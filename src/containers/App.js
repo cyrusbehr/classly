@@ -18,7 +18,7 @@ class App extends Component {
       <div className="main-app-container">
         <div className="main-app-nav">Classly</div>
         {/* notice that we then pass those unpacked props into the Counter component */}
-        {/* <Counter counter={counter} actions={actions} /> */}
+        <Counter counter={counter} actions={actions} />
         {/* <Footer /> */}
         this is the starting point for out application in App.js
       </div>
