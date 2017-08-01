@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "My simple redux application.",
   "scripts": {
-    "prestart": "npm install",
     "clean": "rimraf dist",
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --profile --colors",
     "build": "npm run clean && npm run build:webpack --progress --profile --colors",
@@ -47,9 +46,11 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "dependencies": {
+    "jquery": "^3.2.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.1.1",
+    "redux": "^3.7.2",
     "redux-thunk": "^1.0.3"
   }
 }
