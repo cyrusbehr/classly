@@ -9,6 +9,24 @@ const compiler = webpack(config);
 const host = 'http://localhost';
 const port = process.env.npm_config_port ? process.env.npm_config_port : 3000;
 
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+io.on('connection', socket => {
+
+  socket.on('join', (room) => {
+    socket.join(room);
+    console.log("user has joined", room);
+    socket.currentRoom = room;
+  });
+
+  socket.on('disconnect', () => {
+    socket.leave(socket.currentRoom);
+    console.log("user has left");
+  });
+
+});
+
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
@@ -20,7 +38,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(port, 'localhost', (err) => {
+server.listen(port, 'localhost', (err) => {
   if (err) {
     console.log(err);
     return;
