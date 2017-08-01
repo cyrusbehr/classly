@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CounterActions from '../actions/CounterActions';
-import Routes fron './Routes'
+import Routes from './Routes'
 // import Counter from '../components/Counter';
 // import Footer from '../components/Footer';
 
