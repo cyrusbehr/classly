@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as CounterActions from '../actions/CounterActions';
 import Routes from './Routes'
 import { BrowserRouter } from 'react-router-dom';
 // import Counter from '../components/Counter';
@@ -15,8 +14,6 @@ import { BrowserRouter } from 'react-router-dom';
 class App extends Component {
   render() {
     console.log('render App component');
-    // we can use ES6's object destructuring to effectively 'unpack' our props
-    const { counter, actions } = this.props;
     return (
       <BrowserRouter>
         <Routes />
@@ -24,25 +21,25 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  counter: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired
-};
-
-function mapStateToProps(state) {
-  return {
-    counter: state.counter
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(CounterActions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+//
+// App.propTypes = {
+//   counter: PropTypes.number.isRequired,
+//   actions: PropTypes.object.isRequired
+// };
+//
+// function mapStateToProps(state) {
+//   return {
+//     counter: state.counter
+//   };
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     actions: bindActionCreators(CounterActions, dispatch)
+//   };
+// }
+//
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(App);

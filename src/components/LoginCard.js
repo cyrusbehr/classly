@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-import { setUserType } from '../actions/CounterActions'
+import { setUserType } from '../actions/Actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 class LoginCard extends Component {
