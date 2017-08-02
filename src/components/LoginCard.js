@@ -34,8 +34,12 @@ class LoginCard extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+  }
+}
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
     setUserTypeAction: (userType) => {
       dispatch(setUserType(userType))
@@ -44,5 +48,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
+  mapStateToProps,
   mapDispatchToProps
 )(LoginCard);
