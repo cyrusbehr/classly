@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-
-export default class LoginCard extends Component {
+import { setUserType } from '../actions/CounterActions'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+class LoginCard extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      shouldRedirect: false,
-    }
   }
 
   redirect() {
+    this.props.setUserTypeAction("test")
     this.props.history.push(this.props.redirectRoute);
   }
 
@@ -33,3 +33,16 @@ export default class LoginCard extends Component {
     )
   }
 }
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setUserTypeAction: (userType) => {
+      dispatch(setUserType(userType))
+    }
+  };
+}
+
+export default connect(
+  mapDispatchToProps
+)(LoginCard);

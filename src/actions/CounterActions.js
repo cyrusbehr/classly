@@ -1,4 +1,4 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../constants/ActionTypes';
+import { INCREMENT_COUNTER, DECREMENT_COUNTER, SET_USER_TYPE } from '../constants/ActionTypes';
 
 export function increment() {
   return {
@@ -9,6 +9,13 @@ export function increment() {
 export function decrement() {
   return {
     type: DECREMENT_COUNTER
+  };
+}
+
+export function setUserType(userType) {
+  return {
+    type: SET_USER_TYPE,
+    userType: userType
   };
 }
 
