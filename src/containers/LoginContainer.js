@@ -7,7 +7,8 @@ export default class LoginContainer extends Component {
     return(
       <div>
         {LoginCardData.map((element, index) => {
-          <div>test</div>
+          return (<LoginCard key={index} URL={element.URL} thisClass={element.thisClass}
+          title={element.title} redirectRoute={element.redirectRoute}/>)
         })}
       </div>
     )

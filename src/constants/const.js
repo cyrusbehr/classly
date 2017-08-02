@@ -3,7 +3,7 @@ const LoginCardData = [
     URL: "the first URL",
     title: "the first title",
     redirectRoute: "the first redirectRoute",
-    className: "the first className",
+    thisClass: "the first className",
   },
   {
     URL: "the second URL",

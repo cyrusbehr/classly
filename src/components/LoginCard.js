@@ -5,7 +5,7 @@ export default class LoginCard extends Component {
   render() {
     return(
       <div>
-        <div className={this.props.className}>
+        <div className={this.props.thisClass}>
           imageURL: {this.props.URL}
           <br/>
           title: {this.props.title}
