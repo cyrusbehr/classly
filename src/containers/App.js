@@ -11,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
  * Again, this is because it serves to wrap the rest of our application with the Provider
  * component to make the Redux store available to the rest of the app.
  */
-class App extends Component {
+export default class App extends Component {
   render() {
     console.log('render App component');
     return (
@@ -27,11 +27,11 @@ class App extends Component {
 //   actions: PropTypes.object.isRequired
 // };
 //
-// function mapStateToProps(state) {
-//   return {
-//     counter: state.counter
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    counter: state.counter
+  };
+}
 //
 // function mapDispatchToProps(dispatch) {
 //   return {
