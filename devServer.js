@@ -1,23 +1,26 @@
 const path = require('path');
 const express = require('express');
-const webpack = require('webpack');
-const config = require('./webpack.config.dev');
+// const webpack = require('webpack');
+// const config = require('./webpack.config.dev');
 
 const app = express();
-const compiler = webpack(config);
+// const compiler = webpack(config);
 
 const host = 'http://localhost';
 const port = process.env.npm_config_port ? process.env.npm_config_port : 3000;
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.use(require('webpack-hot-middleware')(compiler));
+// app.use(require('webpack-dev-middleware')(compiler, {
+//   noInfo: true,
+//   publicPath: config.output.publicPath
+// }));
+//
+// app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 app.listen(port, 'localhost', (err) => {

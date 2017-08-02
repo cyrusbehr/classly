@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CounterActions from '../actions/CounterActions';
 import Routes from './Routes'
+import { BrowserRouter } from 'react-router-dom';
 // import Counter from '../components/Counter';
 // import Footer from '../components/Footer';
 
@@ -13,10 +14,13 @@ import Routes from './Routes'
  */
 class App extends Component {
   render() {
+    console.log('render App component');
     // we can use ES6's object destructuring to effectively 'unpack' our props
     const { counter, actions } = this.props;
     return (
-      <Routes />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     );
   }
 }

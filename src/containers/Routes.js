@@ -9,16 +9,17 @@ import TASignupContainer from './TASignupContainer';
 export default class Routes extends Component {
 
    render() {
-     return(
+     console.log('render Routes component');
+      return(
        <div>
-       <Switch>
-         <Route path="/student/signup" component={StudentSignupContainer}/>
-         <Route path="/professor/signup" component={ProfessorSignupContainer}/>
-         <Route path="/TA/signup" component={TASignupContainer}/>
-         <Route path="/main" componenet={MainViewContainer}/>
-         <Route path="/" exact={true} component={LoginContainer}/>
-       </Switch>
-     </div>
+           <Switch>
+           <Route path="/student/signup" component={StudentSignupContainer}/>
+           <Route path="/professor/signup" component={ProfessorSignupContainer}/>
+           <Route path="/TA/signup" component={TASignupContainer}/>
+           <Route path="/main" component={MainViewContainer}/>
+           <Route path="/" exact={true} component={LoginContainer}/>
+         </Switch>
+       </div>
      )
    }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom'
+// import {BrowserRouter} from 'react-router-dom'
+
 /**
 * Import the stylesheet you want used! Here we just reference
 * the main SCSS file we have in the styles directory.
@@ -17,8 +18,6 @@ import { Root } from './containers/Root';
 const store = configureStore();
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Root store={store} />
-  </BrowserRouter>,
+  <Root store={store} />,
   document.getElementById('root')
 );
