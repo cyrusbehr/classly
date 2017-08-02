@@ -1,4 +1,4 @@
-import React, {Container} from 'react'
+import React, {Component} from 'react'
 
 export default class StudentQuestionsContainer extends Component {
 
