@@ -30,13 +30,11 @@ io.on('connection', socket => {
     socket.currentRoom = room;
   });
 
-
   //No data needed for this emit event
   socket.on('disconnect', () => {
     socket.leave(socket.currentRoom);
     console.log("user has left");
   });
-
 
 // data = {
 //   text: String,
@@ -48,7 +46,7 @@ io.on('connection', socket => {
 //   timestamp: Number,
 //   reference: String,
 // }
-  socket.on('newQuestion', (data) = {
+  socket.on('newQuestion', (data) => {
     let newQuestion = new Question({
       text: data.text,
       username: data.username,
@@ -59,11 +57,12 @@ io.on('connection', socket => {
       timestamp: data.timestamp,
       reference: data.referenceClass
     });
-    newQuestion.save(function(err, newQuestion){
+    newQuestion.save((err, newQuestion) => {
       if(err){
         console.log("Error saving newQuestion to database:", err);
       } else {
         socket.broadcast.to(socket.currentRoom).emit('newQuestion', newQuestion);
+        socket.emit('newQuestion', newQuestion);
       }
     });
   });
@@ -81,11 +80,12 @@ io.on('connection', socket => {
       timestamp: data.timestamp,
       referenceClass: data.referenceClass,
     });
-    newTopic.save(function(err, newTopic){
+    newTopic.save((err, newTopic) => {
       if(err){
         console.log("Error saving newTopic to database:", err);
       } else {
         socket.broadcast.to(socket.currentRoom).emit('newQuestion', newQuestion);
+        socket.emit('newTopic', newTopic);
       }
     });
   });
@@ -96,19 +96,60 @@ io.on('connection', socket => {
   //}
   //really only need to know the id, but being passed the previousUpVotes makes code cleaner, if findOneAndUpdate works (tbd)
   socket.on('upVoteQuestion', (data) => {
-    Question.findOneAndUpdate({._id: data.questionId}, { $set: { upVotes: data.previousUpVotes + 1}}, {new: true}, function(err, updatedQuestion){
+    Question.findOneAndUpdate({._id: data.questionId}, { $set: { upVotes: data.previousUpVotes + 1}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error upVoting question:", err);
       } else {
         socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
+        socket.emit('updatedQuestion', updatedQuestion);
       }
     });
   });
 
-  //More sockets to come:
-  //voteTopic
-  //taStar
-  //Question Resolved
+  //data = {
+  //topicId = topic._id,
+  //previousTopicVotes: topic.votes
+  //}
+  socket.on('voteTopic', (data) => {
+    Topic.findOneAndUpdate({_id: data._id}, { $set: {votes: data.previousTopicVotes + 1}}, {new: true}, (err, updatedTopic) => {
+      if(err){
+        console.log("Error voting on topic", err);
+      } else {
+        socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
+        socket.emit('updatedTopic', updatedTopic);
+      }
+    });
+  });
+
+  //data = {
+  //  questionId: question._id,
+  //  isStarred: question.isStarred
+  //}
+  socket.on('toggleStar', (data) => {
+    Question.findOneAndUpdate({_id: data._id}, { $set: {isStarred: !data.isStarred}}, {new: true}, (err, updatedQuestion) => {
+      if(err){
+        console.log("Error starring question:", err);
+      } else {
+        socket.broadcast.to(socket.currentRoom).emit('toggleStar', updatedQuestion);
+        socket.emit('updatedQuestion', updatedQuestion);
+      }
+    });
+  });
+
+  //data = {
+  //questionId: question._id,
+  //isStarred: question.isStarred
+  //}
+  socket.on('toggleResolved', (data) => {
+    Question.findOneAndUpdate({_id: data._id}, { $set: {isResolved: !data.isResolved}}, {new: true}, (err, updatedQuestion) => {
+      if(err){
+        console.log("Error resolving question:", err);
+      } else {
+        socket.broadcast.to(socket.currentRoom).emit('toggleResolved', updatedQuestion);
+        socket.emit('toggleResolved', updatedQuestion);
+      }
+    });
+  });
 
 });
 
