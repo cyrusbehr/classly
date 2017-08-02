@@ -9,7 +9,7 @@ class LoginCard extends Component {
   }
 
   redirect() {
-    this.props.setUserTypeAction("test")
+    this.props.setUserTypeAction(this.props.title)
     this.props.history.push(this.props.redirectRoute);
   }
 
