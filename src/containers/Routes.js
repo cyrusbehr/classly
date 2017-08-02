@@ -10,13 +10,15 @@ export default class Routes extends Component {
 
    render() {
      return(
+       <div>
        <Switch>
+         <Route path="/student/signup" component={StudentSignupContainer}/>
+         <Route path="/professor/signup" component={ProfessorSignupContainer}/>
+         <Route path="/TA/signup" component={TASignupContainer}/>
+         <Route path="/main" componenet={MainViewContainer}/>
          <Route path="/" exact={true} component={LoginContainer}/>
-         <Route path="/student/signup" exact={true} component={StudentSignupContainer}/>
-         <Route path="/professor/signup" exact={true} component={ProfessorSignupContainer}/>
-         <Route path="/TA/signup" exact={true} component={TASignupContainer}/>
-         <Route path="/main" exact={true} componenet={MainViewContainer}/>
        </Switch>
+     </div>
      )
    }
 }

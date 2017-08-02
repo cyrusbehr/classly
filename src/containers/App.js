@@ -17,11 +17,6 @@ class App extends Component {
     const { counter, actions } = this.props;
     return (
       <Routes />
-      // <div className="main-app-container">
-      //   <div className="main-app-nav">Classly</div>
-      //   {/* <Counter counter={counter} actions={actions} /> */}
-      //   this is the starting point for out application in App.js
-      // </div>
     );
   }
 }

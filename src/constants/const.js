@@ -1,21 +1,21 @@
 const LoginCardData = [
   {
     URL: "the first URL",
-    title: "the first title",
-    redirectRoute: "the first redirectRoute",
-    thisClass: "the first className",
+    title: "Student",
+    redirectRoute: "/student/signup",
+    thisClass: "student class",
   },
   {
     URL: "the second URL",
-    title: "the second title",
-    redirectRoute: "the second redirectRoute",
-    className: "the second className",
+    title: "Professor",
+    redirectRoute: "/professor/signup",
+    thisClass: "professor class",
   },
   {
     URL: "the third URL",
-    title: "the third title",
-    redirectRoute: "the third redirectRoute",
-    className: "the third className",
+    title: "TA",
+    redirectRoute: "/TA/signup",
+    thisClass: "TA class",
   },
 ]
 
