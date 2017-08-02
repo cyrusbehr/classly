@@ -20,6 +20,7 @@ const mongoose = require('mongoose');
 const models = require('./src/models/models.js');
 const Question = models.Question;
 const Topic = models.Topic;
+const Class = models.Class;
 //double check mongoose.connect
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -32,6 +33,7 @@ io.on('connection', socket => {
     socket.join(room);
     console.log("user has joined", room);
     socket.currentRoom = room;
+    socket.emit("Joined", room);
   });
 
   //No data needed for this emit event
@@ -50,6 +52,26 @@ io.on('connection', socket => {
 //   timestamp: Number,
 //   reference: String,
 // }
+  socket.on('createClass', (localState) => {
+    console.log("socket create class");
+    let str = localState.name.concat(localState.title);
+    let newClass = new Class({
+      professorName: localState.name,
+      accessCode: str,
+      className: localState.title,
+      timestamp: Date.now(),
+      questions: [],
+      topics: [],
+    });
+    newClass.save((err, newClass) => {
+      if(err){
+        console.log("Error creating newClass:", err);
+      } else {
+        socket.emit('classCreated', newClass);
+      }
+    })
+  });
+
   socket.on('newQuestion', (data) => {
     let newQuestion = new Question({
       text: data.text,
