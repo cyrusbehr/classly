@@ -1,4 +1,4 @@
-import { SET_USER_TYPE } from '../constants/ActionTypes';
+import { SET_USER_TYPE, SET_SOCKET } from '../constants/ActionTypes';
 
 export function setUserType(userType) {
   return {

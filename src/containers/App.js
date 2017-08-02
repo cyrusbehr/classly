@@ -17,7 +17,7 @@ class App extends Component {
     super(props)
 
     this.socket = io('http://localhost:3000');
-    this.setSocketAction(this.socket)
+    this.props.setSocketAction(this.socket)
 
   }
   render() {
