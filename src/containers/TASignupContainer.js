@@ -4,7 +4,7 @@ export default class TASignupContainer extends Component {
   render() {
     return(
       <div>
-        This is the login container!
+        This is the TASignupContainer container!
       </div>
     )
   }
