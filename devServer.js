@@ -100,7 +100,8 @@ io.on('connection', socket => {
   //}
   //really only need to know the id, but being passed the previousUpVotes makes code cleaner, if findOneAndUpdate works (tbd)
   socket.on('upVoteQuestion', (data) => {
-    Question.findOneAndUpdate({._id: data.questionId}, { $set: { upVotes: data.previousUpVotes + 1}}, {new: true}, (err, updatedQuestion) => {
+    let tempUpVote = data.previousUpVotes + 1;
+    Question.findOneAndUpdate({_id: data.questionId}, { $set: { upVotes: tempUpVote}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error upVoting question:", err);
       } else {
@@ -115,7 +116,8 @@ io.on('connection', socket => {
   //previousTopicVotes: topic.votes
   //}
   socket.on('voteTopic', (data) => {
-    Topic.findOneAndUpdate({_id: data._id}, { $set: {votes: data.previousTopicVotes + 1}}, {new: true}, (err, updatedTopic) => {
+    let tempVote = data.previousTopicVotes + 1;
+    Topic.findOneAndUpdate({_id: data._id}, { $set: {votes: tempVote}}, {new: true}, (err, updatedTopic) => {
       if(err){
         console.log("Error voting on topic", err);
       } else {
@@ -130,7 +132,8 @@ io.on('connection', socket => {
   //  isStarred: question.isStarred
   //}
   socket.on('toggleStar', (data) => {
-    Question.findOneAndUpdate({_id: data._id}, { $set: {isStarred: !data.isStarred}}, {new: true}, (err, updatedQuestion) => {
+    let tempStarred = !data.isStarred;
+    Question.findOneAndUpdate({_id: data._id}, { $set: {isStarred: tempStarred}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error starring question:", err);
       } else {
@@ -145,6 +148,7 @@ io.on('connection', socket => {
   //isStarred: question.isStarred
   //}
   socket.on('toggleResolved', (data) => {
+    let tempResolved = !data.isResolved;
     Question.findOneAndUpdate({_id: data._id}, { $set: {isResolved: !data.isResolved}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error resolving question:", err);
@@ -157,10 +161,10 @@ io.on('connection', socket => {
 
 });
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
+// app.use(require('webpack-dev-middleware')(compiler, {
+//   noInfo: true,
+//   publicPath: config.output.publicPath
+// }));
 
 
 // app.use(require('webpack-dev-middleware')(compiler, {
