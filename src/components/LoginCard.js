@@ -10,10 +10,6 @@ export default class LoginCard extends Component {
   }
 
   redirect() {
-    // update the state here
-    // this.setState({
-    //   shouldRedirect: true
-    // });
     this.props.history.push(this.props.redirectRoute);
   }
 
