@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import LoginContainer from './LoginContainer';
-import StudentMainViewContainer from './StudentMainViewContainer';
-import ProfessorMainViewContainer from './ProfessorMainViewContainer';
+import StudentMainViewContainer from './StudentSubContainers/StudentMainViewContainer';
+import ProfessorMainViewContainer from './ProfessorSubContainers/ProfessorMainViewContainer';
 import ProfessorSignupContainer from './ProfessorSignupContainer';
 import StudentSignupContainer from './StudentSignupContainer';
 import TASignupContainer from './TASignupContainer';
