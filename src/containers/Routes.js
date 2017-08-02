@@ -9,7 +9,6 @@ import TASignupContainer from './TASignupContainer';
 export default class Routes extends Component {
 
    render() {
-     console.log('render Routes component');
       return(
        <div>
            <Switch>
