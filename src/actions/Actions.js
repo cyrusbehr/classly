@@ -6,3 +6,10 @@ export function setUserType(userType) {
     userType: userType
   };
 }
+
+export function setSocket(socket) {
+  return {
+    type: SET_SOCKET,
+    socket: socket,
+  }
+}

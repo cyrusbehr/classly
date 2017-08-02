@@ -3,7 +3,7 @@ const LoginCardData = [
     URL: "the first URL",
     title: "Student",
     redirectRoute: "/student/signup",
-    thisClass: "student class",
+    thisClass: "studentLoginClass",
   },
   {
     URL: "the second URL",

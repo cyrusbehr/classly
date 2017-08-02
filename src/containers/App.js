@@ -3,15 +3,23 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Routes from './Routes'
 import { BrowserRouter } from 'react-router-dom';
-// import Counter from '../components/Counter';
-// import Footer from '../components/Footer';
+import io from 'socket.io-client'
+import { setSocket } from '../actions/Actions'
+
 
 /**
  * It is common practice to have a 'Root' container/component require our main App (this one).
  * Again, this is because it serves to wrap the rest of our application with the Provider
  * component to make the Redux store available to the rest of the app.
  */
-export default class App extends Component {
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.socket = io('http://localhost:3000');
+    this.setSocketAction(this.socket)
+
+  }
   render() {
     console.log('render App component');
     return (
@@ -29,17 +37,18 @@ export default class App extends Component {
 //
 function mapStateToProps(state) {
   return {
-    counter: state.counter
   };
 }
-//
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators(CounterActions, dispatch)
-//   };
-// }
-//
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(App);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setSocketAction: (socket) => {
+      dispatch(setSocket(socket))
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
