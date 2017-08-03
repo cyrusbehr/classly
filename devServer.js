@@ -182,6 +182,14 @@ io.on('connection', socket => {
     });
   });
 
+  socket.on('getStudentState', (accessCode) => {
+    Class.findOne({accessCode})
+    .populate('questions')
+    .then((class) => {
+      socket.emit('getStudentState', class);
+    })
+  })
+
 });
 
 // app.use(require('webpack-dev-middleware')(compiler, {

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import StudentQuestion from '../../components/StudentQuestion'
 import AddQuestion from '../../components/AddQuestion'
 
-export default class StudentQuestionsContainer extends Component {
+class StudentQuestionsContainer extends Component {
 
   render() {
     return(
@@ -14,3 +14,19 @@ export default class StudentQuestionsContainer extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return{
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StudentQuestionsContainer);
