@@ -77,11 +77,11 @@ io.on('connection', socket => {
     let newQuestion = new Question({
       text: data.text,
       username: data.username,
-      isResolved: data.isResolved,
-      isStarred: data.isStarred,
-      upVotes: data.upVotes,
+      isResolved: data.isResolved || false,
+      isStarred: data.isStarred || false,
+      upVotes: data.upVotes || 0,
       tags: data.tags,
-      timestamp: data.timestamp,
+      timestamp: Date.now(),
       reference: data.referenceClass
     });
     newQuestion.save((err, newQuestion) => {
