@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addQuestion } from '../actions/Actions'
 
@@ -48,26 +48,30 @@ submitPressed(e) {
 }
 
   render() {
-    return(
-      <div>
-        This is the add questions componenet
-        <br/>
-        <input
-          value={this.state.questionText}
-          type="text"
-          onChange={(e) => this.updateQuestion(e)}
-          placeholder="New Questions..."
-        />
-        <br/>
-        <input
-          value={this.state.tags}
-          type="text"
-          onChange={(e) => this.updateTags(e)}
-          placeholder="Tags (optional)"
-        />
-        <button onClick={(e) => this.submitPressed(e)}>Ask new question</button>
+    return (
+      <div className="new-question-container">
+        <div className="new-question-input-field">
+          <input
+            id="new-question"
+            value={this.state.questionText}
+            type="text"
+            onChange={(e) => this.updateQuestion(e)}
+            placeholder="New Question..."
+          />
+          <input
+            id="tag"
+            value={this.state.tags}
+            type="text"
+            onChange={(e) => this.updateTags(e)}
+            placeholder="Tags (optional)"
+          />
+        </div>
+        <div className="new-question-footer">
+          <button id="question-help">?</button>
+          <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
+        </div>
       </div>
-    )
+    );
   }
 }
 

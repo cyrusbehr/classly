@@ -1,14 +1,18 @@
-import React, {Component} from 'react'
-import StudentQuestion from '../../components/StudentQuestion'
-import AddQuestion from '../../components/AddQuestion'
+import React, { Component } from 'react';
+import StudentQuestion from '../../components/StudentQuestion';
+import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 
 class StudentQuestionsContainer extends Component {
 
   render() {
-    return(
-      <div>
-        This is the student Questions Container
+    return (
+      <div className="questions-container">
+
+        <div className="questions-container-header">
+          <span className="date">1st Aug 2017</span>
+        </div>
+
         <AddQuestion />
         {this.props.questionsArray.map((question, i) => {
           return(
@@ -23,12 +27,12 @@ class StudentQuestionsContainer extends Component {
           )
         })}
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => {
-  return{
+  return {
     questionsArray: state.classReducer.classState.questions
   }
 }
