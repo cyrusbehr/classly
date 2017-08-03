@@ -1,23 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import StudentTopicsContainer from './StudentTopicsContainer'
-import StudentQuestionsContainer from './StudentQuestionsContainer'
+import StudentTopicsContainer from './StudentTopicsContainer';
+import StudentQuestionsContainer from './StudentQuestionsContainer';
 
- class StudentMainViewContainer extends Component {
+class StudentMainViewContainer extends Component {
   render() {
-    return(
+    return (
       <div>
         <StudentTopicsContainer />
         <StudentQuestionsContainer />
       </div>
-    )
+    );
   }
-};
+}
 
 const mapStateToProps = state => {
   return {
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
