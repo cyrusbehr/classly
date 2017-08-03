@@ -1,7 +1,7 @@
 import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION } from '../constants/ActionTypes';
 import _ from 'underscore';
 
-const initialState = {
+const initialState =  {
   classState: {},
 }
 
@@ -26,7 +26,7 @@ export default function (state = initialState, action) {
     //replace old question with updated one
     questionArray[index] = action.updatedQuestion;
     //new state write over to ensure deep copy
-    originalState.classState.questions = questionArray;
+    originalState.classState.questions = [...questionArray];
       return originalState;
 
   default:
