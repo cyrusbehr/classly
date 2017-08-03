@@ -6,14 +6,14 @@ const ClassSchema = mongoose.Schema({
   accessCode: String,
   className: String,
   timestamp: Number,
-  questions: {
+  questions: [{
     type: mongoose.Schema.ObjectId,
     ref: 'Questions'
-  },
-  topics: {
+  }],
+  topics: [{
     type: mongoose.Schema.ObjectId,
     ref: 'Topics'
-  }
+  }]
 });
 
 //reference is referance classSchema - done

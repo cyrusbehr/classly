@@ -19,6 +19,27 @@ const LoginCardData = [
   },
 ]
 
+const ProfessorSignupData = {
+  URL: "logo/image URL",
+  title: "Enter information here to create a room",
+  redirectRoute: '/professor/main'
+}
+
+const StudentSignupData = {
+  URL: "logo/image URL",
+  title: "Enter information here to create a room",
+  redirectRoute: '/student/main'
+}
+
+const taSignupData = {
+  URL: "logo/image URL",
+  title: "Enter information here to create a room",
+  redirectRoute: '/ta/main'
+}
+
 module.exports = {
-  LoginCardData
+  LoginCardData,
+  taSignupData,
+  StudentSignupData,
+  ProfessorSignupData
 }

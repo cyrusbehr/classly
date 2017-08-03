@@ -14,9 +14,6 @@ class LoginCard extends Component {
   }
 
   render() {
-    // if (this.state.shouldRedirect) {
-    //   return <Redirect to={this.props.redirectRoute}/>;
-    // }
     return(
       <div onClick={() => this.redirect()}>
         <div className={this.props.thisClass}>
