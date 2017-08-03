@@ -74,7 +74,7 @@ io.on('connection', socket => {
   });
 
   socket.on('newQuestion', (data) => {
-    let newQuestion = new Question({
+    var newQuestion = new Question({
       text: data.text,
       username: data.username,
       isResolved: data.isResolved || false,
@@ -82,18 +82,18 @@ io.on('connection', socket => {
       upVotes: data.upVotes || 0,
       tags: data.tags,
       timestamp: Date.now(),
-      reference: data.referenceClass
+      referenceClass: data.referenceClass
     });
-    newQuestion.save((err, newQuestion) => {
+    newQuestion.save((err, savedQuestion) => {
       if(err){
         console.log("Error saving newQuestion to database:", err);
       } else {
-        Class.findById(data.reference, (err, classObj) => {
-          classObj.questions.push(data.reference);
+        Class.findById(data.referenceClass, (err, classObj) => {
+          classObj.questions.push(savedQuestion._id);
           classObj.save()
           .then(() => {
-            socket.broadcast.to(socket.currentRoom).emit('newQuestion', newQuestion);
-            socket.emit('newQuestion', newQuestion);
+            socket.broadcast.to(socket.currentRoom).emit('newQuestion', savedQuestion);
+            socket.emit('newQuestion', savedQuestion);
             console.log('made it here damn this is crazy!!')
           })
         })

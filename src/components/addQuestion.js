@@ -31,13 +31,12 @@ submitPressed(e) {
     text: this.state.questionText,
     username:this.props.username,
     tags: this.state.tags,
-    reference: this.props.classObj._id,
+    referenceClass: this.props.classObj._id,
     isResolved: false,
     isStarred: false,
     upVotes: 0,
     timestamp: Date.now(),
   }
-  console.log("The data is: ", data)
   this.props.socket.emit('newQuestion', data);
 }
 
@@ -66,7 +65,6 @@ submitPressed(e) {
 }
 
 const mapStateToProps = state => {
-  console.log("AaAAAAAAAAAAAAAAAAAA: ", state.classReducer)
   return{
     socket: state.socketReducer.socket,
     username: state.userReducer.username,
