@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StudentTopicsContainer from './StudentTopicsContainer';
-// import StudentQuestionsContainer from './StudentQuestionsContainer';
+import StudentQuestionsContainer from './StudentQuestionsContainer';
 
 class StudentMainViewContainer extends Component {
   render() {
     return (
-      <div>
+      <div className="body-container">
         <StudentTopicsContainer />
-        {/* <StudentQuestionsContainer /> */}
+        <StudentQuestionsContainer />
       </div>
     );
   }

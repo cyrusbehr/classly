@@ -1,0 +1,252 @@
+/*black: #4B4B4B*/
+
+/*page setup*/
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: GillSans;
+}
+
+#root, #root > div, #root > div > div {
+  height: 100%
+}
+
+.body-container{
+  display: flex;
+  height: 100%;
+}
+
+.topics-container{
+  background-color: #30383E;
+  flex: 3;
+}
+
+.topics-container-header{
+  background-color: black;
+  color: #EEEEEE;
+  padding: 10px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.topics-container-header .course{
+  position: absolute;
+  margin-left: 10px;
+}
+
+.topics-container-header .lecturer{
+  position: relative;
+  margin: 0 auto;
+}
+
+.questions-container{
+  background-color: #EBEBEB;
+  flex: 5;
+}
+
+.questions-container-header{
+  background-color: white;
+  color: black;
+  padding: 10px;
+  height: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media (max-width: 425px) {
+  .questions-container{
+    display: none;
+  }
+}
+
+/*question cards*/
+.question{
+  min-height: 120px;
+  width: 100%;
+  display: flex;
+  border-top: 2px solid #CACACA;
+}
+
+.question .question-body{
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-body .question-header{
+  padding: 10px 50px 0;
+  flex:1;
+  display: flex;
+  align-items: center;
+}
+
+.question-body .question-body{
+  flex:4;
+  font-size: 30px;
+  color: #4B4B4B; /* off-black */
+  padding: 0 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.question-body .question-footer{
+  flex:1;
+}
+
+.question .question-upvote-container{
+  flex: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-upvote-container .upvote-icon-container{
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#upvote-icon{
+  fill: #4B4B4B;
+}
+
+.question-upvote-container .upvote-number{
+  flex: 2;
+  margin: auto;
+}
+
+/*content inside question card*/
+.tag{
+  background: #FF7E65;
+  color: white;
+  border-radius: 8px;
+  padding: 0 8px;
+  margin: 0 10px;
+}
+.new-question-container, .new-topic-container{
+  padding: 30px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-question-input-field{
+  display:flex;
+}
+
+.new-question-input-field #new-question{
+  flex: 8;
+  margin-right: 10px;
+}
+
+.new-question-input-field #tag{
+  flex: 2;
+}
+
+#new-question, #new-topic, #tag{
+  flex: 0 0 30px;
+  border-radius: 10px;
+  border: white;
+  padding: 0 20px;
+  height: 30px;
+}
+#submit-question, #submit-topic{
+  width: 100px;
+  border: black solid 2px;
+  background-color: rgba(0,0,0,0);
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 5px;
+}
+#submit-topic{
+  border-color: #EBEBEB;
+  color: #EBEBEB;
+}
+#question-help, #topic-help, #alert{
+  width: 25px;
+  height: 25px;
+  border: black solid 2px;
+  background-color: rgba(0,0,0,0);
+  border-radius: 50%;
+  font-size: 16px;
+  margin-right: 5px;
+}
+#alert{
+  background-color: #30383E;
+  width:30px;
+  height:30px;
+  font-size: 20px;
+  margin:0;
+  color: white;
+}
+#topic-help{
+  border-color: #EBEBEB;
+  color: #EBEBEB;
+}
+.new-question-footer, .new-topic-footer{
+  padding: 5px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+::-webkit-input-placeholder{
+  font-size: 16px;
+}
+input[type="text"]{
+  font-size:16px;
+}
+/*content inside topic container*/
+.topic{
+   min-height: 100px;
+   margin: 20px;
+   background-color: #FFFFFF;
+   border-left: #00C993 solid 10px;
+   display: flex;
+}
+
+.topic .topic-content{
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.topic-content .topic-title{
+  display: flex;
+  align-items: center;
+  flex: 2;
+  font-size: 24px;
+}
+
+.topic-content .topic-description{
+  display: flex;
+  align-items: center;
+  flex: 1;
+  color: #BEBEBE;
+}
+
+.topic .topic-alert{
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 15px;
+}
+
+.topic-alert .topic-alert-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.topic-alert .topic-alert-number{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}

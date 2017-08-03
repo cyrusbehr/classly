@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 * the main SCSS file we have in the styles directory.
 */
 import './styles/main.scss';
+import './styles/student.scss';
 
 /**
 * Both configureStore and Root are required conditionally.
