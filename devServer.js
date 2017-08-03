@@ -135,7 +135,7 @@ io.on('connection', socket => {
         console.log("Error upVoting question:", err);
       } else {
         socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
-        socket.emit('updatedQuestion', updatedQuestion);
+        socket.emit('upVoteQuestion', updatedQuestion);
       }
     });
   });
