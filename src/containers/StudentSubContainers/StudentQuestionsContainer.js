@@ -10,7 +10,9 @@ class StudentQuestionsContainer extends Component {
       <div>
         This is the student Questions Container
         <AddQuestion />
-        <StudentQuestion />
+        <StudentQuestion
+          //TODO: Pass in question ID and currentUpVotes as props
+        />
       </div>
     )
   }
