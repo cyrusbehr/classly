@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import upVoteQuestion from '../actions/Actions';
+import { connect } from 'react-redux';
+
 
 class StudentQuestion extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class StudentQuestion extends Component {
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes});
       this.state.alreadyClicked = true;
+      console.log("upvoted question: ", this.props.id);
     } else {
       console.log("This button has already been pressed");
     }
@@ -25,10 +28,9 @@ class StudentQuestion extends Component {
   render() {
     return(
       <div>
-        <Button
+        <button
           onClick={() => this.handleUpvote()}
-          title="Upvote"
-        />
+        >upvote</button>
       </div>
     )
   }

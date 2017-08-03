@@ -1,4 +1,5 @@
 import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION } from '../constants/ActionTypes';
+import _ from 'underscore';
 
 const initialState = {
   classState: {},

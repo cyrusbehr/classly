@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGODB_URI)
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI);
 
 const ClassSchema = mongoose.Schema({
   professorName: String,
