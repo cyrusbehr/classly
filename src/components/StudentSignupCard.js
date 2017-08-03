@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
+import {addClass, setUsername} from '../actions/Actions'
+
 
 class StudentSignupCard extends Component {
   constructor(props) {
@@ -30,9 +32,9 @@ class StudentSignupCard extends Component {
         })
         classObj.questions = sortedArray;
       }
-
-      //use the reducer to upate the state
-      //also update the username
+      //update the state with the class and the username
+      this.props.addClassAction(classObj)
+      this.props.setUsernameAction(this.state.name);
     })
   }
 
@@ -92,7 +94,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    addClassAction: (newClass) => {
+      dispatch(addClass(newClass));
+    },
+    setUsernameAction: (username) => {
+      dispatch(setUsername(username))
+    }
   }
 }
 
