@@ -45,6 +45,10 @@ submitPressed(e) {
     timestamp: Date.now(),
   }
   this.props.socket.emit('newQuestion', data);
+  this.setState({
+    questionText: "",
+    tags: ""
+  })
 }
 
   render() {
