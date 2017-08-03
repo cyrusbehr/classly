@@ -11,8 +11,9 @@ export default function (state = initialState, action) {
     return newState;
 
   case ADD_QUESTION:
-  let originaState = Object.assign({}, state);
-    return state;
+    let originaState = Object.assign({}, state);
+    originaState.classState.questions.push(action.newQuestion)
+    return originaState;
 
   default:
     return state;
