@@ -35,8 +35,14 @@ class StudentSignupCard extends Component {
       //update the state with the class and the username
       this.props.addClassAction(classObj)
       this.props.setUsernameAction(this.state.name);
+      this.redirect()
     })
   }
+
+  redirect() {
+    this.props.history.push(this.props.redirectRoute);
+  }
+
 
   handleNameChange(event, stateProp) {
     this.setState({name: event.target.value})
@@ -71,39 +77,39 @@ class StudentSignupCard extends Component {
               <label>
                 Access Code:
                 <input type="text"
-                   value={this.state.title}
-                   onChange={(event) => this.handleAccessCodeChange(event)}
+                  value={this.state.title}
+                  onChange={(event) => this.handleAccessCodeChange(event)}
                 />
               </label>
               <input type="submit"
                 value="Join Class"
                 onClick={(e) => this.onSubmit(e)}/>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = state => {
-  return{
-    socket: state.socketReducer.socket
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addClassAction: (newClass) => {
-      dispatch(addClass(newClass));
-    },
-    setUsernameAction: (username) => {
-      dispatch(setUsername(username))
+      )
     }
   }
-}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StudentSignupCard);
+  const mapStateToProps = state => {
+    return{
+      socket: state.socketReducer.socket
+    }
+  }
+
+  const mapDispatchToProps = dispatch => {
+    return {
+      addClassAction: (newClass) => {
+        dispatch(addClass(newClass));
+      },
+      setUsernameAction: (username) => {
+        dispatch(setUsername(username))
+      }
+    }
+  }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(StudentSignupCard);
