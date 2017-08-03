@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import StudentTopicsContainer from './StudentTopicsContainer'
 import StudentQuestionsContainer from './StudentQuestionsContainer'
 
-export default class StudentMainViewContainer extends Component {
+ class StudentMainViewContainer extends Component {
   render() {
     return(
       <div>
@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(StudentMainViewContainer);
