@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import ProfessorSignupCard from '../components/ProfessorSignupCard';
-import {ProfessorSignupData} from '../constants/const';
+import ProfessorSignupCard from '../../components/ProfessorSignupCard';
+import {ProfessorSignupData} from '../../constants/const';
 
 export default class ProfessorSignupContainer extends Component {
   render() {

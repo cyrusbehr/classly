@@ -3,8 +3,8 @@ import {Route, Switch} from 'react-router-dom';
 import LoginContainer from './LoginContainer';
 import StudentMainViewContainer from './StudentSubContainers/StudentMainViewContainer';
 import ProfessorMainViewContainer from './ProfessorSubContainers/ProfessorMainViewContainer';
-import ProfessorSignupContainer from './ProfessorSignupContainer';
-import StudentSignupContainer from './StudentSignupContainer';
+import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupContainer';
+import StudentSignupContainer from './StudentSubContainers/StudentSignupContainer';
 import TASignupContainer from './TASignupContainer';
 
 export default class Routes extends Component {
