@@ -39,10 +39,10 @@ const TopicSchema = mongoose.Schema({
 
 const Class = mongoose.model('Class', ClassSchema);
 const Question = mongoose.model('Question', QuestionSchema);
-const Topics = mongoose.model('Topics', TopicSchema)
+const Topic = mongoose.model('Topics', TopicSchema)
 
 module.exports = {
   Class,
   Question,
-  Topics,
+  Topic,
 }

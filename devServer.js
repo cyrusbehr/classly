@@ -107,6 +107,7 @@ io.on('connection', socket => {
   //   reference: String,
   // }
   socket.on('newTopic', (data) => {
+    console.log("reached newtopic serverside");
     let newTopic = new Topic({
       text: data.text,
       votes: data.votes,

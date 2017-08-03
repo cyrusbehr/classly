@@ -21,7 +21,6 @@ class AddTopic extends Component{
   }
 
   submitPressed(e) {
-    console.log("this is submit pressed");
     e.preventDefault();
     const data = {
       text: this.state.topicText,
@@ -33,6 +32,7 @@ class AddTopic extends Component{
     this.setState({
       questionText: "",
     });
+    console.log("ending submit pressed");
   }
 
   render() {
