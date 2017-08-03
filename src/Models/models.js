@@ -8,7 +8,7 @@ const ClassSchema = mongoose.Schema({
   timestamp: Number,
   questions: [{
     type: mongoose.Schema.ObjectId,
-    ref: 'Questions'
+    ref: 'Question'
   }],
   topics: [{
     type: mongoose.Schema.ObjectId,
@@ -38,11 +38,11 @@ const TopicSchema = mongoose.Schema({
 
 
 const Class = mongoose.model('Class', ClassSchema);
-const Questions = mongoose.model('Questions', QuestionSchema);
+const Question = mongoose.model('Question', QuestionSchema);
 const Topics = mongoose.model('Topics', TopicSchema)
 
 module.exports = {
   Class,
-  Questions,
+  Question,
   Topics,
 }

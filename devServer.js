@@ -88,8 +88,15 @@ io.on('connection', socket => {
       if(err){
         console.log("Error saving newQuestion to database:", err);
       } else {
-        socket.broadcast.to(socket.currentRoom).emit('newQuestion', newQuestion);
-        socket.emit('newQuestion', newQuestion);
+        Class.findById(data.reference, (err, classObj) => {
+          classObj.questions.push(data.reference);
+          classObj.save()
+          .then(() => {
+            socket.broadcast.to(socket.currentRoom).emit('newQuestion', newQuestion);
+            socket.emit('newQuestion', newQuestion);
+            console.log('made it here damn this is crazy!!')
+          })
+        })
       }
     });
   });
@@ -186,13 +193,10 @@ io.on('connection', socket => {
     Class.findOne({accessCode: accessCode})
     .populate('questions')
     .then((classObj) => {
-      console.log("it is getting here")
       if(!classObj) {
-        console.log("It is null")
         socket.emit('error1');
 
       } else {
-        console.log("It is not null")
         socket.emit('getStudentState', classObj);
       }
     })

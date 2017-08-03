@@ -31,10 +31,14 @@ submitPressed(e) {
     text: this.state.questionText,
     username:this.props.username,
     tags: this.state.tags,
-    reference: classObj._id,
+    reference: this.props.classObj._id,
+    isResolved: false,
+    isStarred: false,
+    upVotes: 0,
+    timestamp: Date.now(),
   }
+  console.log("The data is: ", data)
   this.props.socket.emit('newQuestion', data);
-  //update the local state to show a new question
 }
 
   render() {
@@ -62,6 +66,7 @@ submitPressed(e) {
 }
 
 const mapStateToProps = state => {
+  console.log("AaAAAAAAAAAAAAAAAAAA: ", state.classReducer)
   return{
     socket: state.socketReducer.socket,
     username: state.userReducer.username,
@@ -71,6 +76,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    addQuestionAction: (newQuestion) => {
+      dispatch(addQuestion(newQuestion))
+    }
   }
 }
 
