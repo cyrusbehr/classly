@@ -43,7 +43,7 @@ class ProfessorSignupCard extends Component {
 
   render() {
     return(
-      <div onClick={() => this.redirect()}>
+      <div>
         <br/>
         imageURL: {this.props.URL}
         <br/>

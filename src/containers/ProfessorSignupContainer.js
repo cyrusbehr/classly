@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ProfessorSignupCard from '../components/ProfessorSignupCard';
-import ProfessorSignupData from '../constants/const';
+import {ProfessorSignupData} from '../constants/const';
 
 export default class ProfessorSignupContainer extends Component {
   render() {
@@ -12,6 +12,7 @@ export default class ProfessorSignupContainer extends Component {
           URL={ProfessorSignupData.URL}
           title={ProfessorSignupData.title}
           redirectRoute={ProfessorSignupData.redirectRoute}
+          {...this.props}
           />
       </div>
     )
