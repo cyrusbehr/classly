@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import upVoteQuestion from '../actions/Actions';
+import {upVoteQuestion} from '../actions/Actions';
 import { connect } from 'react-redux';
 
 
@@ -28,18 +28,23 @@ class StudentQuestion extends Component {
   render() {
     return(
       <div>
-       {this.props.text}
+       Question: {this.props.text}
+       <br/>
+       upvotes: {this.props.currentUpVotes}
+       <br/>
        <button onClick={() => this.handleUpvote()}>
       upvote
       </button>
+      <br/>
       </div>
     )
   }
 }
 
 const mapStateToProps = state => {
+
   return {
-    socket: state.socketReducer.socket
+    socket: state.socketReducer.socket,
   }
 }
 

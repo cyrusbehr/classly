@@ -18,6 +18,7 @@ class StudentQuestionsContainer extends Component {
               currentUpVotes={question.upVotes}
               text={question.text}
               tags={question.tags}
+              i={i}
             />
           )
         })}

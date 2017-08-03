@@ -18,8 +18,6 @@ export default function (state = initialState, action) {
 
   case UPVOTE_QUESTION:
     let originalState = Object.assign({}, state);
-    console.log("this is originalState: ", originalState);
-    //find index of old question
     var index = _.findIndex(originalState.classState.questions, function(q){
       return q._id === action.updatedQuestion._id;
     });
@@ -28,10 +26,8 @@ export default function (state = initialState, action) {
     //replace old question with updated one
     questionArray[index] = action.updatedQuestion;
     //new state write over to ensure deep copy
-    let newState2 = originalState;
-    newState2.classState.questions = questionArray;
-    console.log("this is newState2: ", newState2);
-      return newState2;
+    originalState.classState.questions = questionArray;
+      return originalState;
 
   default:
     return state;
