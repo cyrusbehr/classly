@@ -1,4 +1,6 @@
 /*black: #4B4B4B*/
+$green: #00C993;
+$red: #FF7E65;
 
 /*page setup*/
 html, body{
@@ -21,6 +23,7 @@ html, body{
 .topics-container{
   background-color: #30383E;
   flex: 3;
+  overflow: scroll;
 }
 
 .topics-container-header{
@@ -45,6 +48,7 @@ html, body{
 .questions-container{
   background-color: #EBEBEB;
   flex: 5;
+  overflow: scroll;
 }
 
 .questions-container-header{
@@ -114,6 +118,10 @@ html, body{
 #upvote-icon{
   fill: #4B4B4B;
 }
+#upvote-icon:hover{
+  fill: $green;
+  cursor: pointer;
+}
 
 .question-upvote-container .upvote-number{
   flex: 2;
@@ -122,7 +130,7 @@ html, body{
 
 /*content inside question card*/
 .tag{
-  background: #FF7E65;
+  background: $red;
   color: white;
   border-radius: 8px;
   padding: 0 8px;
@@ -184,6 +192,11 @@ html, body{
   margin:0;
   color: white;
 }
+#alert:hover{
+  background-color: $red;
+  border-color: $red;
+  cursor: pointer;
+}
 #topic-help{
   border-color: #EBEBEB;
   color: #EBEBEB;
@@ -205,7 +218,7 @@ input[type="text"]{
    min-height: 100px;
    margin: 20px;
    background-color: #FFFFFF;
-   border-left: #00C993 solid 10px;
+   border-left: $green solid 10px;
    display: flex;
 }
 
