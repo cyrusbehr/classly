@@ -1,8 +1,9 @@
-import { SET_USER_TYPE } from '../constants/ActionTypes';
+import { SET_USER_TYPE, SET_USERNAME } from '../constants/ActionTypes';
 
 
 const initialState = {
   userType: "",
+  username: ""
 }
 
 export default function (state = initialState, action) {
@@ -10,6 +11,9 @@ export default function (state = initialState, action) {
   case SET_USER_TYPE:
   let newState = Object.assign({}, state, {userType: action.userType})
     return newState;
+  case SET_USERNAME:
+  let newState2 = Object.assign({}, state, {username: action.username})
+    return newState2;
   default:
     return state;
   }

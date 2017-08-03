@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {newClassToReducer} from '../actions/Actions'
+import {addClass} from '../actions/Actions'
 
 class ProfessorSignupCard extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class ProfessorSignupCard extends Component {
       this.props.socket.emit('createClass', this.state);
     });
     this.props.socket.on('classCreated', newClass => {
-      this.props.newClassToReducerAction(newClass);
+      this.props.addClassAction(newClass);
       this.redirect();
     });
   }
@@ -79,7 +79,6 @@ class ProfessorSignupCard extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("STATE", state);
   return {
     socket: state.socketReducer.socket
   }
@@ -87,8 +86,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    newClassToReducerAction: (newClass) => {
-      dispatch(newClassToReducer(newClass))
+    addClassAction: (newClass) => {
+      dispatch(addClass(newClass))
     }
   }
 }

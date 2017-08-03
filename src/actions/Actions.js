@@ -1,22 +1,36 @@
-import { SET_USER_TYPE, SET_SOCKET, NEW_CLASS } from '../constants/ActionTypes';
+import { SET_USER_TYPE, SET_SOCKET, ADD_CLASS, SET_USERNAME, ADD_QUESTION } from '../constants/ActionTypes';
 
 export function setUserType(userType) {
   return {
     type: SET_USER_TYPE,
-    userType: userType
+    userType
   };
 }
 
 export function setSocket(socket) {
   return {
     type: SET_SOCKET,
-    socket: socket,
+    socket,
   }
 }
 
-export function newClassToReducer(newClass) {
+export function addClass(newClass) {
   return {
-    type: NEW_CLASS,
-    newClass: newClass,
+    type: ADD_CLASS,
+    newClass
+  }
+}
+
+export function setUsername(username) {
+  return {
+    type: SET_USERNAME,
+    username
+  }
+}
+
+export function addQuestion(newQuestion) {
+  return {
+    type: ADD_QUESTION,
+    newQuestion
   }
 }

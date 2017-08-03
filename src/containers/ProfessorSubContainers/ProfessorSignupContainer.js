@@ -8,7 +8,6 @@ export default class ProfessorSignupContainer extends Component {
       <div>
         <h3>This is the ProfessorSignupContainer</h3>
         <ProfessorSignupCard
-          {...this.props}
           URL={ProfessorSignupData.URL}
           title={ProfessorSignupData.title}
           redirectRoute={ProfessorSignupData.redirectRoute}

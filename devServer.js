@@ -74,22 +74,29 @@ io.on('connection', socket => {
   });
 
   socket.on('newQuestion', (data) => {
-    let newQuestion = new Question({
+    var newQuestion = new Question({
       text: data.text,
       username: data.username,
-      isResolved: data.isResolved,
-      isStarred: data.isStarred,
-      upVotes: data.upVotes,
+      isResolved: data.isResolved || false,
+      isStarred: data.isStarred || false,
+      upVotes: data.upVotes || 0,
       tags: data.tags,
-      timestamp: data.timestamp,
-      reference: data.referenceClass
+      timestamp: Date.now(),
+      referenceClass: data.referenceClass
     });
-    newQuestion.save((err, newQuestion) => {
+    newQuestion.save((err, savedQuestion) => {
       if(err){
         console.log("Error saving newQuestion to database:", err);
       } else {
-        socket.broadcast.to(socket.currentRoom).emit('newQuestion', newQuestion);
-        socket.emit('newQuestion', newQuestion);
+        Class.findById(data.referenceClass, (err, classObj) => {
+          classObj.questions.push(savedQuestion._id);
+          classObj.save()
+          .then(() => {
+            socket.broadcast.to(socket.currentRoom).emit('newQuestion', savedQuestion);
+            socket.emit('newQuestion', savedQuestion);
+            console.log('made it here damn this is crazy!!')
+          })
+        })
       }
     });
   });
@@ -182,20 +189,20 @@ io.on('connection', socket => {
     });
   });
 
+  socket.on('getStudentState', (accessCode) => {
+    Class.findOne({accessCode: accessCode})
+    .populate('questions')
+    .then((classObj) => {
+      if(!classObj) {
+        socket.emit('error1');
+
+      } else {
+        socket.emit('getStudentState', classObj);
+      }
+    })
+  })
+
 });
-
-// app.use(require('webpack-dev-middleware')(compiler, {
-//   noInfo: true,
-//   publicPath: config.output.publicPath
-// }));
-
-
-// app.use(require('webpack-dev-middleware')(compiler, {
-//   noInfo: true,
-//   publicPath: config.output.publicPath
-// }));
-//
-// app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));

@@ -1,4 +1,4 @@
-import { NEW_CLASS } from '../constants/ActionTypes';
+import { ADD_CLASS, ADD_QUESTION } from '../constants/ActionTypes';
 
 const initialState = {
   classState: {},
@@ -6,8 +6,14 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-  case NEW_CLASS:
-    return action.newClass;
+  case ADD_CLASS:
+  let newState = Object.assign({}, state, {classState: action.newClass})
+    return newState;
+
+  case ADD_QUESTION:
+  let originaState = Object.assign({}, state);
+    return state;
+
   default:
     return state;
   }
