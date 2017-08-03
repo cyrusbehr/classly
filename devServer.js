@@ -129,15 +129,27 @@ io.on('connection', socket => {
   //}
   //really only need to know the id, but being passed the previousUpVotes makes code cleaner, if findOneAndUpdate works (tbd)
   socket.on('upVoteQuestion', (data) => {
-    let tempUpVote = data.previousUpVotes + 1;
-    Question.findOneAndUpdate({_id: data.questionId}, { $set: { upVotes: tempUpVote}}, {new: true}, (err, updatedQuestion) => {
-      if(err){
-        console.log("Error upVoting question:", err);
-      } else {
-        socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
-        socket.emit('upVoteQuestion', updatedQuestion);
-      }
-    });
+    if(!data.toggle){
+      let tempUpVote = data.previousUpVotes + 1;
+      Question.findOneAndUpdate({_id: data.questionId}, { $set: { upVotes: tempUpVote}}, {new: true}, (err, updatedQuestion) => {
+        if(err){
+          console.log("Error upVoting question:", err);
+        } else {
+          socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
+          socket.emit('upVoteQuestion', updatedQuestion);
+        }
+      });
+    } else {
+      let tempUpVote = data.previousUpVotes - 1;
+      Question.findOneAndUpdate({_id: data.questionId}, { $set: { upVotes: tempUpVote}}, {new: true}, (err, updatedQuestion) => {
+        if(err){
+          console.log("Error upVoting question:", err);
+        } else {
+          socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
+          socket.emit('upVoteQuestion', updatedQuestion);
+        }
+      });
+    }
   });
 
   //data = {
