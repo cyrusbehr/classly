@@ -186,9 +186,13 @@ io.on('connection', socket => {
     Class.findOne({accessCode: accessCode})
     .populate('questions')
     .then((classObj) => {
+      console.log("it is getting here")
       if(!classObj) {
-        socket.emit('error');
+        console.log("It is null")
+        socket.emit('error1');
+
       } else {
+        console.log("It is not null")
         socket.emit('getStudentState', classObj);
       }
     })

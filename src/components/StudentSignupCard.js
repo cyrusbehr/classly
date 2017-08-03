@@ -12,16 +12,27 @@ class StudentSignupCard extends Component {
   }
 
   componentDidMount() {
-    this.props.socket.on('error', () => {
+    this.props.socket.on('Joined', () => {
+      this.props.socket.emit('getStudentState', this.state.accessCode)
+    })
+
+    this.props.socket.on('error1', () => {
       // TODO: alert the user that we couldnt find their access code
       console.log("Access Code not found");
     })
 
     this.props.socket.on('getStudentState', (classObj) => {
-      //sort the algorithm here
+      //sort the questions by upvotes
+      let questionsArray = classObj.questions.slice()
+      if(questionsArray.length > 0) {
+        let sortedArray = _.sortBy(questionsArray, (question) => {
+          return -1 * question.upVotes; //negative changes to descending order
+        })
+        classObj.questions = sortedArray;
+      }
+
       //use the reducer to upate the state
       //also update the username
-      console.log(classObj);
     })
   }
 
@@ -30,7 +41,7 @@ class StudentSignupCard extends Component {
   }
 
   handleAccessCodeChange(event) {
-    this.setState({title: event.target.value})
+    this.setState({accessCode: event.target.value})
   }
 
   onSubmit(e) {
