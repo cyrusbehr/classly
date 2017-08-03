@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',//'[name]-[hash].js',
-    publicPath: '/'
+    publicPath: '/dist/'
   },
   plugins: [
     /**
@@ -56,8 +56,13 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
-      }
+        loader: 'style!css!sass',
+      },
+      {
+        test: /\.(png|jpg)$/,
+        include: path.join(__dirname, 'src'),
+        loader: 'url-loader?limit=10000'
+     }
     ]
   }
 };
