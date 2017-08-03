@@ -12,8 +12,9 @@ export default function (state = initialState, action) {
       return newState;
 
   case ADD_QUESTION:
-    let originaState = Object.assign({}, state);
-      return state;
+    let originalState1 = Object.assign({}, state);
+    originalState1.classState.questions = originalState1.classState.questions.concat(action.newQuestion)
+    return originalState1;
 
   case UPVOTE_QUESTION:
     let originalState = Object.assign({}, state);

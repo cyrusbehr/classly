@@ -94,7 +94,6 @@ io.on('connection', socket => {
           .then(() => {
             socket.broadcast.to(socket.currentRoom).emit('newQuestion', savedQuestion);
             socket.emit('newQuestion', savedQuestion);
-            console.log('made it here damn this is crazy!!')
           })
         })
       }

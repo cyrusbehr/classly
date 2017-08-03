@@ -10,9 +10,17 @@ class StudentQuestionsContainer extends Component {
       <div>
         This is the student Questions Container
         <AddQuestion />
-        <StudentQuestion
-          //TODO: Pass in question ID and currentUpVotes as props
-        />
+        {this.props.questionsArray.map((question, i) => {
+          return(
+            <StudentQuestion
+              key={i}
+              id={question._id}
+              currentUpVotes={question.upVotes}
+              text={question.text}
+              tags={question.tags}
+            />
+          )
+        })}
       </div>
     )
   }
@@ -20,7 +28,7 @@ class StudentQuestionsContainer extends Component {
 
 const mapStateToProps = state => {
   return{
-
+    questionsArray: state.classReducer.classState.questions
   }
 }
 

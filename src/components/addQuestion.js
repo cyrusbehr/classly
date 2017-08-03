@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
+import { addQuestion } from '../actions/Actions'
+
 
 class AddQuestion extends Component{
   constructor(props) {
@@ -8,6 +10,11 @@ class AddQuestion extends Component{
       questionText: "",
       tags: "",
     }
+
+    this.props.socket.on('newQuestion', (savedQuestion) => {
+      console.log("This was triggered")
+      this.props.addQuestionAction(savedQuestion);
+    })
   }
 
 updateTags(e) {

@@ -28,9 +28,10 @@ class StudentQuestion extends Component {
   render() {
     return(
       <div>
-        <button
-          onClick={() => this.handleUpvote()}
-        >upvote</button>
+       {this.props.text}
+       <button onClick={() => this.handleUpvote()}>
+      upvote
+      </button>
       </div>
     )
   }
