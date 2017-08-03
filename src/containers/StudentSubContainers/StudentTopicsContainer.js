@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import StudentNewTopic from '../../components/StudentNewTopic';
-import StudentTopic from '../../components/StudentTopic';
+// import StudentNewTopic from '../../components/StudentNewTopic';
+import AddTopic from '../../components/StudentTopic';
+import StudentTopic from '../../components/AddTopic';
 
 export default class StudentTopicsContainer extends Component {
   render() {
@@ -10,7 +11,7 @@ export default class StudentTopicsContainer extends Component {
           <span className="course">CS 101</span>
           <span className="lecturer">Prof Behroozi</span>
         </div>
-        <StudentNewTopic />
+        <AddTopic />
         <StudentTopic />
       </div>
     );

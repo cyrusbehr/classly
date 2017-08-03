@@ -37,19 +37,17 @@ class AddTopic extends Component{
 
   render() {
     return (
-      <div>
-        <div>
-          <input
-            id="new-topic"
-            value={this.state.topicText}
-            type="text"
-            onChange={(e) => this.updateTopic(e)}
-            placeholder="New Topic..."
-          />
-        </div>
-        <div>
-          <button>?</button>
-          <button onClick={(e) => this.submitPressed(e)}>Submit</button>
+      <div div className="new-topic-container">
+        <input
+          id="new-topic"
+          value={this.state.topicText}
+          type="text"
+          onChange={(e) => this.updateTopic(e)}
+          placeholder="this is test..."
+        />
+        <div className="new-topic-footer">
+          <button id="topic-help">?</button>
+          <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
         </div>
       </div>
     );
