@@ -10,6 +10,7 @@ class StudentQuestion extends Component {
       alreadyClicked: false
     }
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
+
       this.props.upVoteQuestionAction(updatedQuestion);
     })
   }
@@ -17,11 +18,14 @@ class StudentQuestion extends Component {
   handleUpvote() {
     if(!this.state.alreadyClicked){
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
-         previousUpVotes: this.props.currentUpVotes});
+         previousUpVotes: this.props.currentUpVotes, toggle: false});
       this.state.alreadyClicked = true;
-      console.log("upvoted question: ", this.props.id);
+      console.log("toggled upVotequestion: ", this.props.id);
     } else {
-      console.log("This button has already been pressed");
+      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
+         previousUpVotes: this.props.currentUpVotes, toggle: true});
+      this.state.alreadyClicked = false;
+      console.log("toggled upVotequestion: ", this.props.id);
     }
   }
 
@@ -50,6 +54,7 @@ const mapStateToProps = state => {
 
   return {
     socket: state.socketReducer.socket,
+    questionsArray: state.classReducer.classState.questions,
   }
 }
 
