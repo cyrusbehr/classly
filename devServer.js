@@ -117,8 +117,14 @@ io.on('connection', socket => {
       if(err){
         console.log("Error saving newTopic to database:", err);
       } else {
-        socket.broadcast.to(socket.currentRoom).emit('newQuestion', newQuestion);
-        socket.emit('newTopic', newTopic);
+        Class.findById(data.referenceClass, (err, classObj) => {
+          classObj.topics.push(newTopic._id);
+          classObj.save()
+          .then(() => {
+            socket.broadcast.to(socket.currentRoom).emit('newTopic', newQuestion);
+            socket.emit('newTopic', newTopic);
+          })
+        })
       }
     });
   });
