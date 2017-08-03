@@ -5,7 +5,7 @@ export default class StudentQuestion extends Component {
   render() {
     return(
       <div>
-        {this.props.title}
+        {this.props.text}
       </div>
     )
   }
