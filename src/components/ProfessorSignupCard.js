@@ -13,7 +13,6 @@ class ProfessorSignupCard extends Component {
   }
 
   componentDidMount() {
-    console.log("-proooops", this.props);
     this.props.socket.on('Joined', room => {
       this.props.socket.emit('createClass', this.state);
     });
@@ -37,8 +36,9 @@ class ProfessorSignupCard extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    let str = this.state.name.concat(this.state.title);
-    this.props.socket.emit('join', str);
+    let nameArr = this.state.name.split(" ")
+    let str = nameArr[0].concat(this.state.title.replace(/ /g,''));
+    this.props.socket.emit('join', str.toLowerCase());
   }
 
   render() {

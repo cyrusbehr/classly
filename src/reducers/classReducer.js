@@ -7,8 +7,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
   case NEW_CLASS:
-    let newState = action.newClass;
-    return newState;
+    return action.newClass;
   default:
     return state;
   }

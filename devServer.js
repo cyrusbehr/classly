@@ -54,10 +54,11 @@ io.on('connection', socket => {
 // }
   socket.on('createClass', (localState) => {
     console.log("socket create class");
-    let str = localState.name.concat(localState.title);
+    let nameArr = localState.name.split(" ");
+    let str = nameArr[0].concat(localState.title.replace(/ /g,''));
     let newClass = new Class({
       professorName: localState.name,
-      accessCode: str,
+      accessCode: str.toLowerCase(),
       className: localState.title,
       timestamp: Date.now(),
       questions: [],
