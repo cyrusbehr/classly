@@ -183,10 +183,10 @@ io.on('connection', socket => {
   });
 
   socket.on('getStudentState', (accessCode) => {
-    Class.findOne({accessCode})
+    Class.findOne({accessCode: accessCode})
     .populate('questions')
-    .then((class) => {
-      socket.emit('getStudentState', class);
+    .then((classObj) => {
+      socket.emit('getStudentState', classObj);
     })
   })
 

@@ -79,7 +79,6 @@ class ProfessorSignupCard extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("STATE", state);
   return {
     socket: state.socketReducer.socket
   }
