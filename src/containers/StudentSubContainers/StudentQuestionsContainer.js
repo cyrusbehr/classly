@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import StudentQuestion from '../../components/StudentQuestion'
 import AddQuestion from '../../components/AddQuestion'
+import { connect } from 'react-redux';
 
 class StudentQuestionsContainer extends Component {
 

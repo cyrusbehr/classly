@@ -186,24 +186,15 @@ io.on('connection', socket => {
     Class.findOne({accessCode: accessCode})
     .populate('questions')
     .then((classObj) => {
-      socket.emit('getStudentState', classObj);
+      if(!classObj) {
+        socket.emit('error');
+      } else {
+        socket.emit('getStudentState', classObj);
+      }
     })
   })
 
 });
-
-// app.use(require('webpack-dev-middleware')(compiler, {
-//   noInfo: true,
-//   publicPath: config.output.publicPath
-// }));
-
-
-// app.use(require('webpack-dev-middleware')(compiler, {
-//   noInfo: true,
-//   publicPath: config.output.publicPath
-// }));
-//
-// app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
