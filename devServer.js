@@ -94,7 +94,6 @@ io.on('connection', socket => {
           .then(() => {
             socket.broadcast.to(socket.currentRoom).emit('newQuestion', savedQuestion);
             socket.emit('newQuestion', savedQuestion);
-            console.log('made it here damn this is crazy!!')
           })
         })
       }
@@ -136,7 +135,7 @@ io.on('connection', socket => {
         console.log("Error upVoting question:", err);
       } else {
         socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
-        socket.emit('updatedQuestion', updatedQuestion);
+        socket.emit('upVoteQuestion', updatedQuestion);
       }
     });
   });

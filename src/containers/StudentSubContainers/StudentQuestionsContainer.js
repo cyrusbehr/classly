@@ -14,7 +14,18 @@ class StudentQuestionsContainer extends Component {
         </div>
 
         <AddQuestion />
-        <StudentQuestion />
+        {this.props.questionsArray.map((question, i) => {
+          return(
+            <StudentQuestion
+              key={i}
+              id={question._id}
+              currentUpVotes={question.upVotes}
+              text={question.text}
+              tags={question.tags}
+              i={i}
+            />
+          )
+        })}
       </div>
     );
   }
@@ -22,7 +33,7 @@ class StudentQuestionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-
+    questionsArray: state.classReducer.classState.questions
   }
 }
 

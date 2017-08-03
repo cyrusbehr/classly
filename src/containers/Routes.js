@@ -18,7 +18,7 @@ export default class Routes extends Component {
            <Route path="/TA/signup" exact={true} component={TASignupContainer}/>
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
-           <Route path="/" exact={true} component={StudentMainViewContainer}/>
+           <Route path="/" exact={true} component={LoginContainer}/>
            {/* changed from LoginContainer to StudentMainViewContainer just for testing */}
          </Switch>
        </div>
