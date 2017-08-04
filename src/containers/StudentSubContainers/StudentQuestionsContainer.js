@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
-import _ from 'underscore'
+import _ from 'underscore';
 
 
 class StudentQuestionsContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: "",
+      accessCode: "",
+    }
+  }
 
   render() {
 
@@ -18,7 +25,6 @@ class StudentQuestionsContainer extends Component {
 
     return (
       <div className="questions-container">
-
         <div className="questions-container-header">
           <span className="course">MECH 101</span>
           <span className="lecturer">Prof {profname}</span>
@@ -26,15 +32,37 @@ class StudentQuestionsContainer extends Component {
         </div>
         <AddQuestion />
         {sortedArray.map((question, i) => {
+          // console.log("this is the filter: ", this.props.filter);
+          // console.log("this is question.tags[0]", question.tags[0]);
+          if (this.props.filter !== "") {
+            if(this.props.filter === question.tags[0]){
+            return(
+              <StudentQuestion
+                reference={question.referenceClass}
+                key={question._id}
+                id={question._id}
+                currentUpVotes={question.upVotes}
+                text={question.text}
+                tags={question.tags}
+                questionCreator={question.username}
+              />
+            )
+          } else {
+            return
+          }
+        } else {
           return(
             <StudentQuestion
+              reference={question.referenceClass}
               key={question._id}
               id={question._id}
               currentUpVotes={question.upVotes}
               text={question.text}
               tags={question.tags}
+              questionCreator={question.username}
             />
           )
+        }
         })}
       </div>
     );
@@ -44,13 +72,13 @@ class StudentQuestionsContainer extends Component {
 const mapStateToProps = state => {
   return {
     questionsArray: state.classReducer.classState.questions,
-    professorName: state.classReducer.classState.professorName
+    professorName: state.classReducer.classState.professorName,
+    filter: state.filterReducer
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-
   }
 }
 

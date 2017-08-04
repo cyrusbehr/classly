@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { voteTopic } from '../actions/Actions';
+import { voteTopic, updateFilter } from '../actions/Actions';
 import $ from 'jquery';
 
 class StudentTopic extends Component {
@@ -9,17 +9,19 @@ class StudentTopic extends Component {
     this.state={
       hover: false,
       alreadyClicked: false,
-      votes: this.props.votes
+      votes: this.props.votes,
+      toggle: false,
     }
     this.props.socket.on('voteTopic', (updatedTopic) => {
-      console.log("")
       this.props.voteTopicAction(updatedTopic);
+      this.setState({votes: this.props.votes});
     })
   }
 
   handleVote(e) {
-    e.preventDefault()
-
+    console.log("this is inner click");
+    e.stopPropagation();
+    e.preventDefault();
     if(!this.state.alreadyClicked) {
       $(e.target).parents('.topic').addClass('animated pulse');
 
@@ -37,9 +39,20 @@ class StudentTopic extends Component {
     }
   }
 
+  handleClick(id){
+    //event propogation
+    if(this.state.toggle){
+      this.props.toggleFilter("");
+      this.setState({toggle: false});
+    } else {
+      this.props.toggleFilter(this.props.text);
+      this.setState({toggle: true});
+    }
+  }
+
   render() {
     return (
-      <div className="topic" style={this.state.alreadyClicked ? {backgroundColor: '#FFF1F1'} : {backgroundColor:'white'}}>
+      <div className="topic" style={this.state.alreadyClicked ? {backgroundColor: '#FFF1F1'} : {backgroundColor:'white'}} onClick={() => this.handleClick(this.props.id)}>
         <div className="topic-content">
           <div className="topic-title">{this.props.text}</div>
           <div className="topic-description">Powerpoint slides p.1-10</div>
@@ -74,6 +87,9 @@ const mapDispatchToProps = dispatch => {
   return {
     voteTopicAction: (updateTopic) => {
       dispatch(voteTopic(updateTopic));
+    },
+    toggleFilter: (newFilter) => {
+      dispatch(updateFilter(newFilter))
     }
   }
 }

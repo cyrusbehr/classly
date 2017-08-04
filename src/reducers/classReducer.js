@@ -1,4 +1,4 @@
-import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION, ADD_TOPIC, VOTE_TOPIC } from '../constants/ActionTypes';
+import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION, ADD_TOPIC, VOTE_TOPIC, DELETE_QUESTION, DELETE_TOPIC } from '../constants/ActionTypes';
 import _ from 'underscore';
 
 const initialState =  {
@@ -42,7 +42,22 @@ export default function (state = initialState, action) {
       originalState1.classState.questions = originalState1.classState.questions.concat(action.newQuestion)
       return originalState1;
 
-    case ADD_TOPIC:
+    case DELETE_QUESTION:
+    let originalState5 = Object.assign({}, state);
+    let questionsArray = originalState5.classState.questions
+    let index;
+
+    for(var i = 0; i < questionsArray.length; i++) {
+      if(questionsArray[i]._id === action.ID){
+        index = i;
+        break;
+      }
+    }
+    questionsArray.splice(index,1);
+    originalState5.classState.questions = [...questionsArray];
+      return originalState5;
+
+    case DELETE_TOPIC:
       var originalState2 = Object.assign({}, state);
       originalState2.classState.topics = originalState2.classState.topics.concat(action.newTopic)
       return originalState2;
