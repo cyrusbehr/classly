@@ -1,80 +1,259 @@
-// @import url(https://fonts.googleapis.com/css?family=Raleway:100,400);
-//
-// $main-bg-color: #f1f2f0;
-// $accent-blue: #37bbe4;
-// $accent-gray: #e1e0dd;
-// $accent-black: #35342f;
-// $accent-orange: #ec6b2d;
-// $accent-red: #dd6464;
-//
-// body {
-//   background-color: $main-bg-color;
-//   color: $accent-black;
-//   display: flex;
-//   justify-content: center;
-//   font-family: 'Raleway', sans-serif;
-// }
-//
-// .main-app-container {
-//   padding-top: 2em;
-// }
-//
-// .main-app-nav {
-//   font-size: 2em;
-//   text-align: center;
-// }
-//
-// .counter-num-label {
-//   color: $accent-orange;
-//   padding-top: 1em;
-//   font-size: 3em;
-//   text-align: center;
-//   width: 100%;
-// }
-//
-// .counter-even-label {
-//   padding-top: 1em;
-//   font-size: 0.75em;
-//   text-align: center;
-//   text-transform: uppercase;
-//   letter-spacing: 3px;
-// }
-//
-// .counter-buttons {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding-top: 3em;
-//
-//   button {
-//     background-color: #CCC;
-//     border: none;
-//     height: 30px;
-//     width: 80px;
-//     margin-left: 1em;
-//     margin-right: 1em;
-//
-//     &:hover {
-//       background-color: $accent-gray;
-//     }
-//   }
-// }
-//
-// footer {
-//   font-size: 0.75em;
-//   text-align: center;
-//   padding-top: 10em;
-//
-//   a {
-//     text-decoration: none;
-//     color: inherit;
-//
-//     &:hover {
-//       color: $accent-blue;
-//     }
-//   }
-//
-//   #heart{
-//     color: $accent-red;
-//   }
-// }
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+
+
+$main-bg-color: #f1f2f0;
+$green: #00c993;
+$dark: #343434;
+
+body {
+  // background-color: $main-bg-color;
+  // color: $accent-black;
+  // display: flex;
+  // justify-content: center;
+  // font-family: 'Raleway', sans-serif;
+  // top: 0;
+  // left: 0;
+  // bottom: 0;
+  // right: 0;
+  // height: 100%;
+  // width: 100%;
+  // position: absolute;
+  // overflow: hidden;
+}
+
+.background-picture {
+  background: url('../assets/login-page-background.jpg');
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  filter: blur(2px);
+  z-index: 0;
+}
+
+.background-overlay {
+  background-color: black;
+  opacity: 0.75;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.top-nav-bar {
+  height: 70px;
+  top:0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+
+.footer {
+  height: 25px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: 2;
+  font-family: 'Raleway', sans-serif;
+  justify-content: space-between;
+  display: flex;
+}
+
+.copyright-container {
+  font-size: 14px;
+  color: white;
+  margin-left: 20px;
+  // margin-bottom: 20px;
+  // border-style: solid;
+  // border-color: white;
+}
+
+.social-media-container {
+  color: white;
+}
+
+.privacy-policy-container {
+  margin-right: 20px;
+}
+
+.privacy-policy {
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+}
+
+
+.name-container {
+  margin-left: 70px;
+  margin-top: 28px;
+}
+
+.name {
+  color: white;
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: $green;
+}
+
+.right-nav-bar {
+  font-size: 14px;
+  display:flex;
+  justify-content: space-between;
+}
+
+.about-nav-bar {
+  color: white;
+  text-decoration: none;
+}
+
+.home-nav-bar {
+  color: white;
+  text-decoration: none;
+}
+
+.contact-nav-bar {
+  color: white;
+  text-decoration: none;
+}
+
+.home-nav-bar-container {
+  margin-top: 35px;
+  margin-right: 90px;
+}
+
+.about-nav-bar-container {
+  margin-top: 35px;
+  margin-right: 90px;
+}
+
+.contact-nav-bar-container {
+  margin-top: 35px;
+  margin-right: 50px;
+}
+
+.main-login-cards-container {
+  justify-content: center;
+  display:flex;
+  height: 450px;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  // border-style: solid;
+  // border-color: white;
+  margin-top: 100px;
+}
+
+.middle-login-cards-container {
+  width: 700px;
+  // border-style: solid;
+  // border-color: white;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.login-slogan-container {
+  // border-style: solid;
+  // border-color: white;
+  height: 120px;
+  width: 700px;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.classroom-word {
+  color: $green;
+}
+
+.future-word {
+  color: $green;
+}
+
+.login-slogan {
+  // border-style: solid;
+  font-size: 27px;
+  font-weight: 400;
+  color: white;
+}
+
+.login-cards-container {
+  display: flex;
+  justify-content: space-between;
+  // border-style: solid;
+  // border-color: white;
+  color:white;
+  width: 700px;
+  height: 330px;
+}
+
+.login-card-picture {
+  max-width: 100%;
+  border-bottom: solid 4px;
+  border-color: $green;
+}
+
+.login-card {
+  height: 290px;
+  width: 175px;
+  // border-style: solid;
+  // border-color: white;
+  background-color: $dark;
+}
+
+.card-title {
+  margin-top: 5px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img{
+  width: 100%;
+}
+
+.signup-slogan-container {
+  height: 120px;
+  width: 700px;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  // border-style: solid;
+}
+
+.signup-slogan {
+  font-size: 27px;
+  font-weight: 400;
+  color: white;
+  // border-style: solid;
+}
+
+.middle-signup-card-container {
+  width: 700px;
+  // border-style: solid;
+  // border-color: white;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

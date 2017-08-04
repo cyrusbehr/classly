@@ -15,16 +15,20 @@ class LoginCard extends Component {
 
   render() {
     return(
-      <div onClick={() => this.redirect()}>
+      <div className="login-card" onClick={() => this.redirect()}>
         <div className={this.props.thisClass}>
-          <br/>
+          <img src={this.props.URL} className="login-card-picture"/>
+          {/* <br/>
           imageURL: {this.props.URL}
           <br/>
           title: {this.props.title}
           <br/>
           redirect route: {this.props.redirectRoute}
           <br/>
-          componentClassName: {this.props.thisClass}
+          componentClassName: {this.props.thisClass} */}
+          <div className="card-title">
+            {this.props.title}
+          </div>
         </div>
       </div>
     )
