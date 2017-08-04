@@ -5,4 +5,5 @@ export const SET_USERNAME = "SET_USERNAME";
 export const ADD_QUESTION = "ADD_QUESTION";
 export const ADD_TOPIC = "ADD_TOPIC";
 export const UPVOTE_QUESTION = "UPVOTE_QUESTION";
-export const VOTE_TOPIC = "VOTE_TOPIC"
+export const VOTE_TOPIC = "VOTE_TOPIC";
+export const TOGGLE_FILTER = "TOGGLE_FILTER";

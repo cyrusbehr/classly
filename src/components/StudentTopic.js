@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { voteTopic } from '../actions/Actions';
+import { voteTopic, updateFilter } from '../actions/Actions';
 
 class StudentTopic extends Component {
   constructor(props) {
     super(props);
     this.state={
       alreadyClicked: false,
-      votes: this.props.votes
+      votes: this.props.votes,
+      toggle: false,
     }
     this.props.socket.on('voteTopic', (updatedTopic) => {
-      console.log("")
       this.props.voteTopicAction(updatedTopic);
     })
   }
 
   handleVote(e) {
-    e.preventDefault()
+    console.log("this is inner click");
+    e.stopPropagation();
+    e.preventDefault();
     if(!this.state.alreadyClicked) {
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('voteTopic', {topicId: this.props.id,
@@ -30,9 +32,20 @@ class StudentTopic extends Component {
     }
   }
 
+  handleClick(id){
+    //event propogation
+    if(this.state.toggle){
+      this.props.toggleFilter("");
+      this.setState({toggle: false});
+    } else {
+      this.props.toggleFilter(this.props.text);
+      this.setState({toggle: true});
+    }
+  }
+
   render() {
     return (
-      <div className="topic">
+      <div className="topic" onClick={() => this.handleClick(this.props.id)}>
         <div className="topic-content">
           <div className="topic-title">{this.props.text}</div>
           <div className="topic-description">Powerpoint slides p.1-10</div>
@@ -56,6 +69,9 @@ const mapDispatchToProps = dispatch => {
   return {
     voteTopicAction: (updateTopic) => {
       dispatch(voteTopic(updateTopic));
+    },
+    toggleFilter: (newFilter) => {
+      dispatch(updateFilter(newFilter))
     }
   }
 }
