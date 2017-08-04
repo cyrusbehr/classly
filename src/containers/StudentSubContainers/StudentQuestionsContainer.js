@@ -20,20 +20,6 @@ class StudentQuestionsContainer extends Component {
           <span className="date">1st Aug 2017</span>
         </div>
         <AddQuestion />
-<<<<<<< HEAD
-          {this.props.questionsArray.map((question, i) => {
-            return(
-              <StudentQuestion
-                key={i}
-                id={question._id}
-                currentUpVotes={question.upVotes}
-                text={question.text}
-                tags={question.tags}
-                i={i}
-              />
-            )
-          })}
-=======
         {sortedArray.map((question, i) => {
           return(
             <StudentQuestion
@@ -42,11 +28,9 @@ class StudentQuestionsContainer extends Component {
               currentUpVotes={question.upVotes}
               text={question.text}
               tags={question.tags}
-              i={i}
             />
           )
         })}
->>>>>>> ce202c8d007722c117e0a21990b99f97a90e1638
       </div>
     );
   }
