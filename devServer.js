@@ -100,12 +100,6 @@ io.on('connection', socket => {
     });
   });
 
-  //   data = {
-  //   text: String,
-  //   votes: Number,
-  //   timestamp: Number,
-  //   reference: String,
-  // }
   socket.on('newTopic', (data) => {
     let newTopic = new Topic({
       text: data.text,
@@ -121,7 +115,6 @@ io.on('connection', socket => {
           classObj.topics.push(newTopic._id);
           classObj.save()
           .then(() => {
-            console.log("The topic is: ", newTopic)
             socket.broadcast.to(socket.currentRoom).emit('newTopic', newTopic);
             socket.emit('newTopic', newTopic);
           })
@@ -205,6 +198,7 @@ io.on('connection', socket => {
   socket.on('getStudentState', (accessCode) => {
     Class.findOne({accessCode: accessCode})
     .populate('questions')
+    .populate('topics')
     .then((classObj) => {
       if(!classObj) {
         socket.emit('error1');
