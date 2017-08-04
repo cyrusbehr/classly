@@ -2,19 +2,19 @@ const LoginCardData = [
   {
     URL: "../assets/student-card-picture.jpg",
     title: "Student",
-    redirectRoute: "/student/signup",
+    redirectRoute: "/",
     thisClass: "student-class",
   },
   {
     URL: "../assets/student-card-picture.jpg",
     title: "Professor",
-    redirectRoute: "/professor/signup",
+    redirectRoute: "/",
     thisClass: "professor-class",
   },
   {
     URL: "../assets/student-card-picture.jpg",
     title: "TA",
-    redirectRoute: "/TA/signup",
+    redirectRoute: "/",
     thisClass: "TA-class",
   },
 ]

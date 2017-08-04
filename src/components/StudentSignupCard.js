@@ -59,35 +59,40 @@ class StudentSignupCard extends Component {
 
   render() {
     return (
-      <div>
-        <br/>
-        imageURL: {this.props.URL}
-        <br/>
-        title: {this.props.title}
-        <div>
-          <div>
+          <div className="student-signup-card">
             <form>
               <label>
-                Student name:
-                <input type="text"
+                <input
+                  type="text"
                   value={this.state.name}
+                  placeholder="firstname"
                   onChange={(event) => this.handleNameChange(event)}
+                  className="student-signup-firstname-input"
                 />
               </label>
+              <br></br>
               <label>
-                Access Code:
-                <input type="text"
+                <input
+                  type="text"
                   value={this.state.title}
+                  placeholder="access code"
                   onChange={(event) => this.handleAccessCodeChange(event)}
+                  className="student-signup-acesscode-input"
                 />
               </label>
-              <input type="submit"
+              <br></br>
+              {/* <input type="submit"
                 value="Join Class"
-                onClick={(e) => this.onSubmit(e)}/>
+                onClick={(e) => this.onSubmit(e)}
+                className="student-signup-submit"
+              /> */}
+              <button
+                type="button"
+                onClick={(e) => this.onSubmit(e)}
+                className="student-signup-submit"
+              >Join Class</button>
               </form>
             </div>
-          </div>
-        </div>
       )
     }
   }

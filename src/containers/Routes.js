@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import LoginContainer from './LoginContainer';
+import MainPageContainer from './MainPageContainer';
 import StudentMainViewContainer from './StudentSubContainers/StudentMainViewContainer';
 import ProfessorMainViewContainer from './ProfessorSubContainers/ProfessorMainViewContainer';
 import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupContainer';
@@ -18,7 +18,7 @@ export default class Routes extends Component {
            <Route path="/TA/signup" exact={true} component={TASignupContainer}/>
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
-           <Route path="/" exact={true} component={LoginContainer}/>
+           <Route path="/" exact={true} component={MainPageContainer}/>
            {/* changed from LoginContainer to StudentMainViewContainer just for testing */}
          </Switch>
        </div>
