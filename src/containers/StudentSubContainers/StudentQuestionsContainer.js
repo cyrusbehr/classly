@@ -15,7 +15,6 @@ class StudentQuestionsContainer extends Component {
 
     return (
       <div className="questions-container">
-
         <div className="questions-container-header">
           <span className="date">1st Aug 2017</span>
         </div>
@@ -23,11 +22,13 @@ class StudentQuestionsContainer extends Component {
         {sortedArray.map((question, i) => {
           return(
             <StudentQuestion
+              reference={question.referenceClass}
               key={question._id}
               id={question._id}
               currentUpVotes={question.upVotes}
               text={question.text}
               tags={question.tags}
+              questionCreator={question.username}
             />
           )
         })}

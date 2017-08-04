@@ -25,6 +25,7 @@ class AddTopic extends Component{
       votes: 0,
       timestamp: Date.now(),
       referenceClass: this.props.classObj._id,
+      username: this.props.username,
     }
     this.props.socket.emit('newTopic', data);
     this.setState({topicText: ""});
@@ -54,6 +55,7 @@ const mapStateToProps = state => {
   return{
     socket: state.socketReducer.socket,
     classObj: state.classReducer.classState,
+    username: state.userReducer.username,
   }
 }
 

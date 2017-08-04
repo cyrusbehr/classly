@@ -35,7 +35,13 @@ class StudentQuestion extends Component {
     }
   }
 
+  deleteItem(e) {
+    e.preventDefault()
+    this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference})
+  }
+
   render() {
+    var isCreator = (this.props.questionCreator === this.props.username)
     return (
       <div className="question">
         <div className="question-body">
@@ -54,6 +60,12 @@ class StudentQuestion extends Component {
             </svg>
           </div>
           <div className="upvote-number">{this.state.votes}</div>
+          {isCreator
+            ?
+            <button onClick={(e)=> this.deleteItem(e)}>delete</button>
+            :
+            ""
+          }
         </div>
       </div>
     );
@@ -65,6 +77,7 @@ const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
+    username: state.userReducer.username,
   }
 }
 
