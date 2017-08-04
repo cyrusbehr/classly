@@ -22,7 +22,6 @@ class StudentQuestionsContainer extends Component {
 
     return (
       <div className="questions-container">
-
         <div className="questions-container-header">
           <span className="date">1st Aug 2017</span>
         </div>
@@ -33,11 +32,13 @@ class StudentQuestionsContainer extends Component {
           if (!this.props.filter) {
             return(
               <StudentQuestion
+                reference={question.referenceClass}
                 key={question._id}
                 id={question._id}
                 currentUpVotes={question.upVotes}
                 text={question.text}
                 tags={question.tags}
+                questionCreator={question.username}
               />
             )
           } else {
@@ -55,6 +56,18 @@ class StudentQuestionsContainer extends Component {
               return
             }
           }
+        } else {
+          return(
+            <StudentQuestion
+              reference={question.referenceClass}
+              key={question._id}
+              id={question._id}
+              currentUpVotes={question.upVotes}
+              text={question.text}
+              tags={question.tags}
+              questionCreator={question.username}
+            />
+          )
         }
       )}
       </div>

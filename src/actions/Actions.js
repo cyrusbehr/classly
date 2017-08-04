@@ -1,8 +1,10 @@
 import { SET_USER_TYPE,
   SET_SOCKET, ADD_CLASS,
   SET_USERNAME, ADD_QUESTION,
-  UPVOTE_QUESTION, VOTE_TOPIC,
-  ADD_TOPIC, TOGGLE_FILTER } from '../constants/ActionTypes';
+  TOGGLE_FILTER,
+  UPVOTE_QUESTION, ADD_TOPIC,
+VOTE_TOPIC, DELETE_QUESTION,
+ DELETE_TOPIC} from '../constants/ActionTypes';
 
 export function setUserType(userType) {
   return {
@@ -57,6 +59,18 @@ export function voteTopic(updatedTopic) {
   return {
     type: VOTE_TOPIC,
     updatedTopic
+  }
+}
+export function deleteQuestion(ID) {
+  return {
+    type: DELETE_QUESTION,
+    ID
+  }
+}
+export function deleteTopic(deleteTopic) {
+  return {
+    type: DELETE_TOPIC,
+    deleteTopic
   }
 }
 

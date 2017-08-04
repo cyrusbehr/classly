@@ -30,6 +30,7 @@ const QuestionSchema = mongoose.Schema({
 });
 
 const TopicSchema = mongoose.Schema({
+  username: String,
   text: String,
   votes: Number,
   timestamp: Number,
