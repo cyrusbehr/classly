@@ -104,7 +104,7 @@ body {
 
 .name {
   color: white;
-  font-size: 20px;
+  font-size: 25px;
   text-decoration: underline;
   text-decoration-color: $green;
 }
@@ -232,28 +232,197 @@ img{
   width: 100%;
 }
 
-.signup-slogan-container {
-  height: 120px;
-  width: 700px;
-  font-family: 'Raleway', sans-serif;
-  color: white;
-  display: flex;
-  justify-content: flex-start;
-  // border-style: solid;
-}
+// .signup-slogan-container {
+//   height: 120px;
+//   width: 700px;
+//   font-family: 'Raleway', sans-serif;
+//   color: white;
+//   display: flex;
+//   justify-content: flex-start;
+//   // border-style: solid;
+// }
+//
+// .signup-slogan {
+//   font-size: 27px;
+//   font-weight: 400;
+//   color: white;
+//   // border-style: solid;
+// }
+//
+// .middle-signup-card-container {
+//   width: 700px;
+//   // border-style: solid;
+//   // border-color: white;
+//   display:flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+// }
 
-.signup-slogan {
-  font-size: 27px;
-  font-weight: 400;
-  color: white;
-  // border-style: solid;
-}
-
-.middle-signup-card-container {
-  width: 700px;
+.student-signup-cards-container {
+  justify-content: center;
+  align-items: center;
+  display:flex;
+  height: 400px;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
   // border-style: solid;
   // border-color: white;
-  display:flex;
+  margin-top: 125px;
+}
+
+.middle-student-cards-container {
+  width:320px;
+  background-color: $dark;
+  padding-top: 40px;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 30px;
+  display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.middle-professor-cards-container {
+  width:320px;
+  background-color: $dark;
+  padding-top: 40px;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.student-signup-slogan-container {
+  display: flex;
+  justify-content: center;
+}
+
+.professor-signup-slogan-container {
+  display: flex;
+  justify-content: center;
+  // border-style: solid;
+  // border-color:white;
+}
+
+.student-signup-slogan {
+  font-family: 'Raleway', sans-serif;
+  font-size: 26px;
+  color: white;
+}
+
+.professor-signup-slogan {
+  font-family: 'Raleway', sans-serif;
+  font-size: 26px;
+  color: white;
+}
+
+.student-word {
+  text-decoration: underline;
+  text-decoration-color: $green;
+}
+
+.professor-word {
+  text-decoration: underline;
+  text-decoration-color: $green;
+}
+
+.student-signup-acesscode-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid white;
+  width: 275px;
+  height: 25px;
+  margin-top: 30px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+.professor-signup-lecture-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid white;
+  width: 275px;
+  height: 25px;
+  margin-top: 30px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+.student-signup-firstname-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid white;
+  width: 275px;
+  height: 25px;
+  margin-top: 30px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+.professor-signup-firstname-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid white;
+  width: 275px;
+  height: 25px;
+  margin-top: 30px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+.student-signup-submit {
+  background-color: $green; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  width: 280px;
+  border-radius: 5px;
+  margin-top: 40px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.professor-signup-submit {
+  background-color: $green; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  width: 280px;
+  border-radius: 5px;
+  margin-top: 40px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.student-signup-card {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.professor-signup-card {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+::-webkit-input-placeholder {
+  color: white;
+  font-family: 'Raleway', sans-serif;
 }

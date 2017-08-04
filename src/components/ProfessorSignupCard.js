@@ -43,36 +43,37 @@ class ProfessorSignupCard extends Component {
 
   render() {
     return(
-      <div>
-        <br/>
-        imageURL: {this.props.URL}
-        <br/>
-        title: {this.props.title}
-        <div>
-          <div>
+      <div className="professor-signup-card">
             <form>
               <label>
-                Professor Name (As it will appear in lecture chat):
-                <input type="text"
-                  name="professorName"
+                <input
+                  type="text"
                   value={this.state.name}
+                  placeholder="firstname"
+                  className="professor-signup-firstname-input"
                   onChange={(event) => this.handleNameChange(event)}
                 />
               </label>
+              <br></br>
               <label>
-                Lecture Title:
-                <input type="text"
-                   name="lectureTitle"
+                <input
+                  type="text"
                    value={this.state.title}
+                   placeholder="lecture title"
+                   className="professor-signup-lecture-input"
                    onChange={(event) => this.handleTitleChange(event)}
                 />
               </label>
-              <input type="submit"
+              <br></br>
+              {/* <input type="submit"
                 value="Create Class"
-                onClick={(e) => this.onSubmit(e)}/>
+                onClick={(e) => this.onSubmit(e)}/> */}
+                <button
+                  type="button"
+                  onClick={(e) => this.onSubmit(e)}
+                  className="student-signup-submit"
+                >Create Class</button>
             </form>
-          </div>
-        </div>
       </div>
     )
   }

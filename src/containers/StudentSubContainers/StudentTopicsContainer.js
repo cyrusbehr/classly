@@ -27,7 +27,7 @@ class StudentTopicsContainer extends Component {
               text={topic.text}
               votes={topic.votes}
               id={topic._id}
-              key={i}
+              key={topic._id}
             />
           )
         })}

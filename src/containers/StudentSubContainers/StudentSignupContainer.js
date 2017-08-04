@@ -5,8 +5,13 @@ import {StudentSignupData} from '../../constants/const'
 export default class StudentSignupContainer extends Component {
   render() {
     return(
-      <div>
-        This is the StudentSignupContainer container
+      <div className="student-signup-cards-container">
+      <div className="middle-student-cards-container">
+        <div className="student-signup-slogan-container">
+          <div className="student-signup-slogan">
+        Welcome to class.ly,<br></br><text className="student-word">student</text>! Let's help you<br></br>get started!
+      </div>
+      </div>
         <StudentSignupCard
           URL={StudentSignupData.URL}
           title={StudentSignupData.title}
@@ -14,6 +19,7 @@ export default class StudentSignupContainer extends Component {
           {...this.props}
         />
       </div>
+    </div>
     )
   }
 };
