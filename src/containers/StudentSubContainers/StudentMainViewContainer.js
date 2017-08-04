@@ -13,11 +13,11 @@ class StudentMainViewContainer extends Component {
 
   render() {
     return (
-      <div className="body-container">
+      <div>
         {
           this.props.userType
           ?
-          <div>
+          <div  className="body-container">
             <StudentTopicsContainer />
             <StudentQuestionsContainer />
           </div>
