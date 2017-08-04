@@ -11,7 +11,6 @@ class StudentQuestion extends Component {
       alreadyClicked: false
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
-
       this.props.upVoteQuestionAction(updatedQuestion);
     })
   }
@@ -20,15 +19,11 @@ class StudentQuestion extends Component {
     if(!this.state.alreadyClicked){
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: false});
-      this.state.alreadyClicked = true;
-      // $('#upvote-icon').css('fill', '#00C993');
-      console.log("toggled upVotequestion: ", this.props.id);
+         this.setState({alreadyClicked: true})
     } else {
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: true});
-      this.state.alreadyClicked = false;
-      // $('#upvote-icon').css('fill', '#4B4B4B');
-      console.log("toggled upVotequestion: ", this.props.id);
+         this.setState({alreadyClicked: false})
     }
   }
 

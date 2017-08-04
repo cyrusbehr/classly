@@ -1,4 +1,4 @@
-import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION, ADD_TOPIC } from '../constants/ActionTypes';
+import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION, ADD_TOPIC, VOTE_TOPIC } from '../constants/ActionTypes';
 import _ from 'underscore';
 
 const initialState =  {
@@ -23,6 +23,19 @@ export default function (state = initialState, action) {
       //new state write over to ensure deep copy
       originalState.classState.questions = [...questionArray];
         return originalState;
+
+    case VOTE_TOPIC:
+      let originalState4 = Object.assign({}, state);
+      var index = _.findIndex(originalState4.classState.topics, function(q){
+        return q._id === action.updatedTopic._id;
+      });
+      //destructure question array
+      let topicsArray = originalState4.classState.topics;
+      //replace old question with updated one
+      topicsArray[index] = action.updatedTopic;
+      //new state write over to ensure deep copy
+      originalState4.classState.topics = [...topicsArray];
+        return originalState4;
 
     case ADD_QUESTION:
       let originalState1 = Object.assign({}, state);

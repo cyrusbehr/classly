@@ -53,7 +53,6 @@ io.on('connection', socket => {
 //   reference: String,
 // }
   socket.on('createClass', (localState) => {
-    console.log("socket create class");
     let nameArr = localState.name.split(" ");
     let str = nameArr[0].concat(localState.title.replace(/ /g,''));
     let newClass = new Class({
@@ -147,20 +146,30 @@ io.on('connection', socket => {
     }
   });
 
-  //data = {
-  //topicId = topic._id,
-  //previousTopicVotes: topic.votes
-  //}
   socket.on('voteTopic', (data) => {
-    let tempVote = data.previousTopicVotes + 1;
-    Topic.findOneAndUpdate({_id: data._id}, { $set: {votes: tempVote}}, {new: true}, (err, updatedTopic) => {
-      if(err){
-        console.log("Error voting on topic", err);
-      } else {
-        socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
-        socket.emit('updatedTopic', updatedTopic);
-      }
-    });
+    if(!data.toggle){
+      let tempUpVote = data.previousVotes + 1;
+      Topic.findOneAndUpdate({_id: data.topicId}, { $set: { votes: tempUpVote}}, {new: true}, (err, updatedTopic) => {
+        if(err){
+          console.log("Error upVoting topic:", err);
+        } else {
+          console.log('The updated topics is: ', updatedTopic)
+          socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
+          socket.emit('voteTopic', updatedTopic);
+        }
+      });
+    } else {
+      let tempUpVote = data.previousVotes - 1;
+      Topic.findOneAndUpdate({_id: data.topicId}, { $set: { votes: tempUpVote}}, {new: true}, (err, updatedTopic) => {
+        if(err){
+          console.log("Error upVoting topic:", err);
+        } else {
+          console.log('The updated topics is: ', updatedTopic)
+          socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
+          socket.emit('voteTopic', updatedTopic);
+        }
+      });
+    }
   });
 
   //data = {

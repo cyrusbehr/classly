@@ -1,7 +1,8 @@
 import { SET_USER_TYPE,
   SET_SOCKET, ADD_CLASS,
   SET_USERNAME, ADD_QUESTION,
-  UPVOTE_QUESTION, ADD_TOPIC } from '../constants/ActionTypes';
+  UPVOTE_QUESTION, ADD_TOPIC,
+VOTE_TOPIC } from '../constants/ActionTypes';
 
 export function setUserType(userType) {
   return {
@@ -50,5 +51,11 @@ export function upVoteQuestion(updatedQuestion) {
     type: UPVOTE_QUESTION,
     updatedQuestion
   }
+}
 
+export function voteTopic(updatedTopic) {
+  return {
+    type: VOTE_TOPIC,
+    updatedTopic
+  }
 }
