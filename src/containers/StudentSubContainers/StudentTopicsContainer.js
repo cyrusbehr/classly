@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
 import StudentTopic from '../../components/StudentTopic';
 import AddTopic from '../../components/AddTopic';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 class StudentTopicsContainer extends Component {
   render() {
