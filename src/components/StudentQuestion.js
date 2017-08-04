@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion} from '../actions/Actions';
+import {upVoteQuestion, deleteQuestion} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -37,6 +37,8 @@ class StudentQuestion extends Component {
 
   deleteItem(e) {
     e.preventDefault()
+    this.props.deleteQuestionAction(this.props.id);
+    console.log('The question id is: ', this.props.id)
     this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference})
   }
 
@@ -85,6 +87,9 @@ const mapDispatchToProps = dispatch => {
   return {
     upVoteQuestionAction: (updatedQuestion) => {
       dispatch(upVoteQuestion(updatedQuestion));
+    },
+    deleteQuestionAction: (ID) => {
+      dispatch(deleteQuestion(ID));
     }
   }
 }
