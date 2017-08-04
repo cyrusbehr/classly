@@ -25,7 +25,7 @@ html, body{
 }
 
 .topics-container{
-  background-color: #30383E;
+  background-color: #EFEFEF;
   flex: 3;
   overflow: scroll;
 }
@@ -50,7 +50,7 @@ html, body{
 }
 
 .questions-container{
-  background-color: #EBEBEB;
+  background-color: #FFFFFF;
   flex: 5;
   overflow: scroll;
 }
@@ -156,17 +156,28 @@ html, body{
   margin-right: 10px;
 }
 
-.new-question-input-field #tag{
-  flex: 2;
+#menu-item{
+  padding: 5px;
 }
 
-#new-question, #new-topic, #tag{
-  flex: 0 0 30px;
+#new-topic{
+  flex:2;
   border-radius: 10px;
   border: white;
   padding: 0 20px;
   height: 30px;
 }
+
+.new-question-input-field #new-question, .new-question-input-field #tag{
+  border-radius: 10px;
+  font-size:16px;
+  flex:2;
+  border-radius: 10px;
+  border: darkgray solid 1px;
+  padding: 0 20px;
+  height: 30px;
+}
+
 #submit-question, #submit-topic{
   width: 100px;
   border: black solid 2px;
@@ -176,8 +187,8 @@ html, body{
   padding: 5px;
 }
 #submit-topic{
-  border-color: #EBEBEB;
-  color: #EBEBEB;
+  border-color: black;
+  color: black;
 }
 #question-help, #topic-help, #alert{
   width: 25px;
@@ -202,10 +213,11 @@ html, body{
   cursor: pointer;
 }
 #topic-help{
-  border-color: #EBEBEB;
-  color: #EBEBEB;
+  border-color: black;
+  color: black;
 }
 .new-question-footer, .new-topic-footer{
+  margin-top:5px;
   padding: 5px 0;
   display: flex;
   justify-content: flex-end;

@@ -73,24 +73,13 @@ submitPressed(e) {
             placeholder="Tags (optional)"
           /> */}
 
-          {/* <Autocomplete
-            getItemValue={(item) => item.text}
-            id="tag"
-            items={this.props.classObj.topics}
-            value={this.state.tags}
-            onChange={(e) => this.updateTags(e)}
-            renderItem={(item, isHighlighted) =>
-              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-                {item.label}
-              </div>
-            }
-          /> */}
           <Autocomplete
-            id="tag"
+            wrapperProps={{id:'new-tag'}}
+            inputProps={{id:'tag', placeholder:'#tag'}}
             getItemValue={(item) => item.text}
             items={this.props.classObj.topics}
             renderItem={(item, isHighlighted) =>
-              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+              <div id="menu-item" style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
                 {item.text}
               </div>
             }
