@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addQuestion } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
+import $ from 'jquery';
 
 
 class AddQuestion extends Component{
@@ -28,7 +29,12 @@ updateQuestion(e) {
 }
 
 submitPressed(e) {
-  e.preventDefault()
+  e.preventDefault();
+  // if(!this.state.questionText === ""){
+  //   console.log("swing");
+  //   $(e.target).addClass('animated swing');
+  // }
+
   let tags;
   if(this.state.tags === "") {
     tags = null;
