@@ -16,9 +16,9 @@ class StudentQuestionsContainer extends Component {
 
   render() {
 
-      var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
-        return -1 * question.upVotes; //negative changes to descending order
-      })
+    var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
+      return -1 * question.upVotes; //negative changes to descending order
+    })
 
     return (
       <div className="questions-container">
@@ -53,23 +53,10 @@ class StudentQuestionsContainer extends Component {
                 />
               )
             } else {
-              return
+              return(<span></span>)
             }
           }
-        } else {
-          return(
-            <StudentQuestion
-              reference={question.referenceClass}
-              key={question._id}
-              id={question._id}
-              currentUpVotes={question.upVotes}
-              text={question.text}
-              tags={question.tags}
-              questionCreator={question.username}
-            />
-          )
-        }
-      )}
+        )}
       </div>
     );
   }
