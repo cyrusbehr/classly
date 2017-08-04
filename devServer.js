@@ -10,7 +10,7 @@ const host = 'http://localhost';
 const port = process.env.npm_config_port ? process.env.npm_config_port : 3000;
 
 
-app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use('/dist/', express.static(path.join(__dirname, 'dist')));
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 const server = require('http').createServer(app);
@@ -117,17 +117,19 @@ io.on('connection', socket => {
       if(err){
         console.log("Error saving newTopic to database:", err);
       } else {
-        socket.broadcast.to(socket.currentRoom).emit('newQuestion', newQuestion);
-        socket.emit('newTopic', newTopic);
+        Class.findById(data.referenceClass, (err, classObj) => {
+          classObj.topics.push(newTopic._id);
+          classObj.save()
+          .then(() => {
+            console.log("The topic is: ", newTopic)
+            socket.broadcast.to(socket.currentRoom).emit('newTopic', newTopic);
+            socket.emit('newTopic', newTopic);
+          })
+        })
       }
     });
   });
 
-  //data = {
-  //questionId: question._id,
-  //previousUpVotes: question.upVotes
-  //}
-  //really only need to know the id, but being passed the previousUpVotes makes code cleaner, if findOneAndUpdate works (tbd)
   socket.on('upVoteQuestion', (data) => {
     if(!data.toggle){
       let tempUpVote = data.previousUpVotes + 1;

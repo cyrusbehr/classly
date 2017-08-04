@@ -41,8 +41,8 @@ class StudentQuestion extends Component {
           <div className="question-footer"></div>
         </div>
         <div className="question-upvote-container">
-          <div className="upvote-icon-container" onClick={() => this.handleUpvote()}>
-            <svg width="38px" height="24px" viewBox="0 0 38 24" version="1.1">
+          <div className="upvote-icon-container">
+            <svg onClick={() => this.handleUpvote()} width="38px" height="24px" viewBox="0 0 38 24" version="1.1">
               <polygon
                 style={this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
                 id="upvote-icon"
