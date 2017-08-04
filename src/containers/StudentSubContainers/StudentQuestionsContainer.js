@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
-import _ from 'underscore'
+import _ from 'underscore';
 
 
 class StudentQuestionsContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: "",
+      accessCode: "",
+    }
+  }
 
   render() {
 
@@ -21,6 +28,23 @@ class StudentQuestionsContainer extends Component {
         </div>
         <AddQuestion />
         {sortedArray.map((question, i) => {
+          // console.log("this is the filter: ", this.props.filter);
+          // console.log("this is question.tags[0]", question.tags[0]);
+          if (this.props.filter !== "") {
+            if(this.props.filter === question.tags[0]){
+            return(
+              <StudentQuestion
+                key={question._id}
+                id={question._id}
+                currentUpVotes={question.upVotes}
+                text={question.text}
+                tags={question.tags}
+              />
+            )
+          } else {
+            return
+          }
+        } else {
           return(
             <StudentQuestion
               key={question._id}
@@ -30,6 +54,7 @@ class StudentQuestionsContainer extends Component {
               tags={question.tags}
             />
           )
+        }
         })}
       </div>
     );
@@ -38,13 +63,13 @@ class StudentQuestionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    questionsArray: state.classReducer.classState.questions
+    questionsArray: state.classReducer.classState.questions,
+    filter: state.filterReducer,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-
   }
 }
 
