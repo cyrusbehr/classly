@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
-import AddTopic from '../../components/StudentTopic';
-import StudentTopic from '../../components/AddTopic';
+import StudentTopic from '../../components/StudentTopic';
+import AddTopic from '../../components/AddTopic';
 import {connect} from 'react-redux'
 
 class StudentTopicsContainer extends Component {
@@ -15,7 +15,16 @@ class StudentTopicsContainer extends Component {
           <span className="lecturer">Prof {profname}</span>
         </div>
         <AddTopic />
-        <StudentTopic />
+        {this.props.classObj.topics.map((topic) => {
+          return(
+            <StudentTopic
+              text={topic.text}
+              votes={topic.votes}
+              id={topic._id}
+              key={topic._id}
+            />
+          )
+        })}
       </div>
     );
   }
