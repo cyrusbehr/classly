@@ -77,6 +77,14 @@ html, body{
   width: 100%;
   display: flex;
   border-top: 2px solid #CACACA;
+  /* for animation effects */
+  background-size: 200% 100%;
+  background-image: linear-gradient(to left, #D9FFF5 50%, white 50%);
+  transition: background-position 0.5s;
+}
+
+.question:hover {
+    background-position: -100% 0%;
 }
 
 .question .question-body{
