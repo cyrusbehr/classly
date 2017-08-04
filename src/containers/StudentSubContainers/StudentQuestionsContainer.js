@@ -28,9 +28,10 @@ class StudentQuestionsContainer extends Component {
         </div>
         <AddQuestion />
         {sortedArray.map((question, i) => {
-          console.log("inside sorted array");
+          // console.log("this is the filter: ", this.props.filter);
+          // console.log("this is question.tags[0]", question.tags[0]);
           if (this.props.filter !== "") {
-            if(this.props.filter === question.tags){
+            if(this.props.filter === question.tags[0]){
             return(
               <StudentQuestion
                 key={question._id}
@@ -63,7 +64,7 @@ class StudentQuestionsContainer extends Component {
 const mapStateToProps = state => {
   return {
     questionsArray: state.classReducer.classState.questions,
-    filter: state.filterReducer.currentFilter,
+    filter: state.filterReducer,
   }
 }
 
