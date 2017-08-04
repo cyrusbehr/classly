@@ -8,27 +8,29 @@ class StudentQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alreadyClicked: false
+      alreadyClicked: false,
+      votes: this.props.currentUpVotes
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
-
       this.props.upVoteQuestionAction(updatedQuestion);
     })
   }
 
+  componenetDidMount() {
+    this.setState({votes: this.props.currentUpVotes})
+  }
+
   handleUpvote() {
     if(!this.state.alreadyClicked){
+      this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: false});
-      this.state.alreadyClicked = true;
-
-      console.log("toggled upVotequestion: ", this.props.id);
+         this.setState({alreadyClicked: true})
     } else {
+      this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: true});
-      this.state.alreadyClicked = false;
-
-      console.log("toggled upVotequestion: ", this.props.id);
+         this.setState({alreadyClicked: false})
     }
   }
 
@@ -50,7 +52,7 @@ class StudentQuestion extends Component {
               </polygon>
             </svg>
           </div>
-          <div className="upvote-number">{this.props.currentUpVotes}</div>
+          <div className="upvote-number">{this.state.votes}</div>
         </div>
       </div>
     );
