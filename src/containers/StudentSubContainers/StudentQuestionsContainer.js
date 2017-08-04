@@ -30,8 +30,7 @@ class StudentQuestionsContainer extends Component {
         {sortedArray.map((question, i) => {
           // console.log("this is the filter: ", this.props.filter);
           // console.log("this is question.tags[0]", question.tags[0]);
-          if (this.props.filter !== "") {
-            if(this.props.filter === question.tags[0]){
+          if (!this.props.filter) {
             return(
               <StudentQuestion
                 key={question._id}
@@ -42,20 +41,22 @@ class StudentQuestionsContainer extends Component {
               />
             )
           } else {
-            return
+            if(this.props.filter === question.tags[0]){
+              return(
+                <StudentQuestion
+                  key={question._id}
+                  id={question._id}
+                  currentUpVotes={question.upVotes}
+                  text={question.text}
+                  tags={question.tags}
+                />
+              )
+            } else {
+              return
+            }
           }
-        } else {
-          return(
-            <StudentQuestion
-              key={question._id}
-              id={question._id}
-              currentUpVotes={question.upVotes}
-              text={question.text}
-              tags={question.tags}
-            />
-          )
         }
-        })}
+      )}
       </div>
     );
   }
