@@ -15,13 +15,14 @@ class StudentTopicsContainer extends Component {
           <span className="lecturer">Prof {profname}</span>
         </div>
         <AddTopic />
-        {this.props.classObj.topics.map((topic) => {
+        {this.props.topics.map((topic, i) => {
+
           return(
             <StudentTopic
               text={topic.text}
               votes={topic.votes}
               id={topic._id}
-              key={topic._id}
+              key={i}
             />
           )
         })}
@@ -31,8 +32,10 @@ class StudentTopicsContainer extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log("In the map state to props:", state.classReducer.classState);
   return {
-    classObj: state.classReducer.classState
+    classObj: state.classReducer.classState,
+    topics: state.classReducer.classState.topics
   }
 }
 
