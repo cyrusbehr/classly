@@ -62,7 +62,8 @@ class StudentTopic extends Component {
 
 const mapStateToProps = state => {
   return {
-    socket: state.socketReducer.socket
+    socket: state.socketReducer.socket,
+    username: state.userReducer.username
   }
 }
 
