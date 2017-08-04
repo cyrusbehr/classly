@@ -11,7 +11,7 @@ class StudentTopicsContainer extends Component {
     return (
       <div className="topics-container">
         <div className="topics-container-header">
-          <span className="course">MECH 101</span>
+          <span className="course">{this.props.classObj.className}</span>
           <span className="lecturer">Prof {profname}</span>
         </div>
         <AddTopic />
