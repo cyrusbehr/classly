@@ -39,7 +39,8 @@ export default class LoginContainer extends Component {
         <div className="middle-login-cards-container">
           <div className="login-slogan-container">
             <div className="login-slogan">
-              With Class.ly, let's <br></br>build the <text className="classroom-word">Classroom</text> of<br></br>the<text className="future-word">Future</text>
+              With Class.ly, let's <br></br>build the <text className="classroom-word">
+                Classroom</text> of<br></br>the <text className="future-word">Future</text>
             </div>
           </div>
           <div className="login-cards-container">
