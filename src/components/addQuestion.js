@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { addQuestion } from '../actions/Actions'
+import { addQuestion } from '../actions/Actions';
+import Autocomplete from 'react-autocomplete';
+import { matchStateToTerm } from 'react-autocomplete';
 
 
 class AddQuestion extends Component{
@@ -62,13 +64,44 @@ submitPressed(e) {
             onChange={(e) => this.updateQuestion(e)}
             placeholder="New Question..."
           />
-          <input
+
+          {/* <input
             id="tag"
             value={this.state.tags}
             type="text"
             onChange={(e) => this.updateTags(e)}
             placeholder="Tags (optional)"
+          /> */}
+
+          {/* <Autocomplete
+            getItemValue={(item) => item.text}
+            id="tag"
+            items={this.props.classObj.topics}
+            value={this.state.tags}
+            onChange={(e) => this.updateTags(e)}
+            renderItem={(item, isHighlighted) =>
+              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                {item.label}
+              </div>
+            }
+          /> */}
+          <Autocomplete
+            id="tag"
+            getItemValue={(item) => item.text}
+            items={this.props.classObj.topics}
+            renderItem={(item, isHighlighted) =>
+              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                {item.text}
+              </div>
+            }
+            value={this.state.tags}
+            onChange={(e) => this.updateTags(e)}
+            onSelect={(val) => this.setState({tags:val})}
+            shouldItemRender={ (item, val)=>{
+              return item.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
+            }}
           />
+
         </div>
         <div className="new-question-footer">
           <button id="question-help">?</button>
