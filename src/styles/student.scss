@@ -61,7 +61,7 @@ html, body{
   padding: 10px;
   height: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -140,7 +140,14 @@ html, body{
   padding: 0 8px;
   margin: 0 10px;
 }
-.new-question-container, .new-topic-container{
+.new-question-container{
+  padding: 30px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+}
+.new-topic-container{
+  margin-top: 40px;
   padding: 30px;
   height: 70px;
   display: flex;
@@ -161,11 +168,10 @@ html, body{
 }
 
 #new-topic{
-  flex:2;
   border-radius: 10px;
   border: white;
   padding: 0 20px;
-  height: 30px;
+  height: 40px;
 }
 
 .new-question-input-field #new-question, .new-question-input-field #tag{

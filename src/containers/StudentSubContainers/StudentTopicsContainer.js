@@ -10,10 +10,10 @@ class StudentTopicsContainer extends Component {
     var profname = proffArr[1] || proffArr[0]
     return (
       <div className="topics-container">
-        <div className="topics-container-header">
+        {/* <div className="topics-container-header">
           <span className="course">MECH 101</span>
           <span className="lecturer">Prof {profname}</span>
-        </div>
+        </div> */}
         <AddTopic />
         {this.props.topics.map((topic, i) => {
 
