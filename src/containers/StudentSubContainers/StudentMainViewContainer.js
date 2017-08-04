@@ -4,11 +4,26 @@ import StudentTopicsContainer from './StudentTopicsContainer';
 import StudentQuestionsContainer from './StudentQuestionsContainer';
 
 class StudentMainViewContainer extends Component {
+  constructor(props){
+    super(props)
+    if(this.props.userType === ""){
+      this.props.history.push('/')
+    }
+  }
+
   render() {
     return (
       <div className="body-container">
-        <StudentTopicsContainer />
-        <StudentQuestionsContainer />
+        {
+          this.props.userType
+          ?
+          <div>
+            <StudentTopicsContainer />
+            <StudentQuestionsContainer />
+          </div>
+          :null
+        }
+
       </div>
     );
   }
@@ -16,6 +31,7 @@ class StudentMainViewContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    userType: state.userReducer.userType,
   };
 };
 
