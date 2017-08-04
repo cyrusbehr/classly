@@ -213,11 +213,38 @@ html, body{
   margin:0;
   color: white;
 }
+
 #alert:hover{
-  background-color: $red;
-  border-color: $red;
   cursor: pointer;
 }
+
+button:focus {
+  outline: none;
+}
+
+.animated {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation-name: pulse;
+}
+
 #topic-help{
   border-color: black;
   color: black;
@@ -240,7 +267,7 @@ input[type="text"]{
    min-height: 100px;
    margin: 20px;
    background-color: #FFFFFF;
-   border-left: $green solid 10px;
+   border-left: $green solid 5px;
    display: flex;
 }
 
@@ -262,7 +289,7 @@ input[type="text"]{
   display: flex;
   align-items: center;
   flex: 1;
-  color: #BEBEBE;
+  color: #989898;
 }
 
 .topic .topic-alert{
