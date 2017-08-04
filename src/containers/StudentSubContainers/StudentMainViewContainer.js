@@ -13,7 +13,7 @@ class StudentMainViewContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="body-container">
         {
           this.props.userType
           ?
