@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addTopic } from '../actions/Actions'
-
+import Autocomplete from 'react-autocomplete';
 
 class AddTopic extends Component{
   constructor(props) {
@@ -41,6 +41,24 @@ class AddTopic extends Component{
           onChange={(e) => this.updateTopic(e)}
           placeholder="this is test..."
         />
+
+        <Autocomplete
+          getItemValue={(item) => item.label}
+          items={[
+            { label: 'apple' },
+            { label: 'banana' },
+            { label: 'pear' }
+          ]}
+          renderItem={(item, isHighlighted) =>
+            <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+              {item.label}
+            </div>
+          }
+          value={value}
+          onChange={(e) => value = e.target.value}
+          onSelect={(val) => value = val}
+        />
+
         <div className="new-topic-footer">
           <button id="topic-help">?</button>
           <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>

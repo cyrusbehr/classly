@@ -50,11 +50,12 @@
   },
   "dependencies": {
     "connected-react-router": "^4.2.3",
-    "immutable": "^3.8.1",
     "file-loader": "^0.11.2",
+    "immutable": "^3.8.1",
     "jquery": "^3.2.1",
     "mongoose": "^4.11.5",
     "react": "^0.14.3",
+    "react-autocomplete": "^1.5.10",
     "react-dom": "^0.14.3",
     "react-redux": "^4.1.1",
     "react-router-dom": "^4.1.2",
