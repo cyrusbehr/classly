@@ -8,3 +8,4 @@ export const UPVOTE_QUESTION = "UPVOTE_QUESTION";
 export const VOTE_TOPIC = "VOTE_TOPIC"
 export const DELETE_QUESTION = "DELETE_QUESTIONs"
 export const DELETE_TOPIC = "DELETE_TOPIC"
+export const TOGGLE_FILTER = "TOGGLE_FILTER";
