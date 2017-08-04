@@ -34,7 +34,6 @@ class MainPageContainer extends Component {
             </div>
           </div>
         </div>
-        {console.log(this.props.userType)}
         {this.props.userType === 'Student' ? <StudentSignupContainer {...this.props} /> : this.props.userType === 'Professor' ? <ProfessorSignupContainer {...this.props}/> : <LoginContainer {...this.props}/>}
         <div className="footer">
           <div className="copyright-container">
