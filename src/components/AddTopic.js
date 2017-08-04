@@ -11,7 +11,6 @@ class AddTopic extends Component{
     }
 
     this.props.socket.on('newTopic', (savedTopic) => {
-      console.log("newTopic listern was triggered");
       this.props.addTopicAction(savedTopic);
     })
   }
@@ -24,15 +23,12 @@ class AddTopic extends Component{
     e.preventDefault();
     const data = {
       text: this.state.topicText,
-      votes: this.props.currentVotes,
+      votes: 0,
       timestamp: Date.now(),
       referenceClass: this.props.classObj._id,
     }
     this.props.socket.emit('newTopic', data);
-    this.setState({
-      questionText: "",
-    });
-    console.log("ending submit pressed");
+    this.setState({topicText: ""});
   }
 
   render() {

@@ -30,8 +30,9 @@ export default function (state = initialState, action) {
       return originalState1;
 
     case ADD_TOPIC:
-      let originalState2 = Object.assign({}, state);
-      originalState2.classState.topics = originalState1.classState.topics.concat(action.newTopic)
+      var originalState2 = Object.assign({}, state);
+      console.log("The original state is: ", action.newTopic)
+      originalState2.classState.topics = originalState2.classState.topics.concat(action.newTopic)
       return originalState2;
 
   default:

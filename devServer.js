@@ -107,7 +107,6 @@ io.on('connection', socket => {
   //   reference: String,
   // }
   socket.on('newTopic', (data) => {
-    console.log("reached newtopic serverside");
     let newTopic = new Topic({
       text: data.text,
       votes: data.votes,
@@ -122,7 +121,8 @@ io.on('connection', socket => {
           classObj.topics.push(newTopic._id);
           classObj.save()
           .then(() => {
-            socket.broadcast.to(socket.currentRoom).emit('newTopic', newQuestion);
+            console.log("The topic is: ", newTopic)
+            socket.broadcast.to(socket.currentRoom).emit('newTopic', newTopic);
             socket.emit('newTopic', newTopic);
           })
         })
@@ -130,11 +130,6 @@ io.on('connection', socket => {
     });
   });
 
-  //data = {
-  //questionId: question._id,
-  //previousUpVotes: question.upVotes
-  //}
-  //really only need to know the id, but being passed the previousUpVotes makes code cleaner, if findOneAndUpdate works (tbd)
   socket.on('upVoteQuestion', (data) => {
     if(!data.toggle){
       let tempUpVote = data.previousUpVotes + 1;
