@@ -33,11 +33,13 @@ class StudentQuestionsContainer extends Component {
             if(this.props.filter === question.tags[0]){
             return(
               <StudentQuestion
+                reference={question.referenceClass}
                 key={question._id}
                 id={question._id}
                 currentUpVotes={question.upVotes}
                 text={question.text}
                 tags={question.tags}
+                questionCreator={question.username}
               />
             )
           } else {
