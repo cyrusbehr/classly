@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion} from '../actions/Actions';
+import {upVoteQuestion, deleteQuestion} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -9,10 +9,11 @@ class StudentQuestion extends Component {
     super(props);
     this.state = {
       alreadyClicked: false,
-      votes: this.props.currentUpVotes
+      votes: this.props.currentUpVotes,
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
+      this.setState({votes: this.props.currentUpVotes})
     })
   }
 
@@ -34,7 +35,15 @@ class StudentQuestion extends Component {
     }
   }
 
+  deleteItem(e) {
+    e.preventDefault()
+    this.props.deleteQuestionAction(this.props.id);
+    console.log('The question id is: ', this.props.id)
+    this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference})
+  }
+
   render() {
+    var isCreator = (this.props.questionCreator === this.props.username)
     return (
       <div className="question">
         <div className="question-body">
@@ -53,6 +62,12 @@ class StudentQuestion extends Component {
             </svg>
           </div>
           <div className="upvote-number">{this.state.votes}</div>
+          {isCreator
+            ?
+            <button onClick={(e)=> this.deleteItem(e)}>delete</button>
+            :
+            ""
+          }
         </div>
       </div>
     );
@@ -64,6 +79,7 @@ const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
+    username: state.userReducer.username,
   }
 }
 
@@ -71,6 +87,9 @@ const mapDispatchToProps = dispatch => {
   return {
     upVoteQuestionAction: (updatedQuestion) => {
       dispatch(upVoteQuestion(updatedQuestion));
+    },
+    deleteQuestionAction: (ID) => {
+      dispatch(deleteQuestion(ID));
     }
   }
 }

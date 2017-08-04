@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addTopic } from '../actions/Actions'
 
-
 class AddTopic extends Component{
   constructor(props) {
     super(props)
@@ -26,6 +25,7 @@ class AddTopic extends Component{
       votes: 0,
       timestamp: Date.now(),
       referenceClass: this.props.classObj._id,
+      username: this.props.username,
     }
     this.props.socket.emit('newTopic', data);
     this.setState({topicText: ""});
@@ -41,6 +41,7 @@ class AddTopic extends Component{
           onChange={(e) => this.updateTopic(e)}
           placeholder="this is test..."
         />
+
         <div className="new-topic-footer">
           <button id="topic-help">?</button>
           <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
@@ -54,6 +55,7 @@ const mapStateToProps = state => {
   return{
     socket: state.socketReducer.socket,
     classObj: state.classReducer.classState,
+    username: state.userReducer.username,
   }
 }
 

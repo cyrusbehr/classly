@@ -42,16 +42,25 @@ io.on('connection', socket => {
     console.log("user has left");
   });
 
-// data = {
-//   text: String,
-//   username: String,
-//   isResolved: Boolean,
-//   isStarred: Boolean,
-//   votes: Number,
-//   tags: Array,
-//   timestamp: Number,
-//   reference: String,
-// }
+  socket.on('deleteQuestion', (data) => {
+    Question.findByIdAndRemove(data.questionId, (err) => {
+      //now we must remove it from the class
+      Class.findById(data.reference, (err, classObj) => {
+        let questionsArray = classObj.questions;
+        let index;
+        for(var i = 0; i < questionsArray.length; i++) {
+          if(questionsArray[i].$oid === data.questionId){
+            index = i;
+            break;
+          }
+        }
+        questionsArray.splice(index,1);
+        classObj.questions = questionsArray;
+        classObj.save();
+      })
+    })
+  })
+
   socket.on('createClass', (localState) => {
     let nameArr = localState.name.split(" ");
     let str = nameArr[0].concat(localState.title.replace(/ /g,''));
@@ -105,6 +114,7 @@ io.on('connection', socket => {
       votes: data.votes,
       timestamp: data.timestamp,
       referenceClass: data.referenceClass,
+      username: data.username,
     });
     newTopic.save((err, newTopic) => {
       if(err){

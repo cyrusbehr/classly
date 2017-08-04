@@ -6,8 +6,10 @@ import ProfessorMainViewContainer from './ProfessorSubContainers/ProfessorMainVi
 import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupContainer';
 import StudentSignupContainer from './StudentSubContainers/StudentSignupContainer';
 import TASignupContainer from './TASignupContainer';
+import {connect} from 'react-redux'
 
 export default class Routes extends Component {
+
 
    render() {
       return(
@@ -19,9 +21,9 @@ export default class Routes extends Component {
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
            <Route path="/" exact={true} component={MainPageContainer}/>
-           {/* changed from LoginContainer to StudentMainViewContainer just for testing */}
          </Switch>
        </div>
      )
    }
+
 }

@@ -19,6 +19,10 @@ html, body{
   height: 100%
 }
 
+.body-parent{
+    height: 100%
+}
+
 .body-container{
   display: flex;
   height: 100%;
@@ -53,6 +57,10 @@ html, body{
   background-color: #EBEBEB;
   flex: 5;
   overflow: scroll;
+}
+
+StudentTopicsContainer{
+  overflow: scroll !important
 }
 
 .questions-container-header{
@@ -266,4 +274,38 @@ input[type="text"]{
   align-items: center;
   justify-content: center;
   flex: 1;
+}
+
+//Ryan
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+//
+@keyframes swing {
+  20% {
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  40% {
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  60% {
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  80% {
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+.swing {
+  transform-origin: top center;
+  animation-name: swing;
 }
