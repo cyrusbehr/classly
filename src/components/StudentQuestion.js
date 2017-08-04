@@ -9,10 +9,11 @@ class StudentQuestion extends Component {
     super(props);
     this.state = {
       alreadyClicked: false,
-      votes: this.props.currentUpVotes
+      votes: this.props.currentUpVotes,
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
+      this.setState({votes: this.props.currentUpVotes})
     })
   }
 
