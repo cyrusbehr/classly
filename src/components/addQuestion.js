@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addQuestion } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
+import $ from 'jquery';
 
 
 class AddQuestion extends Component{
@@ -28,7 +29,12 @@ updateQuestion(e) {
 }
 
 submitPressed(e) {
-  e.preventDefault()
+  e.preventDefault();
+  // if(!this.state.questionText === ""){
+  //   console.log("swing");
+  //   $(e.target).addClass('animated swing');
+  // }
+
   let tags;
   if(this.state.tags === "") {
     tags = null;
@@ -65,32 +71,13 @@ submitPressed(e) {
             placeholder="New Question..."
           />
 
-          {/* <input
-            id="tag"
-            value={this.state.tags}
-            type="text"
-            onChange={(e) => this.updateTags(e)}
-            placeholder="Tags (optional)"
-          /> */}
-
-          {/* <Autocomplete
-            getItemValue={(item) => item.text}
-            id="tag"
-            items={this.props.classObj.topics}
-            value={this.state.tags}
-            onChange={(e) => this.updateTags(e)}
-            renderItem={(item, isHighlighted) =>
-              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-                {item.label}
-              </div>
-            }
-          /> */}
           <Autocomplete
-            id="tag"
+            wrapperProps={{id:'new-tag'}}
+            inputProps={{id:'tag', placeholder:'#tag'}}
             getItemValue={(item) => item.text}
             items={this.props.classObj.topics}
             renderItem={(item, isHighlighted) =>
-              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+              <div id="menu-item" style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
                 {item.text}
               </div>
             }

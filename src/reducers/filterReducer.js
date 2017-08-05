@@ -1,9 +1,7 @@
 import { TOGGLE_FILTER } from '../constants/ActionTypes';
 import _ from 'underscore';
 
-const initialState =  {
-  currentFilter: "",
-}
+const initialState =  "";
 //action that gets passsed in will be of type TOGGLE_FILTER
 //and have a string attached that is the new filter
 
