@@ -63,9 +63,19 @@ export default function (state = initialState, action) {
       return originalState5;
 
     case DELETE_TOPIC:
-      var originalState2 = Object.assign({}, state);
-      originalState2.classState.topics = originalState2.classState.topics.concat(action.newTopic)
-      return originalState2;
+      let originalState8 = Object.assign({}, state);
+      let topicsArr = originalState8.classState.topics
+      let index1;
+
+      for(var i = 0; i < topicsArr.length; i++) {
+        if(topicsArr[i]._id === action.ID){
+          index1 = i;
+          break;
+        }
+      }
+      topicsArr.splice(index1,1);
+      originalState8.classState.topics = [...topicsArr];
+        return originalState8;
 
   default:
     return state;

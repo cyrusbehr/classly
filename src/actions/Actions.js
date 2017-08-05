@@ -67,10 +67,10 @@ export function deleteQuestion(ID) {
     ID
   }
 }
-export function deleteTopic(deleteTopic) {
+export function deleteTopic(ID) {
   return {
     type: DELETE_TOPIC,
-    deleteTopic
+    ID
   }
 }
 
