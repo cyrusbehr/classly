@@ -49,6 +49,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "dependencies": {
+    "concurrently": "^3.5.0",
     "connected-react-router": "^4.2.3",
     "file-loader": "^0.11.2",
     "immutable": "^3.8.1",

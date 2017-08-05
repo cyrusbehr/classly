@@ -23,6 +23,7 @@ class LoginCard extends Component {
           <br/>
           title: {this.props.title}
           <br/>
+          HELELLEOEOA
           redirect route: {this.props.redirectRoute}
           <br/>
           componentClassName: {this.props.thisClass} */}
