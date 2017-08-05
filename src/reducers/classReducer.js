@@ -42,6 +42,11 @@ export default function (state = initialState, action) {
       originalState1.classState.questions = originalState1.classState.questions.concat(action.newQuestion)
       return originalState1;
 
+    case ADD_TOPIC:
+      let originalState7 = Object.assign({}, state);
+      originalState7.classState.topics = originalState7.classState.topics.concat(action.newTopic)
+      return originalState7;
+
     case DELETE_QUESTION:
     let originalState5 = Object.assign({}, state);
     let questionsArray = originalState5.classState.questions
