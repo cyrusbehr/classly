@@ -23,14 +23,14 @@ class StudentQuestion extends Component {
 
   handleUpvote(e) {
     if(!this.state.alreadyClicked){
-      $(e.target).parent('.question').addClass('question-hover');
+      $(e.target).parents('.question').addClass('question-hover');
 
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: false});
          this.setState({alreadyClicked: true})
     } else {
-      $(e.target).parent('.question').removeClass('question-hover');
+      $(e.target).parents('.question').removeClass('question-hover');
 
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
