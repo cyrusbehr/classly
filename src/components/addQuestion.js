@@ -12,6 +12,7 @@ class AddQuestion extends Component{
     this.state = {
       questionText: "",
       tags: "",
+      questionEmpty: true
     }
 
     this.props.socket.on('newQuestion', (savedQuestion) => {
@@ -26,6 +27,7 @@ updateTags(e) {
 
 updateQuestion(e) {
   this.setState({questionText: e.target.value})
+  this.setState({questionEmpty: true})
 }
 
 submitPressed(e) {
@@ -35,28 +37,32 @@ submitPressed(e) {
   //   $(e.target).addClass('animated swing');
   // }
 
-  let tags;
-  if(this.state.tags === "") {
-    tags = null;
+  if(this.state.questionText.trim() === ''){
+    this.setState({questionEmpty: false});
   } else {
-    tags = this.state.tags
-  }
+    let tags;
+    if(this.state.tags === "") {
+      tags = null;
+    } else {
+      tags = this.state.tags
+    }
 
-  const data = {
-    text: this.state.questionText,
-    username:this.props.username,
-    tags: this.state.tags,
-    referenceClass: this.props.classObj._id,
-    isResolved: false,
-    isStarred: false,
-    upVotes: 0,
-    timestamp: Date.now(),
+    const data = {
+      text: this.state.questionText,
+      username:this.props.username,
+      tags: this.state.tags,
+      referenceClass: this.props.classObj._id,
+      isResolved: false,
+      isStarred: false,
+      upVotes: 0,
+      timestamp: Date.now(),
+    }
+    this.props.socket.emit('newQuestion', data);
+    this.setState({
+      questionText: "",
+      tags: ""
+    })
   }
-  this.props.socket.emit('newQuestion', data);
-  this.setState({
-    questionText: "",
-    tags: ""
-  })
 }
 
   render() {
@@ -64,7 +70,7 @@ submitPressed(e) {
       <div className="new-question-container">
         <div className="new-question-input-field">
           <input
-            id="new-question"
+            id={this.state.questionEmpty ? "new-question" : "empty-new-question"}
             value={this.state.questionText}
             type="text"
             onChange={(e) => this.updateQuestion(e)}
@@ -90,10 +96,23 @@ submitPressed(e) {
           />
 
         </div>
-        <div className="new-question-footer">
-          <button id="question-help">?</button>
-          <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
-        </div>
+
+        {this.state.questionEmpty ?
+          <div className="new-question-footer">
+            <button id="question-help">?</button>
+            <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
+          </div> :
+          <div className="empty-new-question-footer">
+            <div className="empty-new-question-alert">
+              question can't be empty!
+            </div>
+            <div className="empty-new-question-container">
+              <button id="question-help">?</button>
+              <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
+            </div>
+          </div>
+        }
+
       </div>
     );
   }

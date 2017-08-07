@@ -236,7 +236,6 @@ io.on('connection', socket => {
     .then((classObj) => {
       if(!classObj) {
         socket.emit('error1');
-
       } else {
         socket.emit('getStudentState', classObj);
       }
