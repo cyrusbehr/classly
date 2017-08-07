@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { voteTopic, updateFilter } from '../actions/Actions';
+import { voteTopic, updateFilter, deleteTopic } from '../actions/Actions';
+import $ from 'jquery';
 
 class StudentTopic extends Component {
   constructor(props) {
     super(props);
     this.state={
+      hover: false,
       alreadyClicked: false,
       votes: this.props.votes,
       toggle: false,
@@ -21,11 +23,15 @@ class StudentTopic extends Component {
     e.stopPropagation();
     e.preventDefault();
     if(!this.state.alreadyClicked) {
+      $(e.target).parents('.topic').addClass('animated pulse');
+
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('voteTopic', {topicId: this.props.id,
         previousVotes: this.props.votes, toggle: false})
         this.setState({alreadyClicked: true})
     }else {
+      $(e.target).parents('.topic').removeClass('animated pulse');
+
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('voteTopic', {topicId: this.props.id,
         previousVotes: this.props.votes, toggle: true})
@@ -44,17 +50,42 @@ class StudentTopic extends Component {
     }
   }
 
+  deleteItem(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.deleteTopicAction(this.props.id)
+    this.props.socket.emit('deleteTopic', {topidId: this.props.id, reference: this.props.reference})
+  }
+
   render() {
+    var isCreator = (this.props.topicCreator === this.props.username)
     return (
-      <div className="topic" onClick={() => this.handleClick(this.props.id)}>
+      <div className="topic" style={this.state.alreadyClicked ? {backgroundColor: '#FFF1F1'} : {backgroundColor:'white'}} onClick={() => this.handleClick(this.props.id)}>
         <div className="topic-content">
           <div className="topic-title">{this.props.text}</div>
           <div className="topic-description">Powerpoint slides p.1-10</div>
         </div>
         <div className="topic-alert">
-          <div className="topic-alert-icon"><button onClick={(e) => this.handleVote(e)} id="alert">!</button></div>
-          <div className="topic-alert-number">{this.state.votes}</div>
+          <div className="topic-alert-icon">
+            <button
+              onClick={(e) => this.handleVote(e)}
+              id="alert"
+              style={this.state.hover || this.state.alreadyClicked ? {backgroundColor:'#FF7E65', borderColor: '#FF7E65'} : {'backgroundColor':'#30383E', 'borderColor': '#30383E'} }
+              onMouseOver={() => {this.setState({hover:true})}}
+              onMouseOut={() => {this.setState({hover:false})}}
+              >!</button>
+          </div>
+          <div
+            className="topic-alert-number"
+            style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
+          >{this.state.votes}</div>
         </div>
+        {isCreator
+          ?
+          <button onClick={(e)=> this.deleteItem(e)}>delete</button>
+          :
+          ""
+        }
       </div>
     );
   }
@@ -62,7 +93,8 @@ class StudentTopic extends Component {
 
 const mapStateToProps = state => {
   return {
-    socket: state.socketReducer.socket
+    socket: state.socketReducer.socket,
+    username: state.userReducer.username
   }
 }
 
@@ -73,6 +105,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleFilter: (newFilter) => {
       dispatch(updateFilter(newFilter))
+    },
+    deleteTopicAction: (topicID) => {
+      dispatch(deleteTopic(topicID));
     }
   }
 }

@@ -42,6 +42,11 @@ export default function (state = initialState, action) {
       originalState1.classState.questions = originalState1.classState.questions.concat(action.newQuestion)
       return originalState1;
 
+    case ADD_TOPIC:
+      let originalState7 = Object.assign({}, state);
+      originalState7.classState.topics = originalState7.classState.topics.concat(action.newTopic)
+      return originalState7;
+
     case DELETE_QUESTION:
     let originalState5 = Object.assign({}, state);
     let questionsArray = originalState5.classState.questions
@@ -58,9 +63,19 @@ export default function (state = initialState, action) {
       return originalState5;
 
     case DELETE_TOPIC:
-      var originalState2 = Object.assign({}, state);
-      originalState2.classState.topics = originalState2.classState.topics.concat(action.newTopic)
-      return originalState2;
+      let originalState8 = Object.assign({}, state);
+      let topicsArr = originalState8.classState.topics
+      let index1;
+
+      for(var i = 0; i < topicsArr.length; i++) {
+        if(topicsArr[i]._id === action.ID){
+          index1 = i;
+          break;
+        }
+      }
+      topicsArr.splice(index1,1);
+      originalState8.classState.topics = [...topicsArr];
+        return originalState8;
 
   default:
     return state;

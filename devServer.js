@@ -61,6 +61,25 @@ io.on('connection', socket => {
     })
   })
 
+  socket.on('deleteTopic', (data) => {
+    Topic.findByIdAndRemove(data.topicId, (err) => {
+      //now we must remove it from the class
+      Class.findById(data.reference, (err, classObj) => {
+        let topicsArray = classObj.topics;
+        let index;
+        for(var i = 0; i < topicsArray.length; i++) {
+          if(topicsArray[i].$oid === data.topicId){
+            index = i;
+            break;
+          }
+        }
+        topicsArray.splice(index,1);
+        classObj.topics = topicsArray;
+        classObj.save();
+      })
+    })
+  })
+
   socket.on('createClass', (localState) => {
     let nameArr = localState.name.split(" ");
     let str = nameArr[0].concat(localState.title.replace(/ /g,''));
@@ -198,10 +217,6 @@ io.on('connection', socket => {
     });
   });
 
-  //data = {
-  //questionId: question._id,
-  //isStarred: question.isStarred
-  //}
   socket.on('toggleResolved', (data) => {
     let tempResolved = !data.isResolved;
     Question.findOneAndUpdate({_id: data._id}, { $set: {isResolved: !data.isResolved}}, {new: true}, (err, updatedQuestion) => {

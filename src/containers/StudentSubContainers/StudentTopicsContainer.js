@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
 import StudentTopic from '../../components/StudentTopic';
 import AddTopic from '../../components/AddTopic';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 class StudentTopicsContainer extends Component {
   render() {
@@ -10,10 +10,15 @@ class StudentTopicsContainer extends Component {
     var profname = proffArr[1] || proffArr[0]
     return (
       <div className="topics-container">
+
+        {/* <div className="topics-container-header">
+          <span className="course">MECH 101</span>
+
         <div className="topics-container-header">
           <span className="course">{this.props.classObj.className}</span>
+
           <span className="lecturer">Prof {profname}</span>
-        </div>
+        </div> */}
         <AddTopic />
         {this.props.topics.map((topic, i) => {
 
@@ -22,7 +27,9 @@ class StudentTopicsContainer extends Component {
               text={topic.text}
               votes={topic.votes}
               id={topic._id}
-              key={topic._id}
+              key={i}
+              reference={topic.referenceClass}
+              topicCreator={topic.username}
             />
           )
         })}

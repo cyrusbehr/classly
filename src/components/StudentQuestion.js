@@ -21,13 +21,17 @@ class StudentQuestion extends Component {
     this.setState({votes: this.props.currentUpVotes})
   }
 
-  handleUpvote() {
+  handleUpvote(e) {
     if(!this.state.alreadyClicked){
+      $(e.target).parents('.question').addClass('question-hover');
+
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: false});
          this.setState({alreadyClicked: true})
     } else {
+      $(e.target).parents('.question').removeClass('question-hover');
+
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: true});
@@ -53,7 +57,7 @@ class StudentQuestion extends Component {
         </div>
         <div className="question-upvote-container">
           <div className="upvote-icon-container">
-            <svg onClick={() => this.handleUpvote()} width="38px" height="24px" viewBox="0 0 38 24" version="1.1">
+            <svg onClick={(e) => this.handleUpvote(e)} width="38px" height="24px" viewBox="0 0 38 24" version="1.1">
               <polygon
                 style={this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
                 id="upvote-icon"

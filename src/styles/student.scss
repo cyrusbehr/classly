@@ -29,7 +29,7 @@ html, body{
 }
 
 .topics-container{
-  background-color: #30383E;
+  background-color: #EFEFEF;
   flex: 3;
   overflow: scroll;
 }
@@ -54,7 +54,7 @@ html, body{
 }
 
 .questions-container{
-  background-color: #EBEBEB;
+  background-color: #FFFFFF;
   flex: 5;
   overflow: scroll;
 }
@@ -69,7 +69,7 @@ StudentTopicsContainer{
   padding: 10px;
   height: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -85,6 +85,14 @@ StudentTopicsContainer{
   width: 100%;
   display: flex;
   border-top: 2px solid #CACACA;
+  /* for animation effects */
+  background-size: 200% 100%;
+  background-image: linear-gradient(to left, #D9FFF5 50%, white 50%);
+  transition: background-position 0.5s;
+}
+
+.question-hover {
+    background-position: -100% 0%;
 }
 
 .question .question-body{
@@ -148,7 +156,14 @@ StudentTopicsContainer{
   padding: 0 8px;
   margin: 0 10px;
 }
-.new-question-container, .new-topic-container{
+.new-question-container{
+  padding: 30px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+}
+.new-topic-container{
+  margin-top: 40px;
   padding: 30px;
   height: 70px;
   display: flex;
@@ -164,17 +179,27 @@ StudentTopicsContainer{
   margin-right: 10px;
 }
 
-.new-question-input-field #tag{
-  flex: 2;
+#menu-item{
+  padding: 5px;
 }
 
-#new-question, #new-topic, #tag{
-  flex: 0 0 30px;
+#new-topic{
   border-radius: 10px;
   border: white;
   padding: 0 20px;
+  height: 40px;
+}
+
+.new-question-input-field #new-question, .new-question-input-field #tag{
+  border-radius: 10px;
+  font-size:16px;
+  flex:2;
+  border-radius: 10px;
+  border: darkgray solid 1px;
+  padding: 0 20px;
   height: 30px;
 }
+
 #submit-question, #submit-topic{
   width: 100px;
   border: black solid 2px;
@@ -184,8 +209,8 @@ StudentTopicsContainer{
   padding: 5px;
 }
 #submit-topic{
-  border-color: #EBEBEB;
-  color: #EBEBEB;
+  border-color: black;
+  color: black;
 }
 #question-help, #topic-help, #alert{
   width: 25px;
@@ -204,16 +229,44 @@ StudentTopicsContainer{
   margin:0;
   color: white;
 }
+
 #alert:hover{
-  background-color: $red;
-  border-color: $red;
   cursor: pointer;
 }
+
+button:focus {
+  outline: none;
+}
+
+.animated {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation-name: pulse;
+}
+
 #topic-help{
-  border-color: #EBEBEB;
-  color: #EBEBEB;
+  border-color: black;
+  color: black;
 }
 .new-question-footer, .new-topic-footer{
+  margin-top:5px;
   padding: 5px 0;
   display: flex;
   justify-content: flex-end;
@@ -230,7 +283,7 @@ input[type="text"]{
    min-height: 100px;
    margin: 20px;
    background-color: #FFFFFF;
-   border-left: $green solid 10px;
+   border-left: $green solid 5px;
    display: flex;
 }
 
@@ -252,7 +305,7 @@ input[type="text"]{
   display: flex;
   align-items: center;
   flex: 1;
-  color: #BEBEBE;
+  color: #989898;
 }
 
 .topic .topic-alert{

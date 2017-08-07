@@ -20,9 +20,14 @@ class StudentQuestionsContainer extends Component {
       return -1 * question.upVotes; //negative changes to descending order
     })
 
+      var proffArr = this.props.professorName.split(" ")
+      var profname = proffArr[1] || proffArr[0]
+
     return (
       <div className="questions-container">
         <div className="questions-container-header">
+          <span className="course">MECH 101</span>
+          <span className="lecturer">Prof {profname}</span>
           <span className="date">1st Aug 2017</span>
         </div>
         <AddQuestion />
@@ -65,7 +70,8 @@ class StudentQuestionsContainer extends Component {
 const mapStateToProps = state => {
   return {
     questionsArray: state.classReducer.classState.questions,
-    filter: state.filterReducer,
+    professorName: state.classReducer.classState.professorName,
+    filter: state.filterReducer
   }
 }
 
