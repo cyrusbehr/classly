@@ -170,7 +170,7 @@ StudentTopicsContainer{
   height: 70px;
   display: flex;
   flex-direction: column;
-  border-style: solid;
+  // border-style: solid;
   justify-content: flex-end;
 }
 
@@ -270,13 +270,23 @@ button:focus {
   color: black;
 }
 
-.new-question-footer, .new-topic-footer{
+.new-question-footer {
   margin-top:5px;
   padding: 5px 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border-style: solid;
+  // border-style: solid;
+}
+
+.new-topic-footer {
+  margin-top:5px;
+  padding: 5px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  // border-style: solid;
+  align-self: flex-end;
 }
 
 .empty-new-topic-footer {
@@ -285,14 +295,14 @@ button:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-style: solid;
+  // border-style: solid;
 }
 
 .empty-new-topic-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border-style: solid;
+  // border-style: solid;
 }
 
 .empty-new-topic-alert {
