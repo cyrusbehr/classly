@@ -8,6 +8,7 @@ class StudentQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      hover: false,
       alreadyClicked: false,
       votes: this.props.currentUpVotes,
     };
@@ -60,15 +61,28 @@ class StudentQuestion extends Component {
         </div>
         <div className="question-upvote-container">
           <div className="upvote-icon-container">
-            <svg onClick={(e) => this.handleUpvote(e)} width="38px" height="24px" viewBox="0 0 38 24" version="1.1">
+            <svg
+              onClick={(e) => this.handleUpvote(e)}
+              onMouseOver={() => {this.setState({hover:true})}}
+              onMouseOut={() => {this.setState({hover:false})}}
+              width="38px"
+              height="24px"
+              viewBox="0 0 38 24"
+              version="1.1"
+            >
               <polygon
-                style={this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
+                style={this.state.hover || this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
                 id="upvote-icon"
                 points="19 -8.8817842e-16 0 18.8571429 4.43333333 23.2571429 19 8.8 33.5666667 23.2571429 38 18.8571429">
               </polygon>
             </svg>
           </div>
-          <div className="upvote-number">{this.state.votes}</div>
+          <div
+            className="upvote-number"
+            style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}
+          >
+            {this.state.votes}
+          </div>
         </div>
         <div className="delete-button-container">
           {isCreator
