@@ -47,7 +47,9 @@ class StudentQuestion extends Component {
   }
 
   render() {
-    var isCreator = (this.props.questionCreator === this.props.username)
+    var isCreatorOrProfessorOrTA= (this.props.questionCreator === this.props.username
+      || this.props.userType === 'Professor'
+      || this.props.userType === 'TA')
     return (
       <div className="question">
         <div className="question-body">
@@ -66,7 +68,7 @@ class StudentQuestion extends Component {
             </svg>
           </div>
           <div className="upvote-number">{this.state.votes}</div>
-          {isCreator
+          {isCreatorOrProfessorOrTA
             ?
             <button onClick={(e)=> this.deleteItem(e)}>delete</button>
             :
@@ -84,6 +86,7 @@ const mapStateToProps = state => {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
     username: state.userReducer.username,
+    userType: state.userReducer.userType,
   }
 }
 
