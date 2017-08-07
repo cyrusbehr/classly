@@ -6,6 +6,7 @@ import ProfessorMainViewContainer from './ProfessorSubContainers/ProfessorMainVi
 import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupContainer';
 import StudentSignupContainer from './StudentSubContainers/StudentSignupContainer';
 import TASignupContainer from './TASubContainers/TASignupContainer';
+import TAMainViewContainer from './TASubContainers/TAMainViewContainer';
 import {connect} from 'react-redux'
 
 export default class Routes extends Component {
@@ -20,6 +21,7 @@ export default class Routes extends Component {
            <Route path="/TA/signup" exact={true} component={TASignupContainer}/>
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
+           <Route path="/ta/main" exact={true} componenet={TAMainViewContainer}/>
            <Route path="/" exact={true} component={MainPageContainer}/>
          </Switch>
        </div>
