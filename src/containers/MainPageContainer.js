@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 class MainPageContainer extends Component {
   clearUserType() {
+
     this.props.setUserTypeAction("");
   }
   render() {

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {addClass, setUsername} from '../actions/Actions'
 
 
-class StudentSignupCard extends Component {
+class TASignupCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -65,7 +65,7 @@ class StudentSignupCard extends Component {
                 <input
                   type="text"
                   value={this.state.name}
-                  placeholder="Full Name"
+                  placeholder="firstname"
                   onChange={(event) => this.handleNameChange(event)}
                   className="student-signup-firstname-input"
                 />
@@ -75,7 +75,7 @@ class StudentSignupCard extends Component {
                 <input
                   type="text"
                   value={this.state.title}
-                  placeholder="Access Code"
+                  placeholder="access code"
                   onChange={(event) => this.handleAccessCodeChange(event)}
                   className="student-signup-acesscode-input"
                 />
@@ -117,4 +117,4 @@ class StudentSignupCard extends Component {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(StudentSignupCard);
+  )(TASignupCard);
