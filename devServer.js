@@ -201,10 +201,6 @@ io.on('connection', socket => {
     }
   });
 
-  //data = {
-  //  questionId: question._id,
-  //  isStarred: question.isStarred
-  //}
   socket.on('toggleStar', (data) => {
     let tempStarred = !data.isStarred;
     Question.findOneAndUpdate({_id: data._id}, { $set: {isStarred: tempStarred}}, {new: true}, (err, updatedQuestion) => {
@@ -240,6 +236,19 @@ io.on('connection', socket => {
       } else {
         socket.emit('getStudentState', classObj);
       }
+    })
+  })
+
+  socket.on('newComment', (data) => {
+    Question.findById(data.questionId, (err, questionObj) => {
+      newComment = {
+        text: data.text,
+        creator: data.username
+      };
+      questionObj.comments.push(newComment);
+      questionObj.save();
+
+      console.log("the new comment was saved!")
     })
   })
 

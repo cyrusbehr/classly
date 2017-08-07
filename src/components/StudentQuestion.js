@@ -51,7 +51,7 @@ class StudentQuestion extends Component {
   replyButtonPressed(e) {
     e.preventDefault();
     this.props.socket.emit('newComment', {questionId: this.props.id,
-      reference: this.props.reference, username: this.props.username, text: this.state.commentText});
+       username: this.props.username, text: this.state.commentText});
     this.setState({commentText: ""});
   }
 
