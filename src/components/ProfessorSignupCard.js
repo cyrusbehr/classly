@@ -49,7 +49,7 @@ class ProfessorSignupCard extends Component {
                 <input
                   type="text"
                   value={this.state.name}
-                  placeholder="firstname"
+                  placeholder="Full Name"
                   className="professor-signup-firstname-input"
                   onChange={(event) => this.handleNameChange(event)}
                 />
@@ -59,7 +59,7 @@ class ProfessorSignupCard extends Component {
                 <input
                   type="text"
                    value={this.state.title}
-                   placeholder="lecture title"
+                   placeholder="Lecture Title or Course Code"
                    className="professor-signup-lecture-input"
                    onChange={(event) => this.handleTitleChange(event)}
                 />

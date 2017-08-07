@@ -4,21 +4,12 @@ import StudentTopic from '../../components/StudentTopic';
 import AddTopic from '../../components/AddTopic';
 import { connect } from 'react-redux'
 
-class StudentTopicsContainer extends Component {
+class TATopicsContainer extends Component {
   render() {
     var proffArr = this.props.classObj.professorName.split(" ")
     var profname = proffArr[1] || proffArr[0]
     return (
       <div className="topics-container">
-
-        {/* <div className="topics-container-header">
-          <span className="course">MECH 101</span>
-
-        <div className="topics-container-header">
-          <span className="course">{this.props.classObj.className}</span>
-
-          <span className="lecturer">Prof {profname}</span>
-        </div> */}
         <AddTopic />
         {this.props.topics.map((topic, i) => {
           return(
@@ -29,7 +20,6 @@ class StudentTopicsContainer extends Component {
               key={i}
               reference={topic.referenceClass}
               topicCreator={topic.username}
-              hightlight={this.props.currentFilter===topic.text ? true : false}
             />
           )
         })}
@@ -42,8 +32,7 @@ const mapStateToProps = state => {
   console.log("In the map state to props:", state.classReducer.classState);
   return {
     classObj: state.classReducer.classState,
-    topics: state.classReducer.classState.topics,
-    currentFilter: state.filterReducer
+    topics: state.classReducer.classState.topics
   }
 }
 
@@ -55,4 +44,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(StudentTopicsContainer)
+)(TATopicsContainer)
