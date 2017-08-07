@@ -50,8 +50,7 @@ class StudentQuestion extends Component {
   }
 
   render() {
-    var isCreator = (this.props.questionCreator === this.props.username)
-    console.log('this.props.tags', this.props.tags);
+    var isCreator = (this.props.questionCreator === this.props.username);
     return (
       <div className="question">
         <div className="question-body">
