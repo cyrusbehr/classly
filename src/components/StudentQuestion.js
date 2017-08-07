@@ -86,29 +86,32 @@ class StudentQuestion extends Component {
             {(this.props.studentName ? <div> - {renderStudentName}</div> : <div></div>)}
           </div>
         </div>
-        <div className="question-upvote-container">
-          <div className="upvote-icon-container">
-            <svg onClick={(e) => this.handleUpvote(e)} width="38px" height="24px" viewBox="0 0 38 24" version="1.1">
-              <polygon
-                style={this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
-                id="upvote-icon"
-                points="19 -8.8817842e-16 0 18.8571429 4.43333333 23.2571429 19 8.8 33.5666667 23.2571429 38 18.8571429">
-              </polygon>
-            </svg>
-          </div>
-          <div className="upvote-number">{this.state.votes}</div>
-          {isCreatorOrProfessorOrTA
-            ?
-            <button onClick={(e)=> this.deleteItem(e)}>delete</button>
-            :
-            ""
-          }
-        </div>
         {isProfessorOrTA
           ?
-          <button onClick={(e)=> this.toggleThisStar(e)}>Star</button>
+          <div>
+            <div className="upvote-number">{this.state.votes}</div>
+            <button onClick={(e)=> this.toggleThisStar(e)}>Star</button>
+            <button onClick={(e)=> this.toggleThisResolve(e)}>Resolve</button>
+          </div>
           :
           ""
+        }
+        {isCreatorOrProfessorOrTA
+          ?
+          <button onClick={(e)=> this.deleteItem(e)}>delete</button>
+          :
+          <div className="question-upvote-container">
+            <div className="upvote-icon-container">
+              <svg onClick={(e) => this.handleUpvote(e)} width="38px" height="24px" viewBox="0 0 38 24" version="1.1">
+                <polygon
+                  style={this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
+                  id="upvote-icon"
+                  points="19 -8.8817842e-16 0 18.8571429 4.43333333 23.2571429 19 8.8 33.5666667 23.2571429 38 18.8571429">
+                </polygon>
+              </svg>
+            </div>
+            <div className="upvote-number">{this.state.votes}</div>
+          </div>
         }
         <div>
           {this.props.isStarred
@@ -117,23 +120,21 @@ class StudentQuestion extends Component {
             :
             ""
           }
+          {this.props.isResolved
+            ?
+          <div>resolved!</div>
+            :
+            ""
+          }
         </div>
-        <div>
+        {/* <div>
           {isProfessorOrTA
             ?
             <button onClick={(e)=> this.toggleThisResolve(e)}>Resolve</button>
             :
             ""
           }
-        </div>
-        <div>
-        {this.props.isResolved
-          ?
-        <div>resolved!</div>
-          :
-          ""
-        }
-      </div>
+        </div> */}
       </div>
     );
   }
