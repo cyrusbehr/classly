@@ -50,7 +50,9 @@ class StudentQuestion extends Component {
 
   replyButtonPressed(e) {
     e.preventDefault();
-    
+    this.props.socket.emit('newComment', {questionId: this.props.id,
+      reference: this.props.reference, username: this.props.username, text: this.state.commentText});
+    this.setState({commentText: ""});
   }
 
   render() {
@@ -66,7 +68,7 @@ class StudentQuestion extends Component {
           <div className="question-footer">
             <button onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
             <input
-              value={this.state.questionText}
+              value={this.state.commentText}
               type="text"
               onChange={(e) => this.updateCommentText(e)}
               placeholder="New Question..."
