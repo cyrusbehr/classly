@@ -5,17 +5,12 @@ import { connect } from 'react-redux';
 import _ from 'underscore';
 
 
-class StudentQuestionsContainer extends Component {
+class TAQuestionsContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: "",
-      accessCode: "",
-    }
   }
 
   render() {
-
     var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
       return -1 * question.upVotes; //negative changes to descending order
     })
@@ -82,4 +77,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(StudentQuestionsContainer);
+)(TAQuestionsContainer);

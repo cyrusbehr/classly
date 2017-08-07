@@ -81,7 +81,7 @@ class StudentSignupCard extends Component {
                   <input
                     type="text"
                     value={this.state.name}
-                    placeholder="firstname"
+                    placeholder="Full Name"
                     onChange={(event) => this.handleNameChange(event)}
                     className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
                   />
@@ -90,7 +90,7 @@ class StudentSignupCard extends Component {
                     <div>
                     </div> :
                     <div className="empty-name-alert">
-                      name can't be empty!
+                      Name can't be empty!
                     </div>}
                   </div>
               </label>
@@ -99,14 +99,14 @@ class StudentSignupCard extends Component {
                 {/* <input
                   type="text"
                   value={this.state.title}
-                  placeholder="access code"
+                  placeholder="Access Code"
                   onChange={(event) => this.handleAccessCodeChange(event)}
                   className="student-signup-acesscode-input"
                 /> */}
                   <input
                     type="text"
                     value={this.state.title}
-                    placeholder="access code"
+                    placeholder="Access Code"
                     onChange={(event) => this.handleAccessCodeChange(event)}
                     className= {this.state.codeEmpty ? this.state.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
                   />
