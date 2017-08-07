@@ -44,9 +44,18 @@ class StudentQuestion extends Component {
     this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference})
   }
 
+  updateCommentText(e) {
+    this.setState({commentText: e.target.value})
+  };
+
+  replyButtonPressed(e) {
+    e.preventDefault();
+    
+  }
+
   render() {
     var isCreator = (this.props.questionCreator === this.props.username);
-    var isTA = this.props.userType === "TA"
+    var isTA = this.props.userType === "TA" || this.props.userType === "Professor"
     return (
       <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
         <div className="question-body">
@@ -55,11 +64,11 @@ class StudentQuestion extends Component {
           {isTA
           ?
           <div className="question-footer">
-            <button>Reply</button>
+            <button onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
             <input
               value={this.state.questionText}
               type="text"
-              onChange={(e) => this.updateQuestion(e)}
+              onChange={(e) => this.updateCommentText(e)}
               placeholder="New Question..."
             />
           </div>
