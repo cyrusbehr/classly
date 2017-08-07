@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { voteTopic, updateFilter } from '../actions/Actions';
+import { voteTopic, updateFilter, deleteTopic } from '../actions/Actions';
 import $ from 'jquery';
 
 class StudentTopic extends Component {
@@ -50,7 +50,15 @@ class StudentTopic extends Component {
     }
   }
 
+  deleteItem(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.deleteTopicAction(this.props.id)
+    this.props.socket.emit('deleteTopic', {topidId: this.props.id, reference: this.props.reference})
+  }
+
   render() {
+    var isCreator = (this.props.topicCreator === this.props.username)
     return (
       <div className="topic" style={this.state.alreadyClicked ? {backgroundColor: '#FFF1F1'} : {backgroundColor:'white'}} onClick={() => this.handleClick(this.props.id)}>
         <div className="topic-content">
@@ -72,6 +80,12 @@ class StudentTopic extends Component {
             style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
           >{this.state.votes}</div>
         </div>
+        {isCreator
+          ?
+          <button onClick={(e)=> this.deleteItem(e)}>delete</button>
+          :
+          ""
+        }
       </div>
     );
   }
@@ -79,7 +93,8 @@ class StudentTopic extends Component {
 
 const mapStateToProps = state => {
   return {
-    socket: state.socketReducer.socket
+    socket: state.socketReducer.socket,
+    username: state.userReducer.username
   }
 }
 
@@ -90,6 +105,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleFilter: (newFilter) => {
       dispatch(updateFilter(newFilter))
+    },
+    deleteTopicAction: (topicID) => {
+      dispatch(deleteTopic(topicID));
     }
   }
 }

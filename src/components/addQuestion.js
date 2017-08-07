@@ -71,14 +71,6 @@ submitPressed(e) {
             placeholder="New Question..."
           />
 
-          {/* <input
-            id="tag"
-            value={this.state.tags}
-            type="text"
-            onChange={(e) => this.updateTags(e)}
-            placeholder="Tags (optional)"
-          /> */}
-
           <Autocomplete
             wrapperProps={{id:'new-tag'}}
             inputProps={{id:'tag', placeholder:'#tag'}}
