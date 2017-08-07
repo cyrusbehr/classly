@@ -62,7 +62,7 @@ class StudentQuestion extends Component {
             : <div className="question-body"> {this.props.text} </div>)} */}
           <div className="question-body"> {this.props.text} </div>
           <div className="question-footer">
-            {(this.props.studentName ? <div> - ``{renderStudentName}</div> : <div></div>)}
+            {(this.props.studentName ? <div> - {renderStudentName}</div> : <div></div>)}
           </div>
         </div>
         <div className="question-upvote-container">

@@ -9,8 +9,6 @@ class ProfessorQuestionsContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: "",
-      accessCode: "",
     }
   }
 
@@ -28,6 +26,9 @@ class ProfessorQuestionsContainer extends Component {
         <div className="questions-container-header">
           <span className="course">MECH 101</span>
           <span>This is {this.props.userType} view</span>
+          <span>Course Access Code: {this.props.code} </span>
+          <span># Students: XX</span>
+          <span>#Q's: {this.props.questionsArray.length}</span>
           <span className="lecturer">Prof {profname}</span>
           <span className="date">1st Aug 2017</span>
         </div>
@@ -74,6 +75,7 @@ const mapStateToProps = state => {
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
+    code: state.classReducer.classState.accessCode,
     userType: state.userReducer.userType,
   }
 }
