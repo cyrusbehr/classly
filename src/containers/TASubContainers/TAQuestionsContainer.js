@@ -8,14 +8,9 @@ import _ from 'underscore';
 class TAQuestionsContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: "",
-      accessCode: "",
-    }
   }
 
   render() {
-
     var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
       return -1 * question.upVotes; //negative changes to descending order
     })

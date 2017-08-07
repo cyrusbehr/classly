@@ -14,17 +14,15 @@ class TAMainViewContainer extends Component {
   render() {
     return (
       <div className="body-parent">
-        I am testing to see if this works or not
         {
           this.props.userType
           ?
           <div  className="body-container">
-            {/* <TATopicsContainer />
-            <TAQuestionsContainer /> */}
+            <TATopicsContainer />
+            <TAQuestionsContainer />
           </div>
           :null
         }
-
       </div>
     );
   }
