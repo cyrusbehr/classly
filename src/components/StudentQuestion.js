@@ -11,6 +11,7 @@ class StudentQuestion extends Component {
       hover: false,
       alreadyClicked: false,
       votes: this.props.currentUpVotes,
+      commentText: ""
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
@@ -43,14 +44,38 @@ class StudentQuestion extends Component {
     this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference})
   }
 
+  updateCommentText(e) {
+    this.setState({commentText: e.target.value})
+  };
+
+  replyButtonPressed(e) {
+    e.preventDefault();
+    this.props.socket.emit('newComment', {questionId: this.props.id,
+       username: this.props.username, text: this.state.commentText});
+    this.setState({commentText: ""});
+  }
+
   render() {
     var isCreator = (this.props.questionCreator === this.props.username);
+    var isTA = this.props.userType === "TA" || this.props.userType === "Professor"
     return (
       <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
         <div className="question-body">
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? 'None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>
-          <div className="question-footer"> <button>Reply</button></div>
+          {isTA
+          ?
+          <div className="question-footer">
+            <button onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+            <input
+              value={this.state.commentText}
+              type="text"
+              onChange={(e) => this.updateCommentText(e)}
+              placeholder="New Question..."
+            />
+          </div>
+          :null
+        }
         </div>
         <div className="question-upvote-container">
           <div className="upvote-icon-container">
@@ -98,6 +123,7 @@ const mapStateToProps = state => {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
     username: state.userReducer.username,
+    userType: state.userReducer.userType
   }
 }
 

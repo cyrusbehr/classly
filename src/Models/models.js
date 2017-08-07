@@ -27,6 +27,7 @@ const QuestionSchema = mongoose.Schema({
   tags: Array,
   timestamp: Number,
   referenceClass: String,
+  comments: Array
 });
 
 const TopicSchema = mongoose.Schema({
