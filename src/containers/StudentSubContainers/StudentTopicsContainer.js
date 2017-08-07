@@ -21,7 +21,7 @@ class StudentTopicsContainer extends Component {
         </div> */}
         <AddTopic />
         {this.props.topics.map((topic, i) => {
-
+          console.log(topic.text, this.props.currentFilter===topic.text);
           return(
             <StudentTopic
               text={topic.text}
@@ -30,6 +30,7 @@ class StudentTopicsContainer extends Component {
               key={i}
               reference={topic.referenceClass}
               topicCreator={topic.username}
+              hightlight={this.props.currentFilter===topic.text ? true : false}
             />
           )
         })}
@@ -42,7 +43,8 @@ const mapStateToProps = state => {
   console.log("In the map state to props:", state.classReducer.classState);
   return {
     classObj: state.classReducer.classState,
-    topics: state.classReducer.classState.topics
+    topics: state.classReducer.classState.topics,
+    currentFilter: state.filterReducer
   }
 }
 
