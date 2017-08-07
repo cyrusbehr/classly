@@ -26,14 +26,12 @@ class StudentQuestionsContainer extends Component {
     return (
       <div className="questions-container">
         <div className="questions-container-header">
-          <span className="course">MECH 101</span>
+          <span className="course">{this.props.className}</span>
           <span className="lecturer">Prof {profname}</span>
           <span className="date">1st Aug 2017</span>
         </div>
         <AddQuestion />
         {sortedArray.map((question, i) => {
-          // console.log("this is the filter: ", this.props.filter);
-          // console.log("this is question.tags[0]", question.tags[0]);
           if (!this.props.filter) {
             return(
               <StudentQuestion
@@ -71,7 +69,8 @@ const mapStateToProps = state => {
   return {
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
-    filter: state.filterReducer
+    filter: state.filterReducer,
+    className: state.classReducer.classState.className,
   }
 }
 
