@@ -10,8 +10,6 @@ class ProfessorTopicsContainer extends Component {
     var profname = proffArr[1] || proffArr[0]
     return (
       <div className="topics-container">
-        <h3>This is ProfessorTopicsContainer</h3>
-
         {/* <div className="topics-container-header">
           <span className="course">MECH 101</span>
 

@@ -47,15 +47,23 @@ class StudentQuestion extends Component {
   }
 
   render() {
-    var isCreatorOrProfessorOrTA= (this.props.questionCreator === this.props.username
+    var isCreatorOrProfessorOrTA = (this.props.questionCreator === this.props.username
       || this.props.userType === 'Professor'
       || this.props.userType === 'TA')
+    if(this.props.studentName){
+      var nameArr = this.props.studentName.split(' ');
+      var renderStudentName = nameArr[0];
+    }
     return (
       <div className="question">
         <div className="question-body">
           <div className="question-header">Tags: <span className="tag">{this.props.tags}</span></div>
+          {/* {(this.props.studentName ? <div className="question-body"> {this.props.text} - asked by {this.props.studentName}. </div>
+            : <div className="question-body"> {this.props.text} </div>)} */}
           <div className="question-body"> {this.props.text} </div>
-          <div className="question-footer"></div>
+          <div className="question-footer">
+            {(this.props.studentName ? <div> - ``{renderStudentName}</div> : <div></div>)}
+          </div>
         </div>
         <div className="question-upvote-container">
           <div className="upvote-icon-container">

@@ -32,6 +32,7 @@ class StudentQuestionsContainer extends Component {
       <div className="questions-container">
         <div className="questions-container-header">
           <span className="course">MECH 101</span>
+          <span>This is {this.props.userType} view</span>
           <span className="lecturer">Prof {profname}</span>
           <span className="date">1st Aug 2017</span>
         </div>
@@ -78,6 +79,7 @@ const mapStateToProps = state => {
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
+    userType: state.userReducer.userType,
   }
 }
 

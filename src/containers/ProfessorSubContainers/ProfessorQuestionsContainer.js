@@ -26,8 +26,8 @@ class ProfessorQuestionsContainer extends Component {
     return (
       <div className="questions-container">
         <div className="questions-container-header">
-          <h3>this is ProfessorQuestionsContainer</h3>
           <span className="course">MECH 101</span>
+          <span>This is {this.props.userType} view</span>
           <span className="lecturer">Prof {profname}</span>
           <span className="date">1st Aug 2017</span>
         </div>
@@ -40,6 +40,7 @@ class ProfessorQuestionsContainer extends Component {
               <StudentQuestion
                 reference={question.referenceClass}
                 key={question._id}
+                studentName={question.username}
                 id={question._id}
                 currentUpVotes={question.upVotes}
                 text={question.text}
@@ -72,7 +73,8 @@ const mapStateToProps = state => {
   return {
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
-    filter: state.filterReducer
+    filter: state.filterReducer,
+    userType: state.userReducer.userType,
   }
 }
 
