@@ -19,7 +19,6 @@ class TASignupCard extends Component {
     })
 
     this.props.socket.on('error1', () => {
-      // TODO: alert the user that we couldnt find their access code
       console.log("Access Code not found");
     })
 
@@ -81,11 +80,6 @@ class TASignupCard extends Component {
                 />
               </label>
               <br></br>
-              {/* <input type="submit"
-                value="Join Class"
-                onClick={(e) => this.onSubmit(e)}
-                className="student-signup-submit"
-              /> */}
               <button
                 type="button"
                 onClick={(e) => this.onSubmit(e)}

@@ -5,7 +5,7 @@ import StudentMainViewContainer from './StudentSubContainers/StudentMainViewCont
 import ProfessorMainViewContainer from './ProfessorSubContainers/ProfessorMainViewContainer';
 import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupContainer';
 import StudentSignupContainer from './StudentSubContainers/StudentSignupContainer';
-import TASignupContainer from './TASignupContainer';
+import TASignupContainer from './TASubContainers/TASignupContainer';
 import {connect} from 'react-redux'
 
 export default class Routes extends Component {

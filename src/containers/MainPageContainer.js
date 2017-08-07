@@ -3,6 +3,7 @@ import LoginCard from '../components/LoginCard'
 import {LoginCardData} from '../constants/const'
 import StudentSignupContainer from './StudentSubContainers/StudentSignupContainer';
 import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupContainer';
+import TASignupContainer from './TASubContainers/TASignupContainer';
 import LoginContainer from './LoginContainer';
 import { connect } from 'react-redux';
 
@@ -35,7 +36,19 @@ class MainPageContainer extends Component {
             </div>
           </div>
         </div>
-        {this.props.userType === 'Student' ? <StudentSignupContainer {...this.props} /> : this.props.userType === 'Professor' ? <ProfessorSignupContainer {...this.props}/> : <LoginContainer {...this.props}/>}
+        {this.props.userType === 'Student'
+        ?
+        <StudentSignupContainer {...this.props} />
+        :
+        this.props.userType === 'Professor'
+        ?
+        <ProfessorSignupContainer {...this.props}/>
+        :
+        this.props.userType === 'TA'
+        ?
+        <TASignupContainer {...this.props}/>
+        :
+        <LoginContainer {...this.props}/>}
         <div className="footer">
           <div className="copyright-container">
             © 2017 Class.ly
