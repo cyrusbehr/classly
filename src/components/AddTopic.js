@@ -6,7 +6,8 @@ class AddTopic extends Component{
   constructor(props) {
     super(props)
     this.state = {
-      topicText: ""
+      topicText: "",
+      topicEmpty: true
     }
 
     this.props.socket.on('newTopic', (savedTopic) => {
@@ -20,15 +21,19 @@ class AddTopic extends Component{
 
   submitPressed(e) {
     e.preventDefault();
-    const data = {
-      text: this.state.topicText,
-      votes: 0,
-      timestamp: Date.now(),
-      referenceClass: this.props.classObj._id,
-      username: this.props.username,
+    if(this.state.topicText === ''){
+      this.setState({topicEmpty: false});
+    } else {
+      const data = {
+        text: this.state.topicText,
+        votes: 0,
+        timestamp: Date.now(),
+        referenceClass: this.props.classObj._id,
+        username: this.props.username,
+      }
+      this.props.socket.emit('newTopic', data);
+      this.setState({topicText: ""});
     }
-    this.props.socket.emit('newTopic', data);
-    this.setState({topicText: ""});
   }
 
   render() {
@@ -41,11 +46,14 @@ class AddTopic extends Component{
           onChange={(e) => this.updateTopic(e)}
           placeholder="this is test..."
         />
-
-        <div className="new-topic-footer">
+          <div className="new-topic-footer">
+            <button id="topic-help">?</button>
+            <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
+          </div>
+        {/* <div className="new-topic-footer">
           <button id="topic-help">?</button>
           <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
-        </div>
+        </div> */}
       </div>
     );
   }
