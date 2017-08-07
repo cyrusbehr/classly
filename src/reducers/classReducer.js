@@ -1,4 +1,7 @@
-import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION, ADD_TOPIC, VOTE_TOPIC, DELETE_QUESTION, DELETE_TOPIC, TOGGLE_STAR } from '../constants/ActionTypes';
+import { ADD_CLASS, ADD_QUESTION,
+   UPVOTE_QUESTION, ADD_TOPIC,
+   VOTE_TOPIC, DELETE_QUESTION,
+   DELETE_TOPIC, TOGGLE_STAR, TOGGLE_RESOLVE } from '../constants/ActionTypes';
 import _ from 'underscore';
 
 const initialState =  {
@@ -102,6 +105,18 @@ export default function (state = initialState, action) {
       // }
       // originalState9.classState.questions[index3] = modifiedQuestion;
       // return originalState9;
+
+    case TOGGLE_RESOLVE:
+      let originalState10 = Object.assign({}, state);
+      var index3 = _.findIndex(originalState10.classState.questions, function(q){
+        return q._id === action.questionId;
+      });
+      let questionArray3 = originalState10.classState.questions;
+      console.log("questionArray3", questionArray3);
+      questionArray3[index3].isResolved = !questionArray3[index3].isResolved;
+
+      originalState10.classState.questions = [...questionArray3];
+        return originalState10;
 
   default:
     return state;

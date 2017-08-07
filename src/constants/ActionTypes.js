@@ -10,3 +10,4 @@ export const DELETE_QUESTION = "DELETE_QUESTIONs";
 export const DELETE_TOPIC = "DELETE_TOPIC";
 export const TOGGLE_FILTER = "TOGGLE_FILTER";
 export const TOGGLE_STAR = "TOGGLE_STAR";
+export const TOGGLE_RESOLVE = "TOGGLE_RESOLVE";

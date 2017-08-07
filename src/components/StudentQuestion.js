@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion, toggleStar, deleteQuestion} from '../actions/Actions';
+import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -16,10 +16,11 @@ class StudentQuestion extends Component {
       this.props.upVoteQuestionAction(updatedQuestion);
       this.setState({votes: this.props.currentUpVotes})
     });
-    this.props.socket.on('toggleResolved', (updatedQuestion) => {
+    this.props.socket.on('toggleStar', (updatedQuestion) => {
       this.props.toggleStarAction(updatedQuestion._id);
-      //TODO: Does updatedQuestion.id or ._id?
-      // this.setState({starred: this.props.isStarred})
+    });
+    this.props.socket.on('toggleResolve', (updatedQuestion) => {
+      this.props.toggleResolveAction(updatedQuestion._id);
     });
   }
 
@@ -49,14 +50,20 @@ class StudentQuestion extends Component {
     e.preventDefault()
     this.props.deleteQuestionAction(this.props.id);
     console.log('The question id is: ', this.props.id)
-    this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference})
+    this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference});
   }
 
   toggleThisStar(e) {
     e.preventDefault();
     this.props.toggleStarAction(this.props.id);
     // this.setState({starred: !this.state.starred});
-    this.props.socket.emit('toggleStar', {questionId: this.props.id, isStarred: this.state.starred })
+    this.props.socket.emit('toggleStar', {questionId: this.props.id, isStarred: this.props.isStarred});
+  }
+
+  toggleThisResolve(e) {
+    e.preventDefault();
+    this.props.toggleResolveAction(this.props.id);
+    this.props.socket.emit('toggleResolve', {questionId: this.props.id, isResolved: this.props.isResolved});
   }
 
   render() {
@@ -111,6 +118,22 @@ class StudentQuestion extends Component {
             ""
           }
         </div>
+        <div>
+          {isProfessorOrTA
+            ?
+            <button onClick={(e)=> this.toggleThisResolve(e)}>Resolve</button>
+            :
+            ""
+          }
+        </div>
+        <div>
+        {this.props.isResolved
+          ?
+        <div>resolved!</div>
+          :
+          ""
+        }
+      </div>
       </div>
     );
   }
@@ -136,6 +159,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleStarAction: (ID) => {
       dispatch(toggleStar(ID))
+    },
+    toggleResolveAction: (ID) => {
+      dispatch(toggleResolve(ID))
     }
   }
 }

@@ -222,14 +222,14 @@ io.on('connection', socket => {
     });
   });
 
-  socket.on('toggleResolved', (data) => {
+  socket.on('toggleResolve', (data) => {
     let tempResolved = !data.isResolved;
-    Question.findOneAndUpdate({_id: data._id}, { $set: {isResolved: !data.isResolved}}, {new: true}, (err, updatedQuestion) => {
+    Question.findOneAndUpdate({_id: data.questionId}, { $set: {isResolved: !data.isResolved}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error resolving question:", err);
       } else {
-        socket.broadcast.to(socket.currentRoom).emit('toggleResolved', updatedQuestion);
-        socket.emit('toggleResolved', updatedQuestion);
+        socket.broadcast.to(socket.currentRoom).emit('toggleResolve', updatedQuestion);
+        // socket.emit('toggleResolve', updatedQuestion);
       }
     });
   });
