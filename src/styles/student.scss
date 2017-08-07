@@ -110,13 +110,11 @@ StudentTopicsContainer{
   align-items: center;
 }
 
-.question-body .question-body{
-  flex:4;
+.question-body .question-content{
   font-size: 30px;
   color: #4B4B4B; /* off-black */
   padding: 10px 50px;
   display: flex;
-  justify-content: center;
 }
 
 .question-body .question-footer{
@@ -125,23 +123,37 @@ StudentTopicsContainer{
 }
 
 .question .question-upvote-container{
-  flex: 0 0 100px;
+  flex: 0 0 50px;
   display: flex;
   flex-direction: column;
 }
 
 .question-upvote-container .upvote-icon-container{
-  flex: 3;
+  flex: 4;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.delete-button-container{
+  width: 35px;
+}
+
+.delete-question{
+  transform: scale(0.5);
+  fill: darkgray;
+}
+
+.delete-question:hover{
+  fill: $red;
+  cursor: pointer;
 }
 
 #upvote-icon{
   fill: #4B4B4B;
 }
 #upvote-icon:hover{
-  fill: $green;
+  // fill: $green;
   cursor: pointer;
 }
 
