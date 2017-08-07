@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
+import { deleteTopic } from '../../actions/Actions';
 import StudentTopic from '../../components/StudentTopic';
 import AddTopic from '../../components/AddTopic';
 import { connect } from 'react-redux'
 
 class StudentTopicsContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      hover: false,
+      alreadyClicked: false,
+      votes: this.props.votes,
+      toggle: false,
+    }
+    this.props.socket.on('deleteTopic', (deletedTopicId) => {
+      this.props.deleteTopicAction(deletedTopicId);
+    });
+  }
+
   render() {
     var proffArr = this.props.classObj.professorName.split(" ")
     var profname = proffArr[1] || proffArr[0]
@@ -41,6 +55,7 @@ class StudentTopicsContainer extends Component {
 const mapStateToProps = state => {
   console.log("In the map state to props:", state.classReducer.classState);
   return {
+    socket: state.socketReducer.socket,
     classObj: state.classReducer.classState,
     topics: state.classReducer.classState.topics
   }
@@ -48,7 +63,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    deleteTopicAction: (topicID) => {
+      dispatch(deleteTopic(topicID));
+    }
   }
 }
 export default connect(

@@ -54,7 +54,7 @@ class StudentTopic extends Component {
     e.preventDefault();
     e.stopPropagation();
     this.props.deleteTopicAction(this.props.id)
-    this.props.socket.emit('deleteTopic', {topidId: this.props.id, reference: this.props.reference})
+    this.props.socket.emit('deleteTopic', {topicId: this.props.id, reference: this.props.reference})
   }
 
   render() {

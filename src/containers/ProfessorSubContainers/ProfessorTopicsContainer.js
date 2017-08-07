@@ -49,7 +49,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    deleteTopicAction: (topicID) => {
+      dispatch(deleteTopic(topicID));
+    }
   }
 }
 export default connect(

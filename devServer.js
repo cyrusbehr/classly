@@ -57,6 +57,8 @@ io.on('connection', socket => {
         questionsArray.splice(index,1);
         classObj.questions = questionsArray;
         classObj.save();
+        var deletedQuestionId = data.questionId;
+        socket.broadcast.to(socket.currentRoom).emit('deleteQuestion', deletedQuestionId);
       })
     })
   })
@@ -76,6 +78,9 @@ io.on('connection', socket => {
         topicsArray.splice(index,1);
         classObj.topics = topicsArray;
         classObj.save();
+        var deletedTopicId = data.topicId;
+        console.log("delete topic id", data.topicId);
+        socket.broadcast.to(socket.currentRoom).emit('deleteTopic', deletedTopicId);
       })
     })
   })

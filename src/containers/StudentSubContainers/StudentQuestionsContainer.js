@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {deleteQuestion} from '../../actions/Actions';
 import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
@@ -12,10 +13,14 @@ class StudentQuestionsContainer extends Component {
       name: "",
       accessCode: "",
     }
+    //listener that calls deleteQuestionAction
+    this.props.socket.on('deleteQuestion', (deletedQuestionId) => {
+      this.props.deleteQuestionAction(deletedQuestionId);
+    });
   }
 
-  render() {
 
+  render() {
     var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
       return -1 * question.upVotes; //negative changes to descending order
     })
@@ -69,14 +74,18 @@ class StudentQuestionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
-    filter: state.filterReducer
+    filter: state.filterReducer,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    deleteQuestionAction: (ID) => {
+      dispatch(deleteQuestion(ID));
+    }
   }
 }
 
