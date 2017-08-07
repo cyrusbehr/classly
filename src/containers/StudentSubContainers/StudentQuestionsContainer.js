@@ -48,6 +48,7 @@ class StudentQuestionsContainer extends Component {
                 id={question._id}
                 currentUpVotes={question.upVotes}
                 text={question.text}
+                isStarred={question.isStarred}
                 tags={question.tags}
                 questionCreator={question.username}
               />
@@ -58,6 +59,7 @@ class StudentQuestionsContainer extends Component {
                 <StudentQuestion
                   key={question._id}
                   id={question._id}
+                  isStarred={question.isStarred}
                   currentUpVotes={question.upVotes}
                   text={question.text}
                   tags={question.tags}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion, deleteQuestion} from '../actions/Actions';
+import {upVoteQuestion, toggleStar, deleteQuestion} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -10,11 +10,17 @@ class StudentQuestion extends Component {
     this.state = {
       alreadyClicked: false,
       votes: this.props.currentUpVotes,
+      // starred: this.props.isStarred,
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
       this.setState({votes: this.props.currentUpVotes})
-    })
+    });
+    this.props.socket.on('toggleResolved', (updatedQuestion) => {
+      this.props.toggleStarAction(updatedQuestion._id);
+      //TODO: Does updatedQuestion.id or ._id?
+      // this.setState({starred: this.props.isStarred})
+    });
   }
 
   componenetDidMount() {
@@ -46,6 +52,13 @@ class StudentQuestion extends Component {
     this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference})
   }
 
+  toggleThisStar(e) {
+    e.preventDefault();
+    this.props.toggleStarAction(this.props.id);
+    // this.setState({starred: !this.state.starred});
+    this.props.socket.emit('toggleStar', {questionId: this.props.id, isStarred: this.state.starred })
+  }
+
   render() {
     var isCreatorOrProfessorOrTA = (this.props.questionCreator === this.props.username
       || this.props.userType === 'Professor'
@@ -54,6 +67,7 @@ class StudentQuestion extends Component {
       var nameArr = this.props.studentName.split(' ');
       var renderStudentName = nameArr[0];
     }
+    var isProfessorOrTA = (this.props.userType === 'Professor' || this.props.userType === 'TA')
     return (
       <div className="question">
         <div className="question-body">
@@ -83,6 +97,20 @@ class StudentQuestion extends Component {
             ""
           }
         </div>
+        {isProfessorOrTA
+          ?
+          <button onClick={(e)=> this.toggleThisStar(e)}>Star</button>
+          :
+          ""
+        }
+        <div>
+          {this.props.isStarred
+            ?
+            <span>starred!</span>
+            :
+            ""
+          }
+        </div>
       </div>
     );
   }
@@ -105,6 +133,9 @@ const mapDispatchToProps = dispatch => {
     },
     deleteQuestionAction: (ID) => {
       dispatch(deleteQuestion(ID));
+    },
+    toggleStarAction: (ID) => {
+      dispatch(toggleStar(ID))
     }
   }
 }

@@ -45,6 +45,7 @@ class ProfessorQuestionsContainer extends Component {
                 id={question._id}
                 currentUpVotes={question.upVotes}
                 text={question.text}
+                isStarred={question.isStarred}
                 tags={question.tags}
                 questionCreator={question.username}
               />
