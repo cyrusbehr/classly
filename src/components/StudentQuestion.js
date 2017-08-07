@@ -54,12 +54,20 @@ class StudentQuestion extends Component {
     return (
       <div className="question">
         <div className="question-body">
-          <div className="question-header"> Tags: {this.props.tags[0]==="" ? 'None' : <span className="tag">this.props.tags</span>}</div>
+          <div className="question-header"> Tags: {this.props.tags[0]==="" ? 'None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-body"> {this.props.text} </div>
-          <div className="question-footer"></div>
+          <div className="question-footer"> <button>Reply</button></div>
         </div>
         <div className="question-upvote-container">
           <div className="upvote-icon-container">
+            
+            {isCreator
+              ?
+              <button onClick={(e)=> this.deleteItem(e)}>delete</button>
+              :
+              ""
+            }
+
             <svg onClick={(e) => this.handleUpvote(e)} width="38px" height="24px" viewBox="0 0 38 24" version="1.1">
               <polygon
                 style={this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
@@ -69,12 +77,6 @@ class StudentQuestion extends Component {
             </svg>
           </div>
           <div className="upvote-number">{this.state.votes}</div>
-          {isCreator
-            ?
-            <button onClick={(e)=> this.deleteItem(e)}>delete</button>
-            :
-            ""
-          }
         </div>
       </div>
     );

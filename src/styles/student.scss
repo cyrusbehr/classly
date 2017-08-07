@@ -32,6 +32,7 @@ html, body{
   background-color: #EFEFEF;
   flex: 3;
   overflow: scroll;
+  border-right: $green solid 3px;
 }
 
 .topics-container-header{
@@ -84,7 +85,7 @@ StudentTopicsContainer{
   min-height: 120px;
   width: 100%;
   display: flex;
-  border-top: 2px solid #CACACA;
+  border-top: 3px solid #DFDFDF;
   /* for animation effects */
   background-size: 200% 100%;
   background-image: linear-gradient(to left, #D9FFF5 50%, white 50%);
@@ -113,13 +114,14 @@ StudentTopicsContainer{
   flex:4;
   font-size: 30px;
   color: #4B4B4B; /* off-black */
-  padding: 0 50px;
+  padding: 10px 50px;
   display: flex;
   justify-content: center;
 }
 
 .question-body .question-footer{
   flex:1;
+  padding: 0 50px;
 }
 
 .question .question-upvote-container{
