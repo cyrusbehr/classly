@@ -21,7 +21,6 @@ class StudentTopicsContainer extends Component {
         </div> */}
         <AddTopic />
         {this.props.topics.map((topic, i) => {
-          console.log(topic.text, this.props.currentFilter===topic.text);
           return(
             <StudentTopic
               text={topic.text}
