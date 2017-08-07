@@ -11,6 +11,7 @@ class StudentQuestion extends Component {
       hover: false,
       alreadyClicked: false,
       votes: this.props.currentUpVotes,
+      commentText: ""
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
@@ -45,12 +46,25 @@ class StudentQuestion extends Component {
 
   render() {
     var isCreator = (this.props.questionCreator === this.props.username);
+    var isTA = this.props.userType === "TA"
     return (
       <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
         <div className="question-body">
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? 'None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>
-          <div className="question-footer"> <button>Reply</button></div>
+          {isTA
+          ?
+          <div className="question-footer">
+            <button>Reply</button>
+            <input
+              value={this.state.questionText}
+              type="text"
+              onChange={(e) => this.updateQuestion(e)}
+              placeholder="New Question..."
+            />
+          </div>
+          :null
+        }
         </div>
         <div className="question-upvote-container">
           <div className="upvote-icon-container">
@@ -98,6 +112,7 @@ const mapStateToProps = state => {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
     username: state.userReducer.username,
+    userType: state.userReducer.userType
   }
 }
 
