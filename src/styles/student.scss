@@ -86,15 +86,10 @@ StudentTopicsContainer{
   width: 100%;
   display: flex;
   border-top: 3px solid #DFDFDF;
-  /* for animation effects */
-  background-size: 200% 100%;
-  background-image: linear-gradient(to left, #D9FFF5 50%, white 50%);
-  transition: background-position 0.5s;
+  background-color: white;
+  //#D9FFF5
 }
 
-.question-hover {
-    background-position: -100% 0%;
-}
 
 .question .question-body{
   height: 100%;
@@ -252,28 +247,6 @@ button:focus {
   outline: none;
 }
 
-.animated {
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-}
-
-@keyframes pulse {
-  from {
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-
-  to {
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-.pulse {
-  animation-name: pulse;
-}
 
 #topic-help{
   border-color: black;
@@ -297,15 +270,24 @@ input[type="text"]{
 .topic{
    min-height: 100px;
    margin: 20px;
-   background-color: #FFFFFF;
+  //  background-color: #FFFFFF;
    border-left: $green solid 5px;
    display: flex;
    transition: transform 0.1s, box-shadow 0.1s;
+   //for transition effect
+   background-size: 200% 100%;
+   background-image: linear-gradient(to left, #FFF1F1 50%, white 50%);
+   transition: background-position 0.5s;
+}
+
+.topic-hover {
+  background-position: -100% 0%;
 }
 
 .topic:hover{
-  transform: scale3d(1.02, 1.02, 1);
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+  // transform: scale3d(1.02, 1.02, 1);
+  // box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+  cursor: pointer;
 }
 
 .topic .topic-content{
@@ -351,6 +333,11 @@ input[type="text"]{
 }
 
 // for form validation
+.animated {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
 @keyframes swing {
   20% {
     transform: rotate3d(0, 0, 1, 15deg);

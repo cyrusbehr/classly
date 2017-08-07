@@ -24,17 +24,11 @@ class StudentQuestion extends Component {
 
   handleUpvote(e) {
     if(!this.state.alreadyClicked){
-
-      $(e.target).parents('.question').addClass('question-hover');
-
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: false});
          this.setState({alreadyClicked: true})
     } else {
-
-      $(e.target).parents('.question').removeClass('question-hover');
-
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id,
          previousUpVotes: this.props.currentUpVotes, toggle: true});
@@ -52,7 +46,7 @@ class StudentQuestion extends Component {
   render() {
     var isCreator = (this.props.questionCreator === this.props.username);
     return (
-      <div className="question">
+      <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
         <div className="question-body">
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? 'None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>

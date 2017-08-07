@@ -24,14 +24,14 @@ class StudentTopic extends Component {
     e.stopPropagation();
     e.preventDefault();
     if(!this.state.alreadyClicked) {
-      $(e.target).parents('.topic').addClass('animated pulse');
+      $(e.target).parents('.topic').addClass('topic-hover');
 
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('voteTopic', {topicId: this.props.id,
         previousVotes: this.props.votes, toggle: false})
         this.setState({alreadyClicked: true})
     }else {
-      $(e.target).parents('.topic').removeClass('animated pulse');
+      $(e.target).parents('.topic').removeClass('topic-hover');
 
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('voteTopic', {topicId: this.props.id,
