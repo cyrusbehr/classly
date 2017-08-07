@@ -18,15 +18,6 @@ class LoginCard extends Component {
       <div className="login-card" onClick={() => this.redirect()}>
         <div className={this.props.thisClass}>
           <img src={this.props.URL} className="login-card-picture"/>
-          {/* <br/>
-          imageURL: {this.props.URL}
-          <br/>
-          title: {this.props.title}
-          <br/>
-          HELELLEOEOA
-          redirect route: {this.props.redirectRoute}
-          <br/>
-          componentClassName: {this.props.thisClass} */}
           <div className="card-title">
             {this.props.title}
           </div>

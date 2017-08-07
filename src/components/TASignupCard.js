@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {addClass, setUsername} from '../actions/Actions'
 
 
-class StudentSignupCard extends Component {
+class TASignupCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,7 +19,6 @@ class StudentSignupCard extends Component {
     })
 
     this.props.socket.on('error1', () => {
-      // TODO: alert the user that we couldnt find their access code
       console.log("Access Code not found");
     })
 
@@ -40,6 +39,7 @@ class StudentSignupCard extends Component {
   }
 
   redirect() {
+    console.log("The redirect route is: ", this.props.redirectRoute)
     this.props.history.push(this.props.redirectRoute);
   }
 
@@ -81,11 +81,6 @@ class StudentSignupCard extends Component {
                 />
               </label>
               <br></br>
-              {/* <input type="submit"
-                value="Join Class"
-                onClick={(e) => this.onSubmit(e)}
-                className="student-signup-submit"
-              /> */}
               <button
                 type="button"
                 onClick={(e) => this.onSubmit(e)}
@@ -117,4 +112,4 @@ class StudentSignupCard extends Component {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(StudentSignupCard);
+  )(TASignupCard);
