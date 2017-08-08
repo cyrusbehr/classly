@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import $ from 'jquery';
 
 import Collapse from 'rc-collapse';
+var Panel = Collapse.Panel;
+require('rc-collapse/assets/index.scss');
 
 
 class StudentQuestion extends Component {
@@ -13,7 +15,8 @@ class StudentQuestion extends Component {
       hover: false,
       alreadyClicked: false,
       votes: this.props.currentUpVotes,
-      commentText: ""
+      commentText: "",
+      toggle: true
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
@@ -80,6 +83,15 @@ class StudentQuestion extends Component {
     this.setState({commentText: ""});
   }
 
+  toggleReply(e) {
+    e.preventDefault();
+    if(this.state.toggle === false){
+      this.setState({toggle: true})
+    } else {
+      this.setState({toggle: false})
+    }
+  }
+
   render() {
     var isCreatorOrProfessorOrTA = (this.props.questionCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA');
     if(this.props.studentName){
@@ -91,27 +103,37 @@ class StudentQuestion extends Component {
     return (
       <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
         <div className="question-body">
+          <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button>
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>
           {/*  TODO: DONOVAN add formating here, feel free to move this around */}
-          {this.props.comments ? this.props.comments.map((comment) => {
-            return(
-            <div>{comment.creator}: {comment.text}</div>
-            )
-          })
-          :null
-        }
           {isProfessorOrTA
             ?
-            <div className="question-footer">
-              <button onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
-              <input
-                value={this.state.commentText}
-                type="text"
-                onChange={(e) => this.updateCommentText(e)}
-                placeholder="New Question..."
-              />
-              <div> - {renderStudentName} </div>
+            <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
+              <div className="question-comment-container">
+                <textarea
+                  value={this.state.commentText}
+                  type="text"
+                  onChange={(e) => this.updateCommentText(e)}
+                  placeholder="Anwser here!!!"
+                  className="question-comment-textarea"
+                />
+                <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+              </div>
+              <div className="question-comments-container">
+                <div className="question-comments-container-spacer">
+                </div>
+                <div className="question-comments-container-main">
+                  {this.props.comments ? this.props.comments.map((comment) => {
+                    return(
+                    <div>{comment.creator}: {comment.text}</div>
+                    )
+                  })
+                  :null
+                }
+                </div>
+              </div>
+              {/* <div> {renderStudentName} </div> */}
             </div>
             : null }
           {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
