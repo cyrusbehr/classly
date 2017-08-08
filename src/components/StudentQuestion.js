@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion, deleteQuestion} from '../actions/Actions';
+import {upVoteQuestion, deleteQuestion, addComment} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -50,6 +50,12 @@ class StudentQuestion extends Component {
 
   replyButtonPressed(e) {
     e.preventDefault();
+    let newCommentObj = {
+      questionId: this.props.id,
+      text: this.state.commentText,
+      creator: this.props.username
+    }
+    this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
        username: this.props.username, text: this.state.commentText});
     this.setState({commentText: ""});
@@ -134,6 +140,9 @@ const mapDispatchToProps = dispatch => {
     },
     deleteQuestionAction: (ID) => {
       dispatch(deleteQuestion(ID));
+    },
+    addCommentAction: (newQuestionObject) => {
+      dispatch(addComment(newQuestionObject))
     }
   }
 }

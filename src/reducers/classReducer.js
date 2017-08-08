@@ -1,4 +1,5 @@
-import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION, ADD_TOPIC, VOTE_TOPIC, DELETE_QUESTION, DELETE_TOPIC } from '../constants/ActionTypes';
+import { ADD_CLASS, ADD_QUESTION, UPVOTE_QUESTION, ADD_TOPIC, VOTE_TOPIC,
+  NEW_COMMENT, DELETE_QUESTION, DELETE_TOPIC } from '../constants/ActionTypes';
 import _ from 'underscore';
 
 const initialState =  {
@@ -76,6 +77,22 @@ export default function (state = initialState, action) {
       topicsArr.splice(index1,1);
       originalState8.classState.topics = [...topicsArr];
         return originalState8;
+
+    case NEW_COMMENT:
+    var newState = Object.assign({}, state);
+    var questionsArray = newState.classState.questions;
+    var index;
+
+    for(var i = 0; i < questionsArray.length; i++) {
+      if(questionsArray[i]._id === action.newCommentObj.questionId){
+        index = i;
+        break;
+      }
+    }
+
+    questionArray[index].push(action.newCommentObj)
+
+    return newState;
 
   default:
     return state;
