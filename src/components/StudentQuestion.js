@@ -2,15 +2,7 @@ import React, {Component} from 'react';
 import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-<<<<<<< HEAD
 import ReactTooltip from 'react-tooltip';
-=======
-
-import Collapse from 'rc-collapse';
-var Panel = Collapse.Panel;
-require('rc-collapse/assets/index.scss');
-
->>>>>>> s6
 
 class StudentQuestion extends Component {
   constructor(props) {
