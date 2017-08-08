@@ -4,7 +4,7 @@ import { SET_USER_TYPE,
   TOGGLE_FILTER,
   UPVOTE_QUESTION, ADD_TOPIC,
 VOTE_TOPIC, DELETE_QUESTION,
- DELETE_TOPIC} from '../constants/ActionTypes';
+ DELETE_TOPIC, TOGGLE_STAR, TOGGLE_RESOLVE} from '../constants/ActionTypes';
 
 export function setUserType(userType) {
   return {
@@ -78,5 +78,19 @@ export function updateFilter(newFilter) {
   return {
     type: TOGGLE_FILTER,
     newFilter
+  }
+}
+
+export function toggleStar(questionId) {
+  return {
+    type: TOGGLE_STAR,
+    questionId
+  }
+}
+
+export function toggleResolve(questionId) {
+  return {
+    type: TOGGLE_RESOLVE,
+    questionId
   }
 }

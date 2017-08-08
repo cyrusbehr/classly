@@ -57,6 +57,8 @@ io.on('connection', socket => {
         questionsArray.splice(index,1);
         classObj.questions = questionsArray;
         classObj.save();
+        var deletedQuestionId = data.questionId;
+        socket.broadcast.to(socket.currentRoom).emit('deleteQuestion', deletedQuestionId);
       })
     })
   })
@@ -76,6 +78,9 @@ io.on('connection', socket => {
         topicsArray.splice(index,1);
         classObj.topics = topicsArray;
         classObj.save();
+        var deletedTopicId = data.topicId;
+        console.log("delete topic id", data.topicId);
+        socket.broadcast.to(socket.currentRoom).emit('deleteTopic', deletedTopicId);
       })
     })
   })
@@ -201,10 +206,6 @@ io.on('connection', socket => {
     }
   });
 
-  //data = {
-  //  questionId: question._id,
-  //  isStarred: question.isStarred
-  //}
   socket.on('toggleStar', (data) => {
     let tempStarred = !data.isStarred;
     Question.findOneAndUpdate({_id: data._id}, { $set: {isStarred: tempStarred}}, {new: true}, (err, updatedQuestion) => {
@@ -217,14 +218,14 @@ io.on('connection', socket => {
     });
   });
 
-  socket.on('toggleResolved', (data) => {
+  socket.on('toggleResolve', (data) => {
     let tempResolved = !data.isResolved;
-    Question.findOneAndUpdate({_id: data._id}, { $set: {isResolved: !data.isResolved}}, {new: true}, (err, updatedQuestion) => {
+    Question.findOneAndUpdate({_id: data.questionId}, { $set: {isResolved: !data.isResolved}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error resolving question:", err);
       } else {
-        socket.broadcast.to(socket.currentRoom).emit('toggleResolved', updatedQuestion);
-        socket.emit('toggleResolved', updatedQuestion);
+        socket.broadcast.to(socket.currentRoom).emit('toggleResolve', updatedQuestion);
+        // socket.emit('toggleResolve', updatedQuestion);
       }
     });
   });
@@ -236,10 +237,22 @@ io.on('connection', socket => {
     .then((classObj) => {
       if(!classObj) {
         socket.emit('error1');
-
       } else {
         socket.emit('getStudentState', classObj);
       }
+    })
+  })
+
+  socket.on('newComment', (data) => {
+    Question.findById(data.questionId, (err, questionObj) => {
+      newComment = {
+        text: data.text,
+        creator: data.username
+      };
+      questionObj.comments.push(newComment);
+      questionObj.save();
+
+      console.log("the new comment was saved!")
     })
   })
 

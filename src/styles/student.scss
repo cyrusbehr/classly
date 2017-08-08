@@ -187,7 +187,7 @@ StudentTopicsContainer{
   display:flex;
 }
 
-.new-question-input-field #new-question{
+.new-question-input-field #new-question #empty-new-question{
   flex: 8;
   margin-right: 10px;
 }
@@ -199,6 +199,15 @@ StudentTopicsContainer{
 #new-topic{
   border-radius: 10px;
   border: white;
+  // border-color: red;
+  padding: 0 20px;
+  height: 40px;
+}
+
+#empty-new-topic{
+  border-radius: 10px;
+  // border: white;
+  border-color: red;
   padding: 0 20px;
   height: 40px;
 }
@@ -209,6 +218,16 @@ StudentTopicsContainer{
   flex:2;
   border-radius: 10px;
   border: darkgray solid 1px;
+  padding: 0 20px;
+  height: 30px;
+}
+
+#empty-new-question{
+  border-radius: 10px;
+  font-size:16px;
+  flex:2;
+  border-radius: 10px;
+  border: red solid 1px;
   padding: 0 20px;
   height: 30px;
 }
@@ -277,6 +296,15 @@ button:focus {
   // border-style: solid;
 }
 
+.empty-new-question-footer {
+  margin-top:5px;
+  padding: 5px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  // border-style: solid;
+}
+
 .new-topic-footer {
   margin-top:5px;
   padding: 5px 0;
@@ -284,14 +312,13 @@ button:focus {
   justify-content: flex-end;
   align-items: center;
   // border-style: solid;
-  align-self: flex-end;
 }
 
 .empty-new-topic-footer {
   margin-top:5px;
   padding: 5px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   // border-style: solid;
 }
@@ -305,6 +332,14 @@ button:focus {
 
 .empty-new-topic-alert {
   color:red;
+  margin-right: 5px;
+  // border-style: solid;
+}
+
+.empty-new-question-alert {
+  color:red;
+  margin-right: 5px;
+  // border-style: solid;
 }
 
 ::-webkit-input-placeholder{
