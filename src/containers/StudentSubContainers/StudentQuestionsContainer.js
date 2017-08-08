@@ -4,6 +4,7 @@ import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
+import { sortByMagic, sortByCategory } from '../../constants/algorithmicos';
 
 
 class StudentQuestionsContainer extends Component {
@@ -21,12 +22,19 @@ class StudentQuestionsContainer extends Component {
 
 
   render() {
-    var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
-      return -1 * question.upVotes; //negative changes to descending order
-    })
+    // var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
+    //   return -1 * question.upVotes; //negative changes to descending order
+    // })
+    if (this.props.filter) {
+      var sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
+    }
 
-      var proffArr = this.props.professorName.split(" ")
-      var profname = proffArr[1] || proffArr[0]
+    if(!this.props.filter) {
+      var sortedArray = sortByMagic(this.props.questionsArray);
+    }
+
+    var proffArr = this.props.professorName.split(" ");
+    var profname = proffArr[1] || proffArr[0];
 
     return (
       <div className="questions-container">
@@ -38,7 +46,7 @@ class StudentQuestionsContainer extends Component {
         </div>
         <AddQuestion />
         {sortedArray.map((question, i) => {
-          if (!this.props.filter) {
+          // if (!this.props.filter) {
             return(
               <StudentQuestion
                 reference={question.referenceClass}
@@ -49,24 +57,25 @@ class StudentQuestionsContainer extends Component {
                 isStarred={question.isStarred}
                 tags={question.tags}
                 questionCreator={question.username}
-              />
-            )
-          } else {
-            if(this.props.filter === question.tags[0]){
-              return(
-                <StudentQuestion
-                  key={question._id}
-                  id={question._id}
-                  isStarred={question.isStarred}
-                  currentUpVotes={question.upVotes}
-                  text={question.text}
-                  tags={question.tags}
                 />
               )
-            } else {
-              return(<span></span>)
-            }
-          }
+          //}
+          // else {
+          //   if(this.props.filter === question.tags[0]){
+          //     return(
+          //       <StudentQuestion
+          //         key={question._id}
+          //         id={question._id}
+          //         isStarred={question.isStarred}
+          //         currentUpVotes={question.upVotes}
+          //         text={question.text}
+          //         tags={question.tags}
+          //       />
+          //     )
+          //   } else {
+          //     return(<span></span>)
+          //   }
+          // }
         })}
       </div>
     );
