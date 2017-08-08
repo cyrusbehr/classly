@@ -115,7 +115,7 @@ class StudentTopic extends Component {
           ?
           <button onClick={(e)=> this.deleteItem(e)}>delete</button>
           :
-          ""
+          null
         }
       </div>
     );
