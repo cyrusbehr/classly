@@ -41,22 +41,6 @@ class StudentTopic extends Component {
   }
 
   handleClick(id,e){
-    //event propogation
-
-    // if(this.props.text===this.props.currentFilter){
-    //   $(e.target).parents('.topic').addClass('topic-toggle');
-    // } else {
-    //   $(e.target).parents('.topic').removeClass('topic-toggle');
-    // }
-
-    // if(this.state.toggle){
-    //   this.props.toggleFilter("");
-    //   this.setState({toggle: false});
-    // } else {
-    //   this.props.toggleFilter(this.props.text);
-    //   this.setState({toggle: true});
-    // }
-
     if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
       this.props.toggleFilter(this.props.text);
     } else {
@@ -68,11 +52,12 @@ class StudentTopic extends Component {
     e.preventDefault();
     e.stopPropagation();
     this.props.deleteTopicAction(this.props.id)
-    this.props.socket.emit('deleteTopic', {topidId: this.props.id, reference: this.props.reference})
+    this.props.socket.emit('deleteTopic', {topicId: this.props.id, reference: this.props.reference})
   }
 
   render() {
-    var isCreator = (this.props.topicCreator === this.props.username)
+    var isCreator = (this.props.topicCreator === this.props.username);
+    var isCreatorOrProfessorOrTA = (this.props.topicCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA');
     var style = {};
 
     if (this.state.alreadyClicked) {
@@ -111,12 +96,7 @@ class StudentTopic extends Component {
             style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
           >{this.state.votes}</div>
         </div>
-        {isCreator
-          ?
-          <button onClick={(e)=> this.deleteItem(e)}>delete</button>
-          :
-          ""
-        }
+        {isCreatorOrProfessorOrTA ? <button onClick={(e)=> this.deleteItem(e)}>delete</button> : null }
       </div>
     );
   }
@@ -126,7 +106,8 @@ const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
     username: state.userReducer.username,
-    currentFilter: state.filterReducer
+    currentFilter: state.filterReducer,
+    userType: state.userReducer.userType,
   }
 }
 

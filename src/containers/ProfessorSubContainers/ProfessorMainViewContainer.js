@@ -1,11 +1,23 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import ProfessorTopicsContainer from './ProfessorTopicsContainer';
+import ProfessorQuestionsContainer from './ProfessorQuestionsContainer';
 
 export default class ProfessorMainViewContainer extends Component {
+  constructor(props){
+    super(props)
+    if(this.props.userType === ""){
+      this.props.history.push('/')
+    }
+  }
+
   render() {
     return(
-      <div>
-        This is the ProfessorMainViewContainer container
+      <div className="body-parent">
+        <div className="body-container">
+          <ProfessorTopicsContainer />
+          <ProfessorQuestionsContainer />
+        </div>
       </div>
     )
   }
@@ -13,6 +25,7 @@ export default class ProfessorMainViewContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    userType: state.userReducer.userType,
   }
 }
 
