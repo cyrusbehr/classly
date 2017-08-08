@@ -243,12 +243,13 @@ io.on('connection', socket => {
     Question.findById(data.questionId, (err, questionObj) => {
       newComment = {
         text: data.text,
-        creator: data.username
+        creator: data.username,
+        questionId: data.questionId
       };
       questionObj.comments.push(newComment);
       questionObj.save();
 
-      console.log("the new comment was saved!")
+      socket.broadcast.to(socket.currentRoom).emit('newComment', questionObj);
     })
   })
 
