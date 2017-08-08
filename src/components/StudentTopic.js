@@ -79,7 +79,11 @@ class StudentTopic extends Component {
       >
         <div className="topic-content">
           <div className="topic-title">{this.props.text}</div>
-          <div className="topic-description">Powerpoint slides p.1-10</div>
+          {this.props.slideNumber
+          ?
+          <div className="topic-description">Slide Number  {this.props.slideNumber}</div>
+          :null
+        }
         </div>
         <div className="topic-alert">
           <div className="topic-alert-icon">
