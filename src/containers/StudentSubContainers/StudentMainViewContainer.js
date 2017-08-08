@@ -11,13 +11,14 @@ class StudentMainViewContainer extends Component {
     }
   }
 
+  //TODO: checking userType a second time seems redundant here
   render() {
     return (
       <div className="body-parent">
         {
           this.props.userType
           ?
-          <div  className="body-container">
+          <div className="body-container">
             <StudentTopicsContainer />
             <StudentQuestionsContainer />
           </div>
