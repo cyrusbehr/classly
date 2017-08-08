@@ -139,6 +139,7 @@ io.on('connection', socket => {
       timestamp: data.timestamp,
       referenceClass: data.referenceClass,
       username: data.username,
+      slideNumber: data.slideNumber
     });
     newTopic.save((err, newTopic) => {
       if(err){

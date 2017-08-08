@@ -7,7 +7,8 @@ class AddTopic extends Component{
     super(props)
     this.state = {
       topicText: "",
-      topicEmpty: true
+      topicEmpty: true,
+      slideNumberText: null
     }
 
     this.props.socket.on('newTopic', (savedTopic) => {
@@ -20,20 +21,32 @@ class AddTopic extends Component{
     this.setState({topicEmpty: true});
   }
 
+  updateSlideNumber(e) {
+    this.setState({slideNumberText: e.target.value});
+  }
+
   submitPressed(e) {
     e.preventDefault();
     if(this.state.topicText.trim() === ''){
       this.setState({topicEmpty: false});
     } else {
+
       const data = {
         text: this.state.topicText,
         votes: 0,
         timestamp: Date.now(),
         referenceClass: this.props.classObj._id,
         username: this.props.username,
+        slideNumber: this.state.slideNumberText
+
       }
       this.props.socket.emit('newTopic', data);
-      this.setState({topicText: ""});
+      this.setState(
+        {
+        topicText: "",
+        slideNumberText: null,
+      }
+    );
     }
   }
 
@@ -45,14 +58,26 @@ class AddTopic extends Component{
           value={this.state.topicText}
           type="text"
           onChange={(e) => this.updateTopic(e)}
-          placeholder="this is test..."
+          placeholder="New Topic..."
         />
         {this.state.topicEmpty ?
           <div className="new-topic-footer">
+            <input
+              value={this.state.slideNumberText}
+              type="text"
+              onChange={(e) => this.updateSlideNumber(e)}
+              placeholder="Slide Number (optional)"
+            />
             <button id="topic-help">?</button>
             <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
           </div> :
           <div className="empty-new-topic-footer">
+            <input
+              value={this.state.slideNumberText}
+              type="text"
+              onChange={(e) => this.updateSlideNumber(e)}
+              placeholder="Slide Number (optional)"
+            />
             <div className="empty-new-topic-alert">
               Topic can't be empty!
             </div>
