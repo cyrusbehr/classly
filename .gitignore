@@ -4,4 +4,4 @@ node_modules
 lib
 coverage
 env.sh
-bundle.js
+public/bundle.js
