@@ -3,11 +3,16 @@ import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
+import {addComment} from '../../actions/Actions';
 
 
 class TAQuestionsContainer extends Component {
   constructor(props) {
     super(props)
+
+    this.props.socket.on('newComment', (newCommentObj) => {
+      this.props.addCommentAction(newCommentObj);
+    })
   }
 
   render() {
@@ -37,6 +42,7 @@ class TAQuestionsContainer extends Component {
                 text={question.text}
                 tags={question.tags}
                 questionCreator={question.username}
+                comments={question.comments}
               />
             )
           } else {
@@ -62,6 +68,7 @@ class TAQuestionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
@@ -71,6 +78,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    addCommentAction: (newQuestionObject) => {
+      dispatch(addComment(newQuestionObject))
+    },
   }
 }
 

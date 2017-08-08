@@ -104,7 +104,7 @@ submitPressed(e) {
           </div> :
           <div className="empty-new-question-footer">
             <div className="empty-new-question-alert">
-              question can't be empty!
+              Question can't be empty!
             </div>
             <div className="empty-new-question-container">
               <button id="question-help">?</button>

@@ -56,7 +56,8 @@ class StudentTopic extends Component {
   }
 
   render() {
-    var isCreator = (this.props.topicCreator === this.props.username)
+    var isCreator = (this.props.topicCreator === this.props.username);
+    var isCreatorOrProfessorOrTA = (this.props.topicCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA');
     var style = {};
 
     if (this.state.alreadyClicked) {
@@ -95,12 +96,7 @@ class StudentTopic extends Component {
             style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
           >{this.state.votes}</div>
         </div>
-        {isCreator
-          ?
-          <button onClick={(e)=> this.deleteItem(e)}>delete</button>
-          :
-          null
-        }
+        {isCreatorOrProfessorOrTA ? <button onClick={(e)=> this.deleteItem(e)}>delete</button> : null }
       </div>
     );
   }
@@ -110,7 +106,8 @@ const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
     username: state.userReducer.username,
-    currentFilter: state.filterReducer
+    currentFilter: state.filterReducer,
+    userType: state.userReducer.userType,
   }
 }
 

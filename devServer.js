@@ -253,7 +253,7 @@ io.on('connection', socket => {
       questionObj.comments.push(newComment);
       questionObj.save();
 
-      socket.broadcast.to(socket.currentRoom).emit('newComment', questionObj);
+      socket.broadcast.to(socket.currentRoom).emit('newComment', newComment);
     })
   })
 
