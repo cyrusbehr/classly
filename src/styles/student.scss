@@ -65,6 +65,9 @@ StudentTopicsContainer{
 }
 
 .questions-container-header{
+  z-index: 999;
+  position: fixed;
+  width: 60.5%;
   background-color: white;
   color: black;
   padding: 10px;
@@ -167,6 +170,7 @@ StudentTopicsContainer{
 }
 
 .new-question-container{
+  margin-top: 40px;
   padding: 30px;
   height: 70px;
   display: flex;
