@@ -13,16 +13,6 @@ class StudentQuestion extends Component {
       votes: this.props.currentUpVotes,
       commentText: ""
     };
-    this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
-      this.props.upVoteQuestionAction(updatedQuestion);
-      this.setState({votes: this.props.currentUpVotes})
-    });
-    this.props.socket.on('toggleStar', (updatedQuestion) => {
-      this.props.toggleStarAction(updatedQuestion._id);
-    });
-    this.props.socket.on('toggleResolve', (updatedQuestion) => {
-      this.props.toggleResolveAction(updatedQuestion._id);
-    });
   }
 
   componenetDidMount() {
@@ -146,7 +136,7 @@ class StudentQuestion extends Component {
             </svg>
           : null }
         </div>
-        </div>
+      </div>
     );
   }
 }
@@ -178,7 +168,7 @@ const mapDispatchToProps = dispatch => {
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
     }
-}
+  }
 }
 
 export default connect(

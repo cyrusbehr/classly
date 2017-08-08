@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {deleteQuestion} from '../../actions/Actions';
+import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../../actions/Actions';
 import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
@@ -16,6 +16,16 @@ class StudentQuestionsContainer extends Component {
     //listener that calls deleteQuestionAction
     this.props.socket.on('deleteQuestion', (deletedQuestionId) => {
       this.props.deleteQuestionAction(deletedQuestionId);
+    });
+    this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
+      this.props.upVoteQuestionAction(updatedQuestion);
+      this.setState({votes: this.props.currentUpVotes})
+    });
+    this.props.socket.on('toggleStar', (updatedQuestion) => {
+      this.props.toggleStarAction(updatedQuestion._id);
+    });
+    this.props.socket.on('toggleResolve', (updatedQuestion) => {
+      this.props.toggleResolveAction(updatedQuestion._id);
     });
   }
 
@@ -88,7 +98,16 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteQuestionAction: (ID) => {
       dispatch(deleteQuestion(ID));
-    }
+    },
+    toggleStarAction: (ID) => {
+      dispatch(toggleStar(ID))
+    },
+    toggleResolveAction: (ID) => {
+      dispatch(toggleResolve(ID))
+    },
+    upVoteQuestionAction: (updatedQuestion) => {
+      dispatch(upVoteQuestion(updatedQuestion));
+    },
   }
 }
 
