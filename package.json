@@ -7,7 +7,7 @@
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --profile --colors",
     "build": "npm run clean && npm run build:webpack --progress --profile --colors",
     "dev": "concurrently -k \"npm run frontend\" \"npm run backend\"",
-    "start": "concurrently -k \"npm run frontend\" \"npm run backend\"",
+    "start": "concurrently -k \"npm run build\" \"npm run backend\"",
     "frontend": "webpack -d --watch --config webpack.config.dev.js",
     "backend": "node devServer.js",
     "lint": "eslint src"
