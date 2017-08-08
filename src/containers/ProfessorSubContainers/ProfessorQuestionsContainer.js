@@ -18,6 +18,7 @@ class ProfessorQuestionsContainer extends Component {
       this.props.deleteQuestionAction(deletedQuestionId);
     });
     this.props.socket.on('toggleStar', (updatedQuestion) => {
+      console.log("this is toggleStar updatedQ", updatedQuestion);
       this.props.toggleStarAction(updatedQuestion._id);
     });
     this.props.socket.on('toggleResolve', (updatedQuestion) => {
