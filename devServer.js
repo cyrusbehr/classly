@@ -23,6 +23,9 @@ const Topic = models.Topic;
 const Class = models.Class;
 //double check mongoose.connect
 mongoose.connect(process.env.MONGODB_URI);
+mongoose.connection.on('connected', () => {
+  console.log('connected to database')
+})
 
 io.on('connection', socket => {
 
