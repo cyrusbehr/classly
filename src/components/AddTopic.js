@@ -6,7 +6,8 @@ class AddTopic extends Component{
   constructor(props) {
     super(props)
     this.state = {
-      topicText: ""
+      topicText: "",
+      topicEmpty: true
     }
 
     this.props.socket.on('newTopic', (savedTopic) => {
@@ -16,36 +17,55 @@ class AddTopic extends Component{
 
   updateTopic(e) {
     this.setState({topicText: e.target.value})
+    this.setState({topicEmpty: true});
   }
 
   submitPressed(e) {
     e.preventDefault();
-    const data = {
-      text: this.state.topicText,
-      votes: 0,
-      timestamp: Date.now(),
-      referenceClass: this.props.classObj._id,
-      username: this.props.username,
+    if(this.state.topicText.trim() === ''){
+      this.setState({topicEmpty: false});
+    } else {
+      const data = {
+        text: this.state.topicText,
+        votes: 0,
+        timestamp: Date.now(),
+        referenceClass: this.props.classObj._id,
+        username: this.props.username,
+      }
+      this.props.socket.emit('newTopic', data);
+      this.setState({topicText: ""});
     }
-    this.props.socket.emit('newTopic', data);
-    this.setState({topicText: ""});
   }
 
   render() {
     return (
       <div div className="new-topic-container">
         <input
-          id="new-topic"
+          id= {this.state.topicEmpty ? "new-topic" : "empty-new-topic"}
           value={this.state.topicText}
           type="text"
           onChange={(e) => this.updateTopic(e)}
           placeholder="this is test..."
         />
-
-        <div className="new-topic-footer">
+        {this.state.topicEmpty ?
+          <div className="new-topic-footer">
+            <button id="topic-help">?</button>
+            <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
+          </div> :
+          <div className="empty-new-topic-footer">
+            <div className="empty-new-topic-alert">
+              topic can't be empty!
+            </div>
+            <div className="empty-new-topic-container">
+              <button id="topic-help">?</button>
+              <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
+            </div>
+          </div>
+        }
+        {/* <div className="new-topic-footer">
           <button id="topic-help">?</button>
           <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
-        </div>
+        </div> */}
       </div>
     );
   }

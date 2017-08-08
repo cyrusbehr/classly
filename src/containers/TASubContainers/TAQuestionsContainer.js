@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
-import {deleteQuestion} from '../../actions/Actions';
 import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
 
 
-class StudentQuestionsContainer extends Component {
+class TAQuestionsContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: "",
-      accessCode: "",
-    }
-    //listener that calls deleteQuestionAction
-    this.props.socket.on('deleteQuestion', (deletedQuestionId) => {
-      this.props.deleteQuestionAction(deletedQuestionId);
-    });
   }
-
 
   render() {
     var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
@@ -31,7 +21,6 @@ class StudentQuestionsContainer extends Component {
     return (
       <div className="questions-container">
         <div className="questions-container-header">
-          <span>This is {this.props.userType} view</span>
           <span className="course">{this.props.className}</span>
           <span className="lecturer">Prof {profname}</span>
           <span className="date">1st Aug 2017</span>
@@ -46,7 +35,6 @@ class StudentQuestionsContainer extends Component {
                 id={question._id}
                 currentUpVotes={question.upVotes}
                 text={question.text}
-                isStarred={question.isStarred}
                 tags={question.tags}
                 questionCreator={question.username}
               />
@@ -57,7 +45,6 @@ class StudentQuestionsContainer extends Component {
                 <StudentQuestion
                   key={question._id}
                   id={question._id}
-                  isStarred={question.isStarred}
                   currentUpVotes={question.upVotes}
                   text={question.text}
                   tags={question.tags}
@@ -75,24 +62,19 @@ class StudentQuestionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
-    userType: state.userReducer.userType,
     className: state.classReducer.classState.className,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteQuestionAction: (ID) => {
-      dispatch(deleteQuestion(ID));
-    }
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(StudentQuestionsContainer);
+)(TAQuestionsContainer);

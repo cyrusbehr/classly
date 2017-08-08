@@ -11,6 +11,7 @@ class StudentTopic extends Component {
       alreadyClicked: false,
       votes: this.props.votes,
       toggle: false,
+      filter: ""
     }
     this.props.socket.on('voteTopic', (updatedTopic) => {
       this.props.voteTopicAction(updatedTopic);
@@ -23,14 +24,14 @@ class StudentTopic extends Component {
     e.stopPropagation();
     e.preventDefault();
     if(!this.state.alreadyClicked) {
-      $(e.target).parents('.topic').addClass('animated pulse');
+      $(e.target).parents('.topic').addClass('topic-hover');
 
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('voteTopic', {topicId: this.props.id,
         previousVotes: this.props.votes, toggle: false})
         this.setState({alreadyClicked: true})
     }else {
-      $(e.target).parents('.topic').removeClass('animated pulse');
+      $(e.target).parents('.topic').removeClass('topic-hover');
 
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('voteTopic', {topicId: this.props.id,
@@ -39,14 +40,27 @@ class StudentTopic extends Component {
     }
   }
 
-  handleClick(id){
+  handleClick(id,e){
     //event propogation
-    if(this.state.toggle){
-      this.props.toggleFilter("");
-      this.setState({toggle: false});
-    } else {
+
+    // if(this.props.text===this.props.currentFilter){
+    //   $(e.target).parents('.topic').addClass('topic-toggle');
+    // } else {
+    //   $(e.target).parents('.topic').removeClass('topic-toggle');
+    // }
+
+    // if(this.state.toggle){
+    //   this.props.toggleFilter("");
+    //   this.setState({toggle: false});
+    // } else {
+    //   this.props.toggleFilter(this.props.text);
+    //   this.setState({toggle: true});
+    // }
+
+    if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
       this.props.toggleFilter(this.props.text);
-      this.setState({toggle: true});
+    } else {
+      this.props.toggleFilter('');
     }
   }
 
@@ -59,8 +73,25 @@ class StudentTopic extends Component {
 
   render() {
     var isCreator = (this.props.topicCreator === this.props.username)
+    var style = {};
+
+    if (this.state.alreadyClicked) {
+      style.backgroundColor = '#FFF1F1';
+    } else {
+      style.backgroundColor = 'white';
+    }
+
+    if(this.props.hightlight){
+      style.transform = 'scale3d(1.02, 1.02, 1)';
+      style.boxShadow = '0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15)'
+    }
+
     return (
-      <div className="topic" style={this.state.alreadyClicked ? {backgroundColor: '#FFF1F1'} : {backgroundColor:'white'}} onClick={() => this.handleClick(this.props.id)}>
+      <div
+        className="topic"
+        style={style}
+        onClick={(e) => this.handleClick(this.props.id,e)}
+      >
         <div className="topic-content">
           <div className="topic-title">{this.props.text}</div>
           <div className="topic-description">Powerpoint slides p.1-10</div>
@@ -94,7 +125,8 @@ class StudentTopic extends Component {
 const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
-    username: state.userReducer.username
+    username: state.userReducer.username,
+    currentFilter: state.filterReducer
   }
 }
 
