@@ -10,6 +10,9 @@ class TASignupCard extends Component {
     this.state = {
       name: "",
       accessCode: "",
+      wrongAccessCode: true,
+      nameEmpty: true,
+      codeEmpty: true
     }
   }
 
@@ -19,7 +22,8 @@ class TASignupCard extends Component {
     })
 
     this.props.socket.on('error1', () => {
-      console.log("Access Code not found");
+      this.setState({wrongAccessCode: false});
+
     })
 
     this.props.socket.on('getStudentState', (classObj) => {
@@ -46,15 +50,28 @@ class TASignupCard extends Component {
 
   handleNameChange(event, stateProp) {
     this.setState({name: event.target.value})
+    this.setState({nameEmpty: true});
   }
 
   handleAccessCodeChange(event) {
     this.setState({accessCode: event.target.value})
+    this.setState({codeEmpty: true});
+    this.setState({wrongAccessCode: true});
   }
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.socket.emit('join', this.state.accessCode);
+    if(this.state.name.trim() === ''){
+      this.setState({nameEmpty: false});
+    }
+
+    if(this.state.accessCode.trim() === ''){
+      this.setState({codeEmpty: false});
+    }
+
+    if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
+      this.props.socket.emit('join', this.state.accessCode);
+    }
   }
 
   render() {
@@ -67,8 +84,16 @@ class TASignupCard extends Component {
                   value={this.state.name}
                   placeholder="Full Name"
                   onChange={(event) => this.handleNameChange(event)}
-                  className="student-signup-firstname-input"
+                  className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
                 />
+                <div>
+                {this.state.nameEmpty ?
+                  <div>
+                  </div> :
+                  <div className="empty-name-alert">
+                    Name can't be empty!
+                  </div>}
+                </div>
               </label>
               <br></br>
               <label>
@@ -77,8 +102,19 @@ class TASignupCard extends Component {
                   value={this.state.title}
                   placeholder="Access Code"
                   onChange={(event) => this.handleAccessCodeChange(event)}
-                  className="student-signup-acesscode-input"
+                  className= {this.state.codeEmpty ? this.state.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
                 />
+                <div>
+                {this.state.codeEmpty ? this.state.wrongAccessCode ?
+                  <div>
+                  </div> :
+                  <div className="wrong-access-alert">
+                    Wrong access code!
+                  </div> :
+                  <div className="empty-access-alert">
+                    Access code can't be empty!
+                  </div> }
+                </div>
               </label>
               <br></br>
               <button
