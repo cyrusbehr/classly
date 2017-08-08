@@ -10,7 +10,7 @@ const host = 'http://localhost';
 const port = process.env.PORT || 3000;
 
 
-app.use('/dist/', express.static(path.join(__dirname, 'dist')));
+// app.use('/dist/', express.static(path.join(__dirname, 'dist')));
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 const server = require('http').createServer(app);
