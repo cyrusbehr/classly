@@ -51,7 +51,7 @@ export function sortByMagic(arrayOfQuestions) {
   })
 
   var returnArray = notResolvedAndStarred.concat(notResolvedAndNotStarred, resolvedAndStarred, resolvedAndNotStarred);
-
+  console.log("this is sortByMagic", returnArray);
   return returnArray;
 }
 
@@ -71,7 +71,7 @@ export function sortByCategory(category, arrayOfQuestions) {
   var arr0 = sortByMagic(categoryArray);
   var arr1 = sortByMagic(notCategoryArray);
   var newArray = categoryArray.concat(notCategoryArray);
-
+  console.log("This is sortByCategory", newArray);
   return newArray;
 }
 
