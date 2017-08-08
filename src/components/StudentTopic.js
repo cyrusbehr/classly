@@ -41,22 +41,6 @@ class StudentTopic extends Component {
   }
 
   handleClick(id,e){
-    //event propogation
-
-    // if(this.props.text===this.props.currentFilter){
-    //   $(e.target).parents('.topic').addClass('topic-toggle');
-    // } else {
-    //   $(e.target).parents('.topic').removeClass('topic-toggle');
-    // }
-
-    // if(this.state.toggle){
-    //   this.props.toggleFilter("");
-    //   this.setState({toggle: false});
-    // } else {
-    //   this.props.toggleFilter(this.props.text);
-    //   this.setState({toggle: true});
-    // }
-
     if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
       this.props.toggleFilter(this.props.text);
     } else {
