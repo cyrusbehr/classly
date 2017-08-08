@@ -3,6 +3,7 @@ import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
+import {addComment} from '../../actions/Actions';
 
 
 class ProfessorQuestionsContainer extends Component {
@@ -10,6 +11,11 @@ class ProfessorQuestionsContainer extends Component {
     super(props)
     this.state = {
     }
+    console.log('temp');
+    this.props.socket.on('newComment', (newCommentObj) => {
+      console.log('incoming..');
+      this.props.addCommentAction(newCommentObj);
+    })
   }
 
   render() {
@@ -24,7 +30,7 @@ class ProfessorQuestionsContainer extends Component {
     return (
       <div className="questions-container">
         <div className="questions-container-header">
-          <span className="course">MECH 101</span>
+          <span className="course">{this.props.className}</span>
           <span>This is {this.props.userType} view</span>
           <span>Course Access Code: {this.props.code} </span>
           <span># Students: XX</span>
@@ -49,6 +55,7 @@ class ProfessorQuestionsContainer extends Component {
                 isStarred={question.isStarred}
                 tags={question.tags}
                 questionCreator={question.username}
+                comments={question.comments}
               />
             )
           } else {
@@ -74,16 +81,21 @@ class ProfessorQuestionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
     code: state.classReducer.classState.accessCode,
     userType: state.userReducer.userType,
+    className: state.classReducer.classState.className
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    addCommentAction: (newQuestionObject) => {
+      dispatch(addComment(newQuestionObject))
+    },
   }
 }
 

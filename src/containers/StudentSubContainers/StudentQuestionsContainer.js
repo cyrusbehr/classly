@@ -4,6 +4,8 @@ import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
+import {addComment} from '../../actions/Actions';
+
 
 
 class StudentQuestionsContainer extends Component {
@@ -17,6 +19,10 @@ class StudentQuestionsContainer extends Component {
     this.props.socket.on('deleteQuestion', (deletedQuestionId) => {
       this.props.deleteQuestionAction(deletedQuestionId);
     });
+    this.props.socket.on('newComment', (newCommentObj) => {
+      console.log("This ones for your corey! : ", newCommentObj);
+      this.props.addCommentAction(newCommentObj);
+    })
   }
 
 
@@ -49,6 +55,7 @@ class StudentQuestionsContainer extends Component {
                 isStarred={question.isStarred}
                 tags={question.tags}
                 questionCreator={question.username}
+                comments={question.comments}
               />
             )
           } else {
@@ -88,7 +95,10 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteQuestionAction: (ID) => {
       dispatch(deleteQuestion(ID));
-    }
+    },
+    addCommentAction: (newQuestionObject) => {
+      dispatch(addComment(newQuestionObject))
+    },
   }
 }
 
