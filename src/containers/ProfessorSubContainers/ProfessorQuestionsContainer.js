@@ -3,6 +3,7 @@ import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
+import {addComment} from '../../actions/Actions';
 
 
 class ProfessorQuestionsContainer extends Component {
@@ -10,6 +11,9 @@ class ProfessorQuestionsContainer extends Component {
     super(props)
     this.state = {
     }
+    this.props.socket.on('newComment', (newCommentObj) => {
+      this.props.addCommentAction(newCommentObj);
+    })
   }
 
   render() {
@@ -75,6 +79,7 @@ class ProfessorQuestionsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
@@ -85,6 +90,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    addCommentAction: (newQuestionObject) => {
+      dispatch(addComment(newQuestionObject))
+    },
   }
 }
 

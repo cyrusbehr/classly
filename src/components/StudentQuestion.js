@@ -23,9 +23,6 @@ class StudentQuestion extends Component {
     this.props.socket.on('toggleResolve', (updatedQuestion) => {
       this.props.toggleResolveAction(updatedQuestion._id);
     });
-    this.props.socket.on('newComment', (newCommentObj) => {
-      this.props.addCommentAction(newCommentObj);
-    })
   }
 
   componenetDidMount() {
@@ -78,7 +75,6 @@ class StudentQuestion extends Component {
     this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
        username: this.props.username, text: this.state.commentText});
-    this.props.socket.emit('newComment', {questionId: this.props.id, username: this.props.username, text: this.state.commentText});
     this.setState({commentText: ""});
   }
 
@@ -93,7 +89,7 @@ class StudentQuestion extends Component {
     return (
       <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
         <div className="question-body">
-          <div className="question-header"> Tags: {this.props.tags[0]==="" ? 'None' : <span className="tag">{this.props.tags}</span>}</div>
+          <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>
 
         {/*  TODO: DONOVAN add formating here, feel free to move this around */}
