@@ -93,7 +93,6 @@ class StudentQuestion extends Component {
           <div className="question-content"> {this.props.text} </div>
 
         {/*  TODO: DONOVAN add formating here, feel free to move this around */}
-        {console.log("The comments are: ", this.props.comments)}
         {this.props.comments ? this.props.comments.map((comment) => {
           return(
           <div>{comment.creator}: {comment.text}</div>

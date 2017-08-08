@@ -20,6 +20,7 @@ class StudentQuestionsContainer extends Component {
       this.props.deleteQuestionAction(deletedQuestionId);
     });
     this.props.socket.on('newComment', (newCommentObj) => {
+      console.log("This ones for your corey! : ", newCommentObj);
       this.props.addCommentAction(newCommentObj);
     })
   }
