@@ -81,7 +81,7 @@ import { ADD_CLASS, ADD_QUESTION,
       return originalState8;
 
       case NEW_COMMENT:
-      var newState = Object.assign({}, state);
+      var newState = JSON.parse(JSON.stringify(state));//Object.assign({}, state);
       var questionsArray = newState.classState.questions;
       var index;
 
@@ -91,9 +91,7 @@ import { ADD_CLASS, ADD_QUESTION,
           break;
         }
       }
-
       questionsArray[index].comments.push(action.newCommentObj)
-
       return newState;
 
       case TOGGLE_STAR:

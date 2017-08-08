@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
-import { deleteTopic } from '../../actions/Actions';
+import { deleteTopic, addComment } from '../../actions/Actions';
 import StudentTopic from '../../components/StudentTopic';
 import AddTopic from '../../components/AddTopic';
 import { connect } from 'react-redux'
@@ -17,6 +17,10 @@ class StudentTopicsContainer extends Component {
     this.props.socket.on('deleteTopic', (deletedTopicId) => {
       this.props.deleteTopicAction(deletedTopicId);
     });
+    // this.props.socket.on('newComment', (newCommentObj) => {
+    //   console.log('incoming.. 1');
+    //   this.props.addCommentAction(newCommentObj);
+    // })
   }
 
   render() {
@@ -66,7 +70,10 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteTopicAction: (topicID) => {
       dispatch(deleteTopic(topicID));
-    }
+    },
+    addCommentAction: (newQuestionObject) => {
+      dispatch(addComment(newQuestionObject))
+    },
   }
 }
 export default connect(
