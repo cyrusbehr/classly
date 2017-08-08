@@ -62,9 +62,11 @@ class StudentQuestionsContainer extends Component {
               reference={question.referenceClass}
               key={question._id}
               id={question._id}
+              studentName={question.username}
               currentUpVotes={question.upVotes}
               text={question.text}
               isStarred={question.isStarred}
+              isResolved={question.isResolved}
               tags={question.tags}
               questionCreator={question.username}
               comments={question.comments}
