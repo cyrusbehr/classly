@@ -90,7 +90,7 @@ export default function (state = initialState, action) {
       }
     }
 
-    questionArray[index].push(action.newCommentObj)
+    questionsArray[index].comments.push(action.newCommentObj)
 
     return newState;
 
