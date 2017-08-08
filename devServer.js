@@ -17,7 +17,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const mongoose = require('mongoose');
-const models = require('./src/models/models.js');
+const models = require('./src/Models/models.js');
 const Question = models.Question;
 const Topic = models.Topic;
 const Class = models.Class;
