@@ -37,6 +37,7 @@ class TAQuestionsContainer extends Component {
                 text={question.text}
                 tags={question.tags}
                 questionCreator={question.username}
+                comments={question.comments}
               />
             )
           } else {

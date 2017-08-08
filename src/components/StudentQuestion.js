@@ -23,6 +23,9 @@ class StudentQuestion extends Component {
     this.props.socket.on('toggleResolve', (updatedQuestion) => {
       this.props.toggleResolveAction(updatedQuestion._id);
     });
+    this.props.socket.on('newComment', (newCommentObj) => {
+      this.props.addCommentAction(newCommentObj);
+    })
   }
 
   componenetDidMount() {
@@ -92,6 +95,17 @@ class StudentQuestion extends Component {
         <div className="question-body">
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? 'None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>
+
+        {/*  TODO: DONOVAN add formating here, feel free to move this around */}
+        {console.log("The comments are: ", this.props.comments)}
+        {this.props.comments ? this.props.comments.map((comment) => {
+          return(
+          <div>{comment.creator}: {comment.text}</div>
+          )
+        })
+        :null
+      }
+
           {isTA
             ?
             <div className="question-footer">

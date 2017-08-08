@@ -29,7 +29,6 @@ class TATopicsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("In the map state to props:", state.classReducer.classState);
   return {
     classObj: state.classReducer.classState,
     topics: state.classReducer.classState.topics

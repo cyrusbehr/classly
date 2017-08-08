@@ -39,7 +39,6 @@ class TASignupCard extends Component {
   }
 
   redirect() {
-    console.log("The redirect route is: ", this.props.redirectRoute)
     this.props.history.push(this.props.redirectRoute);
   }
 

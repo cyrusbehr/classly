@@ -49,6 +49,7 @@ class ProfessorQuestionsContainer extends Component {
                 isStarred={question.isStarred}
                 tags={question.tags}
                 questionCreator={question.username}
+                comments={question.comments}
               />
             )
           } else {
