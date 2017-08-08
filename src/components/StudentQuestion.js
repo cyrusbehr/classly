@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion} from '../actions/Actions';
+import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -181,6 +181,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
+    },
+    addCommentAction: (newComment) => {
+      dispatch(addComment(newComment))
     }
   }
 }
