@@ -3,6 +3,8 @@ import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} f
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
+import Collapse from 'rc-collapse';
+
 
 class StudentQuestion extends Component {
   constructor(props) {
