@@ -75,6 +75,7 @@ StudentTopicsContainer{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0px 2px 10px lightgrey;
 }
 
 @media (max-width: 425px) {
