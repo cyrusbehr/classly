@@ -107,6 +107,8 @@ body {
   font-size: 25px;
   text-decoration: underline;
   text-decoration-color: $green;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .right-nav-bar {
@@ -118,16 +120,25 @@ body {
 .about-nav-bar {
   color: white;
   text-decoration: none;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 14px;
 }
 
 .home-nav-bar {
   color: white;
   text-decoration: none;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 14px;
 }
 
 .contact-nav-bar {
   color: white;
   text-decoration: none;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 14px;
 }
 
 .home-nav-bar-container {
