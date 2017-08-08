@@ -138,14 +138,30 @@ StudentTopicsContainer{
   width: 35px;
 }
 
-.delete-question{
+.delete-question, .star, .resolve{
   transform: scale(0.5);
   fill: darkgray;
+}
+.delete-question:hover, .star:hover, .resolve:hover{
+  cursor: pointer;
 }
 
 .delete-question:hover{
   fill: $red;
-  cursor: pointer;
+  stroke: $red;
+  stroke-width: 4px;
+}
+
+.star:hover{
+  fill: $red;
+  stroke: $red;
+  stroke-width: 4px;
+}
+
+.resolve:hover{
+  fill: green;
+  stroke: green;
+  stroke-width: 4px;
 }
 
 #upvote-icon{
