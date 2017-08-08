@@ -74,11 +74,14 @@ export function sortByCategory(category, arrayOfQuestions) {
   }
 
   var arr0 = sortByMagic(categoryArray);
-  var arr1 = sortByMagic(notCategoryArray);
-  var newArray = arr0.concat(arr1);
-  console.log("This is sortByCategory return", newArray);
-  return newArray;
+  return arr0;
 }
+
+  // var arr1 = sortByMagic(notCategoryArray);
+  // var newArray = arr0.concat(arr1);
+  // console.log("This is sortByCategory return", newArray);
+  // return newArray;
+ //}
 
 
 //first, bring all comments matching category and push them to the front, and sort
