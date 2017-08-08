@@ -157,12 +157,14 @@ io.on('connection', socket => {
   });
 
   socket.on('upVoteQuestion', (data) => {
+    // console.log('upVoteQuestion Data: ', data);
     if(!data.toggle){
       let tempUpVote = data.previousUpVotes + 1;
       Question.findOneAndUpdate({_id: data.questionId}, { $set: { upVotes: tempUpVote}}, {new: true}, (err, updatedQuestion) => {
         if(err){
           console.log("Error upVoting question:", err);
         } else {
+          // console.log("updated upVote question: ", updatedQuestion);
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
         }
@@ -173,6 +175,7 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting question:", err);
         } else {
+          // console.log("updated upVote quesiton: ", updatedQuestion);
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
         }
@@ -187,7 +190,7 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting topic:", err);
         } else {
-          console.log('The updated topics is: ', updatedTopic)
+          // console.log('The updated topics is: ', updatedTopic)
           socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
           socket.emit('voteTopic', updatedTopic);
         }
@@ -198,7 +201,7 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting topic:", err);
         } else {
-          console.log('The updated topics is: ', updatedTopic)
+          // console.log('The updated topics is: ', updatedTopic);
           socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
           socket.emit('voteTopic', updatedTopic);
         }
@@ -208,10 +211,12 @@ io.on('connection', socket => {
 
   socket.on('toggleStar', (data) => {
     let tempStarred = !data.isStarred;
-    Question.findOneAndUpdate({_id: data._id}, { $set: {isStarred: tempStarred}}, {new: true}, (err, updatedQuestion) => {
+    // console.log("toggleStar data:", data);
+    Question.findOneAndUpdate({_id: data.questionId}, { $set: {isStarred: tempStarred}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error starring question:", err);
       } else {
+        // console.log("emmiting backend toggleStar updatedQuestion:", updatedQuestion);
         socket.broadcast.to(socket.currentRoom).emit('toggleStar', updatedQuestion);
         socket.emit('updatedQuestion', updatedQuestion);
       }

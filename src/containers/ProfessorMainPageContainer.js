@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import LoginCard from '../components/LoginCard'
 import {LoginCardData} from '../constants/const'
-import LoginContainer from './LoginContainer';
+import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupContainer';
 import { connect } from 'react-redux';
 import {setUserType} from '../actions/Actions'
 
-class MainPageContainer extends Component {
+class ProfessorMainPageContainer extends Component {
   clearUserTypeAndRedirect(e) {
     e.preventDefault();
     this.props.setUserTypeAction("");
@@ -36,7 +36,7 @@ class MainPageContainer extends Component {
             </div>
           </div>
         </div>
-        <LoginContainer {...this.props}/>
+        <ProfessorSignupContainer {...this.props}/>
         <div className="footer">
           <div className="copyright-container">
             © 2017 Class.ly
@@ -72,4 +72,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainPageContainer);
+)(ProfessorMainPageContainer);
