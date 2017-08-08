@@ -16,7 +16,7 @@ class StudentTopic extends Component {
     this.props.socket.on('voteTopic', (updatedTopic) => {
       this.props.voteTopicAction(updatedTopic);
       this.setState({votes: this.props.votes});
-    })
+    });
   }
 
   handleVote(e) {
