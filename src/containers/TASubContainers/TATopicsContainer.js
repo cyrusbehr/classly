@@ -20,6 +20,7 @@ class TATopicsContainer extends Component {
               key={i}
               reference={topic.referenceClass}
               topicCreator={topic.username}
+              hightlight={this.props.currentFilter===topic.text ? true : false}
             />
           )
         })}
@@ -31,7 +32,8 @@ class TATopicsContainer extends Component {
 const mapStateToProps = state => {
   return {
     classObj: state.classReducer.classState,
-    topics: state.classReducer.classState.topics
+    topics: state.classReducer.classState.topics,
+    currentFilter: state.filterReducer
   }
 }
 
