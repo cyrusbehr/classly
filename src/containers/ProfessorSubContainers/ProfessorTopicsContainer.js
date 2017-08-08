@@ -29,6 +29,7 @@ class ProfessorTopicsContainer extends Component {
               key={i}
               reference={topic.referenceClass}
               topicCreator={topic.username}
+              hightlight={this.props.currentFilter===topic.text ? true : false}
             />
           )
         })}
@@ -41,7 +42,8 @@ const mapStateToProps = state => {
   console.log("In the map state to props:", state.classReducer.classState);
   return {
     classObj: state.classReducer.classState,
-    topics: state.classReducer.classState.topics
+    topics: state.classReducer.classState.topics,
+    currentFilter: state.filterReducer
   }
 }
 
