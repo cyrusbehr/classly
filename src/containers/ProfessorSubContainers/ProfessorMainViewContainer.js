@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ProfessorTopicsContainer from './ProfessorTopicsContainer';
 import ProfessorQuestionsContainer from './ProfessorQuestionsContainer';
 
-export default class ProfessorMainViewContainer extends Component {
+class ProfessorMainViewContainer extends Component {
   constructor(props){
     super(props)
     if(this.props.userType === ""){
@@ -12,12 +12,19 @@ export default class ProfessorMainViewContainer extends Component {
   }
 
   render() {
+    console.log("the userTpye is: ", this.props);
     return(
       <div className="body-parent">
-        <div className="body-container">
-          <ProfessorTopicsContainer />
-          <ProfessorQuestionsContainer />
-        </div>
+        {
+          this.props.userType
+          ?
+          <div className="body-container">
+            <ProfessorTopicsContainer />
+            <ProfessorQuestionsContainer />
+          </div>
+          :null
+        }
+
       </div>
     )
   }
@@ -34,7 +41,7 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProfessorMainViewContainer);
