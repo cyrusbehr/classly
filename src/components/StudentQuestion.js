@@ -186,7 +186,7 @@ const mapDispatchToProps = dispatch => {
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
     }
-
+}
 }
 
 export default connect(
