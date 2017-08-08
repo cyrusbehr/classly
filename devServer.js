@@ -217,7 +217,7 @@ io.on('connection', socket => {
       if(err){
         console.log("Error starring question:", err);
       } else {
-        console.log("emmiting backend toggleStar updatedQuestion:", updatedQuestion);
+        // console.log("emmiting backend toggleStar updatedQuestion:", updatedQuestion);
         socket.broadcast.to(socket.currentRoom).emit('toggleStar', updatedQuestion);
         socket.emit('updatedQuestion', updatedQuestion);
       }
