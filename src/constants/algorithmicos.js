@@ -4,6 +4,7 @@ export function sortByMagic(arrayOfQuestions) {
   var resolvedArray = [];
   var notResolvedArray = [];
 
+  //split into resolved and not resolved
   for(var i = 0; i < arrayOfQuestions.length; i++){
     if(arrayOfQuestions[i].isResolved){
       resolvedArray.push(arrayOfQuestions[i]);
@@ -15,6 +16,7 @@ export function sortByMagic(arrayOfQuestions) {
   var notResolvedAndStarred = [];
   var notResolvedAndNotStarred = [];
 
+  //split into further arrays
   for(var j = 0; j < notResolvedArray.length; j++) {
     if(notResolvedArray[j].isStarred){
       notResolvedAndStarred.push(notResolvedArray[j]);
@@ -23,6 +25,7 @@ export function sortByMagic(arrayOfQuestions) {
     }
   }
 
+  //more arrays
   var resolvedAndStarred = [];
   var resolvedAndNotStarred = [];
 
@@ -34,24 +37,26 @@ export function sortByMagic(arrayOfQuestions) {
     }
   }
 
+  //sort each array by upVotes
   notResolvedAndStarred.sort((a, b) => {
-    return b - a;
+    return b.upVotes - a.upVotes;
   });
 
   notResolvedAndNotStarred.sort((a, b) => {
-    return b - a;
+    return b.upVotes - a.upVotes;
   });
 
   resolvedAndStarred.sort((a, b) => {
-    return b - a;
+    return b.upVotes - a.upVotes;
   });
 
   resolvedAndNotStarred.sort((a, b) => {
-    return b - a;
+    return b.upVotes - a.upVotes;
   })
 
+  //concatenate and return them in order in one array
   var returnArray = notResolvedAndStarred.concat(notResolvedAndNotStarred, resolvedAndStarred, resolvedAndNotStarred);
-  console.log("this is sortByMagic", returnArray);
+  console.log("this is sortByMagic return", returnArray);
   return returnArray;
 }
 
@@ -61,7 +66,7 @@ export function sortByCategory(category, arrayOfQuestions) {
   var notCategoryArray = [];
 
   for(var l = 0; l < arrayOfQuestions.length; l++){
-    if(arrayOfQuestions[l].tags === category) {
+    if(arrayOfQuestions[l].tags[0] === category) {
       categoryArray.push(arrayOfQuestions[l]);
     } else {
       notCategoryArray.push(arrayOfQuestions[l]);
@@ -70,8 +75,8 @@ export function sortByCategory(category, arrayOfQuestions) {
 
   var arr0 = sortByMagic(categoryArray);
   var arr1 = sortByMagic(notCategoryArray);
-  var newArray = categoryArray.concat(notCategoryArray);
-  console.log("This is sortByCategory", newArray);
+  var newArray = arr0.concat(arr1);
+  console.log("This is sortByCategory return", newArray);
   return newArray;
 }
 
