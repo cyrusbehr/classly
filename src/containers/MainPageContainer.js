@@ -6,12 +6,15 @@ import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupCo
 import TASignupContainer from './TASubContainers/TASignupContainer';
 import LoginContainer from './LoginContainer';
 import { connect } from 'react-redux';
+import {setUserType} from '../actions/Actions'
 
 class MainPageContainer extends Component {
-  clearUserType() {
-
+  clearUserTypeAndRedirect(e) {
+    e.preventDefault();
     this.props.setUserTypeAction("");
+    this.props.history.push('/');
   }
+
   render() {
     console.log('render Login Container');
     return(
@@ -22,17 +25,17 @@ class MainPageContainer extends Component {
         </div>
         <div className="top-nav-bar">
           <div className="name-container">
-              <a href="/" className="name" onClick={() => this.clearUserType()}>Class.ly</a>
+              <button className="name" onClick={(e) => this.clearUserTypeAndRedirect(e)}>Class.ly</button>
           </div>
           <div className="right-nav-bar">
             <div className="home-nav-bar-container">
-                <a href="/" className="home-nav-bar" onClick={() => this.clearUserType()}>HOME</a>
+                <button className="home-nav-bar" onClick={(e) => this.clearUserTypeAndRedirect(e)}>HOME</button>
             </div>
             <div className="about-nav-bar-container">
-                <a href="#" className="about-nav-bar">ABOUT</a>
+                <button className="about-nav-bar">ABOUT</button>
             </div>
             <div className="contact-nav-bar-container">
-                <a href="#" className="contact-nav-bar">CONTACT</a>
+                <button className="contact-nav-bar">CONTACT</button>
             </div>
           </div>
         </div>
