@@ -18,6 +18,7 @@ class TAQuestionsContainer extends Component {
       this.props.deleteQuestionAction(deletedQuestionId);
     });
     this.props.socket.on('toggleStar', (updatedQuestion) => {
+      console.log("TA toggleState updatedQuestion: ", updatedQuestion);
       this.props.toggleStarAction(updatedQuestion.questionId);
     });
     this.props.socket.on('toggleResolve', (updatedQuestion) => {

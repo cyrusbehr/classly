@@ -103,8 +103,7 @@ class StudentQuestion extends Component {
             <div>{comment.creator}: {comment.text}</div>
             )
           })
-          :null
-        }
+          :null }
           {isProfessorOrTA
             ?
             <div className="question-footer">
@@ -128,17 +127,19 @@ class StudentQuestion extends Component {
             <button onClick={(e)=> this.toggleThisResolve(e)}>Resolve</button>
           </div> : null
         }
-        <div className="question-upvote-container">
-          <div className="upvote-icon-container">
-            <svg
-              onClick={(e) => this.handleUpvote(e)}
-              onMouseOver={() => {this.setState({hover:true})}}
-              onMouseOut={() => {this.setState({hover:false})}}
-              width="38px"
-              height="24px"
-              viewBox="0 0 38 24"
-              version="1.1"
-              >
+        {!isProfessorOrTA
+          ?
+          <div className="question-upvote-container">
+            <div className="upvote-icon-container">
+              <svg
+                onClick={(e) => this.handleUpvote(e)}
+                onMouseOver={() => {this.setState({hover:true})}}
+                onMouseOut={() => {this.setState({hover:false})}}
+                width="38px"
+                height="24px"
+                viewBox="0 0 38 24"
+                version="1.1"
+                >
                 <polygon
                   style={this.state.hover || this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
                   id="upvote-icon"
@@ -147,10 +148,11 @@ class StudentQuestion extends Component {
               </svg>
             </div>
             <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
-          </div>
-          <div>
-            { this.props.isStarred ? <span>starred!</span> : null }
-            { this.props.isResolved ? <div>resolved!</div> : null }
+          </div> : null
+        }
+        <div>
+          { this.props.isStarred ? <span>starred!</span> : null }
+          { this.props.isResolved ? <div>resolved!</div> : null }
         </div>
         <div className="delete-button-container">
           {isCreatorOrProfessorOrTA ?
