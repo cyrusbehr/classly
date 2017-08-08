@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {addClass} from '../actions/Actions'
+import {addClass, setUsername} from '../actions/Actions'
 
 class ProfessorSignupCard extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class ProfessorSignupCard extends Component {
     });
     this.props.socket.on('classCreated', newClass => {
       this.props.addClassAction(newClass);
+      this.props.setUsernameAction(this.state.name);
       this.redirect();
     });
   }
@@ -89,6 +90,9 @@ const mapDispatchToProps = dispatch => {
   return {
     addClassAction: (newClass) => {
       dispatch(addClass(newClass))
+    },
+    setUsernameAction: (username) => {
+      dispatch(setUsername(username))
     }
   }
 }
