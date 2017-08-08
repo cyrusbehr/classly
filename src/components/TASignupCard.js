@@ -14,6 +14,9 @@ class TASignupCard extends Component {
       nameEmpty: true,
       codeEmpty: true
     }
+    if(this.props.userType === ""){
+      this.props.history.push('/')
+    }
   }
 
   componentDidMount() {
@@ -129,7 +132,8 @@ class TASignupCard extends Component {
 
   const mapStateToProps = state => {
     return{
-      socket: state.socketReducer.socket
+      socket: state.socketReducer.socket,
+      userType: state.userReducer.userType,
     }
   }
 
