@@ -139,6 +139,7 @@ io.on('connection', socket => {
       timestamp: data.timestamp,
       referenceClass: data.referenceClass,
       username: data.username,
+      slideNumber: data.slideNumber
     });
     newTopic.save((err, newTopic) => {
       if(err){
@@ -216,7 +217,7 @@ io.on('connection', socket => {
       if(err){
         console.log("Error starring question:", err);
       } else {
-        console.log("emmiting backend toggleStar updatedQuestion:", updatedQuestion);
+        // console.log("emmiting backend toggleStar updatedQuestion:", updatedQuestion);
         socket.broadcast.to(socket.currentRoom).emit('toggleStar', updatedQuestion);
         socket.emit('updatedQuestion', updatedQuestion);
       }
