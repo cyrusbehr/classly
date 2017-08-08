@@ -22,8 +22,8 @@ class StudentQuestionsContainer extends Component {
       this.props.addCommentAction(newCommentObj);
     });
     this.props.socket.on('toggleStar', (updatedQuestion) => {
-      // console.log("this is toggleState listener:", updatedQuestion);
-      this.props.toggleStarAction(updatedQuestion.questionId);
+      console.log("this is toggleState listener updatedQuestion:", updatedQuestion);
+      this.props.toggleStarAction(updatedQuestion._id);
     });
     this.props.socket.on('toggleResolve', (updatedQuestion) => {
       this.props.toggleResolveAction(updatedQuestion._id);
