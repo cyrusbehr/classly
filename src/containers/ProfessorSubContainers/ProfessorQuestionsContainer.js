@@ -3,7 +3,7 @@ import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
-import {addComment, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve} from '../../actions/Actions';
+import {addComment, deleteTopic, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve} from '../../actions/Actions';
 import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
 
 class ProfessorQuestionsContainer extends Component {
@@ -23,6 +23,9 @@ class ProfessorQuestionsContainer extends Component {
     });
     this.props.socket.on('toggleResolve', (updatedQuestion) => {
       this.props.toggleResolveAction(updatedQuestion._id);
+    });
+    this.props.socket.on('deleteTopic', (deletedTopicId) => {
+      this.props.deleteTopicAction(deletedTopicId);
     });
   }
 
@@ -106,6 +109,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
+    },
+    deleteTopicAction: (topicID) => {
+      dispatch(deleteTopic(topicID));
     }
   }
 }

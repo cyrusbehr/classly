@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
 import StudentTopic from '../../components/StudentTopic';
+import { deleteTopic } from '../../actions/Actions';
 import AddTopic from '../../components/AddTopic';
 import { connect } from 'react-redux'
 
 class TATopicsContainer extends Component {
+  constructor(props){
+    super(props)
+    this.state={}
+    this.props.socket.on('deleteTopic', (deletedTopicId) => {
+      this.props.deleteTopicAction(deletedTopicId);
+    });
+  }
+
+
   render() {
     var proffArr = this.props.classObj.professorName.split(" ")
     var profname = proffArr[1] || proffArr[0]
@@ -34,13 +44,16 @@ const mapStateToProps = state => {
   return {
     classObj: state.classReducer.classState,
     topics: state.classReducer.classState.topics,
-    currentFilter: state.filterReducer
+    currentFilter: state.filterReducer,
+    socket: state.socketReducer.socket,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    deleteTopicAction: (topicID) => {
+      dispatch(deleteTopic(topicID));
+    }
   }
 }
 export default connect(
