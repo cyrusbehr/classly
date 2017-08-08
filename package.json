@@ -8,7 +8,7 @@
     "build": "npm run clean && npm run build:webpack --progress --profile --colors",
     "dev": "concurrently -k \"npm run frontend\" \"npm run backend\"",
     "start": "node devServer.js",
-    "webpack" : "webpack --config webpack.config.dev.js",
+    "webpack": "webpack --config webpack.config.dev.js",
     "frontend": "webpack -d --watch --config webpack.config.dev.js",
     "backend": "node devServer.js",
     "lint": "eslint src"
@@ -72,6 +72,7 @@
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3",
     "underscore": "^1.8.3",
-    "url-loader": "^0.5.9"
+    "url-loader": "^0.5.9",
+    "webpack-dev-server": "^2.7.1"
   }
 }
