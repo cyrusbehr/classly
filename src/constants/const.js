@@ -6,13 +6,13 @@ const LoginCardData = [
     thisClass: "student-class",
   },
   {
-    URL: "../assets/student-card-picture.jpg",
+    URL: "../assets/teacher-card-picture.jpg",
     title: "Professor",
     redirectRoute: "/",
     thisClass: "professor-class",
   },
   {
-    URL: "../assets/student-card-picture.jpg",
+    URL: "../assets/ta-card-picture.jpg",
     title: "TA",
     redirectRoute: "/",
     thisClass: "TA-class",

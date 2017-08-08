@@ -115,10 +115,10 @@ class StudentSignupCard extends Component {
                     <div>
                     </div> :
                     <div className="wrong-access-alert">
-                      wrong access code!
+                      Wrong access code!
                     </div> :
                     <div className="empty-access-alert">
-                      access code can't be empty!
+                      Access code can't be empty!
                     </div> }
                   </div>
               </label>

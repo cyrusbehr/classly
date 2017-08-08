@@ -54,7 +54,7 @@ class AddTopic extends Component{
           </div> :
           <div className="empty-new-topic-footer">
             <div className="empty-new-topic-alert">
-              topic can't be empty!
+              Topic can't be empty!
             </div>
             <div className="empty-new-topic-container">
               <button id="topic-help">?</button>
