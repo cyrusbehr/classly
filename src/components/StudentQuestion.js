@@ -110,6 +110,29 @@ class StudentQuestion extends Component {
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>
           {/*  TODO: DONOVAN add formating here, feel free to move this around */}
+          {!isProfessorOrTA
+            ?
+            <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
+              <div className="question-comment-container-wrapper">
+                <div className="question-comments-container-spacer">
+                </div>
+              </div>
+              <div className="question-comments-container">
+                <div className="question-comments-container-spacer">
+                </div>
+                <div className="question-comments-container-main">
+                  {this.props.comments ? this.props.comments.map((comment) => {
+                    return(
+                    <div>{comment.creator}: {comment.text}</div>
+                    )
+                  })
+                  :null
+                }
+                </div>
+              </div>
+              {/* <div> {renderStudentName} </div> */}
+            </div>
+          : null }
           {isProfessorOrTA
             ?
             <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
