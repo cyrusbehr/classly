@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addTopic } from '../actions/Actions'
+import ReactTooltip from 'react-tooltip';
 
 class AddTopic extends Component{
   constructor(props) {
@@ -62,17 +63,19 @@ class AddTopic extends Component{
         />
         {this.state.topicEmpty ?
           <div className="new-topic-footer">
-            <input
+            <input className="input-slides"
               value={this.state.slideNumberText}
               type="text"
               onChange={(e) => this.updateSlideNumber(e)}
               placeholder="Slide Number (optional)"
             />
-            <button id="topic-help">?</button>
-            <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
+            <div className="new-topic-container-container">
+              <button data-tip="topic-help" data-for="topic-help" id="topic-help">?</button>
+              <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
+            </div>
           </div> :
           <div className="empty-new-topic-footer">
-            <input
+            <input className="input-slides"
               value={this.state.slideNumberText}
               type="text"
               onChange={(e) => this.updateSlideNumber(e)}
@@ -81,16 +84,20 @@ class AddTopic extends Component{
             <div className="empty-new-topic-alert">
               Topic can't be empty!
             </div>
-            <div className="empty-new-topic-container">
-              <button id="topic-help">?</button>
+            <div className="new-topic-container-container">
+              <button data-tip="topic-help" data-for="topic-help"
+                data-multiline="true" id="topic-help">?</button>
               <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
-            </div>
+          </div>
           </div>
         }
         {/* <div className="new-topic-footer">
           <button id="topic-help">?</button>
           <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
         </div> */}
+        <ReactTooltip id='topic-help' type='info'>
+          <span>Here you can add topics which you would like the professor <br></br>  to revisit. Fellow peers can vote on these topics</span>
+        </ReactTooltip>
       </div>
     );
   }

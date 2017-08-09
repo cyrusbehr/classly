@@ -33,7 +33,7 @@ html, body{
   background-color: #EFEFEF;
   flex: 3;
   overflow: scroll;
-  border-right: $green solid 3px;
+  // border-right: $green solid 3px;
 }
 
 .topics-container-header{
@@ -68,15 +68,16 @@ StudentTopicsContainer{
 .questions-container-header{
   z-index: 999;
   position: fixed;
-  width: 61.5vw;
-  background-color: white;
-  color: black;
+  right: 0;
+  left: 0;
+  background-color: $green;
+  color: white;
   padding: 10px;
   height: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 2px 10px lightgrey;
+  // box-shadow: 0px 2px 10px lightgrey;
 }
 
 @media (max-width: 425px) {
@@ -95,6 +96,17 @@ StudentTopicsContainer{
   //#D9FFF5
 }
 
+.question-resolve{
+  background-color: #F8F8F8 !important;
+}
+
+.question-resolve .question-header, .question-resolve .question-content {
+  color: #C1C1C1 !important;
+}
+.question-resolve .tag{
+  background-color: #C1C1C1;
+  color: white;
+}
 
 .question .question-body{
   height: 100%;
@@ -239,6 +251,10 @@ StudentTopicsContainer{
   margin: auto;
 }
 
+.upvote-number{
+  font-size: 25px;
+}
+
 /*content inside question card*/
 .tag{
   background: $red;
@@ -273,6 +289,7 @@ StudentTopicsContainer{
 .new-question-input-field #new-question #empty-new-question{
   flex: 8;
   margin-right: 10px;
+  padding-right: 10px;
 }
 
 #menu-item{
@@ -281,7 +298,7 @@ StudentTopicsContainer{
 
 #new-topic{
   border-radius: 10px;
-  border: white;
+  border: $green solid 2px;
   // border-color: red;
   padding: 0 20px;
   height: 40px;
@@ -300,9 +317,13 @@ StudentTopicsContainer{
   font-size:16px;
   flex:2;
   border-radius: 10px;
-  border: darkgray solid 1px;
+  border: $green solid 2px;
   padding: 0 20px;
   height: 30px;
+}
+
+#tag{
+    border: $green solid 1px !important;
 }
 
 #empty-new-question{
@@ -324,6 +345,14 @@ StudentTopicsContainer{
   font-size: 16px;
   padding: 5px;
   transition: color 0.3s, background-color 0.3s
+}
+
+.input-slides {
+  color: $green;
+  // border: #EFEFEF solid 2px;
+  border: $green solid 1px;
+  padding: 5px;
+  border-radius: 8px;
 }
 
 .question-comment-button {
@@ -406,7 +435,7 @@ button:focus {
   margin-top:5px;
   padding: 5px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   // border-style: solid;
 }
@@ -415,9 +444,13 @@ button:focus {
   margin-top:5px;
   padding: 5px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   // border-style: solid;
+}
+
+.new-topic-container-container {
+  justify-content: flex-end;
 }
 
 .empty-new-topic-container {
