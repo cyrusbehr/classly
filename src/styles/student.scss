@@ -355,6 +355,12 @@ StudentTopicsContainer{
   margin-right: 5px;
 }
 
+#question-help:hover, #topic-help:hover{
+  color: white;
+  background-color: $hoverGray;
+  // cursor: pointer;
+}
+
 #alert{
   background-color: #30383E;
   width:30px;
