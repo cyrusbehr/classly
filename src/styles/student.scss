@@ -570,6 +570,11 @@ input[type="text"]{
   flex: 1;
 }
 
+.topic-alert-icon-delete{
+position: relative;
+top: -15px; 
+}
+
 // for form validation
 .animated {
   animation-duration: 0.5s;
