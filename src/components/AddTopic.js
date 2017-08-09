@@ -83,7 +83,8 @@ class AddTopic extends Component{
               Topic can't be empty!
             </div>
             <div className="empty-new-topic-container">
-              <button data-tip="topic-help" data-for="topic-help" id="topic-help">?</button>
+              <button data-tip="topic-help" data-for="topic-help"
+                data-multiline="true" id="topic-help">?</button>
               <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
             </div>
           </div>
@@ -93,7 +94,7 @@ class AddTopic extends Component{
           <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
         </div> */}
         <ReactTooltip id='topic-help' type='info'>
-          <span>Mark as resolved</span>
+          <span>Here you can add topics which you would like the professor <br></br>  to revisit. Fellow peers can vote on these topics</span>
         </ReactTooltip>
       </div>
     );

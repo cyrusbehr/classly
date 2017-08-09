@@ -4,6 +4,7 @@ import { addQuestion } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
+import ReactTooltip from 'react-tooltip'
 
 
 class AddQuestion extends Component{
@@ -32,10 +33,6 @@ updateQuestion(e) {
 
 submitPressed(e) {
   e.preventDefault();
-  // if(!this.state.questionText === ""){
-  //   console.log("swing");
-  //   $(e.target).addClass('animated swing');
-  // }
 
   if(this.state.questionText.trim() === ''){
     this.setState({questionEmpty: false});
@@ -99,7 +96,7 @@ submitPressed(e) {
 
         {this.state.questionEmpty ?
           <div className="new-question-footer">
-            <button id="question-help">?</button>
+            <button data-tip="question-help" data-for="question-help" id="question-help">?</button>
             <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
           </div> :
           <div className="empty-new-question-footer">
@@ -107,12 +104,14 @@ submitPressed(e) {
               Question can't be empty!
             </div>
             <div className="empty-new-question-container">
-              <button id="question-help">?</button>
+              <button data-tip="question-help" data-for="question-help" id="question-help">?</button>
               <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
             </div>
           </div>
         }
-
+        <ReactTooltip id='question-help' type='info'>
+          <span>Here you can ask any questions you have. <br/>You can add optional topic tags, <br/>and vote on other questions</span>
+        </ReactTooltip>
       </div>
     );
   }

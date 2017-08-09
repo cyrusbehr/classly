@@ -199,7 +199,7 @@ class StudentQuestion extends Component {
             <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
           </div>
           :
-          <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div> 
+          <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
         }
         <div className="delete-button-container">
           {isCreatorOrProfessorOrTA ?
