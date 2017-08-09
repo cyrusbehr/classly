@@ -64,7 +64,6 @@ class StudentQuestion extends Component {
 
   toggleThisResolve(e) {
     e.preventDefault();
-    $(e.target).parents('.question').toggleClass('question-resolve');
     this.props.toggleResolveAction(this.props.id);
     this.props.socket.emit('toggleResolve', {questionId: this.props.id, isResolved: this.props.isResolved});
   }
@@ -105,68 +104,12 @@ class StudentQuestion extends Component {
     // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
     return (
       <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
-
+      <div className="question-main-section">
         <div className="question-body">
           <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button>
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>
           {/*  TODO: DONOVAN add formating here, feel free to move this around */}
-          {!isProfessorOrTA
-            ?
-            <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
-              <div className="question-comment-container-wrapper">
-                <div className="question-comments-container-spacer">
-                </div>
-              </div>
-              <div className="question-comments-container">
-                <div className="question-comments-container-spacer">
-                </div>
-                <div className="question-comments-container-main">
-                  {this.props.comments ? this.props.comments.map((comment) => {
-                    return(
-                    <div>{comment.creator}: {comment.text}</div>
-                    )
-                  })
-                  :null
-                }
-                </div>
-              </div>
-              {/* <div> {renderStudentName} </div> */}
-            </div>
-          : null }
-          {isProfessorOrTA
-            ?
-            <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
-              <div className="question-comment-container-wrapper">
-                <div className="question-comments-container-spacer">
-                </div>
-                <div className="question-comment-container">
-                  <textarea
-                    value={this.state.commentText}
-                    type="text"
-                    onChange={(e) => this.updateCommentText(e)}
-                    placeholder="Anwser here!!!"
-                    className="question-comment-textarea"
-                  />
-                  <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
-                </div>
-              </div>
-              <div className="question-comments-container">
-                <div className="question-comments-container-spacer">
-                </div>
-                <div className="question-comments-container-main">
-                  {this.props.comments ? this.props.comments.map((comment) => {
-                    return(
-                    <div>{comment.creator}: {comment.text}</div>
-                    )
-                  })
-                  :null
-                }
-                </div>
-              </div>
-              {/* <div> {renderStudentName} </div> */}
-            </div>
-            : null }
           {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
         </div>
         {/* {isProfessorOrTA
@@ -177,6 +120,7 @@ class StudentQuestion extends Component {
             <button onClick={(e)=> this.toggleThisResolve(e)}>Resolve</button>
           </div> : null
         } */}
+        <div className="all-buttons-container">
         {!isProfessorOrTA
           ?
           <div className="question-upvote-container">
@@ -198,9 +142,7 @@ class StudentQuestion extends Component {
               </svg>
             </div>
             <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
-          </div>
-          :
-          <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
+          </div> : null
         }
         <div className="delete-button-container">
           {isCreatorOrProfessorOrTA ?
@@ -241,6 +183,83 @@ class StudentQuestion extends Component {
             </ReactTooltip>
 
             </div> : null }
+          {/* { isProfessorOrTA ?
+            <svg
+              className="resolve"
+              width="40px"
+              height="40px"
+              style={this.props.isResolved ? {fill:'green'} : {}}
+              onClick={(e)=> this.toggleThisResolve(e)}
+            >
+              <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
+            </svg> : null } */}
+        </div>
+      </div>
+    </div>
+
+      <div className="question-comment-section">
+        {!isProfessorOrTA
+          ?
+          <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
+            <div className="question-comment-container-wrapper">
+              <div className="question-comments-container-spacer">
+              </div>
+            </div>
+            <div className="question-comments-container">
+              <div className="question-comments-container-spacer">
+              </div>
+              <div className="question-comments-container-main">
+                {this.props.comments ? this.props.comments.map((comment) => {
+                  return(
+                  <div>{comment.creator}: {comment.text}</div>
+                  )
+                })
+                :null
+              }
+              </div>
+            </div>
+            {/* <div> {renderStudentName} </div> */}
+          </div>
+        : null }
+        {isProfessorOrTA
+          ?
+          <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
+            <div className="question-comments-container">
+              <div className="question-comments-container-spacer">
+              </div>
+              <div className="question-comments-container-main">
+                <div className="comment-section-header">{this.props.comments.length} Replies</div>
+                {this.props.comments ? this.props.comments.map((comment) => {
+                  return(
+                    <div>
+                  <div className="comment-creator">{comment.creator}: </div>
+                  <div className="comment">{comment.text}</div>
+                </div>
+                  )
+                })
+                :null
+              }
+              </div>
+            </div>
+            <div className="question-comment-container-wrapper">
+              <div className="question-comments-container-spacer">
+              </div>
+              <div className="question-comment-container">
+                <textarea
+                  value={this.state.commentText}
+                  type="text"
+                  onChange={(e) => this.updateCommentText(e)}
+                  placeholder="Anwser here!!!"
+                  className="question-comment-textarea"
+                />
+                <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+              </div>
+            </div>
+            {/* <div> {renderStudentName} </div> */}
+          </div>
+          : null }
+
+
         </div>
         </div>
     );
