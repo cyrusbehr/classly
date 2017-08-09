@@ -169,15 +169,8 @@ class StudentQuestion extends Component {
             : null }
           {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
         </div>
-        {/* {isProfessorOrTA
-          ?
-          <div>
-            <div className="upvote-number">{this.state.votes}</div>
-            <button onClick={(e)=> this.toggleThisStar(e)}>Star</button>
-            <button onClick={(e)=> this.toggleThisResolve(e)}>Resolve</button>
-          </div> : null
-        } */}
-        {!isProfessorOrTA
+
+        {/* {!isProfessorOrTA
           ?
           <div className="question-upvote-container">
             <div className="upvote-icon-container">
@@ -201,7 +194,19 @@ class StudentQuestion extends Component {
           </div>
           :
           <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
-        }
+        } */}
+
+          <div className="question-upvote-container">
+            <div className="upvote-icon-container">
+              <i id="upvote-icon" className="material-icons">keyboard_arrow_up</i>
+              {this.state.votes}
+            </div>
+            <div className="upvote-number">
+              <i id="reply-icon" className="material-icons">chat</i>
+              99
+            </div>
+          </div>
+
         <div className="delete-button-container">
           {isCreatorOrProfessorOrTA ?
             <svg className="delete-question" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">

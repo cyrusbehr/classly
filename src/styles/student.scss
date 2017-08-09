@@ -6,6 +6,7 @@ display: none;
 $green: #00C993;
 $red: #FF7E65;
 $hoverGray: #4B4B4B;
+$blue: #2979FF;
 
 /*page setup*/
 html, body{
@@ -202,11 +203,12 @@ StudentTopicsContainer{
 }
 
 .question-upvote-container .upvote-icon-container{
-  flex: 4;
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
+
 
 .delete-button-container{
   width: 35px;
@@ -238,21 +240,28 @@ StudentTopicsContainer{
   stroke-width: 4px;
 }
 
+#reply-icon{
+  color: #4B4B4B;
+}
+#reply-icon:hover{
+  color: $blue;
+  cursor: pointer;
+}
 #upvote-icon{
-  fill: #4B4B4B;
+  margin-right: 5px;
+  color: #4B4B4B;
+  transform: scale(1.8);
 }
 #upvote-icon:hover{
-  // fill: $green;
+  color: $green;
   cursor: pointer;
 }
 
 .question-upvote-container .upvote-number{
-  flex: 2;
-  margin: auto;
-}
-
-.upvote-number{
-  font-size: 25px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 /*content inside question card*/
