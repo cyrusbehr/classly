@@ -122,7 +122,7 @@ class TASignupCard extends Component {
               <button
                 type="button"
                 onClick={(e) => this.onSubmit(e)}
-                className="student-signup-submit"
+                className="student-signup-submit hvr-grow"
               >Join Class</button>
               </form>
             </div>

@@ -406,6 +406,18 @@ img{
   font-family: 'Raleway', sans-serif;
 }
 
+.professor-signup-empty-lecture-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid red;
+  width: 275px;
+  height: 25px;
+  margin-top: 30px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
 .student-signup-firstname-input {
   border: 0;
   outline: 0;
@@ -423,6 +435,12 @@ img{
 // }
 
 .empty-name-alert {
+  color: red;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+}
+
+.empty-lecture-alert {
   color: red;
   font-family: 'Raleway', sans-serif;
   font-size: 15px;
@@ -454,6 +472,18 @@ img{
   font-family: 'Raleway', sans-serif;
 }
 
+.professor-signup-empty-firstname-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid red;
+  width: 275px;
+  height: 25px;
+  margin-top: 30px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
 .student-signup-submit {
   background-color: $green; /* Green */
   border: none;
@@ -466,12 +496,29 @@ img{
   width: 280px;
   border-radius: 4px;
   margin-top: 40px;
+  transition: color 0.3s, background-color 0.3s;
   font-family: 'Raleway', sans-serif;
 }
 
 .student-signup-submit:hover {
-  background-color: $lightGreen;
   cursor: pointer;
+}
+
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    transform: scale(1.1);
 }
 
 .professor-signup-submit {
