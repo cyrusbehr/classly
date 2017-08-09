@@ -3,6 +3,7 @@
 
 $main-bg-color: #f1f2f0;
 $green: #00c993;
+$lightGreen: #00e5a4;
 $dark: #343434;
 
 body {
@@ -453,6 +454,11 @@ img{
   border-radius: 5px;
   margin-top: 40px;
   font-family: 'Raleway', sans-serif;
+}
+
+.student-signup-submit:hover {
+  background-color: $lightGreen;
+  cursor: pointer;
 }
 
 .professor-signup-submit {
