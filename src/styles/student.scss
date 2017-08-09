@@ -94,6 +94,17 @@ StudentTopicsContainer{
   //#D9FFF5
 }
 
+.question-resolve{
+  background-color: #F8F8F8 !important;
+}
+
+.question-resolve .question-header, .question-resolve .question-content {
+  color: #C1C1C1 !important;
+}
+.question-resolve .tag{
+  background-color: #C1C1C1;
+  color: white;
+}
 
 .question .question-body{
   height: 100%;

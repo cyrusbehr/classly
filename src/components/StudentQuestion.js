@@ -64,6 +64,7 @@ class StudentQuestion extends Component {
 
   toggleThisResolve(e) {
     e.preventDefault();
+    $(e.target).parents('.question').toggleClass('question-resolve');
     this.props.toggleResolveAction(this.props.id);
     this.props.socket.emit('toggleResolve', {questionId: this.props.id, isResolved: this.props.isResolved});
   }
