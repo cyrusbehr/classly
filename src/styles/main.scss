@@ -3,23 +3,9 @@
 
 $main-bg-color: #f1f2f0;
 $green: #00c993;
+$lightGreen: #00e5a4;
 $dark: #343434;
 
-body {
-  // background-color: $main-bg-color;
-  // color: $accent-black;
-  // display: flex;
-  // justify-content: center;
-  // font-family: 'Raleway', sans-serif;
-  // top: 0;
-  // left: 0;
-  // bottom: 0;
-  // right: 0;
-  // height: 100%;
-  // width: 100%;
-  // position: absolute;
-  // overflow: hidden;
-}
 
 .background-picture {
   background: url('../assets/login-page-background.jpg');
@@ -102,6 +88,10 @@ body {
   margin-top: 28px;
 }
 
+.name:hover{
+  cursor: pointer;
+}
+
 .name {
   color: white;
   font-size: 25px;
@@ -131,6 +121,10 @@ body {
   background-color: transparent;
   border-color: transparent;
   font-size: 14px;
+}
+
+.home-nav-bar:hover {
+  cursor: pointer;
 }
 
 .contact-nav-bar {
@@ -222,9 +216,29 @@ body {
 .login-card {
   height: 290px;
   width: 175px;
-  // border-style: solid;
-  // border-color: white;
   background-color: $dark;
+  transition: transform .4s;
+
+  &::after {
+    transition: opacity 2s cubic-bezier(.165, .84, .44, 1);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+    content: '';
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale3d(1.05, 1.05, 1);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.login-card:hover{
+  cursor: pointer;
 }
 
 .card-title {
@@ -450,9 +464,14 @@ img{
   display: inline-block;
   font-size: 20px;
   width: 280px;
-  border-radius: 5px;
+  border-radius: 4px;
   margin-top: 40px;
   font-family: 'Raleway', sans-serif;
+}
+
+.student-signup-submit:hover {
+  background-color: $lightGreen;
+  cursor: pointer;
 }
 
 .professor-signup-submit {
