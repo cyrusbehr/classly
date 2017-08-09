@@ -113,15 +113,19 @@ class StudentQuestion extends Component {
           {isProfessorOrTA
             ?
             <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
-              <div className="question-comment-container">
-                <textarea
-                  value={this.state.commentText}
-                  type="text"
-                  onChange={(e) => this.updateCommentText(e)}
-                  placeholder="Anwser here!!!"
-                  className="question-comment-textarea"
-                />
-                <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+              <div className="question-comment-container-wrapper">
+                <div className="question-comments-container-spacer">
+                </div>
+                <div className="question-comment-container">
+                  <textarea
+                    value={this.state.commentText}
+                    type="text"
+                    onChange={(e) => this.updateCommentText(e)}
+                    placeholder="Anwser here!!!"
+                    className="question-comment-textarea"
+                  />
+                  <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+                </div>
               </div>
               <div className="question-comments-container">
                 <div className="question-comments-container-spacer">
