@@ -231,9 +231,11 @@ body {
 .login-card {
   height: 290px;
   width: 175px;
-  // border-style: solid;
-  // border-color: white;
   background-color: $dark;
+}
+
+.login-card:hover{
+  cursor: pointer;
 }
 
 .card-title {
