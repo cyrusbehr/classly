@@ -31,7 +31,7 @@ html, body{
 
 .topics-container{
   background-color: #EFEFEF;
-  flex: 3;
+  flex: 0 0 350px;
   overflow: scroll;
   // border-right: $green solid 3px;
 }
@@ -57,7 +57,7 @@ html, body{
 
 .questions-container{
   background-color: #FFFFFF;
-  flex: 5;
+  flex: 3;
   overflow: scroll;
 }
 
@@ -226,6 +226,23 @@ StudentTopicsContainer{
   stroke-width: 4px;
 }
 
+.delete-topic{
+  transform: scale(0.3);
+  fill: darkgray;
+  position: relative;
+  top: -8px;
+  left: 10px;
+}
+.delete-topic:hover{
+  cursor: pointer;
+}
+
+.delete-topic:hover{
+  fill: $red;
+  stroke: $red;
+  stroke-width: 4px;
+}
+
 .star:hover{
   fill: $red;
   stroke: $red;
@@ -379,7 +396,7 @@ StudentTopicsContainer{
   cursor: pointer;
 }
 
-#question-help, #topic-help, #alert{
+#question-help, #topic-help {
   width: 25px;
   height: 25px;
   color: $hoverGray;
@@ -398,11 +415,15 @@ StudentTopicsContainer{
 
 #alert{
   background-color: #30383E;
-  width:30px;
-  height:30px;
+  width:22px;
+  height:22px;
   font-size: 20px;
   margin:0;
   color: white;
+  border: $hoverGray solid 2px;
+  background-color: rgba(0,0,0,0);
+  border-radius: 50%;
+  font-size: 16px;
 }
 
 #alert:hover{
@@ -482,8 +503,8 @@ input[type="text"]{
 }
 /*content inside topic container*/
 .topic{
-   min-height: 100px;
-   margin: 20px;
+   min-height: 75px;
+   margin: 10px 15px;
   //  background-color: #FFFFFF;
    border-left: $green solid 5px;
    display: flex;
@@ -516,7 +537,7 @@ input[type="text"]{
   display: flex;
   align-items: center;
   flex: 2;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .topic-content .topic-description{
@@ -527,10 +548,10 @@ input[type="text"]{
 }
 
 .topic .topic-alert{
-  flex: 0 0 60px;
+  flex: 0 0 40px;
   display: flex;
   flex-direction: column;
-  padding: 20px 0 15px;
+  padding: 0px 0 0px 0;
 }
 
 .topic-alert .topic-alert-icon{
@@ -538,13 +559,20 @@ input[type="text"]{
   align-items: center;
   justify-content: center;
   flex: 1;
+  // justify-content: space-between;
 }
 
-.topic-alert .topic-alert-number{
+.topic-alert .topic-alert-number, .topic-alert-icon{
   display: flex;
   align-items: center;
+  // justify-content: space-between;
   justify-content: center;
   flex: 1;
+}
+
+.topic-alert-icon-delete{
+position: relative;
+top: -15px; 
 }
 
 // for form validation
