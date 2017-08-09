@@ -103,6 +103,10 @@ body {
   margin-top: 28px;
 }
 
+.name:hover{
+  cursor: pointer;
+}
+
 .name {
   color: white;
   font-size: 25px;
@@ -132,6 +136,10 @@ body {
   background-color: transparent;
   border-color: transparent;
   font-size: 14px;
+}
+
+.home-nav-bar:hover {
+  cursor: pointer;
 }
 
 .contact-nav-bar {
