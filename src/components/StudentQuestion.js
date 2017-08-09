@@ -215,16 +215,6 @@ class StudentQuestion extends Component {
             </ReactTooltip>
 
             </div> : null }
-          {/* { isProfessorOrTA ?
-            <svg
-              className="resolve"
-              width="40px"
-              height="40px"
-              style={this.props.isResolved ? {fill:'green'} : {}}
-              onClick={(e)=> this.toggleThisResolve(e)}
-            >
-              <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
-            </svg> : null } */}
         </div>
         </div>
     );
