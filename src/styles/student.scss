@@ -5,7 +5,6 @@ display: none;
 /*black: #4B4B4B*/
 $green: #00C993;
 $red: #FF7E65;
-$dark: #343434;
 
 /*page setup*/
 html, body{
@@ -117,11 +116,12 @@ StudentTopicsContainer{
   display: flex;
 }
 
-.question-body {
+.question-body .question-footer{
   flex:1;
   padding: 0 50px;
 }
 
+<<<<<<< HEAD
 .question-footer {
   flex:1;
   padding: 0;
@@ -185,14 +185,30 @@ StudentTopicsContainer{
   width: 35px;
 }
 
-.delete-question{
+.delete-question, .star, .resolve{
   transform: scale(0.5);
   fill: darkgray;
+}
+.delete-question:hover, .star:hover, .resolve:hover{
+  cursor: pointer;
 }
 
 .delete-question:hover{
   fill: $red;
-  cursor: pointer;
+  stroke: $red;
+  stroke-width: 4px;
+}
+
+.star:hover{
+  fill: $red;
+  stroke: $red;
+  stroke-width: 4px;
+}
+
+.resolve:hover{
+  fill: green;
+  stroke: green;
+  stroke-width: 4px;
 }
 
 #upvote-icon{
@@ -291,17 +307,7 @@ StudentTopicsContainer{
   border-radius: 20px;
   font-size: 16px;
   padding: 5px;
-  transition: color 0.3s, background-color 0.3s
-}
 
-.question-comment-button {
-  margin-top: 5px;
-  width: 100px;
-  border: black solid 2px;
-  background-color: rgba(0,0,0,0);
-  border-radius: 20px;
-  font-size: 16px;
-  padding: 5px;
   transition: color 0.3s, background-color 0.3s
 }
 
@@ -311,12 +317,6 @@ StudentTopicsContainer{
 }
 
 #submit-question:hover, #submit-topic:hover{
-  color: white;
-  background-color: black;
-  cursor: pointer;
-}
-
-.question-comment-button:hover{
   color: white;
   background-color: black;
   cursor: pointer;

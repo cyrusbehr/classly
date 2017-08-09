@@ -14,6 +14,9 @@ class StudentSignupCard extends Component {
       nameEmpty: true,
       codeEmpty: true
     }
+    if(this.props.userType === ""){
+      this.props.history.push('/')
+    }
   }
 
   componentDidMount() {
@@ -141,7 +144,8 @@ class StudentSignupCard extends Component {
 
   const mapStateToProps = state => {
     return{
-      socket: state.socketReducer.socket
+      socket: state.socketReducer.socket,
+      userType: state.userReducer.userType,
     }
   }
 

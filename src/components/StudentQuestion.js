@@ -2,11 +2,7 @@ import React, {Component} from 'react';
 import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-
-import Collapse from 'rc-collapse';
-var Panel = Collapse.Panel;
-require('rc-collapse/assets/index.scss');
-
+import ReactTooltip from 'react-tooltip';
 
 class StudentQuestion extends Component {
   constructor(props) {
@@ -22,16 +18,22 @@ class StudentQuestion extends Component {
       this.props.upVoteQuestionAction(updatedQuestion);
       this.setState({votes: this.props.currentUpVotes})
     });
-    this.props.socket.on('toggleStar', (updatedQuestion) => {
-      this.props.toggleStarAction(updatedQuestion._id);
-    });
-    this.props.socket.on('toggleResolve', (updatedQuestion) => {
-      this.props.toggleResolveAction(updatedQuestion._id);
-    });
   }
 
+    // this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
+    //   this.props.upVoteQuestionAction(updatedQuestion);
+    //   this.setState({votes: this.props.currentUpVotes})
+    // });
+    // this.props.socket.on('toggleStar', (updatedQuestion) => {
+    //   this.props.toggleStarAction(updatedQuestion._id);
+    // });
+    // this.props.socket.on('toggleResolve', (updatedQuestion) => {
+    //   this.props.toggleResolveAction(updatedQuestion._id);
+    // });
+  //}
+
   componenetDidMount() {
-    this.setState({votes: this.props.currentUpVotes})
+    this.setState({votes: this.props.currentUpVotes});
   }
 
   handleUpvote(e) {
@@ -67,7 +69,7 @@ class StudentQuestion extends Component {
   }
 
   updateCommentText(e) {
-    this.setState({commentText: e.target.value})
+    this.setState({commentText: e.target.value});
   };
 
   replyButtonPressed(e) {
@@ -102,6 +104,7 @@ class StudentQuestion extends Component {
     // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
     return (
       <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
+
         <div className="question-body">
           <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button>
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
@@ -138,25 +141,27 @@ class StudentQuestion extends Component {
             : null }
           {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
         </div>
-        {isProfessorOrTA
+        {/* {isProfessorOrTA
           ?
           <div>
             <div className="upvote-number">{this.state.votes}</div>
             <button onClick={(e)=> this.toggleThisStar(e)}>Star</button>
             <button onClick={(e)=> this.toggleThisResolve(e)}>Resolve</button>
           </div> : null
-        }
-        <div className="question-upvote-container">
-          <div className="upvote-icon-container">
-            <svg
-              onClick={(e) => this.handleUpvote(e)}
-              onMouseOver={() => {this.setState({hover:true})}}
-              onMouseOut={() => {this.setState({hover:false})}}
-              width="38px"
-              height="24px"
-              viewBox="0 0 38 24"
-              version="1.1"
-              >
+        } */}
+        {!isProfessorOrTA
+          ?
+          <div className="question-upvote-container">
+            <div className="upvote-icon-container">
+              <svg
+                onClick={(e) => this.handleUpvote(e)}
+                onMouseOver={() => {this.setState({hover:true})}}
+                onMouseOut={() => {this.setState({hover:false})}}
+                width="38px"
+                height="24px"
+                viewBox="0 0 38 24"
+                version="1.1"
+                >
                 <polygon
                   style={this.state.hover || this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
                   id="upvote-icon"
@@ -165,17 +170,57 @@ class StudentQuestion extends Component {
               </svg>
             </div>
             <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
-          </div>
-          <div>
-            { this.props.isStarred ? <span>starred!</span> : null }
-            { this.props.isResolved ? <div>resolved!</div> : null }
-        </div>
+          </div> : null
+        }
         <div className="delete-button-container">
           {isCreatorOrProfessorOrTA ?
             <svg className="delete-question" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
               <path d="M13.172 16L.586 3.414c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L16 13.172 28.586.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828L18.828 16l12.586 12.586c.78.78.78 2.047 0 2.828-.78.78-2.048.78-2.828 0L16 18.828 3.414 31.414c-.78.78-2.047.78-2.828 0-.78-.78-.78-2.047 0-2.828L13.172 16z"/>
             </svg>
           : null }
+          { isProfessorOrTA ?
+            <div>
+            <svg
+              className="star"
+              width="40px"
+              height="40px"
+              style={this.props.isStarred ? {fill:'#FF7E65'} : {}}
+              onClick={(e)=> this.toggleThisStar(e)}
+              data-tip
+              data-for='star'
+            >
+              <path d="M16 .7c-.4 0-.7.2-.9.6l-4.4 8.9-9.8 1.4c-.4.1-.7.4-.9.7-.1.4 0 .8.3 1l7.1 6.9L5.7 30c-.1.4.1.8.4 1 .2.1.4.2.6.2.2 0 .3 0 .5-.1l8.8-4.6 8.8 4.6c.1.1.3.1.5.1s.4-.1.6-.2c.3-.2.5-.6.4-1l-1.7-9.8 7.1-6.9c.3-.3.4-.7.3-1-.1-.4-.4-.6-.8-.7l-9.9-1.4-4.4-8.9c-.2-.4-.5-.6-.9-.6z"/>
+            </svg>
+            <ReactTooltip id='star' type='warning'>
+              <span>Pin question</span>
+            </ReactTooltip>
+
+            <svg
+              className="resolve"
+              width="40px"
+              height="40px"
+              style={this.props.isResolved ? {fill:'green'} : {}}
+              onClick={(e)=> this.toggleThisResolve(e)}
+              data-tip
+              data-for='resolve'
+            >
+              <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
+            </svg>
+            <ReactTooltip id='resolve' type='success'>
+              <span>Mark as resolved</span>
+            </ReactTooltip>
+
+            </div> : null }
+          {/* { isProfessorOrTA ?
+            <svg
+              className="resolve"
+              width="40px"
+              height="40px"
+              style={this.props.isResolved ? {fill:'green'} : {}}
+              onClick={(e)=> this.toggleThisResolve(e)}
+            >
+              <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
+            </svg> : null } */}
         </div>
         </div>
     );

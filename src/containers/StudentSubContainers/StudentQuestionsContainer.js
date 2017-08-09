@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {deleteQuestion} from '../../actions/Actions';
 import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
-import {addComment} from '../../actions/Actions';
-
-
+import {addComment, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve} from '../../actions/Actions';
+import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
 
 class StudentQuestionsContainer extends Component {
   constructor(props) {
@@ -22,17 +20,32 @@ class StudentQuestionsContainer extends Component {
     this.props.socket.on('newComment', (newCommentObj) => {
       console.log("This ones for your corey! : ", newCommentObj);
       this.props.addCommentAction(newCommentObj);
-    })
+    });
+    this.props.socket.on('toggleStar', (updatedQuestion) => {
+      console.log("this is toggleState listener updatedQuestion:", updatedQuestion);
+      this.props.toggleStarAction(updatedQuestion._id);
+    });
+    this.props.socket.on('toggleResolve', (updatedQuestion) => {
+      this.props.toggleResolveAction(updatedQuestion._id);
+    });
   }
 
-
   render() {
-    var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
-      return -1 * question.upVotes; //negative changes to descending order
-    })
+    // var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
+    //   return -1 * question.upVotes; //negative changes to descending order
+    // })
+    var sortedArray;
 
-      var proffArr = this.props.professorName.split(" ")
-      var profname = proffArr[1] || proffArr[0]
+    if(this.props.filter){
+      sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
+    } else {
+      sortedArray = sortByMagic(this.props.questionsArray);
+    }
+
+    console.log("The new sorted array is: ", sortedArray);
+
+    var proffArr = this.props.professorName.split(" ");
+    var profname = proffArr[1] || proffArr[0];
 
     return (
       <div className="questions-container">
@@ -44,37 +57,23 @@ class StudentQuestionsContainer extends Component {
         </div>
         <AddQuestion />
         {sortedArray.map((question, i) => {
-          if (!this.props.filter) {
-            return(
-              <StudentQuestion
-                reference={question.referenceClass}
-                key={question._id}
-                id={question._id}
-                currentUpVotes={question.upVotes}
-                text={question.text}
-                isStarred={question.isStarred}
-                tags={question.tags}
-                questionCreator={question.username}
-                comments={question.comments}
+          return(
+            <StudentQuestion
+              reference={question.referenceClass}
+              key={question._id}
+              id={question._id}
+              studentName={question.username}
+              currentUpVotes={question.upVotes}
+              text={question.text}
+              isStarred={question.isStarred}
+              isResolved={question.isResolved}
+              tags={question.tags}
+              questionCreator={question.username}
+              comments={question.comments}
               />
             )
-          } else {
-            if(this.props.filter === question.tags[0]){
-              return(
-                <StudentQuestion
-                  key={question._id}
-                  id={question._id}
-                  isStarred={question.isStarred}
-                  currentUpVotes={question.upVotes}
-                  text={question.text}
-                  tags={question.tags}
-                />
-              )
-            } else {
-              return(<span></span>)
-            }
           }
-        })}
+        )}
       </div>
     );
   }
@@ -87,6 +86,7 @@ const mapStateToProps = state => {
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
     userType: state.userReducer.userType,
+    username: state.userReducer.username,
     className: state.classReducer.classState.className,
   }
 }
@@ -99,6 +99,15 @@ const mapDispatchToProps = dispatch => {
     addCommentAction: (newQuestionObject) => {
       dispatch(addComment(newQuestionObject))
     },
+    upVoteQuestionAction: (updatedQuestion) => {
+      dispatch(upVoteQuestion(updatedQuestion));
+    },
+    toggleStarAction: (ID) => {
+      dispatch(toggleStar(ID))
+    },
+    toggleResolveAction: (ID) => {
+      dispatch(toggleResolve(ID))
+    }
   }
 }
 

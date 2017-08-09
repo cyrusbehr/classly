@@ -7,22 +7,25 @@ const app = express();
 // const compiler = webpack(config);
 
 const host = 'http://localhost';
-const port = process.env.npm_config_port ? process.env.npm_config_port : 3000;
+const port = process.env.PORT || 3000;
 
 
-app.use('/dist/', express.static(path.join(__dirname, 'dist')));
+// app.use('/dist/', express.static(path.join(__dirname, 'dist')));
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const mongoose = require('mongoose');
-const models = require('./src/models/models.js');
+const models = require('./src/Models/models.js');
 const Question = models.Question;
 const Topic = models.Topic;
 const Class = models.Class;
 //double check mongoose.connect
 mongoose.connect(process.env.MONGODB_URI);
+mongoose.connection.on('connected', () => {
+  console.log('connected to database')
+})
 
 io.on('connection', socket => {
 
@@ -139,6 +142,7 @@ io.on('connection', socket => {
       timestamp: data.timestamp,
       referenceClass: data.referenceClass,
       username: data.username,
+      slideNumber: data.slideNumber
     });
     newTopic.save((err, newTopic) => {
       if(err){
@@ -157,12 +161,14 @@ io.on('connection', socket => {
   });
 
   socket.on('upVoteQuestion', (data) => {
+    // console.log('upVoteQuestion Data: ', data);
     if(!data.toggle){
       let tempUpVote = data.previousUpVotes + 1;
       Question.findOneAndUpdate({_id: data.questionId}, { $set: { upVotes: tempUpVote}}, {new: true}, (err, updatedQuestion) => {
         if(err){
           console.log("Error upVoting question:", err);
         } else {
+          // console.log("updated upVote question: ", updatedQuestion);
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
         }
@@ -173,6 +179,7 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting question:", err);
         } else {
+          // console.log("updated upVote quesiton: ", updatedQuestion);
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
         }
@@ -187,7 +194,7 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting topic:", err);
         } else {
-          console.log('The updated topics is: ', updatedTopic)
+          // console.log('The updated topics is: ', updatedTopic)
           socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
           socket.emit('voteTopic', updatedTopic);
         }
@@ -198,7 +205,7 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting topic:", err);
         } else {
-          console.log('The updated topics is: ', updatedTopic)
+          // console.log('The updated topics is: ', updatedTopic);
           socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
           socket.emit('voteTopic', updatedTopic);
         }
@@ -208,10 +215,12 @@ io.on('connection', socket => {
 
   socket.on('toggleStar', (data) => {
     let tempStarred = !data.isStarred;
-    Question.findOneAndUpdate({_id: data._id}, { $set: {isStarred: tempStarred}}, {new: true}, (err, updatedQuestion) => {
+    // console.log("toggleStar data:", data);
+    Question.findOneAndUpdate({_id: data.questionId}, { $set: {isStarred: tempStarred}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error starring question:", err);
       } else {
+        // console.log("emmiting backend toggleStar updatedQuestion:", updatedQuestion);
         socket.broadcast.to(socket.currentRoom).emit('toggleStar', updatedQuestion);
         socket.emit('updatedQuestion', updatedQuestion);
       }
@@ -263,7 +272,7 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-server.listen(port, 'localhost', (err) => {
+server.listen(port, (err) => {
   if (err) {
     console.log(err);
     return;

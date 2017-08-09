@@ -36,6 +36,7 @@ const TopicSchema = mongoose.Schema({
   votes: Number,
   timestamp: Number,
   referenceClass: String,
+  slideNumber: String,
 });
 
 

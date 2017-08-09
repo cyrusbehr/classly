@@ -100,7 +100,10 @@ import { ADD_CLASS, ADD_QUESTION,
         return q._id === action.questionId;
       });
       let questionArray2 = originalState9.classState.questions;
+      console.log("action.questionId:", action.questionId);
       console.log("questionArray2", questionArray2);
+      console.log("index2", index2);
+      console.log(questionArray2[index2]);
       questionArray2[index2].isStarred = !questionArray2[index2].isStarred;
 
       originalState9.classState.questions = [...questionArray2];

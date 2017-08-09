@@ -7,7 +7,8 @@
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --profile --colors",
     "build": "npm run clean && npm run build:webpack --progress --profile --colors",
     "dev": "concurrently -k \"npm run frontend\" \"npm run backend\"",
-    "start": "concurrently -k \"npm run frontend\" \"npm run backend\"",
+    "start": "node devServer.js",
+    "webpack" : "webpack --config webpack.config.dev.js",
     "frontend": "webpack -d --watch --config webpack.config.dev.js",
     "backend": "node devServer.js",
     "lint": "eslint src"
@@ -51,6 +52,7 @@
   "dependencies": {
     "concurrently": "^3.5.0",
     "connected-react-router": "^4.2.3",
+    "express": "^4.15.4",
     "file-loader": "^0.11.2",
     "immutable": "^3.8.1",
     "jquery": "^3.2.1",
@@ -64,8 +66,10 @@
     "react-motion": "^0.5.0",
     "react-redux": "^4.1.1",
     "react-router-dom": "^4.1.2",
+    "react-tooltip": "^3.3.0",
     "redux": "^3.7.2",
     "redux-thunk": "^1.0.3",
+    "rimraf": "^2.6.1",
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3",
     "underscore": "^1.8.3",

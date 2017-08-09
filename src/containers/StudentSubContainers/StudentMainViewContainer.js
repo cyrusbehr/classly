@@ -11,7 +11,6 @@ class StudentMainViewContainer extends Component {
     }
   }
 
-  //TODO: checking userType a second time seems redundant here
   render() {
     return (
       <div className="body-parent">

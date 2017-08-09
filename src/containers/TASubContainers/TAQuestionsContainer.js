@@ -3,7 +3,8 @@ import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
-import {addComment} from '../../actions/Actions';
+import {addComment, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve} from '../../actions/Actions';
+import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
 
 
 class TAQuestionsContainer extends Component {
@@ -12,13 +13,31 @@ class TAQuestionsContainer extends Component {
 
     this.props.socket.on('newComment', (newCommentObj) => {
       this.props.addCommentAction(newCommentObj);
-    })
+    });
+    this.props.socket.on('deleteQuestion', (deletedQuestionId) => {
+      this.props.deleteQuestionAction(deletedQuestionId);
+    });
+    this.props.socket.on('toggleStar', (updatedQuestion) => {
+      console.log("TA toggleState updatedQuestion: ", updatedQuestion);
+      this.props.toggleStarAction(updatedQuestion._id);
+    });
+    this.props.socket.on('toggleResolve', (updatedQuestion) => {
+      this.props.toggleResolveAction(updatedQuestion._id);
+    });
   }
 
   render() {
-    var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
-      return -1 * question.upVotes; //negative changes to descending order
-    })
+    // var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
+    //   return -1 * question.upVotes; //negative changes to descending order
+    // })
+
+    var sortedArray;
+
+    if(this.props.filter){
+      sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
+    } else {
+      sortedArray = sortByMagic(this.props.questionsArray);
+    }
 
       var proffArr = this.props.professorName.split(" ")
       var profname = proffArr[1] || proffArr[0]
@@ -32,35 +51,23 @@ class TAQuestionsContainer extends Component {
         </div>
         <AddQuestion />
         {sortedArray.map((question, i) => {
-          if (!this.props.filter) {
             return(
               <StudentQuestion
                 reference={question.referenceClass}
                 key={question._id}
+                studentName={question.username}
                 id={question._id}
                 currentUpVotes={question.upVotes}
                 text={question.text}
+                isResolved={question.isResolved}
+                isStarred={question.isStarred}
                 tags={question.tags}
                 questionCreator={question.username}
                 comments={question.comments}
               />
             )
-          } else {
-            if(this.props.filter === question.tags[0]){
-              return(
-                <StudentQuestion
-                  key={question._id}
-                  id={question._id}
-                  currentUpVotes={question.upVotes}
-                  text={question.text}
-                  tags={question.tags}
-                />
-              )
-            } else {
-              return(<span></span>)
-            }
           }
-        })}
+        )}
       </div>
     );
   }
@@ -81,6 +88,18 @@ const mapDispatchToProps = dispatch => {
     addCommentAction: (newQuestionObject) => {
       dispatch(addComment(newQuestionObject))
     },
+    deleteQuestionAction: (ID) => {
+      dispatch(deleteQuestion(ID));
+    },
+    toggleStarAction: (ID) => {
+      dispatch(toggleStar(ID))
+    },
+    upVoteQuestionAction: (updatedQuestion) => {
+      dispatch(upVoteQuestion(updatedQuestion));
+    },
+    toggleResolveAction: (ID) => {
+      dispatch(toggleResolve(ID))
+    }
   }
 }
 
