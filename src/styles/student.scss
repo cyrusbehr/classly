@@ -31,7 +31,7 @@ html, body{
 
 .topics-container{
   background-color: #EFEFEF;
-  flex: 1;
+  flex: 0 0 350px;
   overflow: scroll;
   // border-right: $green solid 3px;
 }
@@ -221,6 +221,23 @@ StudentTopicsContainer{
 }
 
 .delete-question:hover{
+  fill: $red;
+  stroke: $red;
+  stroke-width: 4px;
+}
+
+.delete-topic{
+  transform: scale(0.3);
+  fill: darkgray;
+  position: relative;
+  top: -5px;
+  left: 10px;
+}
+.delete-topic:hover{
+  cursor: pointer;
+}
+
+.delete-topic:hover{
   fill: $red;
   stroke: $red;
   stroke-width: 4px;
