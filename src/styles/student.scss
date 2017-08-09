@@ -124,8 +124,10 @@ StudentTopicsContainer{
 .question-footer {
   flex:1;
   padding: 0;
-  height: 0;
+  max-height: 0;
   overflow: hidden;
+  // transition: max-height 0.1s linear;
+  // position: absolute;
 }
 
 .question-footer-1 {
@@ -135,7 +137,10 @@ StudentTopicsContainer{
   align-items: flex-start;
   padding: 10px;
   border-radius: 5px;
+  max-height: 500px;
+  transition: max-height 1s linear;
   // border-style: solid;
+  // position: absolute;
 }
 
 .question-comment-container-wrapper {
