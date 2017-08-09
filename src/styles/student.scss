@@ -315,7 +315,7 @@ StudentTopicsContainer{
   font-size:16px;
   flex:2;
   border-radius: 10px;
-  border: darkgray solid 1px;
+  border: $green solid 1px;
   padding: 0 20px;
   height: 30px;
 }
@@ -339,6 +339,14 @@ StudentTopicsContainer{
   font-size: 16px;
   padding: 5px;
   transition: color 0.3s, background-color 0.3s
+}
+
+.input-slides {
+  color: $green;
+  // border: #EFEFEF solid 2px;
+  border: $green solid 2px;
+  padding: 5px;
+  border-radius: 20px;
 }
 
 .question-comment-button {
