@@ -292,7 +292,7 @@ StudentTopicsContainer{
 .new-topic-container{
   margin-top: 40px;
   padding: 15px;
-  height: 70px;
+  min-height: 70px;
   display: flex;
   flex-direction: column;
   // border-style: solid;
@@ -316,9 +316,8 @@ StudentTopicsContainer{
 #new-topic{
   border-radius: 10px;
   border: $green solid 2px;
-  // border-color: red;
   padding: 0 20px;
-  height: 40px;
+  height: 30px;
 }
 
 #empty-new-topic{
@@ -326,7 +325,7 @@ StudentTopicsContainer{
   // border: white;
   border-color: red;
   padding: 0 20px;
-  height: 40px;
+  height: 30px;
 }
 
 .new-question-input-field #new-question, .new-question-input-field #tag{
@@ -488,8 +487,6 @@ button:focus {
 
 .empty-new-topic-alert {
   color:red;
-  margin-right: 5px;
-  // border-style: solid;
 }
 
 .empty-new-question-alert {
