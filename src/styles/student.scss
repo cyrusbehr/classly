@@ -422,7 +422,7 @@ button:focus {
   margin-top:5px;
   padding: 5px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   // border-style: solid;
 }
@@ -431,9 +431,13 @@ button:focus {
   margin-top:5px;
   padding: 5px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   // border-style: solid;
+}
+
+.new-topic-container-container {
+  justify-content: flex-end;
 }
 
 .empty-new-topic-container {

@@ -68,8 +68,10 @@ class AddTopic extends Component{
               onChange={(e) => this.updateSlideNumber(e)}
               placeholder="Slide Number (optional)"
             />
-            <button id="topic-help">?</button>
-            <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
+            <div className="new-topic-container-container">
+              <button id="topic-help">?</button>
+              <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
+            </div>
           </div> :
           <div className="empty-new-topic-footer">
             <input
@@ -81,10 +83,10 @@ class AddTopic extends Component{
             <div className="empty-new-topic-alert">
               Topic can't be empty!
             </div>
-            <div className="empty-new-topic-container">
+            <div className="new-topic-container-container">
               <button id="topic-help">?</button>
               <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
-            </div>
+          </div>
           </div>
         }
         {/* <div className="new-topic-footer">
