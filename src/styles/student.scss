@@ -5,6 +5,7 @@ display: none;
 /*black: #4B4B4B*/
 $green: #00C993;
 $red: #FF7E65;
+$hoverGray: #4B4B4B;
 
 /*page setup*/
 html, body{
@@ -67,7 +68,7 @@ StudentTopicsContainer{
 .questions-container-header{
   z-index: 999;
   position: fixed;
-  width: 60.5%;
+  width: 61.5vw;
   background-color: white;
   color: black;
   padding: 10px;
@@ -135,8 +136,10 @@ StudentTopicsContainer{
 .question-footer {
   flex:1;
   padding: 0;
-  height: 0;
+  max-height: 0;
   overflow: hidden;
+  // transition: max-height 0.1s linear;
+  // position: absolute;
 }
 
 .question-footer-1 {
@@ -146,7 +149,10 @@ StudentTopicsContainer{
   align-items: flex-start;
   padding: 10px;
   border-radius: 5px;
+  max-height: 500px;
+  transition: max-height 1s linear;
   // border-style: solid;
+  // position: absolute;
 }
 
 .question-comment-container-wrapper {
@@ -243,6 +249,10 @@ StudentTopicsContainer{
   margin: auto;
 }
 
+.upvote-number{
+  font-size: 25px;
+}
+
 /*content inside question card*/
 .tag{
   background: $red;
@@ -277,6 +287,7 @@ StudentTopicsContainer{
 .new-question-input-field #new-question #empty-new-question{
   flex: 8;
   margin-right: 10px;
+  padding-right: 10px;
 }
 
 #menu-item{
@@ -321,7 +332,8 @@ StudentTopicsContainer{
 
 #submit-question, #submit-topic{
   width: 100px;
-  border: black solid 2px;
+  border: $hoverGray solid 2px;
+  color: $hoverGray;
   background-color: rgba(0,0,0,0);
   border-radius: 20px;
   font-size: 16px;
@@ -346,25 +358,28 @@ StudentTopicsContainer{
   cursor: pointer;
 }
 
-#submit-topic{
-  border-color: black;
-  color: black;
-}
 
 #submit-question:hover, #submit-topic:hover{
   color: white;
-  background-color: black;
+  background-color: $hoverGray;
   cursor: pointer;
 }
 
 #question-help, #topic-help, #alert{
   width: 25px;
   height: 25px;
-  border: black solid 2px;
+  color: $hoverGray;
+  border: $hoverGray solid 2px;
   background-color: rgba(0,0,0,0);
   border-radius: 50%;
   font-size: 16px;
   margin-right: 5px;
+}
+
+#question-help:hover, #topic-help:hover{
+  color: white;
+  background-color: $hoverGray;
+  // cursor: pointer;
 }
 
 #alert{
@@ -382,12 +397,6 @@ StudentTopicsContainer{
 
 button:focus {
   outline: none;
-}
-
-
-#topic-help{
-  border-color: black;
-  color: black;
 }
 
 .new-question-footer {
