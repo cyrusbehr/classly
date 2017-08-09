@@ -10,7 +10,6 @@ import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
 class TAQuestionsContainer extends Component {
   constructor(props) {
     super(props)
-
     this.props.socket.on('newComment', (newCommentObj) => {
       this.props.addCommentAction(newCommentObj);
     });
@@ -19,7 +18,7 @@ class TAQuestionsContainer extends Component {
     });
     this.props.socket.on('toggleStar', (updatedQuestion) => {
       console.log("TA toggleState updatedQuestion: ", updatedQuestion);
-      this.props.toggleStarAction(updatedQuestion._id);
+      this.props.toggleStarAction(updatedQuestion.questionId);
     });
     this.props.socket.on('toggleResolve', (updatedQuestion) => {
       this.props.toggleResolveAction(updatedQuestion._id);
@@ -99,6 +98,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
+    },
+    deleteTopicAction: (topicID) => {
+      dispatch(deleteTopic(topicID));
     }
   }
 }

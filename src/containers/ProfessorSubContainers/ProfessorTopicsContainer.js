@@ -3,8 +3,22 @@ import React, { Component } from 'react';
 import StudentTopic from '../../components/StudentTopic';
 import AddTopic from '../../components/AddTopic';
 import { connect } from 'react-redux'
+import { deleteTopic } from '../../actions/Actions';
+
 
 class ProfessorTopicsContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
+    this.props.socket.on('deleteTopic', (deletedTopicId) => {
+      this.props.deleteTopicAction(deletedTopicId);
+    });
+  }
+
+
+
+
   render() {
     var proffArr = this.props.classObj.professorName.split(" ")
     var profname = proffArr[1] || proffArr[0]
@@ -44,7 +58,8 @@ const mapStateToProps = state => {
   return {
     classObj: state.classReducer.classState,
     topics: state.classReducer.classState.topics,
-    currentFilter: state.filterReducer
+    currentFilter: state.filterReducer,
+    socket: state.socketReducer.socket,
   }
 }
 
