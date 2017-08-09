@@ -291,7 +291,7 @@ StudentTopicsContainer{
 
 .new-topic-container{
   margin-top: 40px;
-  padding: 30px;
+  padding: 15px;
   height: 70px;
   display: flex;
   flex-direction: column;
@@ -365,11 +365,16 @@ StudentTopicsContainer{
 }
 
 .input-slides {
-  color: $green;
-  // border: #EFEFEF solid 2px;
   border: $green solid 1px;
   padding: 5px;
   border-radius: 8px;
+  font-size: 15px !important;
+  height: 18px;
+  width: 165px;
+}
+
+.input-slides::-webkit-input-placeholder {
+    font-size: 15px;
 }
 
 .question-comment-button {
@@ -572,7 +577,7 @@ input[type="text"]{
 
 .topic-alert-icon-delete{
 position: relative;
-top: -15px; 
+top: -15px;
 }
 
 // for form validation

@@ -64,6 +64,7 @@ class AddTopic extends Component{
         {this.state.topicEmpty ?
           <div className="new-topic-footer">
             <input className="input-slides"
+
               value={this.state.slideNumberText}
               type="text"
               onChange={(e) => this.updateSlideNumber(e)}
