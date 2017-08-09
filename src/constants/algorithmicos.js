@@ -56,7 +56,7 @@ export function sortByMagic(arrayOfQuestions) {
 
   //concatenate and return them in order in one array
   var returnArray = notResolvedAndStarred.concat(notResolvedAndNotStarred, resolvedAndStarred, resolvedAndNotStarred);
-  console.log("this is sortByMagic return", returnArray);
+  // console.log("this is sortByMagic return", returnArray);
   return returnArray;
 }
 
