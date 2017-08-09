@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addTopic } from '../actions/Actions'
+import ReactTooltip from 'react-tooltip';
 
 class AddTopic extends Component{
   constructor(props) {
@@ -69,7 +70,7 @@ class AddTopic extends Component{
               placeholder="Slide Number (optional)"
             />
             <div className="new-topic-container-container">
-              <button id="topic-help">?</button>
+              <button data-tip="topic-help" data-for="topic-help" id="topic-help">?</button>
               <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
             </div>
           </div> :
@@ -84,7 +85,8 @@ class AddTopic extends Component{
               Topic can't be empty!
             </div>
             <div className="new-topic-container-container">
-              <button id="topic-help">?</button>
+              <button data-tip="topic-help" data-for="topic-help"
+                data-multiline="true" id="topic-help">?</button>
               <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
           </div>
           </div>
@@ -93,6 +95,9 @@ class AddTopic extends Component{
           <button id="topic-help">?</button>
           <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
         </div> */}
+        <ReactTooltip id='topic-help' type='info'>
+          <span>Here you can add topics which you would like the professor <br></br>  to revisit. Fellow peers can vote on these topics</span>
+        </ReactTooltip>
       </div>
     );
   }
