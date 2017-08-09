@@ -90,7 +90,7 @@ StudentTopicsContainer{
 
 /*question cards*/
 .question{
-  min-height: 120px;
+  min-height: 80px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -131,22 +131,23 @@ StudentTopicsContainer{
 }
 
 .question-body .question-header{
-  padding: 10px 50px 0;
+  padding: 5px 10px 0;
+  font-size: 10px;
   flex:1;
   display: flex;
   align-items: center;
 }
 
 .question-body .question-content{
-  font-size: 30px;
+  font-size: 20px;
   color: #4B4B4B; /* off-black */
-  padding: 10px 50px;
+  padding: 5px 10px;
   display: flex;
 }
 
 .question-body .question-footer{
   flex:1;
-  padding: 0 50px;
+  padding: 0 10px;
 }
 
 .question-footer {
@@ -232,6 +233,7 @@ StudentTopicsContainer{
 
 .delete-button-container{
   width: 35px;
+  justify-content: center;
 }
 
 .delete-question, .star, .resolve{
@@ -299,13 +301,13 @@ StudentTopicsContainer{
   background: $red;
   color: white;
   border-radius: 8px;
-  padding: 0 8px;
-  margin: 0 10px;
+  padding: 0 8px 0 8px;
+  margin: 0 10px 0 10px;
 }
 
 .new-question-container{
   margin-top: 40px;
-  padding: 30px;
+  padding: 10px;
   height: 70px;
   display: flex;
   flex-direction: column;
@@ -313,7 +315,7 @@ StudentTopicsContainer{
 
 .new-topic-container{
   margin-top: 40px;
-  padding: 15px;
+  padding: 10px;
   min-height: 70px;
   display: flex;
   flex-direction: column;
@@ -323,11 +325,17 @@ StudentTopicsContainer{
 
 .new-question-input-field{
   display:flex;
+  margin-right: 10px;
+}
+
+#new-question {
+  margin-right: 10px;
 }
 
 .new-question-input-field #new-question #empty-new-question{
   flex: 8;
   margin-right: 10px;
+  margin-left: 10px;
   padding-right: 10px;
 }
 
@@ -633,7 +641,7 @@ top: -15px;
 }
 
 .comment {
-  font-size: 25px;
+  font-size: 15px;
   color: $hoverGray;
   margin-bottom: 10px;
 }
