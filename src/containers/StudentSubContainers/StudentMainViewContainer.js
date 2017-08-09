@@ -14,7 +14,7 @@ class StudentMainViewContainer extends Component {
   render() {
     if(this.props.professorName){
       var proffArr = this.props.professorName.split(" ");
-      var profname = proffArr[1] || proffArr[0];  
+      var profname = proffArr[1] || proffArr[0];
     }
 
     return (
@@ -24,7 +24,7 @@ class StudentMainViewContainer extends Component {
           ?
           <div className="body-container">
             <div className="questions-container-header">
-              <span>This is {this.props.userType} view</span>
+              {/* <span>This is {this.props.userType} view</span> */}
               <span className="course">{this.props.className}</span>
               <span className="lecturer">Prof {profname}</span>
               <span className="date">1st Aug 2017</span>
