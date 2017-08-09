@@ -139,7 +139,8 @@ StudentTopicsContainer{
   padding: 10px;
   border-radius: 5px;
   max-height: 500px;
-  transition: max-height 1s linear;
+  transition: max-height 1s ease;
+  overflow: hidden;
   // border-style: solid;
   // position: absolute;
 }
