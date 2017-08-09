@@ -230,7 +230,7 @@ StudentTopicsContainer{
   transform: scale(0.3);
   fill: darkgray;
   position: relative;
-  top: -5px;
+  top: -8px;
   left: 10px;
 }
 .delete-topic:hover{
@@ -396,7 +396,7 @@ StudentTopicsContainer{
   cursor: pointer;
 }
 
-#question-help, #topic-help, #alert{
+#question-help, #topic-help {
   width: 25px;
   height: 25px;
   color: $hoverGray;
@@ -415,11 +415,15 @@ StudentTopicsContainer{
 
 #alert{
   background-color: #30383E;
-  width:30px;
-  height:30px;
+  width:22px;
+  height:22px;
   font-size: 20px;
   margin:0;
   color: white;
+  border: $hoverGray solid 2px;
+  background-color: rgba(0,0,0,0);
+  border-radius: 50%;
+  font-size: 16px;
 }
 
 #alert:hover{
@@ -544,10 +548,10 @@ input[type="text"]{
 }
 
 .topic .topic-alert{
-  flex: 0 0 60px;
+  flex: 0 0 40px;
   display: flex;
   flex-direction: column;
-  padding: 20px 0 15px;
+  padding: 0px 0 0px 0;
 }
 
 .topic-alert .topic-alert-icon{
@@ -555,11 +559,13 @@ input[type="text"]{
   align-items: center;
   justify-content: center;
   flex: 1;
+  // justify-content: space-between;
 }
 
-.topic-alert .topic-alert-number{
+.topic-alert .topic-alert-number, .topic-alert-icon{
   display: flex;
   align-items: center;
+  // justify-content: space-between;
   justify-content: center;
   flex: 1;
 }
