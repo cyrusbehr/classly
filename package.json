@@ -9,6 +9,7 @@
     "dev": "concurrently -k \"npm run frontend\" \"npm run backend\"",
     "start": "node devServer.js",
     "webpack": "webpack --config webpack.config.dev.js",
+    "webpack-dev" : "webpack --watch --config webpack.config.dev.js",
     "frontend": "webpack -d --watch --config webpack.config.dev.js",
     "backend": "node devServer.js",
     "lint": "eslint src"
