@@ -75,6 +75,10 @@ class StudentTopic extends Component {
       style['background-color'] = 'lightgray';
     }
 
+    if(this.props.color){
+      style['border-left'] = this.props.color + ' solid 7px';
+    }
+
     return (
       <div
         className="topic"

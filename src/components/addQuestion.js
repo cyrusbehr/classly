@@ -6,7 +6,8 @@ import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
 import ReactTooltip from 'react-tooltip'
 
-
+import {randomColor} from '../constants/algorithmicos';
+import {colorArray} from '../constants/const';
 
 class AddQuestion extends Component{
   constructor(props) {
@@ -66,6 +67,7 @@ class AddQuestion extends Component{
         isStarred: false,
         upVotes: 0,
         timestamp: Date.now(),
+        color: randomColor(colorArray)
       }
       this.props.socket.emit('newQuestion', data);
       this.setState({
