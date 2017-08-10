@@ -164,6 +164,20 @@ class StudentQuestion extends Component {
                           }
                         </div>
                       </div>
+                      <div className="question-comment-container-wrapper">
+                        <div className="question-comments-container-spacer">
+                        </div>
+                        <div className="question-comment-container">
+                          <textarea
+                            value={this.state.commentText}
+                            type="text"
+                            onChange={(e) => this.updateCommentText(e)}
+                            placeholder="Anwser here!!!"
+                            className="question-comment-textarea"
+                          />
+                          <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
