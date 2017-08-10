@@ -7,7 +7,8 @@ import $ from 'jquery';
 import ReactTooltip from 'react-tooltip'
 import { isUnique } from '../constants/algorithmicos'
 
-
+import {randomColor} from '../constants/algorithmicos';
+import {colorArray} from '../constants/const';
 
 class AddQuestion extends Component{
   constructor(props) {
@@ -64,7 +65,8 @@ class AddQuestion extends Component{
         isStarred: false,
         upVotes: 0,
         timestamp: Date.now(),
-        isUniqueTopic
+        isUniqueTopic,
+        color: randomColor(colorArray)
       }
 
       console.log("this is data in addQuestions:", data);

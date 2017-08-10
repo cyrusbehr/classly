@@ -110,6 +110,7 @@ io.on('connection', socket => {
           timestamp: Date.now(),
           referenceClass: newClass._id,
           username: 'default_topic',
+          isDefault: true
         });
         newTopic.save((err, savedTopic) => {
           if(err){
@@ -120,8 +121,8 @@ io.on('connection', socket => {
               classObj.save()
               .then(() => {
                 socket.emit('classCreated', newClass);
-                socket.broadcast.to(socket.currentRoom).emit('newTopic', {savedTopic});
-                socket.emit('newTopic', {savedTopic});
+                socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
+                socket.emit('newTopic', savedTopic);
               })
             })
           }
@@ -140,7 +141,8 @@ io.on('connection', socket => {
       upVotes: data.upVotes || 0,
       tags: data.tags,
       timestamp: Date.now(),
-      referenceClass: data.referenceClass
+      referenceClass: data.referenceClass,
+      color: data.color
     });
     newQuestion.save((err, savedQuestion) => {
       if(err){
@@ -161,6 +163,7 @@ io.on('connection', socket => {
               timestamp: Date.now(),
               referenceClass: data.referenceClass,
               username: data.username,
+              color: data.color
             });
             newTopic.save((err, savedTopic) => {
               if(err){

@@ -28,7 +28,8 @@ const QuestionSchema = mongoose.Schema({
   tags: Array,
   timestamp: Number,
   referenceClass: String,
-  comments: Array
+  comments: Array,
+  color: String
 });
 
 const TopicSchema = mongoose.Schema({
@@ -38,6 +39,8 @@ const TopicSchema = mongoose.Schema({
   votes: Number,
   timestamp: Number,
   referenceClass: String,
+  isDefault: Boolean,
+  color: String
 });
 
 
