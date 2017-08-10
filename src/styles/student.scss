@@ -469,6 +469,11 @@ StudentTopicsContainer{
   // cursor: pointer;
 }
 
+.questions-title{
+  padding-left: 10px;
+  color: gray;
+}
+
 #alert{
   background-color: #30383E;
   width:22px;
@@ -568,6 +573,11 @@ input[type="text"]{
   //  background-size: 200% 100%;
   //  background-image: linear-gradient(to left, #FFF1F1 50%, white 50%);
   //  transition: background-position 0.5s;
+}
+
+.topics-title{
+  padding-left: 10px;
+  color: gray;
 }
 
 .topic-hover {
