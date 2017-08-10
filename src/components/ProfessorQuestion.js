@@ -82,10 +82,9 @@ class ProfessorQuestion extends Component {
     }
 
     render() {
-      if(this.props.studentName){
-        var nameArr = this.props.studentName.split(' ');
-        var renderStudentName = nameArr[0];
-      }
+      var nameArr = this.props.questionCreator.split(' ');
+      var questionCreatorFirstName = nameArr[0];
+
       return (
         <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
           <div className="question-main-section">
@@ -93,8 +92,8 @@ class ProfessorQuestion extends Component {
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
               <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
+              <div className="question-main-section-question-creator"> - {this.props.questionCreator}</div>
               {/*  TODO: DONOVAN add formating here, feel free to move this around */}
-              {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
             </div>
 
             <div className="all-buttons-container">
@@ -188,7 +187,6 @@ class ProfessorQuestion extends Component {
                         <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
                       </div>
                     </div>
-                    {/* <div> {renderStudentName} </div> */}
                   </div>
                 </div>
               </div>

@@ -130,6 +130,12 @@ StudentTopicsContainer{
   flex-direction: column;
 }
 
+.question-main-section-question-creator{
+  color: $hoverGray;
+  font-size: 12px;
+  padding-left: 10px;
+}
+
 .question-body .question-header{
   padding: 5px 10px 0;
   font-size: 15px;
