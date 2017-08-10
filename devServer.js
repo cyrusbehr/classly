@@ -110,6 +110,7 @@ io.on('connection', socket => {
           timestamp: Date.now(),
           referenceClass: newClass._id,
           username: 'default_topic',
+          isDefault: true
         });
         newTopic.save((err, savedTopic) => {
           if(err){

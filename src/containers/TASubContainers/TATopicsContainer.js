@@ -33,7 +33,7 @@ class TATopicsContainer extends Component {
               topicCreator={topic.username}
               hightlight={this.props.currentFilter===topic.text ? true : false}
               greyOut={this.props.currentFilter!=='' && this.props.currentFilter!==topic.text}
-              slideNumber={topic.slideNumber}
+              isDefault={topic.isDefault}
             />
           )
         })}
