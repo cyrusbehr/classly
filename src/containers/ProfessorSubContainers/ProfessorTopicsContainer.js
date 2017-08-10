@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
 import StudentTopic from '../../components/StudentTopic';
-import AddTopic from '../../components/AddTopic';
+// import AddTopic from '../../components/AddTopic';
 import { connect } from 'react-redux'
 import { deleteTopic } from '../../actions/Actions';
 
@@ -32,7 +32,7 @@ class ProfessorTopicsContainer extends Component {
 
           <span className="lecturer">Prof {profname}</span>
         </div> */}
-        <AddTopic />
+        {/* <AddTopic /> */}
         {this.props.topics.map((topic, i) => {
 
           return(
