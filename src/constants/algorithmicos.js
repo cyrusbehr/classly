@@ -77,6 +77,12 @@ export function sortByCategory(category, arrayOfQuestions) {
   return arr0;
 }
 
+export function randomColor(colorArray) {
+  const randomDigit = Math.floor((Math.random() * colorArray.length));
+  const colorSelected = colorArray[randomDigit];
+  return colorSelected;
+}
+
   // var arr1 = sortByMagic(notCategoryArray);
   // var newArray = arr0.concat(arr1);
   // console.log("This is sortByCategory return", newArray);
