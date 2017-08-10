@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { addQuestion } from '../actions/Actions';
+import { addQuestion, addTopic } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
@@ -16,8 +16,12 @@ class AddQuestion extends Component{
       questionEmpty: true
     }
 
-    this.props.socket.on('newQuestion', (savedQuestion) => {
+    this.props.socket.on('newQuestion', ({savedQuestion} )=> {
       this.props.addQuestionAction(savedQuestion);
+    })
+
+    this.props.socket.on('newTopic', ({savedTopic}) => {
+      this.props.addTopicAction(savedTopic);
     })
   }
 
@@ -137,6 +141,9 @@ const mapDispatchToProps = dispatch => {
   return {
     addQuestionAction: (newQuestion) => {
       dispatch(addQuestion(newQuestion))
+    },
+    addTopicAction: (savedTopic) => {
+      dispatch(addTopic(savedTopic))
     }
   }
 }
