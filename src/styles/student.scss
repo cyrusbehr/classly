@@ -35,7 +35,7 @@ html, body{
   background-color: #EFEFEF;
   flex: 0 0 350px;
   overflow: scroll;
-  // border-right: $green solid 3px;
+  padding-top: 50px;
 }
 
 .topics-container-header{
@@ -379,6 +379,11 @@ StudentTopicsContainer{
   border: $green solid 2px;
   padding: 0 20px;
   height: 30px;
+}
+
+.new-question-input-field{
+  margin-top: 10px;
+
 }
 
 #tag{
