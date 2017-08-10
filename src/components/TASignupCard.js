@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
 import {addClass, setUsername} from '../actions/Actions'
+import $ from 'jquery'
 
 
 class TASignupCard extends Component {
@@ -20,6 +21,13 @@ class TASignupCard extends Component {
   }
 
   componentDidMount() {
+    let self = this;
+    $("input").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+      self.onSubmit(e)
+    }
+});
+
     this.props.socket.on('Joined', () => {
       this.props.socket.emit('getStudentState', this.state.accessCode)
     })

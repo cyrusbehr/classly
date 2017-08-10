@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
 import {addClass, setUsername} from '../actions/Actions'
+import $ from 'jquery'
 
 
 class StudentSignupCard extends Component {
@@ -20,12 +21,19 @@ class StudentSignupCard extends Component {
   }
 
   componentDidMount() {
+    let self = this;
+    $("input").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+      self.onSubmit(e)
+    }
+});
+
+
     this.props.socket.on('Joined', () => {
       this.props.socket.emit('getStudentState', this.state.accessCode)
     })
 
     this.props.socket.on('error1', () => {
-      // TODO: alert the user that we couldnt find their access code
       this.setState({wrongAccessCode: false});
     })
 
@@ -70,6 +78,8 @@ class StudentSignupCard extends Component {
     if(this.state.accessCode.trim() === ''){
       this.setState({codeEmpty: false});
     }
+
+    if(!this.state.accessCode || !this.state.name) return;
 
     if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
       this.props.socket.emit('join', this.state.accessCode);
