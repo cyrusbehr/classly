@@ -121,8 +121,8 @@ io.on('connection', socket => {
               classObj.save()
               .then(() => {
                 socket.emit('classCreated', newClass);
-                socket.broadcast.to(socket.currentRoom).emit('newTopic', {savedTopic});
-                socket.emit('newTopic', {savedTopic});
+                socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
+                socket.emit('newTopic', savedTopic);
               })
             })
           }
