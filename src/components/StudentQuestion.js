@@ -58,7 +58,6 @@ class StudentQuestion extends Component {
   toggleThisStar(e) {
     e.preventDefault();
     this.props.toggleStarAction(this.props.id);
-    // this.setState({starred: !this.state.starred});
     this.props.socket.emit('toggleStar', {questionId: this.props.id, isStarred: this.props.isStarred});
   }
 
@@ -101,6 +100,7 @@ class StudentQuestion extends Component {
       var renderStudentName = nameArr[0];
     }
     var isProfessorOrTA = (this.props.userType === 'Professor' || this.props.userType === 'TA');
+    var isStudentStarred = (this.props.userType === "Student" && this.props.isStarred);
     // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
     return (
     <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
@@ -172,6 +172,20 @@ class StudentQuestion extends Component {
               </ReactTooltip>
 
               </div> : null }
+              { isStudentStarred
+              ?
+              <svg
+                className="star"
+                width="40px"
+                height="40px"
+                style={this.props.isStarred ? {fill:'#FF7E65'} : {}}
+                onClick={(e)=> this.toggleThisStar(e)}
+                data-tip
+                data-for='star'
+              >
+                <path d="M16 .7c-.4 0-.7.2-.9.6l-4.4 8.9-9.8 1.4c-.4.1-.7.4-.9.7-.1.4 0 .8.3 1l7.1 6.9L5.7 30c-.1.4.1.8.4 1 .2.1.4.2.6.2.2 0 .3 0 .5-.1l8.8-4.6 8.8 4.6c.1.1.3.1.5.1s.4-.1.6-.2c.3-.2.5-.6.4-1l-1.7-9.8 7.1-6.9c.3-.3.4-.7.3-1-.1-.4-.4-.6-.8-.7l-9.9-1.4-4.4-8.9c-.2-.4-.5-.6-.9-.6z"/>
+              </svg>
+              : null }
             {/* { isProfessorOrTA ?
               <svg
                 className="resolve"
@@ -251,8 +265,6 @@ class StudentQuestion extends Component {
           {/* <div> {renderStudentName} </div> */}
         </div>
         : null }
-
-
       </div>
     </div>
 
