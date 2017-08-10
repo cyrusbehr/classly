@@ -60,15 +60,19 @@ class StudentTopic extends Component {
     var isCreatorOrProfessorOrTA = (this.props.topicCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA');
     var style = {};
 
-    if (this.state.alreadyClicked) {
-      style.backgroundColor = '#FFF1F1';
-    } else {
-      style.backgroundColor = 'white';
-    }
+    // if (this.state.alreadyClicked) {
+    //   style.backgroundColor = '#FFF1F1';
+    // } else {
+    //   style.backgroundColor = 'white';
+    // }
 
     if(this.props.hightlight){
       style.transform = 'scale3d(1.02, 1.02, 1)';
       style.boxShadow = '0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15)'
+    }
+
+    if(this.props.greyOut){
+      style['background-color'] = 'lightgray';
     }
 
     return (
@@ -78,7 +82,7 @@ class StudentTopic extends Component {
         onClick={(e) => this.handleClick(this.props.id,e)}
       >
         <div className="topic-content">
-          <div className="topic-title">{this.props.text}</div>
+          <div className="topic-title" style={this.props.greyOut ? {'color':'darkgray'} : {}}>{this.props.text}</div>
           {this.props.slideNumber
           ?
           <div className="topic-description">Slide Number  {this.props.slideNumber}</div>
