@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProfessorQuestion from '../../components/ProfessorQuestion';
+import TAQuestion from '../../components/TAQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
@@ -51,7 +51,7 @@ class TAQuestionsContainer extends Component {
         <AddQuestion />
         {sortedArray.map((question, i) => {
           return(
-            <ProfessorQuestion
+            <TAQuestion
               reference={question.referenceClass}
               key={question._id}
               studentName={question.username}
