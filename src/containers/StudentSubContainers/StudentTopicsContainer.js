@@ -43,6 +43,8 @@ class StudentTopicsContainer extends Component {
               hightlight={this.props.currentFilter===topic.text ? true : false}
               greyOut={this.props.currentFilter!=='' && this.props.currentFilter!==topic.text}
               isDefault={topic.isDefault}
+              slideNumber={topic.slideNumber}
+              color={topic.color}
             />
           )
         })}
