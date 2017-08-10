@@ -65,7 +65,7 @@ class AddQuestion extends Component{
         isStarred: false,
         upVotes: 0,
         timestamp: Date.now(),
-        isUniqueTopic
+        isUniqueTopic,
         color: randomColor(colorArray)
       }
 
