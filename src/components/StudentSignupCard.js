@@ -79,6 +79,8 @@ class StudentSignupCard extends Component {
       this.setState({codeEmpty: false});
     }
 
+    if(!this.state.accessCode || !this.state.name) return;
+
     if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
       this.props.socket.emit('join', this.state.accessCode);
     }
