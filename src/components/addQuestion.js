@@ -5,6 +5,7 @@ import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
 import ReactTooltip from 'react-tooltip'
+import { isUnique } from '../constants/algorithmicos'
 
 
 
@@ -50,12 +51,9 @@ class AddQuestion extends Component{
     if(this.state.questionText.trim() === ''){
       this.setState({questionEmpty: false});
     } else {
-      let tags;
-      if(this.state.tags === "") {
-        tags = null;
-      } else {
-        tags = this.state.tags
-      }
+
+
+      var isUniqueTopic = isUnique(this.state.tags, this.props.topicsArr);
 
       const data = {
         text: this.state.questionText,
@@ -66,6 +64,7 @@ class AddQuestion extends Component{
         isStarred: false,
         upVotes: 0,
         timestamp: Date.now(),
+        isUniqueTopic
       }
       this.props.socket.emit('newQuestion', data);
       this.setState({

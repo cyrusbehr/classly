@@ -129,7 +129,8 @@ io.on('connection', socket => {
           classObj.questions.push(savedQuestion._id);
           classObj.save()
           .then(() => {
-            if(data.tags === ""){
+            //check to see if the topic is empty or already exists
+            if(data.tags === "" || data.isUniqueTopic === false){
               socket.broadcast.to(socket.currentRoom).emit('newQuestion', {savedQuestion});
               socket.emit('newQuestion', {savedQuestion});
             }else{
