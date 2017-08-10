@@ -37,6 +37,7 @@ class ProfessorQuestionsContainer extends Component {
 
     var sortedArray;
 
+
     if(this.props.filter){
       sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
     } else {
