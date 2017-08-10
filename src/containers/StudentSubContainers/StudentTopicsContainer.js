@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
 import { deleteTopic, addComment } from '../../actions/Actions';
 import StudentTopic from '../../components/StudentTopic';
-import AddTopic from '../../components/AddTopic';
+// import AddTopic from '../../components/AddTopic';
 import { connect } from 'react-redux'
 
 class StudentTopicsContainer extends Component {
@@ -28,7 +28,7 @@ class StudentTopicsContainer extends Component {
     var profname = proffArr[1] || proffArr[0]
     return (
       <div className="topics-container">
-        <AddTopic />
+        {/* <AddTopic /> */}
         {this.props.topics.map((topic, i) => {
           return(
             <StudentTopic
