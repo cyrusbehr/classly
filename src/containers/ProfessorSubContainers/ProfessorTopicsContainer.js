@@ -21,9 +21,11 @@ class ProfessorTopicsContainer extends Component {
 
   render() {
     var proffArr = this.props.classObj.professorName.split(" ")
-    var profname = proffArr[1] || proffArr[0]
+    var profname = proffArr[1] || proffArr[0];
+    var numOfTopics = this.props.topics.length;
     return (
       <div className="topics-container">
+        <p className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')}</p>
         {/* <div className="topics-container-header">
           <span className="course">MECH 101</span>
 
