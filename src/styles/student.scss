@@ -240,6 +240,12 @@ StudentTopicsContainer{
   transform: scale(0.5);
   fill: darkgray;
 }
+
+.star-student{
+  transform: scale(0.5);
+  fill: darkgray;
+}
+
 .delete-question:hover, .star:hover, .resolve:hover{
   cursor: pointer;
 }

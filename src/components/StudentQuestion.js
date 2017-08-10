@@ -126,7 +126,7 @@ class StudentQuestion extends Component {
               { isStudentStarred
               ?
               <svg
-                className="star"
+                className="star-student"
                 width="40px"
                 height="40px"
                 style={this.props.isStarred ? {fill:'#FF7E65'} : {}}
