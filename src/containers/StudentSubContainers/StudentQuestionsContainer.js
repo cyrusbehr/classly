@@ -50,7 +50,7 @@ class StudentQuestionsContainer extends Component {
     return (
       <div className="questions-container">
         <AddQuestion />
-        <p className="question-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
+        <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {sortedArray.map((question, i) => {
           return(
             <StudentQuestion
