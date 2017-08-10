@@ -91,7 +91,7 @@ class ProfessorQuestion extends Component {
           <div className="question-main-section">
             <div className="question-body">
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
-              <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
+              <div className="question-header">{this.props.tags[0]==="" ? ' None' : <span className="tag">#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
               {/*  TODO: DONOVAN add formating here, feel free to move this around */}
               {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}

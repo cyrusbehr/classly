@@ -84,7 +84,7 @@ class AddQuestion extends Component{
 
           <Autocomplete
             wrapperProps={{id:'new-tag'}}
-            inputProps={{id:'tag', placeholder:'#tag'}}
+            inputProps={{id:'tag', placeholder:'#topic'}}
             getItemValue={(item) => item.text}
             items={this.props.classObj.topics}
             renderItem={(item, isHighlighted) =>
