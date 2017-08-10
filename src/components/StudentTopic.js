@@ -78,7 +78,7 @@ class StudentTopic extends Component {
         onClick={(e) => this.handleClick(this.props.id,e)}
       >
         <div className="topic-content">
-          <div className="topic-title">{this.props.text}</div>
+          <div className="topic-title">#{this.props.text}</div>
           {this.props.slideNumber
           ?
           <div className="topic-description">Slide Number  {this.props.slideNumber}</div>
