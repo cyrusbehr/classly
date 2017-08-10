@@ -91,3 +91,10 @@ export function sortByCategory(category, arrayOfQuestions) {
 // // first, exclude resolved questions by pushing them to the bottom
 // // then push all starred questions to the front and sort them in order by votes
 // // then sort the rest by upvotes
+
+export function isUnique(topicText, topicsArray) {
+  for(var i = 0; i < topicsArray.length - 1; i++ ) {
+    if(topicsArray[i].text === topicText) return false
+  }
+  return true
+}

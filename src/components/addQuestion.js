@@ -134,6 +134,7 @@ const mapStateToProps = state => {
     socket: state.socketReducer.socket,
     username: state.userReducer.username,
     classObj: state.classReducer.classState,
+    topicsArr: state.classReducer.classState.topics
   }
 }
 
