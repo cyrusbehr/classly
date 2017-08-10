@@ -90,7 +90,7 @@ StudentTopicsContainer{
 
 /*question cards*/
 .question{
-  min-height: 120px;
+  min-height: 80px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -131,22 +131,23 @@ StudentTopicsContainer{
 }
 
 .question-body .question-header{
-  padding: 10px 50px 0;
+  padding: 5px 10px 0;
+  font-size: 15px;
   flex:1;
   display: flex;
   align-items: center;
 }
 
 .question-body .question-content{
-  font-size: 30px;
+  font-size: 23px;
   color: #4B4B4B; /* off-black */
-  padding: 10px 50px;
+  padding: 5px 10px;
   display: flex;
 }
 
 .question-body .question-footer{
   flex:1;
-  padding: 0 50px;
+  padding: 0 10px;
 }
 
 .question-footer {
@@ -307,13 +308,13 @@ StudentTopicsContainer{
   background: $red;
   color: white;
   border-radius: 8px;
-  padding: 0 8px;
-  margin: 0 10px;
+  padding: 0 8px 0 8px;
+  margin: 0 10px 0 10px;
 }
 
 .new-question-container{
   margin-top: 40px;
-  padding: 30px;
+  padding: 10px;
   height: 70px;
   display: flex;
   flex-direction: column;
@@ -321,8 +322,8 @@ StudentTopicsContainer{
 
 .new-topic-container{
   margin-top: 40px;
-  padding: 30px;
-  height: 70px;
+  padding: 10px;
+  min-height: 70px;
   display: flex;
   flex-direction: column;
   // border-style: solid;
@@ -331,11 +332,17 @@ StudentTopicsContainer{
 
 .new-question-input-field{
   display:flex;
+  margin-right: 10px;
+}
+
+#new-question {
+  margin-right: 10px;
 }
 
 .new-question-input-field #new-question #empty-new-question{
   flex: 8;
   margin-right: 10px;
+  margin-left: 10px;
   padding-right: 10px;
 }
 
@@ -346,9 +353,8 @@ StudentTopicsContainer{
 #new-topic{
   border-radius: 10px;
   border: $green solid 2px;
-  // border-color: red;
   padding: 0 20px;
-  height: 40px;
+  height: 30px;
 }
 
 #empty-new-topic{
@@ -356,7 +362,7 @@ StudentTopicsContainer{
   // border: white;
   border-color: red;
   padding: 0 20px;
-  height: 40px;
+  height: 30px;
 }
 
 .new-question-input-field #new-question, .new-question-input-field #tag{
@@ -395,11 +401,16 @@ StudentTopicsContainer{
 }
 
 .input-slides {
-  color: $green;
-  // border: #EFEFEF solid 2px;
   border: $green solid 1px;
   padding: 5px;
   border-radius: 8px;
+  font-size: 15px !important;
+  height: 18px;
+  width: 165px;
+}
+
+.input-slides::-webkit-input-placeholder {
+    font-size: 15px;
 }
 
 .question-comment-button {
@@ -513,8 +524,6 @@ button:focus {
 
 .empty-new-topic-alert {
   color:red;
-  margin-right: 5px;
-  // border-style: solid;
 }
 
 .empty-new-question-alert {
@@ -639,7 +648,7 @@ top: -15px;
 }
 
 .comment {
-  font-size: 25px;
+  font-size: 15px;
   color: $hoverGray;
   margin-bottom: 10px;
 }
