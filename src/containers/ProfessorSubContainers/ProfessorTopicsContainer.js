@@ -44,6 +44,7 @@ class ProfessorTopicsContainer extends Component {
               reference={topic.referenceClass}
               topicCreator={topic.username}
               hightlight={this.props.currentFilter===topic.text ? true : false}
+              greyOut={this.props.currentFilter!=='' && this.props.currentFilter!==topic.text}
               slideNumber={topic.slideNumber}
             />
           )
