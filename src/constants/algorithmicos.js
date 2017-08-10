@@ -1,6 +1,7 @@
 
 export function sortByMagic(arrayOfQuestions) {
   //returns new sorted array
+  console.log("arr of qs", arrayOfQuestions);
   var resolvedArray = [];
   var notResolvedArray = [];
 

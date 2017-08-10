@@ -18,7 +18,7 @@ class AddQuestion extends Component{
       questionEmpty: true
     }
 
-    this.props.socket.on('newQuestion', ({savedQuestion} )=> {
+    this.props.socket.on('newQuestion', (savedQuestion) => {
       this.props.addQuestionAction(savedQuestion);
     })
 
@@ -57,7 +57,8 @@ class AddQuestion extends Component{
 
       const data = {
         text: this.state.questionText,
-        username:this.props.username,
+        username: this.props.username,
+        userType: this.props.userType,
         tags: this.state.tags,
         referenceClass: this.props.classObj._id,
         isResolved: false,
@@ -66,6 +67,8 @@ class AddQuestion extends Component{
         timestamp: Date.now(),
         isUniqueTopic
       }
+
+      console.log("this is data in addQuestions:", data);
       this.props.socket.emit('newQuestion', data);
       this.setState({
         questionText: "",
@@ -139,7 +142,8 @@ const mapStateToProps = state => {
     username: state.userReducer.username,
     classObj: state.classReducer.classState,
     currentFilter: state.filterReducer,
-    topicsArr: state.classReducer.classState.topics
+    userType: state.userReducer.userType,
+    topicsArr: state.classReducer.classState.topics,
   }
 }
 

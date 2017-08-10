@@ -35,6 +35,7 @@ class StudentQuestionsContainer extends Component {
     //   return -1 * question.upVotes; //negative changes to descending order
     // })
     var sortedArray;
+    console.log("questionsArray", this.props.questionsArray);
 
     if(this.props.filter){
       sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);

@@ -108,12 +108,11 @@ io.on('connection', socket => {
     })
   });
 
-//TODO: Pass in userTYpe on newQuestion sockets
   socket.on('newQuestion', (data) => {
     var newQuestion = new Question({
       text: data.text,
       username: data.username,
-      userTye: data.userType,
+      userType: data.userType,
       isResolved: data.isResolved || false,
       isStarred: data.isStarred || false,
       upVotes: data.upVotes || 0,

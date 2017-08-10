@@ -41,6 +41,9 @@ import { ADD_CLASS, ADD_QUESTION,
       return originalState4;
 
       case ADD_QUESTION:
+      console.log("inside ADD_QUESTION");
+      console.log("action is :", action);
+      console.log(action.newQuestion);
       let originalState1 = Object.assign({}, state);
       originalState1.classState.questions = originalState1.classState.questions.concat(action.newQuestion)
       return originalState1;
