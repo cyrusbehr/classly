@@ -56,6 +56,11 @@ class StudentTopic extends Component {
   }
 
   render() {
+    var questions = this.props.questions;
+    var questionsWithTheTopic = questions.filter((question)=>{
+      return question.tags.includes(this.props.text);
+    })
+
     var isCreator = (this.props.topicCreator === this.props.username);
     var isCreatorOrProfessorOrTA = (this.props.topicCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA');
     var style = {};
@@ -74,6 +79,7 @@ class StudentTopic extends Component {
     if(this.props.greyOut){
       style['background-color'] = 'lightgray';
     }
+
 
     return (
       <div
@@ -128,7 +134,7 @@ class StudentTopic extends Component {
          </div>
 
           <div className="topic-alert-number">
-            9
+            {questionsWithTheTopic.length}
           </div>
 
         </div>
@@ -155,6 +161,7 @@ const mapStateToProps = state => {
     username: state.userReducer.username,
     currentFilter: state.filterReducer,
     userType: state.userReducer.userType,
+    questions: state.classReducer.classState.questions
   }
 }
 
