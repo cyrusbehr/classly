@@ -49,6 +49,7 @@ class TAQuestionsContainer extends Component {
           <span className="date">1st Aug 2017</span>
         </div>
         <AddQuestion />
+        <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {sortedArray.map((question, i) => {
           return(
             <TAQuestion
