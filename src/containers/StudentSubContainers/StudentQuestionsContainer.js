@@ -49,13 +49,8 @@ class StudentQuestionsContainer extends Component {
 
     return (
       <div className="questions-container">
-        {/* <div className="questions-container-header">
-          <span>This is {this.props.userType} view</span>
-          <span className="course">{this.props.className}</span>
-          <span className="lecturer">Prof {profname}</span>
-          <span className="date">1st Aug 2017</span>
-        </div> */}
         <AddQuestion />
+        <p className="question-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {sortedArray.map((question, i) => {
           return(
             <StudentQuestion
