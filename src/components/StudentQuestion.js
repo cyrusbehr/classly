@@ -90,7 +90,8 @@ class StudentQuestion extends Component {
         <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
           <div className="question-main-section">
             <div className="question-body">
-              <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
+              {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
+              <div className="question-header">{this.props.tags[0]==="" ? ' None' : <span className="tag">#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
               {isCreator
                 ?

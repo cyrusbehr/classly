@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { addQuestion } from '../actions/Actions';
+import { addQuestion, addTopic } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
 import ReactTooltip from 'react-tooltip'
+
 
 
 class AddQuestion extends Component{
@@ -16,8 +17,12 @@ class AddQuestion extends Component{
       questionEmpty: true
     }
 
-    this.props.socket.on('newQuestion', (savedQuestion) => {
+    this.props.socket.on('newQuestion', ({savedQuestion} )=> {
       this.props.addQuestionAction(savedQuestion);
+    })
+
+    this.props.socket.on('newTopic', ({savedTopic}) => {
+      this.props.addTopicAction(savedTopic);
     })
   }
 
@@ -84,7 +89,7 @@ class AddQuestion extends Component{
 
           <Autocomplete
             wrapperProps={{id:'new-tag'}}
-            inputProps={{id:'tag', placeholder:'#tag'}}
+            inputProps={{id:'tag', placeholder:'#topic'}}
             getItemValue={(item) => item.text}
             items={this.props.classObj.topics}
             renderItem={(item, isHighlighted) =>
@@ -130,7 +135,8 @@ const mapStateToProps = state => {
     socket: state.socketReducer.socket,
     username: state.userReducer.username,
     classObj: state.classReducer.classState,
-    currentFilter: state.filterReducer
+    currentFilter: state.filterReducer,
+    topicsArr: state.classReducer.classState.topics
   }
 }
 
@@ -138,6 +144,9 @@ const mapDispatchToProps = dispatch => {
   return {
     addQuestionAction: (newQuestion) => {
       dispatch(addQuestion(newQuestion))
+    },
+    addTopicAction: (savedTopic) => {
+      dispatch(addTopic(savedTopic))
     }
   }
 }
