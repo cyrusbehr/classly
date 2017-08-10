@@ -110,6 +110,7 @@ io.on('connection', socket => {
           timestamp: Date.now(),
           referenceClass: newClass._id,
           username: 'default_topic',
+          isDefault: true
         });
         newTopic.save((err, savedTopic) => {
           if(err){
@@ -120,8 +121,8 @@ io.on('connection', socket => {
               classObj.save()
               .then(() => {
                 socket.emit('classCreated', newClass);
-                socket.broadcast.to(socket.currentRoom).emit('newTopic', {savedTopic});
-                socket.emit('newTopic', {savedTopic});
+                socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
+                socket.emit('newTopic', savedTopic);
               })
             })
           }

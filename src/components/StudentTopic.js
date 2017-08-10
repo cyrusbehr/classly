@@ -57,14 +57,8 @@ class StudentTopic extends Component {
 
   render() {
     var isCreator = (this.props.topicCreator === this.props.username);
-    var isCreatorOrProfessorOrTA = (this.props.topicCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA');
+    var isCreatorOrProfessorOrTA = (this.props.topicCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA') && !this.props.isDefault;
     var style = {};
-
-    // if (this.state.alreadyClicked) {
-    //   style.backgroundColor = '#FFF1F1';
-    // } else {
-    //   style.backgroundColor = 'white';
-    // }
 
     if(this.props.hightlight){
       style.transform = 'scale3d(1.02, 1.02, 1)';
@@ -83,11 +77,6 @@ class StudentTopic extends Component {
       >
         <div className="topic-content">
           <div className="topic-title" style={this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
-          {this.props.slideNumber
-          ?
-          <div className="topic-description">Slide Number  {this.props.slideNumber}</div>
-          :null
-        }
         </div>
         <div className="topic-alert">
           {isCreatorOrProfessorOrTA
