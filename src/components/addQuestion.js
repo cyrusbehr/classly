@@ -22,7 +22,7 @@ class AddQuestion extends Component{
       this.props.addQuestionAction(savedQuestion);
     })
 
-    this.props.socket.on('newTopic', ({savedTopic}) => {
+    this.props.socket.on('newTopic', (savedTopic) => {
       this.props.addTopicAction(savedTopic);
     })
   }

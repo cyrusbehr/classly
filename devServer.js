@@ -130,8 +130,8 @@ io.on('connection', socket => {
           .then(() => {
             //check to see if the topic is empty or already exists
             if(data.tags === "" || data.isUniqueTopic === false){
-              socket.broadcast.to(socket.currentRoom).emit('newQuestion', {savedQuestion});
-              socket.emit('newQuestion', {savedQuestion});
+              socket.broadcast.to(socket.currentRoom).emit('newQuestion', savedQuestion);
+              socket.emit('newQuestion', savedQuestion);
             }else{
             let newTopic = new Topic({
               text: data.tags,
@@ -148,10 +148,10 @@ io.on('connection', socket => {
                   classObj.topics.push(savedTopic._id);
                   classObj.save()
                   .then(() => {
-                    socket.broadcast.to(socket.currentRoom).emit('newQuestion', {savedQuestion});
-                    socket.emit('newQuestion', {savedQuestion});
-                    socket.broadcast.to(socket.currentRoom).emit('newTopic', {savedTopic});
-                    socket.emit('newTopic', {savedTopic});
+                    socket.broadcast.to(socket.currentRoom).emit('newQuestion', savedQuestion);
+                    socket.emit('newQuestion', savedQuestion);
+                    socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
+                    socket.emit('newTopic', savedTopic);
                   })
                 })
               }
