@@ -105,17 +105,17 @@ io.on('connection', socket => {
       } else {
 
         let newTopic = new Topic({
-          text: data.tags,
+          text: "All",
           votes: 0,
           timestamp: Date.now(),
-          referenceClass: data.referenceClass,
-          username: data.username,
+          referenceClass: newClass._id,
+          username: 'default_topic',
         });
         newTopic.save((err, savedTopic) => {
           if(err){
             console.log("Error saving savedTopic to database:", err);
           } else {
-            Class.findById(data.referenceClass, (err, classObj) => {
+            Class.findById(newClass._id, (err, classObj) => {
               classObj.topics.push(savedTopic._id);
               classObj.save()
               .then(() => {

@@ -93,7 +93,7 @@ export function sortByCategory(category, arrayOfQuestions) {
 // // then sort the rest by upvotes
 
 export function isUnique(topicText, topicsArray) {
-  for(var i = 0; i < topicsArray.length - 1; i++ ) {
+  for(var i = 0; i < topicsArray.length; i++ ) {
     if(topicsArray[i].text === topicText) return false
   }
   return true
