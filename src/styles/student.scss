@@ -379,12 +379,9 @@ StudentTopicsContainer{
   border: $green solid 2px;
   padding: 0 20px;
   height: 30px;
-}
-
-.new-question-input-field{
   margin-top: 10px;
-
 }
+
 
 #tag{
     border: $green solid 2px !important;
@@ -395,7 +392,7 @@ StudentTopicsContainer{
   font-size:16px;
   flex:2;
   border-radius: 10px;
-  border: red solid 1px;
+  border: red solid 2px;
   padding: 0 20px;
   height: 30px;
 }
