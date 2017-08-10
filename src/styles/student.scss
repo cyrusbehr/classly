@@ -35,7 +35,7 @@ html, body{
   background-color: #EFEFEF;
   flex: 0 0 350px;
   overflow: scroll;
-  // border-right: $green solid 3px;
+  padding-top: 50px;
 }
 
 .topics-container-header{
@@ -128,6 +128,12 @@ StudentTopicsContainer{
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.question-main-section-question-creator{
+  color: $hoverGray;
+  font-size: 12px;
+  padding-left: 10px;
 }
 
 .question-body .question-header{
@@ -321,7 +327,6 @@ StudentTopicsContainer{
 .new-question-container{
   margin-top: 40px;
   padding: 10px;
-  height: 70px;
   display: flex;
   flex-direction: column;
 }
@@ -379,10 +384,12 @@ StudentTopicsContainer{
   border: $green solid 2px;
   padding: 0 20px;
   height: 30px;
+  margin-top: 10px;
 }
 
+
 #tag{
-    border: $green solid 1px !important;
+    border: $green solid 2px !important;
 }
 
 #empty-new-question{
@@ -390,9 +397,11 @@ StudentTopicsContainer{
   font-size:16px;
   flex:2;
   border-radius: 10px;
-  border: red solid 1px;
+  border: red solid 2px;
   padding: 0 20px;
   height: 30px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 #submit-question, #submit-topic{

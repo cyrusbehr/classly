@@ -63,7 +63,6 @@ class ProfessorQuestionsContainer extends Component {
             <ProfessorQuestion
               reference={question.referenceClass}
               key={question._id}
-              studentName={question.username}
               id={question._id}
               currentUpVotes={question.upVotes}
               text={question.text}

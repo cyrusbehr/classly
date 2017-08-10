@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import StudentNewTopic from '../../components/StudentNewTopic';
 import StudentTopic from '../../components/StudentTopic';
 import { deleteTopic } from '../../actions/Actions';
-import AddTopic from '../../components/AddTopic';
+// import AddTopic from '../../components/AddTopic';
 import { connect } from 'react-redux'
 
 class TATopicsContainer extends Component {
@@ -14,13 +14,12 @@ class TATopicsContainer extends Component {
     });
   }
 
-
   render() {
     var proffArr = this.props.classObj.professorName.split(" ")
     var profname = proffArr[1] || proffArr[0]
     return (
       <div className="topics-container">
-        <AddTopic />
+        {/* <AddTopic /> */}
         {this.props.topics.map((topic, i) => {
           return(
             <StudentTopic

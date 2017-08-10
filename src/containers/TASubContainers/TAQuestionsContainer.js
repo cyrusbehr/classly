@@ -54,7 +54,6 @@ class TAQuestionsContainer extends Component {
             <TAQuestion
               reference={question.referenceClass}
               key={question._id}
-              studentName={question.username}
               id={question._id}
               currentUpVotes={question.upVotes}
               text={question.text}
