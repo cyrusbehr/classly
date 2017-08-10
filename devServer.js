@@ -141,7 +141,8 @@ io.on('connection', socket => {
       upVotes: data.upVotes || 0,
       tags: data.tags,
       timestamp: Date.now(),
-      referenceClass: data.referenceClass
+      referenceClass: data.referenceClass,
+      color: data.color
     });
     newQuestion.save((err, savedQuestion) => {
       if(err){
@@ -162,6 +163,7 @@ io.on('connection', socket => {
               timestamp: Date.now(),
               referenceClass: data.referenceClass,
               username: data.username,
+              color: data.color
             });
             newTopic.save((err, savedTopic) => {
               if(err){
