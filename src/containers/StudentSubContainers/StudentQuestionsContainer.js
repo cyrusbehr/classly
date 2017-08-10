@@ -42,7 +42,7 @@ class StudentQuestionsContainer extends Component {
       sortedArray = sortByMagic(this.props.questionsArray);
     }
 
-    console.log("The new sorted array is: ", sortedArray);
+    // console.log("The new sorted array is: ", sortedArray);
 
     // var proffArr = this.props.professorName.split(" ");
     // var profname = proffArr[1] || proffArr[0];
@@ -64,7 +64,7 @@ class StudentQuestionsContainer extends Component {
               tags={question.tags}
               questionCreator={question.username}
               comments={question.comments}
-              userType={question.userType}
+              questionCreatorType={question.userType}
               />
             )
           }
