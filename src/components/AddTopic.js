@@ -38,8 +38,8 @@ class AddTopic extends Component{
         timestamp: Date.now(),
         referenceClass: this.props.classObj._id,
         username: this.props.username,
-        slideNumber: this.state.slideNumberText
-
+        userType: this.props.userType,
+        slideNumber: this.state.slideNumberText,
       }
       this.props.socket.emit('newTopic', data);
       this.setState(
@@ -106,6 +106,7 @@ class AddTopic extends Component{
       socket: state.socketReducer.socket,
       classObj: state.classReducer.classState,
       username: state.userReducer.username,
+      userType: state.userReducer.userType,
     }
   }
 

@@ -61,6 +61,7 @@ class TAQuestionsContainer extends Component {
               isStarred={question.isStarred}
               tags={question.tags}
               questionCreator={question.username}
+              userType={question.userType}
               comments={question.comments}
             />
           )

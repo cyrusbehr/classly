@@ -21,6 +21,7 @@ const ClassSchema = mongoose.Schema({
 const QuestionSchema = mongoose.Schema({
   text: String,
   username: String,
+  userType: String,
   isResolved: Boolean,
   isStarred: Boolean,
   upVotes: Number,
@@ -32,6 +33,7 @@ const QuestionSchema = mongoose.Schema({
 
 const TopicSchema = mongoose.Schema({
   username: String,
+  userType: String,
   text: String,
   votes: Number,
   timestamp: Number,

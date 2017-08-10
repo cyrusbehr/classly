@@ -55,6 +55,7 @@ class AddQuestion extends Component{
       const data = {
         text: this.state.questionText,
         username:this.props.username,
+        userType: this.props.userType,
         tags: this.state.tags,
         referenceClass: this.props.classObj._id,
         isResolved: false,
@@ -130,6 +131,7 @@ const mapStateToProps = state => {
     socket: state.socketReducer.socket,
     username: state.userReducer.username,
     classObj: state.classReducer.classState,
+    userType: state.userReducer.userType,
   }
 }
 
