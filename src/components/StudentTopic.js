@@ -90,7 +90,7 @@ class StudentTopic extends Component {
         }
         </div>
         <div className="topic-alert">
-          {isCreatorOrProfessorOrTA
+          {/* {isCreatorOrProfessorOrTA
             ?
             <span>
             <svg className="delete-topic" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
@@ -116,14 +116,34 @@ class StudentTopic extends Component {
                 onMouseOut={() => {this.setState({hover:false})}}
                 >!</button>
             </div>
-           }
 
+            <div
+              className="topic-alert-number"
+              style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
+            >{this.state.votes}</div>
+           } */}
 
-          <div
-            className="topic-alert-number"
-            style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
-          >{this.state.votes}</div>
+         <div className="topic-alert-icon">
+           <i className="material-icons">help_outline</i>
+         </div>
+
+          <div className="topic-alert-number">
+            9
+          </div>
+
         </div>
+
+        <div className='delete-topic'>
+          {
+            isCreatorOrProfessorOrTA ?
+            <i
+              className="material-icons"
+              onClick={(e)=> this.deleteItem(e)}
+            >clear</i> :
+            null
+          }
+        </div>
+
       </div>
     );
   }

@@ -263,12 +263,17 @@ StudentTopicsContainer{
 }
 
 .delete-topic{
-  transform: scale(0.3);
-  fill: darkgray;
-  position: relative;
-  top: -8px;
-  left: 10px;
+  // transform: scale(0.3);
+  // fill: darkgray;
+  // position: relative;
+  // top: -8px;
+  // left: 10px;
+  width: 24px;
 }
+.delete-topic i:hover{
+  color: $red;
+}
+
 .delete-topic:hover{
   cursor: pointer;
 }
