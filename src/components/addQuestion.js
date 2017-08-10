@@ -69,7 +69,11 @@ class AddQuestion extends Component{
       })
     }
   }
-
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      tags: nextProps.currentFilter,
+    })
+  }
   render() {
     return (
       <div className="new-question-container">
