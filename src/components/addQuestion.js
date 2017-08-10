@@ -17,50 +17,58 @@ class AddQuestion extends Component{
     }
 
     this.props.socket.on('newQuestion', (savedQuestion) => {
-      console.log("This was triggered")
       this.props.addQuestionAction(savedQuestion);
     })
   }
 
-updateTags(e) {
-    this.setState({tags: e.target.value})
-}
-
-updateQuestion(e) {
-  this.setState({questionText: e.target.value})
-  this.setState({questionEmpty: true})
-}
-
-submitPressed(e) {
-  e.preventDefault();
-
-  if(this.state.questionText.trim() === ''){
-    this.setState({questionEmpty: false});
-  } else {
-    let tags;
-    if(this.state.tags === "") {
-      tags = null;
-    } else {
-      tags = this.state.tags
-    }
-
-    const data = {
-      text: this.state.questionText,
-      username:this.props.username,
-      tags: this.state.tags,
-      referenceClass: this.props.classObj._id,
-      isResolved: false,
-      isStarred: false,
-      upVotes: 0,
-      timestamp: Date.now(),
-    }
-    this.props.socket.emit('newQuestion', data);
-    this.setState({
-      questionText: "",
-      tags: ""
-    })
+  componentDidMount() {
+    let self = this;
+    $("input").on('keyup', function (e) {
+      if (e.keyCode == 13) {
+        self.submitPressed(e)
+      }
+    });
   }
-}
+
+  updateTags(e) {
+    this.setState({tags: e.target.value})
+  }
+
+  updateQuestion(e) {
+    this.setState({questionText: e.target.value})
+    this.setState({questionEmpty: true})
+  }
+
+  submitPressed(e) {
+    e.preventDefault();
+
+    if(this.state.questionText.trim() === ''){
+      this.setState({questionEmpty: false});
+    } else {
+      let tags;
+      if(this.state.tags === "") {
+        tags = null;
+      } else {
+        tags = this.state.tags
+      }
+
+      const data = {
+        text: this.state.questionText,
+        username:this.props.username,
+        tags: this.state.tags,
+        referenceClass: this.props.classObj._id,
+        isResolved: false,
+        isStarred: false,
+        upVotes: 0,
+        timestamp: Date.now(),
+      }
+      this.props.socket.emit('newQuestion', data);
+      this.setState({
+        questionText: "",
+        tags: ""
+      })
+    }
+  }
 
   render() {
     return (

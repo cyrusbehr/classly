@@ -21,10 +21,10 @@ class ProfessorSignupCard extends Component {
   componentDidMount() {
     let self = this;
     $("input").on('keyup', function (e) {
-    if (e.keyCode == 13) {
-      self.onSubmit(e)
-    }
-});
+      if (e.keyCode == 13) {
+        self.onSubmit(e)
+      }
+    });
 
 
     this.props.socket.on('Joined', room => {

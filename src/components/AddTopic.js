@@ -44,10 +44,10 @@ class AddTopic extends Component{
       this.props.socket.emit('newTopic', data);
       this.setState(
         {
-        topicText: "",
-        slideNumberText: null,
-      }
-    );
+          topicText: "",
+          slideNumberText: null,
+        }
+      );
     }
   }
 
@@ -84,40 +84,40 @@ class AddTopic extends Component{
             <div className="new-topic-container-container">
               <button data-tip="topic-help" data-for="topic-help"
                 data-multiline="true" id="topic-help">?</button>
-              <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
-          </div>
-          </div>
-        }
-        <ReactTooltip id='topic-help' type='info'>
-          <span>Here you can add topics which you would like the professor <br></br>  to revisit. Fellow peers can vote on these topics</span>
-        </ReactTooltip>
-        {this.state.topicEmpty ? null :
-        <div className="empty-new-topic-alert">
-          Topic can't be empty!
+                <button id="submit-topic" onClick={(e) => this.submitPressed(e)}>Submit</button>
+              </div>
+            </div>
+          }
+          <ReactTooltip id='topic-help' type='info'>
+            <span>Here you can add topics which you would like the professor <br></br>  to revisit. Fellow peers can vote on these topics</span>
+          </ReactTooltip>
+          {this.state.topicEmpty ? null :
+            <div className="empty-new-topic-alert">
+              Topic can't be empty!
+            </div>
+          }
         </div>
-      }
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return{
-    socket: state.socketReducer.socket,
-    classObj: state.classReducer.classState,
-    username: state.userReducer.username,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addTopicAction: (savedTopic) => {
-      dispatch(addTopic(savedTopic))
+      );
     }
   }
-}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddTopic);
+  const mapStateToProps = state => {
+    return{
+      socket: state.socketReducer.socket,
+      classObj: state.classReducer.classState,
+      username: state.userReducer.username,
+    }
+  }
+
+  const mapDispatchToProps = dispatch => {
+    return {
+      addTopicAction: (savedTopic) => {
+        dispatch(addTopic(savedTopic))
+      }
+    }
+  }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddTopic);

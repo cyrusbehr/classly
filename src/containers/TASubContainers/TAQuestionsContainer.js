@@ -38,8 +38,8 @@ class TAQuestionsContainer extends Component {
       sortedArray = sortByMagic(this.props.questionsArray);
     }
 
-      var proffArr = this.props.professorName.split(" ")
-      var profname = proffArr[1] || proffArr[0]
+    var proffArr = this.props.professorName.split(" ")
+    var profname = proffArr[1] || proffArr[0]
 
     return (
       <div className="questions-container">
@@ -50,26 +50,26 @@ class TAQuestionsContainer extends Component {
         </div>
         <AddQuestion />
         {sortedArray.map((question, i) => {
-            return(
-              <ProfessorQuestion
-                reference={question.referenceClass}
-                key={question._id}
-                studentName={question.username}
-                id={question._id}
-                currentUpVotes={question.upVotes}
-                text={question.text}
-                isResolved={question.isResolved}
-                isStarred={question.isStarred}
-                tags={question.tags}
-                questionCreator={question.username}
-                comments={question.comments}
-              />
-            )
-          }
-        )}
-      </div>
-    );
-  }
+          return(
+            <ProfessorQuestion
+              reference={question.referenceClass}
+              key={question._id}
+              studentName={question.username}
+              id={question._id}
+              currentUpVotes={question.upVotes}
+              text={question.text}
+              isResolved={question.isResolved}
+              isStarred={question.isStarred}
+              tags={question.tags}
+              questionCreator={question.username}
+              comments={question.comments}
+            />
+          )
+        }
+      )}
+    </div>
+  );
+}
 }
 
 const mapStateToProps = state => {
