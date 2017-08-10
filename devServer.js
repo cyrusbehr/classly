@@ -103,7 +103,29 @@ io.on('connection', socket => {
       if(err){
         console.log("Error creating newClass:", err);
       } else {
-        socket.emit('classCreated', newClass);
+
+        let newTopic = new Topic({
+          text: data.tags,
+          votes: 0,
+          timestamp: Date.now(),
+          referenceClass: data.referenceClass,
+          username: data.username,
+        });
+        newTopic.save((err, savedTopic) => {
+          if(err){
+            console.log("Error saving savedTopic to database:", err);
+          } else {
+            Class.findById(data.referenceClass, (err, classObj) => {
+              classObj.topics.push(savedTopic._id);
+              classObj.save()
+              .then(() => {
+                socket.emit('classCreated', newClass);
+                socket.broadcast.to(socket.currentRoom).emit('newTopic', {savedTopic});
+                socket.emit('newTopic', {savedTopic});
+              })
+            })
+          }
+        });
       }
     })
   });
