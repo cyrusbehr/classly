@@ -73,7 +73,11 @@ class AddQuestion extends Component{
       })
     }
   }
-
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      tags: nextProps.currentFilter,
+    })
+  }
   render() {
     return (
       <div className="new-question-container">
@@ -134,6 +138,7 @@ const mapStateToProps = state => {
     socket: state.socketReducer.socket,
     username: state.userReducer.username,
     classObj: state.classReducer.classState,
+    currentFilter: state.filterReducer,
     topicsArr: state.classReducer.classState.topics
   }
 }
