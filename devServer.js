@@ -108,10 +108,12 @@ io.on('connection', socket => {
     })
   });
 
+//TODO: Pass in userTYpe on newQuestion sockets
   socket.on('newQuestion', (data) => {
     var newQuestion = new Question({
       text: data.text,
       username: data.username,
+      userTye: data.userType,
       isResolved: data.isResolved || false,
       isStarred: data.isStarred || false,
       upVotes: data.upVotes || 0,
@@ -161,6 +163,7 @@ io.on('connection', socket => {
     });
   });
 
+<<<<<<< HEAD
   // socket.on('newTopic', (data) => {
   //   let newTopic = new Topic({
   //     text: data.text,
@@ -185,6 +188,33 @@ io.on('connection', socket => {
   //     }
   //   });
   // });
+=======
+  socket.on('newTopic', (data) => {
+    let newTopic = new Topic({
+      text: data.text,
+      votes: data.votes,
+      timestamp: data.timestamp,
+      referenceClass: data.referenceClass,
+      username: data.username,
+      userType: data.userType,
+      slideNumber: data.slideNumber
+    });
+    newTopic.save((err, newTopic) => {
+      if(err){
+        console.log("Error saving newTopic to database:", err);
+      } else {
+        Class.findById(data.referenceClass, (err, classObj) => {
+          classObj.topics.push(newTopic._id);
+          classObj.save()
+          .then(() => {
+            socket.broadcast.to(socket.currentRoom).emit('newTopic', newTopic);
+            socket.emit('newTopic', newTopic);
+          })
+        })
+      }
+    });
+  });
+>>>>>>> RC3
 
   socket.on('upVoteQuestion', (data) => {
     // console.log('upVoteQuestion Data: ', data);

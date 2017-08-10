@@ -69,6 +69,7 @@ class StudentQuestionsContainer extends Component {
               tags={question.tags}
               questionCreator={question.username}
               comments={question.comments}
+              userType={question.userType}
               />
             )
           }
