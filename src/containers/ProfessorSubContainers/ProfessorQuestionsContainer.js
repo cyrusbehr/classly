@@ -36,7 +36,6 @@ class ProfessorQuestionsContainer extends Component {
     // })
 
     var sortedArray;
-    console.log("questionsArray", this.props.questionsArray);
 
 
     if(this.props.filter){
@@ -84,7 +83,6 @@ class ProfessorQuestionsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("mapStateToProps questionsarrary", state.classReducer.classState.questions);
   return {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
