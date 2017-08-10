@@ -185,7 +185,6 @@ class TAQuestion extends Component {
                         <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
                       </div>
                     </div>
-                    {/* <div> {renderStudentName} </div> */}
                   </div>
                 </div>
               </div>
