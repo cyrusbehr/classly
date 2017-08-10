@@ -83,11 +83,8 @@ class StudentQuestion extends Component {
 
     render() {
       var isCreator = (this.props.questionCreator === this.props.username);
-      if(this.props.studentName){
-        var nameArr = this.props.studentName.split(' ');
-        var renderStudentName = nameArr[0];
-      }
       var isStudentStarred = (this.props.userType === "Student" && this.props.isStarred);
+      // var isPostedByProfessorOrTa = (this.props.)
       // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
       return (
         <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
@@ -96,6 +93,10 @@ class StudentQuestion extends Component {
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
               <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
+              {isCreator
+                ?
+                <div className="question-main-section-question-creator"> - {this.props.questionCreator}</div>
+              : null}
             </div>
             <div className="all-buttons-container">
               <div className="question-upvote-container">
