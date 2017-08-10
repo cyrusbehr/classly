@@ -64,7 +64,6 @@ class StudentQuestion extends Component {
 
   toggleThisResolve(e) {
     e.preventDefault();
-    $(e.target).parents('.question').toggleClass('question-resolve');
     this.props.toggleResolveAction(this.props.id);
     this.props.socket.emit('toggleResolve', {questionId: this.props.id, isResolved: this.props.isResolved});
   }
@@ -104,150 +103,160 @@ class StudentQuestion extends Component {
     var isProfessorOrTA = (this.props.userType === 'Professor' || this.props.userType === 'TA');
     // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
     return (
-      <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
-
+    <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
+      <div className="question-main-section">
         <div className="question-body">
-          <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button>
+          {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
           <div className="question-header"> Tags: {this.props.tags[0]==="" ? ' None' : <span className="tag">{this.props.tags}</span>}</div>
           <div className="question-content"> {this.props.text} </div>
           {/*  TODO: DONOVAN add formating here, feel free to move this around */}
-          {!isProfessorOrTA
-            ?
-            <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
-              <div className="question-comment-container-wrapper">
-                <div className="question-comments-container-spacer">
-                </div>
-              </div>
-              <div className="question-comments-container">
-                <div className="question-comments-container-spacer">
-                </div>
-                <div className="question-comments-container-main">
-                  {this.props.comments ? this.props.comments.map((comment) => {
-                    return(
-                    <div>{comment.creator}: {comment.text}</div>
-                    )
-                  })
-                  :null
-                }
-                </div>
-              </div>
-              {/* <div> {renderStudentName} </div> */}
-            </div>
-          : null }
-          {isProfessorOrTA
-            ?
-            <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
-              <div className="question-comment-container-wrapper">
-                <div className="question-comments-container-spacer">
-                </div>
-                <div className="question-comment-container">
-                  <textarea
-                    value={this.state.commentText}
-                    type="text"
-                    onChange={(e) => this.updateCommentText(e)}
-                    placeholder="Anwser here!!!"
-                    className="question-comment-textarea"
-                  />
-                  <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
-                </div>
-              </div>
-              <div className="question-comments-container">
-                <div className="question-comments-container-spacer">
-                </div>
-                <div className="question-comments-container-main">
-                  {this.props.comments ? this.props.comments.map((comment) => {
-                    return(
-                    <div>{comment.creator}: {comment.text}</div>
-                    )
-                  })
-                  :null
-                }
-                </div>
-              </div>
-              {/* <div> {renderStudentName} </div> */}
-            </div>
-            : null }
           {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
         </div>
 
-        {/* {!isProfessorOrTA
-          ?
+        <div className="all-buttons-container">
           <div className="question-upvote-container">
             <div className="upvote-icon-container">
-              <svg
+              <i
+                id="upvote-icon"
+                className="material-icons"
                 onClick={(e) => this.handleUpvote(e)}
-                onMouseOver={() => {this.setState({hover:true})}}
-                onMouseOut={() => {this.setState({hover:false})}}
-                width="38px"
-                height="24px"
-                viewBox="0 0 38 24"
-                version="1.1"
-                >
-                <polygon
-                  style={this.state.hover || this.state.alreadyClicked ? {'fill':'#00C993'} : {'fill': '#4B4B4B'} }
-                  id="upvote-icon"
-                  points="19 -8.8817842e-16 0 18.8571429 4.43333333 23.2571429 19 8.8 33.5666667 23.2571429 38 18.8571429">
-                </polygon>
-              </svg>
-            </div>
-            <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
-          </div>
-          :
-          <div className="upvote-number" style={this.state.hover || this.state.alreadyClicked ? {color: '#00C993'} : {color:'#4B4B4B'}}> {this.state.votes} </div>
-        } */}
-
-          <div className="question-upvote-container">
-            <div className="upvote-icon-container">
-              <i id="upvote-icon" className="material-icons">keyboard_arrow_up</i>
+              >keyboard_arrow_up</i>
               {this.state.votes}
             </div>
             <div className="upvote-number">
-              <i id="reply-icon" className="material-icons">chat</i>
-              99
+              <i
+                id="reply-icon"
+                className="material-icons"
+                onClick={(e) => this.toggleReply(e)}
+              >chat</i>
+              {this.props.comments.length}
             </div>
           </div>
 
-        <div className="delete-button-container">
-          {isCreatorOrProfessorOrTA ?
-            <svg className="delete-question" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
-              <path d="M13.172 16L.586 3.414c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L16 13.172 28.586.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828L18.828 16l12.586 12.586c.78.78.78 2.047 0 2.828-.78.78-2.048.78-2.828 0L16 18.828 3.414 31.414c-.78.78-2.047.78-2.828 0-.78-.78-.78-2.047 0-2.828L13.172 16z"/>
-            </svg>
-          : null }
-          { isProfessorOrTA ?
-            <div>
-            <svg
-              className="star"
-              width="40px"
-              height="40px"
-              style={this.props.isStarred ? {fill:'#FF7E65'} : {}}
-              onClick={(e)=> this.toggleThisStar(e)}
-              data-tip
-              data-for='star'
-            >
-              <path d="M16 .7c-.4 0-.7.2-.9.6l-4.4 8.9-9.8 1.4c-.4.1-.7.4-.9.7-.1.4 0 .8.3 1l7.1 6.9L5.7 30c-.1.4.1.8.4 1 .2.1.4.2.6.2.2 0 .3 0 .5-.1l8.8-4.6 8.8 4.6c.1.1.3.1.5.1s.4-.1.6-.2c.3-.2.5-.6.4-1l-1.7-9.8 7.1-6.9c.3-.3.4-.7.3-1-.1-.4-.4-.6-.8-.7l-9.9-1.4-4.4-8.9c-.2-.4-.5-.6-.9-.6z"/>
-            </svg>
-            <ReactTooltip id='star' type='warning'>
-              <span>Pin question</span>
-            </ReactTooltip>
+          <div className="delete-button-container">
+            {isCreatorOrProfessorOrTA ?
+              <svg className="delete-question" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
+                <path d="M13.172 16L.586 3.414c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L16 13.172 28.586.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828L18.828 16l12.586 12.586c.78.78.78 2.047 0 2.828-.78.78-2.048.78-2.828 0L16 18.828 3.414 31.414c-.78.78-2.047.78-2.828 0-.78-.78-.78-2.047 0-2.828L13.172 16z"/>
+              </svg>
+            : null }
+            { isProfessorOrTA ?
+              <div>
+              <svg
+                className="star"
+                width="40px"
+                height="40px"
+                style={this.props.isStarred ? {fill:'#FF7E65'} : {}}
+                onClick={(e)=> this.toggleThisStar(e)}
+                data-tip
+                data-for='star'
+              >
+                <path d="M16 .7c-.4 0-.7.2-.9.6l-4.4 8.9-9.8 1.4c-.4.1-.7.4-.9.7-.1.4 0 .8.3 1l7.1 6.9L5.7 30c-.1.4.1.8.4 1 .2.1.4.2.6.2.2 0 .3 0 .5-.1l8.8-4.6 8.8 4.6c.1.1.3.1.5.1s.4-.1.6-.2c.3-.2.5-.6.4-1l-1.7-9.8 7.1-6.9c.3-.3.4-.7.3-1-.1-.4-.4-.6-.8-.7l-9.9-1.4-4.4-8.9c-.2-.4-.5-.6-.9-.6z"/>
+              </svg>
+              <ReactTooltip id='star' type='warning'>
+                <span>Pin question</span>
+              </ReactTooltip>
 
-            <svg
-              className="resolve"
-              width="40px"
-              height="40px"
-              style={this.props.isResolved ? {fill:'green'} : {}}
-              onClick={(e)=> this.toggleThisResolve(e)}
-              data-tip
-              data-for='resolve'
-            >
-              <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
-            </svg>
-            <ReactTooltip id='resolve' type='success'>
-              <span>Mark as resolved</span>
-            </ReactTooltip>
+              <svg
+                className="resolve"
+                width="40px"
+                height="40px"
+                style={this.props.isResolved ? {fill:'green'} : {}}
+                onClick={(e)=> this.toggleThisResolve(e)}
+                data-tip
+                data-for='resolve'
+              >
+                <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
+              </svg>
+              <ReactTooltip id='resolve' type='success'>
+                <span>Mark as resolved</span>
+              </ReactTooltip>
 
-            </div> : null }
+              </div> : null }
+            {/* { isProfessorOrTA ?
+              <svg
+                className="resolve"
+                width="40px"
+                height="40px"
+                style={this.props.isResolved ? {fill:'green'} : {}}
+                onClick={(e)=> this.toggleThisResolve(e)}
+              >
+                <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
+              </svg> : null } */}
+          </div>
         </div>
+      </div>
+
+      <div className="question-comment-section">
+        {!isProfessorOrTA
+          ?
+          <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
+            <div className="question-comment-container-wrapper">
+              <div className="question-comments-container-spacer">
+              </div>
+            </div>
+            <div className="question-comments-container">
+              <div className="question-comments-container-spacer">
+              </div>
+              <div className="question-comments-container-main">
+                <div className="comment-section-header">{this.props.comments.length} Replies</div>
+                {this.props.comments ? this.props.comments.map((comment) => {
+                  return(
+                    <div>
+                      <div className="comment-creator">{comment.creator}: </div>
+                      <div className="comment">{comment.text}</div>
+                    </div>
+                  )
+                })
+                :null
+              }
+            </div>
+          </div>
+          {/* <div> {renderStudentName} </div> */}
         </div>
+        : null }
+        {isProfessorOrTA
+          ?
+          <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
+            <div className="question-comments-container">
+              <div className="question-comments-container-spacer">
+              </div>
+              <div className="question-comments-container-main">
+                <div className="comment-section-header">{this.props.comments.length} Replies</div>
+                {this.props.comments ? this.props.comments.map((comment) => {
+                  return(
+                    <div>
+                      <div className="comment-creator">{comment.creator}: </div>
+                      <div className="comment">{comment.text}</div>
+                    </div>
+                  )
+                })
+                :null
+              }
+            </div>
+          </div>
+          <div className="question-comment-container-wrapper">
+            <div className="question-comments-container-spacer">
+            </div>
+            <div className="question-comment-container">
+              <textarea
+                value={this.state.commentText}
+                type="text"
+                onChange={(e) => this.updateCommentText(e)}
+                placeholder="Anwser here!!!"
+                className="question-comment-textarea"
+              />
+              <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+            </div>
+          </div>
+          {/* <div> {renderStudentName} </div> */}
+        </div>
+        : null }
+
+
+      </div>
+    </div>
+
+
     );
   }
 }

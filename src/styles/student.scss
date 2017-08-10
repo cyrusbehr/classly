@@ -7,6 +7,7 @@ $green: #00C993;
 $red: #FF7E65;
 $hoverGray: #4B4B4B;
 $blue: #2979FF;
+$lightDarkGray: #c0c0c0;
 
 /*page setup*/
 html, body{
@@ -32,7 +33,7 @@ html, body{
 
 .topics-container{
   background-color: #EFEFEF;
-  flex: 3;
+  flex: 0 0 350px;
   overflow: scroll;
   // border-right: $green solid 3px;
 }
@@ -58,7 +59,7 @@ html, body{
 
 .questions-container{
   background-color: #FFFFFF;
-  flex: 5;
+  flex: 3;
   overflow: scroll;
 }
 
@@ -92,10 +93,23 @@ StudentTopicsContainer{
   min-height: 120px;
   width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   border-top: 3px solid #DFDFDF;
   background-color: white;
   //#D9FFF5
 }
+
+.question-main-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.all-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 
 .question-resolve{
   background-color: #F8F8F8 !important;
@@ -150,10 +164,10 @@ StudentTopicsContainer{
   flex-direction: column;
   align-items: flex-start;
   padding: 10px;
-  border-radius: 5px;
-  max-height: 500px;
+  max-height: 1000px;
   transition: max-height 1s ease;
   overflow: hidden;
+  background-color: #f2f2f2;
   // border-style: solid;
   // position: absolute;
 }
@@ -179,21 +193,28 @@ StudentTopicsContainer{
 
 
 .question-comments-container-spacer {
-  width: 33px;
+  width: 37px;
   // border-style: solid;
+}
+
+.comment-section-header {
+  margin-bottom: 10px;
+  font-size: 19px;
+  color: $hoverGray;
 }
 
 .question-comments-container-main {
   width: 450px;
-  // border-style: solid;
+  // border-style: solid
 }
 
 .question-comment-textarea {
-  border: darkgray solid 1px;;
+  border: darkgray solid 2px;;
   width: 410px;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px 20px;
+  font-size: 25px;
 }
 
 .question .question-upvote-container{
@@ -211,7 +232,7 @@ StudentTopicsContainer{
 
 
 .delete-button-container{
-  width: 35px;
+  width: 55px;
 }
 
 .delete-question, .star, .resolve{
@@ -223,6 +244,23 @@ StudentTopicsContainer{
 }
 
 .delete-question:hover{
+  fill: $red;
+  stroke: $red;
+  stroke-width: 4px;
+}
+
+.delete-topic{
+  transform: scale(0.3);
+  fill: darkgray;
+  position: relative;
+  top: -8px;
+  left: 10px;
+}
+.delete-topic:hover{
+  cursor: pointer;
+}
+
+.delete-topic:hover{
   fill: $red;
   stroke: $red;
   stroke-width: 4px;
@@ -388,7 +426,7 @@ StudentTopicsContainer{
   cursor: pointer;
 }
 
-#question-help, #topic-help, #alert{
+#question-help, #topic-help {
   width: 25px;
   height: 25px;
   color: $hoverGray;
@@ -407,11 +445,15 @@ StudentTopicsContainer{
 
 #alert{
   background-color: #30383E;
-  width:30px;
-  height:30px;
+  width:22px;
+  height:22px;
   font-size: 20px;
   margin:0;
   color: white;
+  border: $hoverGray solid 2px;
+  background-color: rgba(0,0,0,0);
+  border-radius: 50%;
+  font-size: 16px;
 }
 
 #alert:hover{
@@ -491,8 +533,8 @@ input[type="text"]{
 }
 /*content inside topic container*/
 .topic{
-   min-height: 100px;
-   margin: 20px;
+   min-height: 75px;
+   margin: 10px 15px;
   //  background-color: #FFFFFF;
    border-left: $green solid 5px;
    display: flex;
@@ -525,7 +567,7 @@ input[type="text"]{
   display: flex;
   align-items: center;
   flex: 2;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .topic-content .topic-description{
@@ -536,10 +578,10 @@ input[type="text"]{
 }
 
 .topic .topic-alert{
-  flex: 0 0 60px;
+  flex: 0 0 40px;
   display: flex;
   flex-direction: column;
-  padding: 20px 0 15px;
+  padding: 0px 0 0px 0;
 }
 
 .topic-alert .topic-alert-icon{
@@ -547,13 +589,20 @@ input[type="text"]{
   align-items: center;
   justify-content: center;
   flex: 1;
+  // justify-content: space-between;
 }
 
-.topic-alert .topic-alert-number{
+.topic-alert .topic-alert-number, .topic-alert-icon{
   display: flex;
   align-items: center;
+  // justify-content: space-between;
   justify-content: center;
   flex: 1;
+}
+
+.topic-alert-icon-delete{
+position: relative;
+top: -15px;
 }
 
 // for form validation
@@ -582,6 +631,17 @@ input[type="text"]{
   to {
     transform: rotate3d(0, 0, 1, 0deg);
   }
+}
+
+.comment-creator {
+  font-size: 25px;
+  color: $lightDarkGray;
+}
+
+.comment {
+  font-size: 25px;
+  color: $hoverGray;
+  margin-bottom: 10px;
 }
 
 .swing {
