@@ -52,7 +52,6 @@ class AddQuestion extends Component{
       this.setState({questionEmpty: false});
     } else {
 
-
       var isUniqueTopic = isUnique(this.state.tags, this.props.topicsArr);
 
       const data = {
