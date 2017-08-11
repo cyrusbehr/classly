@@ -93,8 +93,20 @@ class StudentQuestion extends Component {
       var isProfessorOrTA = (this.props.questionCreatorType === "Professor" || this.props.questionCreatorType === "TA");
       console.log("this.props.qcreatortypr:", this.props.questionCreatorType);
       // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
+
+      var style = {};
+      if(this.state.alreadyClicked){ //TODO: this needs fixing
+        style.backgroundColor = '#D9FFF5';
+      } else {
+        style.backgroundColor = 'white';
+      }
+
+      if(this.props.isResolved){
+        style.backgroundColor = 'lightgray';
+      }
+
       return (
-        <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
+        <div className="question" style={style}>
           <div className="question-main-section">
             <div className="question-body">
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}

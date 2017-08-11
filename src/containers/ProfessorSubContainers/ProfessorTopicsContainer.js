@@ -48,6 +48,7 @@ class ProfessorTopicsContainer extends Component {
               hightlight={this.props.currentFilter===topic.text ? true : false}
               greyOut={this.props.currentFilter!=='' && this.props.currentFilter!==topic.text}
               isDefault={topic.isDefault}
+              color={topic.color}
             />
           )
         })}

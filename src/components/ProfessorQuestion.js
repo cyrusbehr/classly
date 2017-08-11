@@ -91,12 +91,23 @@ class ProfessorQuestion extends Component {
       var nameArr = this.props.questionCreator.split(' ');
       var questionCreatorFirstName = nameArr[0];
 
+      var style = {};
+      if(this.state.alreadyClicked){ //TODO: this needs fixing
+        style.backgroundColor = '#D9FFF5';
+      } else {
+        style.backgroundColor = 'white';
+      }
+
+      if(this.props.isResolved){
+        style.backgroundColor = 'lightgray';
+      }
+
       return (
-        <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
+        <div className="question" style={style}>
           <div className="question-main-section">
             <div className="question-body">
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
-              <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag">#{this.props.tags}</span>}</div>
+              <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
               <div className="question-main-section-question-creator"> - {this.props.questionCreator}</div>
               {/*  TODO: DONOVAN add formating here, feel free to move this around */}
