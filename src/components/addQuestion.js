@@ -76,6 +76,16 @@ class AddQuestion extends Component{
         questionText: "",
         // tags: ""
       })
+
+      // BOOKMARK
+      // $('.questions-container').animate({
+      //   scrollTop: $('.questions-container').height()
+      // },
+      // 500,
+      // "swing");
+      $('.questions-container').animate({
+        scrollTop: $('#anchor').offset().top
+      }, 500, "swing");
     }
   }
   componentWillReceiveProps(nextProps){
