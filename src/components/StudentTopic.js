@@ -41,10 +41,14 @@ class StudentTopic extends Component {
   }
 
   handleClick(id,e){
-    if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
-      this.props.toggleFilter(this.props.text);
-    } else {
+    if(this.props.text === "General"){
       this.props.toggleFilter('');
+    }else {
+      if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
+        this.props.toggleFilter(this.props.text);
+      } else {
+        this.props.toggleFilter('');
+      }
     }
   }
 
