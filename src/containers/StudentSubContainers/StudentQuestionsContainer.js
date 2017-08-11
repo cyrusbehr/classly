@@ -42,7 +42,6 @@ class StudentQuestionsContainer extends Component {
         }
       }
     }
-    console.log('truuuuuuuuuuueeeeeee', this.props.questionsArray);
   }
 
   render() {
