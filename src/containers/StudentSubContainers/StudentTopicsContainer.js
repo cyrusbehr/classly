@@ -29,6 +29,7 @@ class StudentTopicsContainer extends Component {
     var numOfTopics = this.props.topics.length;
     return (
       <div className="topics-container">
+        
         <p className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')}</p>
         {/* <AddTopic /> */}
         {this.props.topics.map((topic, i) => {

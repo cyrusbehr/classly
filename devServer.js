@@ -105,7 +105,7 @@ io.on('connection', socket => {
       } else {
 
         let newTopic = new Topic({
-          text: "General",
+          text: "All Topics",
           votes: 0,
           timestamp: Date.now(),
           referenceClass: newClass._id,
