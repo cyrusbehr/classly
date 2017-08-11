@@ -82,6 +82,9 @@ class StudentTopic extends Component {
       style['border-left'] = this.props.color + ' solid 7px';
     }
 
+    var generalGreyedOut = this.props.text === "General" && this.props.greyOut;
+
+
     return (
       <div
         className="topic"
@@ -89,7 +92,7 @@ class StudentTopic extends Component {
         onClick={(e) => this.handleClick(this.props.id,e)}
       >
         <div className="topic-content">
-          <div className="topic-title" style={this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
+          <div className="topic-title" style={generalGreyedOut ? {'color':'#00C993'} : this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
         </div>
         <div className="topic-alert">
           {/* {isCreatorOrProfessorOrTA
