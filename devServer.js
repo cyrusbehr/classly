@@ -123,6 +123,7 @@ io.on('connection', socket => {
       timestamp: data.timestamp,
       referenceClass: data.referenceClass,
       username: data.username,
+      color: data.color
     })
     socket.broadcast.to(socket.currentRoom).emit('generateTopic', newTopic);
     socket.emit('generateTopic', newTopic);
@@ -173,8 +174,8 @@ io.on('connection', socket => {
               classObj.save()
               .then(() => {
                 socket.emit('classCreated', newClass);
-                socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
-                socket.emit('newTopic', savedTopic);
+                socket.broadcast.to(socket.currentRoom).emit('generateTopic', savedTopic);
+                socket.emit('generateTopic', savedTopic);
               })
             })
           }

@@ -79,6 +79,7 @@ class AddQuestion extends Component{
             timestamp: Date.now(),
             referenceClass: this.props.classObj._id,
             username: this.props.username,
+            color: thisColor,
           }
           this.props.socket.emit('generateTopic', newTopic);
         }
