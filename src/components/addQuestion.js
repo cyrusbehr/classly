@@ -72,17 +72,17 @@ class AddQuestion extends Component{
 
       this.props.socket.emit('generateQuestion', data);
 
-      if(isUniqueTopic && data.tags !== "") {
-        const newTopic = {
-          text: this.state.tags,
-          votes: 0,
-          timestamp: Date.now(),
-          referenceClass: this.props.classObj._id,
-          username: this.props.username,
-          color: thisColor,
+        if(isUniqueTopic && data.tags !== "") {
+          const newTopic = {
+            text: this.state.tags,
+            votes: 0,
+            timestamp: Date.now(),
+            referenceClass: this.props.classObj._id,
+            username: this.props.username,
+            color: thisColor,
+          }
+          this.props.socket.emit('generateTopic', newTopic);
         }
-        this.props.socket.emit('generateTopic', newTopic);
-      }
 
       this.setState({
         questionText: "",

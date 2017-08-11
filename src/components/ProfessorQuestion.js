@@ -24,7 +24,7 @@ class ProfessorQuestion extends Component {
     this.setState({votes: this.props.currentUpVotes});
   }
 
-  onTestChange(e) {
+   onTestChange(e) {
     if (e.which === 13) {
       this.replyButtonPressed(e)
     }

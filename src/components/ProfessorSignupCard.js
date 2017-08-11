@@ -71,68 +71,71 @@ class ProfessorSignupCard extends Component {
   render() {
     return(
       <div className="professor-signup-card">
-        <form>
-          <label>
-            <input
-              type="text"
-              value={this.state.name}
-              placeholder="Full Name"
-              className={this.state.nameEmpty ? "professor-signup-firstname-input" : "professor-signup-empty-firstname-input"}
-              onChange={(event) => this.handleNameChange(event)}
-            />
-            {this.state.nameEmpty ?
-              <div>
-              </div> :
-              <div className="empty-name-alert">
-                Name can't be empty!
-              </div>}
-            </label>
-            <br></br>
-            <label>
-              <input
-                type="text"
-                value={this.state.title}
-                placeholder="Lecture Title or Course Code"
-                className={this.state.nameEmpty ? "professor-signup-lecture-input" : "professor-signup-empty-firstname-input"}
-                onChange={(event) => this.handleTitleChange(event)}
-              />
-              {this.state.lectureEmpty ?
-                <div>
-                </div> :
-                <div className="empty-lecture-alert">
-                  Lecture title can't be empty!
-                </div>}
+            <form>
+              <label>
+                <input
+                  type="text"
+                  value={this.state.name}
+                  placeholder="Full Name"
+                  className={this.state.nameEmpty ? "professor-signup-firstname-input" : "professor-signup-empty-firstname-input"}
+                  onChange={(event) => this.handleNameChange(event)}
+                />
+                {this.state.nameEmpty ?
+                  <div>
+                  </div> :
+                  <div className="empty-name-alert">
+                    Name can't be empty!
+                  </div>}
               </label>
               <br></br>
-              <button
-                type="button"
-                onClick={(e) => this.onSubmit(e)}
-                className="student-signup-submit hvr-grow"
+              <label>
+                <input
+                  type="text"
+                   value={this.state.title}
+                   placeholder="Lecture Title or Course Code"
+                   className={this.state.nameEmpty ? "professor-signup-lecture-input" : "professor-signup-empty-firstname-input"}
+                   onChange={(event) => this.handleTitleChange(event)}
+                />
+                {this.state.lectureEmpty ?
+                  <div>
+                  </div> :
+                  <div className="empty-lecture-alert">
+                    Lecture title can't be empty!
+                  </div>}
+              </label>
+              <br></br>
+              {/* <input type="submit"
+                value="Create Class"
+                onClick={(e) => this.onSubmit(e)}/> */}
+                <button
+                  type="button"
+                  onClick={(e) => this.onSubmit(e)}
+                  className="student-signup-submit hvr-grow"
                 >Create Class</button>
-              </form>
-            </div>
-          )
-        }
-      }
+            </form>
+      </div>
+    )
+  }
+}
 
-      const mapStateToProps = state => {
-        return {
-          socket: state.socketReducer.socket,
-          userType: state.userReducer.userType,
-        }
-      }
+const mapStateToProps = state => {
+  return {
+    socket: state.socketReducer.socket,
+    userType: state.userReducer.userType,
+  }
+}
 
-      const mapDispatchToProps = dispatch => {
-        return {
-          addClassAction: (newClass) => {
-            dispatch(addClass(newClass))
-          },
-          setUsernameAction: (username) => {
-            dispatch(setUsername(username))
-          }
-        }
-      }
+const mapDispatchToProps = dispatch => {
+  return {
+    addClassAction: (newClass) => {
+      dispatch(addClass(newClass))
+    },
+    setUsernameAction: (username) => {
+      dispatch(setUsername(username))
+    }
+  }
+}
 
-      export default connect(
-        mapStateToProps,
-        mapDispatchToProps)(ProfessorSignupCard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)(ProfessorSignupCard);
