@@ -3,7 +3,7 @@ import StudentQuestion from '../../components/StudentQuestion';
 import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
-import {addComment, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve} from '../../actions/Actions';
+import {addComment, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve, setColor} from '../../actions/Actions';
 import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
 
 class StudentQuestionsContainer extends Component {
@@ -30,6 +30,21 @@ class StudentQuestionsContainer extends Component {
     });
   }
 
+  setColor() {
+    for(var i = 0; i < this.props.questionsArray.length; i++){
+      for(var j = 0; j < this.props.topicsArray.length; j++){
+        if(this.props.questionsArray[i].tags[0] === this.props.topicsArray[j].text){
+          if(this.props.topicsArray[j].color) {
+            this.props.questionsArray[i].color = this.props.topicsArray[j].color;
+          } else {
+            this.props.questionsArray[i].color = '#00C993';
+          }
+        }
+      }
+    }
+    console.log('truuuuuuuuuuueeeeeee', this.props.questionsArray);
+  }
+
   render() {
     // var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
     //   return -1 * question.upVotes; //negative changes to descending order
@@ -51,6 +66,7 @@ class StudentQuestionsContainer extends Component {
       <div className="questions-container">
         <AddQuestion />
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
+        {this.setColor()}
         {sortedArray.map((question, i) => {
           return(
             <StudentQuestion
@@ -65,6 +81,7 @@ class StudentQuestionsContainer extends Component {
               questionCreator={question.username}
               comments={question.comments}
               questionCreatorType={question.userType}
+              color={question.color}
               />
             )
           }
@@ -78,6 +95,7 @@ const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
+    topicsArray: state.classReducer.classState.topics,
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
     userType: state.userReducer.userType,
@@ -102,6 +120,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
+    },
+    setColor: (ID) => {
+      dispatch(setColor(ID))
     }
   }
 }

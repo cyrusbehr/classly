@@ -39,7 +39,7 @@ const TopicSchema = mongoose.Schema({
   votes: Number,
   timestamp: Number,
   referenceClass: String,
-  isDefault: Boolean
+  isDefault: Boolean,
   color: String
 });
 
