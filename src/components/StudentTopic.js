@@ -83,7 +83,7 @@ class StudentTopic extends Component {
     }
 
     var generalGreyedOut = this.props.text === "General" && this.props.greyOut;
-
+    var isGeneral = this.props.text === "General"
 
     return (
       <div
@@ -133,7 +133,7 @@ class StudentTopic extends Component {
          </div>
 
           <div className="topic-alert-number">
-            {questionsWithTheTopic.length}
+            {isGeneral ? this.props.questions.length : questionsWithTheTopic.length}
           </div>
 
         </div>
@@ -160,7 +160,7 @@ const mapStateToProps = state => {
     username: state.userReducer.username,
     currentFilter: state.filterReducer,
     userType: state.userReducer.userType,
-    questions: state.classReducer.classState.questions
+    questions: state.classReducer.classState.questions,
   }
 }
 
