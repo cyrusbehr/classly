@@ -24,6 +24,12 @@ class ProfessorQuestion extends Component {
     this.setState({votes: this.props.currentUpVotes});
   }
 
+   onTestChange(e) {
+    if (e.which === 13) {
+      this.replyButtonPressed(e)
+    }
+  }
+
   handleUpvote(e) {
     if(!this.state.alreadyClicked){
       this.setState({votes: this.state.votes + 1})
@@ -90,7 +96,7 @@ class ProfessorQuestion extends Component {
           <div className="question-main-section">
             <div className="question-body">
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
-              <div className="question-header">{this.props.tags[0]==="" ? ' None' : <span className="tag">#{this.props.tags}</span>}</div>
+              <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag">#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
               <div className="question-main-section-question-creator"> - {this.props.questionCreator}</div>
               {/*  TODO: DONOVAN add formating here, feel free to move this around */}
@@ -178,10 +184,11 @@ class ProfessorQuestion extends Component {
                       </div>
                       <div className="question-comment-container">
                         <textarea
+                          onKeyPress={(e) => this.onTestChange(e)}
                           value={this.state.commentText}
                           type="text"
                           onChange={(e) => this.updateCommentText(e)}
-                          placeholder="Anwser here!!!"
+                          placeholder="Add a reply..."
                           className="question-comment-textarea"
                         />
                         <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>

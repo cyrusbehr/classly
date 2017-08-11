@@ -56,6 +56,11 @@ class StudentTopic extends Component {
   }
 
   render() {
+    var questions = this.props.questions;
+    var questionsWithTheTopic = questions.filter((question)=>{
+      return question.tags.includes(this.props.text);
+    })
+
     var isCreator = (this.props.topicCreator === this.props.username);
     var isCreatorOrProfessorOrTA = (this.props.topicCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA') && !this.props.isDefault;
     var style = {};
@@ -83,7 +88,7 @@ class StudentTopic extends Component {
           <div className="topic-title" style={this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
         </div>
         <div className="topic-alert">
-          {isCreatorOrProfessorOrTA
+          {/* {isCreatorOrProfessorOrTA
             ?
             <span>
             <svg className="delete-topic" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
@@ -109,14 +114,34 @@ class StudentTopic extends Component {
                 onMouseOut={() => {this.setState({hover:false})}}
                 >!</button>
             </div>
-           }
 
+            <div
+              className="topic-alert-number"
+              style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
+            >{this.state.votes}</div>
+           } */}
 
-          <div
-            className="topic-alert-number"
-            style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
-          >{this.state.votes}</div>
+         <div className="topic-alert-icon">
+           <i className="material-icons">help_outline</i>
+         </div>
+
+          <div className="topic-alert-number">
+            {questionsWithTheTopic.length}
+          </div>
+
         </div>
+
+        <div className='delete-topic'>
+          {
+            isCreatorOrProfessorOrTA ?
+            <i
+              className="material-icons"
+              onClick={(e)=> this.deleteItem(e)}
+            >clear</i> :
+            null
+          }
+        </div>
+
       </div>
     );
   }
@@ -128,6 +153,7 @@ const mapStateToProps = state => {
     username: state.userReducer.username,
     currentFilter: state.filterReducer,
     userType: state.userReducer.userType,
+    questions: state.classReducer.classState.questions
   }
 }
 
