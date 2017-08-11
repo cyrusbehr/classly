@@ -72,7 +72,6 @@ class ProfessorQuestionsContainer extends Component {
           <span className="lecturer">Prof {profname}</span>
           <span className="date">1st Aug 2017</span>
         </div>
-        <AddQuestion />
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {this.setColor()}
         {sortedArray.map((question, i) => {
@@ -94,7 +93,10 @@ class ProfessorQuestionsContainer extends Component {
             )
           }
         )}
+        <div className="question-container-bottom-buffer"></div>
         <span id="anchor"></span>
+        <AddQuestion />
+        {/* <div div="question-container-bottom-buffer"></div> */}
       </div>
     );
   }
