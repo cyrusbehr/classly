@@ -121,9 +121,9 @@ const mapDispatchToProps = dispatch => {
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
     },
-    setColor: (ID) => {
-      dispatch(setColor(ID))
-    }
+    // setColor: (ID) => {
+    //   dispatch(setColor(ID))
+    // }
   }
 }
 

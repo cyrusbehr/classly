@@ -12,4 +12,3 @@ export const TOGGLE_FILTER = "TOGGLE_FILTER";
 export const TOGGLE_STAR = "TOGGLE_STAR";
 export const TOGGLE_RESOLVE = "TOGGLE_RESOLVE";
 export const NEW_COMMENT = "NEW_COMMENT";
-export const SET_COLOR = "SET_COLOR";

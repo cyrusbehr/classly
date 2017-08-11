@@ -4,7 +4,7 @@ import { SET_USER_TYPE,
   TOGGLE_FILTER,
   UPVOTE_QUESTION, ADD_TOPIC,
   VOTE_TOPIC, DELETE_QUESTION,
-  DELETE_TOPIC, TOGGLE_STAR, TOGGLE_RESOLVE, NEW_COMMENT, SET_COLOR} from '../constants/ActionTypes';
+  DELETE_TOPIC, TOGGLE_STAR, TOGGLE_RESOLVE, NEW_COMMENT} from '../constants/ActionTypes';
 
   export function setUserType(userType) {
     return {
@@ -103,8 +103,8 @@ import { SET_USER_TYPE,
     }
   }
 
-  export function setColor(questionId) {
-    return {
-      type: SET_COLOR
-    }
-  }
+  // export function setColor(questionId) {
+  //   return {
+  //     type: SET_COLOR
+  //   }
+  // }
