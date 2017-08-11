@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
+import {upVoteQuestion, likeQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 import ReactTooltip from 'react-tooltip';
@@ -9,7 +9,6 @@ class StudentQuestion extends Component {
     super(props);
     this.state = {
       hover: false,
-      alreadyClicked: false,
       votes: this.props.currentUpVotes,
       commentText: "",
       toggle: true
@@ -30,15 +29,15 @@ class StudentQuestion extends Component {
    }
  }
 
-  handleUpvote(e) {
-    if(!this.state.alreadyClicked){
+  handleUpvote(e, questionId) {
+    if(this.props.likedQuestions.indexOf(questionId) === -1){
       this.setState({votes: this.state.votes + 1})
+      this.props.likeQuestionAction(questionId, "UP");
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
-      this.setState({alreadyClicked: true});
     } else {
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
-      this.setState({alreadyClicked: false});
+      this.props.likeQuestionAction(questionId, "DOWN");
     }
   }
 
@@ -91,7 +90,7 @@ class StudentQuestion extends Component {
       var isCreator = (this.props.questionCreator === this.props.username);
       var isStudentStarred = (this.props.userType === "Student" && this.props.isStarred);
       var isProfessorOrTA = (this.props.questionCreatorType === "Professor" || this.props.questionCreatorType === "TA");
-      console.log("this.props.qcreatortypr:", this.props.questionCreatorType);
+      var isAlreadyClicked = (this.props.likedQuestions.indexOf(this.props.id) !== -1)
       // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
 
       var style = {};
@@ -106,7 +105,7 @@ class StudentQuestion extends Component {
       }
 
       return (
-        <div className="question" style={style}>
+        <div className="question" style={isAlreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
           <div className="question-main-section">
             <div className="question-body">
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
@@ -123,117 +122,121 @@ class StudentQuestion extends Component {
                   <i
                     id="upvote-icon"
                     className="material-icons"
-                    onClick={(e) => this.handleUpvote(e)}
+                    onClick={(e) => this.handleUpvote(e, this.props.id)}
                     >keyboard_arrow_up</i>
                     {this.state.votes}
-                  </div>
-                  <div className="upvote-number">
-                    <i
-                      id="reply-icon"
-                      className="material-icons"
-                      onClick={(e) => this.toggleReply(e)}
-                      >chat</i>
-                      {this.props.comments.length}
-                    </div>
-                  </div>
-
-                  <div className="delete-button-container">
-                    {isCreator ?
-                      <svg className="delete-question" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
-                        <path d="M13.172 16L.586 3.414c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L16 13.172 28.586.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828L18.828 16l12.586 12.586c.78.78.78 2.047 0 2.828-.78.78-2.048.78-2.828 0L16 18.828 3.414 31.414c-.78.78-2.047.78-2.828 0-.78-.78-.78-2.047 0-2.828L13.172 16z"/>
-                      </svg>
-                      : null }
-                      { isStudentStarred
-                        ?
-                        <svg
-                          className="star-student"
-                          width="40px"
-                          height="40px"
-                          style={this.props.isStarred ? {fill:'#FF7E65'} : {}}
-                          data-tip
-                          data-for='star'
-                          >
-                            <path d="M16 .7c-.4 0-.7.2-.9.6l-4.4 8.9-9.8 1.4c-.4.1-.7.4-.9.7-.1.4 0 .8.3 1l7.1 6.9L5.7 30c-.1.4.1.8.4 1 .2.1.4.2.6.2.2 0 .3 0 .5-.1l8.8-4.6 8.8 4.6c.1.1.3.1.5.1s.4-.1.6-.2c.3-.2.5-.6.4-1l-1.7-9.8 7.1-6.9c.3-.3.4-.7.3-1-.1-.4-.4-.6-.8-.7l-9.9-1.4-4.4-8.9c-.2-.4-.5-.6-.9-.6z"/>
-                          </svg>
-                          : null }
-                        </div>
-                      </div>
-                    </div>
-                    <div className="question-comment-section">
-                      <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
-                        <div className="question-comment-container-wrapper">
-                          <div className="question-comments-container-spacer">
-                          </div>
-                        </div>
-                        <div className="question-comments-container">
-                          <div className="question-comments-container-spacer">
-                          </div>
-                          <div className="question-comments-container-main">
-                            <div className="comment-section-header">{this.props.comments.length} Replies</div>
-                            {this.props.comments ? this.props.comments.map((comment) => {
-                              return(
-                                <div>
-                                  <div className="comment-creator">{comment.creator}: </div>
-                                  <div className="comment">{comment.text}</div>
-                                </div>
-                              )
-                            })
-                            :null
-                          }
-                        </div>
-                      </div>
-                      <div className="question-comment-container-wrapper">
-                        <div className="question-comments-container-spacer">
-                        </div>
-                        <div className="question-comment-container">
-                          <textarea
-                            onKeyPress={(e) => this.onTestChange(e)}
-                            value={this.state.commentText}
-                            type="text"
-                            onChange={(e) => this.updateCommentText(e)}
-                            placeholder="Add a reply..."
-                            className="question-comment-textarea"
-                          />
-                          <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
-                        </div>
-                      </div>
-                    </div>
+                </div>
+                <div className="upvote-number">
+                  <i
+                    id="reply-icon"
+                    className="material-icons"
+                    onClick={(e) => this.toggleReply(e)}
+                    >chat</i>
+                    {this.props.comments.length}
                   </div>
                 </div>
-              );
-            }
-          }
 
-          const mapStateToProps = state => {
+                <div className="delete-button-container">
+                {isCreator ?
+                  <svg className="delete-question" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
+                    <path d="M13.172 16L.586 3.414c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L16 13.172 28.586.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828L18.828 16l12.586 12.586c.78.78.78 2.047 0 2.828-.78.78-2.048.78-2.828 0L16 18.828 3.414 31.414c-.78.78-2.047.78-2.828 0-.78-.78-.78-2.047 0-2.828L13.172 16z"/>
+                  </svg>
+                  : null }
+                { isStudentStarred
+                  ?
+                  <svg
+                    className="star-student"
+                    width="40px"
+                    height="40px"
+                    style={this.props.isStarred ? {fill:'#FF7E65'} : {}}
+                    data-tip
+                    data-for='star'
+                    >
+                      <path d="M16 .7c-.4 0-.7.2-.9.6l-4.4 8.9-9.8 1.4c-.4.1-.7.4-.9.7-.1.4 0 .8.3 1l7.1 6.9L5.7 30c-.1.4.1.8.4 1 .2.1.4.2.6.2.2 0 .3 0 .5-.1l8.8-4.6 8.8 4.6c.1.1.3.1.5.1s.4-.1.6-.2c.3-.2.5-.6.4-1l-1.7-9.8 7.1-6.9c.3-.3.4-.7.3-1-.1-.4-.4-.6-.8-.7l-9.9-1.4-4.4-8.9c-.2-.4-.5-.6-.9-.6z"/>
+                    </svg>
+                    : null }
+                  </div>
+                </div>
+              </div>
+              <div className="question-comment-section">
+                <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
+                  <div className="question-comment-container-wrapper">
+                    <div className="question-comments-container-spacer">
+                    </div>
+                  </div>
+                  <div className="question-comments-container">
+                    <div className="question-comments-container-spacer">
+                    </div>
+                    <div className="question-comments-container-main">
+                      <div className="comment-section-header">{this.props.comments.length} Replies</div>
+                      {this.props.comments ? this.props.comments.map((comment) => {
+                        return(
+                          <div>
+                            <div className="comment-creator">{comment.creator}: </div>
+                            <div className="comment">{comment.text}</div>
+                          </div>
+                        )
+                      })
+                      :null
+                    }
+                  </div>
+                </div>
+                <div className="question-comment-container-wrapper">
+                  <div className="question-comments-container-spacer">
+                  </div>
+                  <div className="question-comment-container">
+                    <textarea
+                      onKeyPress={(e) => this.onTestChange(e)}
+                      value={this.state.commentText}
+                      type="text"
+                      onChange={(e) => this.updateCommentText(e)}
+                      placeholder="Add a reply..."
+                      className="question-comment-textarea"
+                    />
+                    <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+    }
 
-            return {
-              socket: state.socketReducer.socket,
-              questionsArray: state.classReducer.classState.questions,
-              username: state.userReducer.username,
-              userType: state.userReducer.userType,
-            }
-          }
+const mapStateToProps = state => {
 
-          const mapDispatchToProps = dispatch => {
-            return {
-              upVoteQuestionAction: (updatedQuestion) => {
-                dispatch(upVoteQuestion(updatedQuestion));
-              },
-              deleteQuestionAction: (ID) => {
-                dispatch(deleteQuestion(ID));
-              },
-              toggleStarAction: (ID) => {
-                dispatch(toggleStar(ID))
-              },
-              toggleResolveAction: (ID) => {
-                dispatch(toggleResolve(ID))
-              },
-              addCommentAction: (newComment) => {
-                dispatch(addComment(newComment))
-              }
-            }
-          }
+  return {
+    socket: state.socketReducer.socket,
+    questionsArray: state.classReducer.classState.questions,
+    username: state.userReducer.username,
+    userType: state.userReducer.userType,
+    likedQuestions: state.userReducer.likedQuestions,
+  }
+}
 
-          export default connect(
-            mapStateToProps,
-            mapDispatchToProps)(StudentQuestion);
+const mapDispatchToProps = dispatch => {
+  return {
+    upVoteQuestionAction: (updatedQuestion) => {
+      dispatch(upVoteQuestion(updatedQuestion));
+    },
+    deleteQuestionAction: (ID) => {
+      dispatch(deleteQuestion(ID));
+    },
+    toggleStarAction: (ID) => {
+      dispatch(toggleStar(ID))
+    },
+    toggleResolveAction: (ID) => {
+      dispatch(toggleResolve(ID))
+    },
+    addCommentAction: (newComment) => {
+      dispatch(addComment(newComment))
+    },
+    likeQuestionAction: (questionId, direction) => {
+      dispatch(likeQuestion(questionId, direction));
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)(StudentQuestion);
