@@ -73,7 +73,7 @@ class AddQuestion extends Component{
       this.props.socket.emit('newQuestion', data);
       this.setState({
         questionText: "",
-        tags: ""
+        // tags: ""
       })
     }
   }
