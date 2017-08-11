@@ -96,7 +96,7 @@ class ProfessorQuestion extends Component {
           <div className="question-main-section">
             <div className="question-body">
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
-              <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag">#{this.props.tags}</span>}</div>
+              <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
               <div className="question-main-section-question-creator"> - {this.props.questionCreator}</div>
               {/*  TODO: DONOVAN add formating here, feel free to move this around */}

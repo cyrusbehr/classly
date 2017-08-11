@@ -29,6 +29,20 @@ class ProfessorQuestionsContainer extends Component {
     });
   }
 
+  setColor() {
+    for(var i = 0; i < this.props.questionsArray.length; i++){
+      for(var j = 0; j < this.props.topicsArray.length; j++){
+        if(this.props.questionsArray[i].tags[0] === this.props.topicsArray[j].text){
+          if(this.props.topicsArray[j].color) {
+            this.props.questionsArray[i].color = this.props.topicsArray[j].color;
+          } else {
+            this.props.questionsArray[i].color = '#00C993';
+          }
+        }
+      }
+    }
+  }
+
   render() {
 
     // var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
@@ -60,6 +74,7 @@ class ProfessorQuestionsContainer extends Component {
         </div>
         <AddQuestion />
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
+        {this.setColor()}
         {sortedArray.map((question, i) => {
           return(
             <ProfessorQuestion
@@ -74,6 +89,7 @@ class ProfessorQuestionsContainer extends Component {
               questionCreator={question.username}
               comments={question.comments}
               userType={question.userType}
+              color={question.color}
               />
             )
           }
@@ -87,6 +103,7 @@ const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
+    topicsArray: state.classReducer.classState.topics,
     professorName: state.classReducer.classState.professorName,
     filter: state.filterReducer,
     code: state.classReducer.classState.accessCode,
