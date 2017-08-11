@@ -94,6 +94,7 @@ class ProfessorQuestionsContainer extends Component {
             )
           }
         )}
+        <span id="anchor"></span>
       </div>
     );
   }

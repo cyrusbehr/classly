@@ -85,6 +85,7 @@ class StudentQuestionsContainer extends Component {
             )
           }
         )}
+        <span id="anchor"></span>
       </div>
     );
   }

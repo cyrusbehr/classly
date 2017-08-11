@@ -84,6 +84,7 @@ class TAQuestionsContainer extends Component {
           )
         }
       )}
+      <span id="anchor"></span>
     </div>
   );
 }
