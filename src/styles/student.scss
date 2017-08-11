@@ -132,7 +132,7 @@ StudentTopicsContainer{
 
 .question-main-section-question-creator{
   color: $hoverGray;
-  font-size: 12px;
+  font-size: 14px;
   padding-left: 10px;
 }
 
@@ -323,11 +323,10 @@ StudentTopicsContainer{
 
 /*content inside question card*/
 .tag{
-  background: $red;
   color: white;
   border-radius: 8px;
   padding: 0 8px 0 8px;
-  margin: 0 10px 0 0;;
+  margin: 0 10px 0 0;
 }
 
 .new-question-container{
@@ -478,6 +477,7 @@ StudentTopicsContainer{
 .questions-title{
   padding-left: 10px;
   color: gray;
+  font-size: 18px;
 }
 
 #alert{
@@ -582,8 +582,9 @@ input[type="text"]{
 }
 
 .topics-title{
-  padding-left: 10px;
+  padding-left: 15px;
   color: gray;
+  font-size: 18px;
 }
 
 .topic-hover {

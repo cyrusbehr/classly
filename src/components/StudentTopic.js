@@ -41,10 +41,14 @@ class StudentTopic extends Component {
   }
 
   handleClick(id,e){
-    if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
-      this.props.toggleFilter(this.props.text);
-    } else {
+    if(this.props.text === "General"){
       this.props.toggleFilter('');
+    }else {
+      if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
+        this.props.toggleFilter(this.props.text);
+      } else {
+        this.props.toggleFilter('');
+      }
     }
   }
 
@@ -78,6 +82,9 @@ class StudentTopic extends Component {
       style['border-left'] = this.props.color + ' solid 7px';
     }
 
+    var generalGreyedOut = this.props.text === "General" && this.props.greyOut;
+    var isGeneral = this.props.text === "General"
+
     return (
       <div
         className="topic"
@@ -85,7 +92,7 @@ class StudentTopic extends Component {
         onClick={(e) => this.handleClick(this.props.id,e)}
       >
         <div className="topic-content">
-          <div className="topic-title" style={this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
+          <div className="topic-title" style={generalGreyedOut ? {'color':'#00C993'} : this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
         </div>
         <div className="topic-alert">
           {/* {isCreatorOrProfessorOrTA
@@ -126,7 +133,7 @@ class StudentTopic extends Component {
          </div>
 
           <div className="topic-alert-number">
-            {questionsWithTheTopic.length}
+            {isGeneral ? this.props.questions.length : questionsWithTheTopic.length}
           </div>
 
         </div>
@@ -153,7 +160,7 @@ const mapStateToProps = state => {
     username: state.userReducer.username,
     currentFilter: state.filterReducer,
     userType: state.userReducer.userType,
-    questions: state.classReducer.classState.questions
+    questions: state.classReducer.classState.questions,
   }
 }
 

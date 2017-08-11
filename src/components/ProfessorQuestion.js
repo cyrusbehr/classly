@@ -24,6 +24,12 @@ class ProfessorQuestion extends Component {
     this.setState({votes: this.props.currentUpVotes});
   }
 
+   onTestChange(e) {
+    if (e.which === 13) {
+      this.replyButtonPressed(e)
+    }
+  }
+
   handleUpvote(e) {
     if(!this.state.alreadyClicked){
       this.setState({votes: this.state.votes + 1})
@@ -178,10 +184,11 @@ class ProfessorQuestion extends Component {
                       </div>
                       <div className="question-comment-container">
                         <textarea
+                          onKeyPress={(e) => this.onTestChange(e)}
                           value={this.state.commentText}
                           type="text"
                           onChange={(e) => this.updateCommentText(e)}
-                          placeholder="Anwser here!!!"
+                          placeholder="Add a reply..."
                           className="question-comment-textarea"
                         />
                         <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
