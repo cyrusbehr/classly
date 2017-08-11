@@ -9,7 +9,6 @@ class StudentQuestion extends Component {
     super(props);
     this.state = {
       hover: false,
-      alreadyClicked: false,
       votes: this.props.currentUpVotes,
       commentText: "",
       toggle: true
@@ -22,9 +21,6 @@ class StudentQuestion extends Component {
 
   componenetDidMount() {
     this.setState({votes: this.props.currentUpVotes});
-    if(this.props.likedQuestions.indexOf(questionId) === -1){
-      this.setState({alreadyClicked: true});
-    }
   }
 
   onTestChange(e) {
@@ -34,48 +30,15 @@ class StudentQuestion extends Component {
  }
 
   handleUpvote(e, questionId) {
-    // if(!this.state.alreadyClicked){
-    //   this.setState({votes: this.state.votes + 1})
-    //   this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
-    //   this.setState({alreadyClicked: true});
-    // } else {
-    //   this.setState({votes: this.state.votes - 1})
-    //   this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
-    //   this.setState({alreadyClicked: false});
-    // }
-
-    // if(!this.props.likedQuestions.includes(questionId)){
-    //   this.setState({votes: this.state.votes + 1})
-    //   this.props.likeQuestionAction(questionId);
-    //   this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
-    //   // this.setState({alreadyClicked: true});
-    // } else {
-    //   this.setState({votes: this.state.votes - 1})
-    //   this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
-    //   // this.setState({alreadyClicked: false});
-    //   this.props.likeQuestionAction(questionId);
-    // }
-
     if(this.props.likedQuestions.indexOf(questionId) === -1){
       this.setState({votes: this.state.votes + 1})
       this.props.likeQuestionAction(questionId, "UP");
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
-      this.setState({alreadyClicked: true});
     } else {
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
-      this.setState({alreadyClicked: false});
       this.props.likeQuestionAction(questionId, "DOWN");
     }
-
-    // if(questionId of this question is not contained in userReducer.likedQuestions){
-    //   upvote it and
-    //   submit action to the dispatch
-    // } else {
-    //   downvote
-    //   submit action to the dispatch to toggle and take it off the list
-    // }
-
   }
 
   deleteItem(e) {
@@ -127,9 +90,9 @@ class StudentQuestion extends Component {
       var isCreator = (this.props.questionCreator === this.props.username);
       var isStudentStarred = (this.props.userType === "Student" && this.props.isStarred);
       var isProfessorOrTA = (this.props.questionCreatorType === "Professor" || this.props.questionCreatorType === "TA");
-      // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
+      var isAlreadyClicked = (this.props.likedQuestions.indexOf(this.props.id) !== -1)
       return (
-        <div className="question" style={this.state.alreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
+        <div className="question" style={isAlreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
           <div className="question-main-section">
             <div className="question-body">
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
