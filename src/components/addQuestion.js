@@ -25,6 +25,7 @@ class AddQuestion extends Component{
 
     this.props.socket.on('newTopic', (savedTopic) => {
       this.props.addTopicAction(savedTopic);
+      console.log('This was hit')
     })
   }
 
