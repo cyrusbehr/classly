@@ -102,9 +102,3 @@ import { SET_USER_TYPE,
       questionId
     }
   }
-
-  // export function setColor(questionId) {
-  //   return {
-  //     type: SET_COLOR
-  //   }
-  // }

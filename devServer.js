@@ -9,7 +9,6 @@ const app = express();
 const host = 'http://localhost';
 const port = process.env.PORT || 3000;
 
-
 // app.use('/dist/', express.static(path.join(__dirname, 'dist')));
 app.use('/', express.static(path.join(__dirname, 'public')));
 
@@ -29,9 +28,6 @@ mongoose.connection.on('connected', () => {
 
 io.on('connection', socket => {
 
-//data = {
-//   room: room access code
-//}
   socket.on('join', (room) => {
     socket.join(room);
     console.log("user has joined", room);
@@ -39,7 +35,6 @@ io.on('connection', socket => {
     socket.emit("Joined", room);
   });
 
-  //No data needed for this emit event
   socket.on('disconnect', () => {
     socket.leave(socket.currentRoom);
     console.log("user has left");
@@ -183,34 +178,6 @@ io.on('connection', socket => {
       }
     })
   });
-
-  socket.on('newQuestion', (newQuestion) => {
-    console.log(newQuestion);
-    newQuestion.save((err, savedQuestion) => {
-      if(err){
-        console.log("Error saving newQuestion to database:", err);
-      } else {
-        Class.findById(newQuestion.referenceClass, (err, classObj) => {
-          classObj.questions.push(savedQuestion._id);
-          classObj.save()
-        })
-      }
-    });
-  });
-
-  socket.on('newTopic', (newTopic) => {
-    newTopic.save((err, newTopic) => {
-      if(err){
-        console.log("Error saving newTopic to database:", err);
-      } else {
-        Class.findById(newTopic.referenceClass, (err, classObj) => {
-          classObj.topics.push(newTopic._id);
-          classObj.save()
-        })
-      }
-    });
-  });
-
 
   socket.on('upVoteQuestion', (data) => {
     // console.log('upVoteQuestion Data: ', data);
