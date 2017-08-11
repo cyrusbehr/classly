@@ -40,15 +40,11 @@ class StudentTopic extends Component {
     }
   }
 
-  handleClick(id,e){
-    if(this.props.text === "All Topics"){
+  handleClick(id, e) {
+    if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
+      this.props.toggleFilter(this.props.text);
+    } else {
       this.props.toggleFilter('');
-    }else {
-      if(this.props.currentFilter==='' || this.props.currentFilter !== this.props.text){
-        this.props.toggleFilter(this.props.text);
-      } else {
-        this.props.toggleFilter('');
-      }
     }
   }
 
@@ -82,8 +78,8 @@ class StudentTopic extends Component {
       style['border-left'] = this.props.color + ' solid 7px';
     }
 
-    var allTopicsGreyedOut = this.props.text === "All Topics" && this.props.greyOut;
-    var isAllTopics = this.props.text === "All Topics"
+    // var allTopicsGreyedOut = this.props.text === "All Topics" && this.props.greyOut;
+    // var isAllTopics = this.props.text === "All Topics"
 
     return (
       <div
@@ -92,7 +88,7 @@ class StudentTopic extends Component {
         onClick={(e) => this.handleClick(this.props.id,e)}
       >
         <div className="topic-content">
-          <div className="topic-title" style={allTopicsGreyedOut ? {'color':'white'} : this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
+          <div className="topic-title" style={this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
         </div>
         <div className="topic-alert">
           {/* {isCreatorOrProfessorOrTA
@@ -133,7 +129,7 @@ class StudentTopic extends Component {
          </div>
 
           <div className="topic-alert-number">
-            {isAllTopics ? this.props.questions.length : questionsWithTheTopic.length}
+            {questionsWithTheTopic.length}
           </div>
 
         </div>

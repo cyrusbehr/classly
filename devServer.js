@@ -103,30 +103,23 @@ io.on('connection', socket => {
       if(err){
         console.log("Error creating newClass:", err);
       } else {
-
-        let newTopic = new Topic({
-          text: "All Topics",
-          votes: 0,
-          timestamp: Date.now(),
-          referenceClass: newClass._id,
-          username: 'default_topic',
-          isDefault: true
-        });
-        newTopic.save((err, savedTopic) => {
-          if(err){
-            console.log("Error saving savedTopic to database:", err);
-          } else {
-            Class.findById(newClass._id, (err, classObj) => {
-              classObj.topics.push(savedTopic._id);
-              classObj.save()
-              .then(() => {
-                socket.emit('classCreated', newClass);
-                socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
-                socket.emit('newTopic', savedTopic);
-              })
-            })
-          }
-        });
+        // let newTopic = new Topic({
+        //   text: "All Topics",
+        //   votes: 0,
+        //   timestamp: Date.now(),
+        //   referenceClass: newClass._id,
+        //   username: 'default_topic',
+        //   isDefault: true
+        // });
+        Class.findById(newClass._id, (err, classObj) => {
+          // classObj.topics.push(savedTopic._id);
+          classObj.save()
+          .then(() => {
+            socket.emit('classCreated', newClass);
+            // socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
+            // socket.emit('newTopic', savedTopic);
+          })
+        })
       }
     })
   });
