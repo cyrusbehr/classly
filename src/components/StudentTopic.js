@@ -95,39 +95,6 @@ class StudentTopic extends Component {
           <div className="topic-title" style={generalGreyedOut ? {'color':'#00C993'} : this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
         </div>
         <div className="topic-alert">
-          {/* {isCreatorOrProfessorOrTA
-            ?
-            <span>
-            <svg className="delete-topic" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
-              <path d="M13.172 16L.586 3.414c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L16 13.172 28.586.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828L18.828 16l12.586 12.586c.78.78.78 2.047 0 2.828-.78.78-2.048.78-2.828 0L16 18.828 3.414 31.414c-.78.78-2.047.78-2.828 0-.78-.78-.78-2.047 0-2.828L13.172 16z"/>
-            </svg>
-            <div className="topic-alert-icon topic-alert-icon-delete">
-              <button
-                onClick={(e) => this.handleVote(e)}
-                id="alert"
-                style={this.state.hover || this.state.alreadyClicked ? {backgroundColor:'#FF7E65', borderColor: '#FF7E65'} : {'backgroundColor':'#30383E', 'borderColor': '#30383E'} }
-                onMouseOver={() => {this.setState({hover:true})}}
-                onMouseOut={() => {this.setState({hover:false})}}
-                >!</button>
-            </div>
-          </span>
-            :
-            <div className="topic-alert-icon">
-              <button
-                onClick={(e) => this.handleVote(e)}
-                id="alert"
-                style={this.state.hover || this.state.alreadyClicked ? {backgroundColor:'#FF7E65', borderColor: '#FF7E65'} : {'backgroundColor':'#30383E', 'borderColor': '#30383E'} }
-                onMouseOver={() => {this.setState({hover:true})}}
-                onMouseOut={() => {this.setState({hover:false})}}
-                >!</button>
-            </div>
-
-            <div
-              className="topic-alert-number"
-              style={this.state.hover || this.state.alreadyClicked ? {color: '#FF7E65'} : {color:'#30383E'}}
-            >{this.state.votes}</div>
-           } */}
-
          <div className="topic-alert-icon">
            <i className="material-icons">help_outline</i>
          </div>

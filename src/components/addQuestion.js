@@ -19,12 +19,12 @@ class AddQuestion extends Component{
       questionEmpty: true
     }
 
-    this.props.socket.on('newQuestion', (savedQuestion) => {
-      this.props.addQuestionAction(savedQuestion);
+    this.props.socket.on('generateQuestion', (newQuestion) => {
+      this.props.addQuestionAction(newQuestion);
     })
 
-    this.props.socket.on('newTopic', (savedTopic) => {
-      this.props.addTopicAction(savedTopic);
+    this.props.socket.on('generateTopic', (newTopic) => {
+      this.props.addTopicAction(newTopic);
     })
   }
 
@@ -54,6 +54,7 @@ class AddQuestion extends Component{
     } else {
 
       var isUniqueTopic = isUnique(this.state.tags, this.props.topicsArr);
+      var thisColor = randomColor(colorArray)
 
       const data = {
         text: this.state.questionText,
@@ -65,12 +66,23 @@ class AddQuestion extends Component{
         isStarred: false,
         upVotes: 0,
         timestamp: Date.now(),
-        isUniqueTopic,
-        color: randomColor(colorArray)
+        color: thisColor,
+        comments: []
       }
 
-      console.log("this is data in addQuestions:", data);
-      this.props.socket.emit('newQuestion', data);
+      this.props.socket.emit('generateQuestion', data);
+
+        if(isUniqueTopic && data.tags !== "") {
+          const newTopic = {
+            text: this.state.tags,
+            votes: 0,
+            timestamp: Date.now(),
+            referenceClass: this.props.classObj._id,
+            username: this.props.username,
+          }
+          this.props.socket.emit('generateTopic', newTopic);
+        }
+
       this.setState({
         questionText: "",
         // tags: ""
