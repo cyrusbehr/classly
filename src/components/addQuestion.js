@@ -86,7 +86,7 @@ class AddQuestion extends Component{
 
       this.setState({
         questionText: "",
-        // tags: ""
+        tags: ""
       })
 
       // BOOKMARK
