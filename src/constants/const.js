@@ -54,7 +54,6 @@ const colorArray = [
   '#194D33',
   '#DBDF00',
   '#B0BC00',
-  '#FCDC00',
   '#FB9E00',
   '#FE9200',
   '#C45100',
