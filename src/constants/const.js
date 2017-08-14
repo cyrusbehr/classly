@@ -59,9 +59,6 @@ const colorArray = [
   '#FE9200',
   '#C45100',
   '#F44E3B',
-  '#CCCCCC',
-  '#999999',
-  '#666666'
 ]
 
 module.exports = {
