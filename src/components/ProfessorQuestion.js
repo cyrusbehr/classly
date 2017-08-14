@@ -251,7 +251,6 @@ class ProfessorQuestion extends Component {
                 </div>
               </div>
             </div>
-          </div>
         );
       }
     }
