@@ -95,7 +95,7 @@ StudentTopicsContainer{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-top: 3px solid #DFDFDF;
+  border-bottom: 3px solid #DFDFDF;
   background-color: white;
   //#D9FFF5
 }
@@ -334,6 +334,13 @@ StudentTopicsContainer{
   padding: 10px;
   display: flex;
   flex-direction: column;
+
+  z-index: 999;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  left: 350px;
 }
 
 .new-topic-container{
@@ -478,6 +485,8 @@ StudentTopicsContainer{
   padding-left: 10px;
   color: gray;
   font-size: 18px;
+  margin-top: 55px;
+  z-index: 0;
 }
 
 #alert{
@@ -493,7 +502,7 @@ StudentTopicsContainer{
   font-size: 16px;
 }
 
-#alert:hover{
+#alert:hover {
   cursor: pointer;
 }
 
@@ -585,6 +594,7 @@ input[type="text"]{
   padding-left: 15px;
   color: gray;
   font-size: 18px;
+  margin-top: 0px;
 }
 
 .topic-hover {
@@ -698,4 +708,8 @@ top: -15px;
 #return-button:hover{
   color: $green;
   cursor: pointer;
+}
+
+.question-container-bottom-buffer {
+  height: 115px;
 }

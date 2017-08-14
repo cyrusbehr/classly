@@ -88,6 +88,59 @@ io.on('connection', socket => {
     })
   })
 
+  socket.on('generateQuestion', (data) => {
+    const newQuestion = new Question ({
+      text: data.text,
+      username: data.username,
+      userType: data.userType,
+      tags: data.tags,
+      referenceClass: data.referenceClass,
+      isResolved: data.isResolved,
+      isStarred: data.isStarred,
+      upVotes: data.upVotes,
+      timestamp: data.timestamp,
+      color: data.color,
+      comments: data.comments,
+    })
+    socket.broadcast.to(socket.currentRoom).emit('generateQuestion', newQuestion);
+    socket.emit('generateQuestion', newQuestion);
+    newQuestion.save((err, savedQuestion) => {
+      if(err){
+        console.log("Error saving newQuestion to database:", err);
+      } else {
+        Class.findById(newQuestion.referenceClass, (err, classObj) => {
+          classObj.questions.push(savedQuestion._id);
+          classObj.save()
+        })
+      }
+    });
+  })
+
+  socket.on('generateTopic', (data) => {
+    const newTopic = new Topic ({
+      text: data.text,
+      votes: data.votes,
+      timestamp: data.timestamp,
+      referenceClass: data.referenceClass,
+      username: data.username,
+      color: data.color
+    })
+    socket.broadcast.to(socket.currentRoom).emit('generateTopic', newTopic);
+    socket.emit('generateTopic', newTopic);
+
+    newTopic.save((err, newTopic) => {
+      if(err){
+        console.log("Error saving newTopic to database:", err);
+      } else {
+        Class.findById(newTopic.referenceClass, (err, classObj) => {
+          classObj.topics.push(newTopic._id);
+          classObj.save()
+        })
+      }
+    });
+  })
+
+
   socket.on('createClass', (localState) => {
     let nameArr = localState.name.split(" ");
     let str = nameArr[0].concat(localState.title.replace(/ /g,''));
@@ -124,87 +177,32 @@ io.on('connection', socket => {
     })
   });
 
-  socket.on('newQuestion', (data) => {
-    var newQuestion = new Question({
-      text: data.text,
-      username: data.username,
-      userType: data.userType,
-      isResolved: data.isResolved || false,
-      isStarred: data.isStarred || false,
-      upVotes: data.upVotes || 0,
-      tags: data.tags,
-      timestamp: Date.now(),
-      referenceClass: data.referenceClass,
-      color: data.color
-    });
+  socket.on('newQuestion', (newQuestion) => {
+    console.log(newQuestion);
     newQuestion.save((err, savedQuestion) => {
       if(err){
         console.log("Error saving newQuestion to database:", err);
       } else {
-        Class.findById(data.referenceClass, (err, classObj) => {
+        Class.findById(newQuestion.referenceClass, (err, classObj) => {
           classObj.questions.push(savedQuestion._id);
           classObj.save()
-          .then(() => {
-            //check to see if the topic is empty or already exists
-            if(data.tags === "" || data.isUniqueTopic === false){
-              socket.broadcast.to(socket.currentRoom).emit('newQuestion', savedQuestion);
-              socket.emit('newQuestion', savedQuestion);
-            }else{
-            let newTopic = new Topic({
-              text: data.tags,
-              votes: 0,
-              timestamp: Date.now(),
-              referenceClass: data.referenceClass,
-              username: data.username,
-              color: data.color
-            });
-            newTopic.save((err, savedTopic) => {
-              if(err){
-                console.log("Error saving savedTopic to database:", err);
-              } else {
-                Class.findById(data.referenceClass, (err, classObj) => {
-                  classObj.topics.push(savedTopic._id);
-                  classObj.save()
-                  .then(() => {
-                    socket.broadcast.to(socket.currentRoom).emit('newQuestion', savedQuestion);
-                    socket.emit('newQuestion', savedQuestion);
-                    socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
-                    socket.emit('newTopic', savedTopic);
-                  })
-                })
-              }
-            });
-          }
-          })
         })
       }
     });
   });
 
-  // socket.on('newTopic', (data) => {
-  //   let newTopic = new Topic({
-  //     text: data.text,
-  //     votes: data.votes,
-  //     timestamp: data.timestamp,
-  //     referenceClass: data.referenceClass,
-  //     username: data.username,
-  //     slideNumber: data.slideNumber
-  //   });
-  //   newTopic.save((err, newTopic) => {
-  //     if(err){
-  //       console.log("Error saving newTopic to database:", err);
-  //     } else {
-  //       Class.findById(data.referenceClass, (err, classObj) => {
-  //         classObj.topics.push(newTopic._id);
-  //         classObj.save()
-  //         .then(() => {
-  //           socket.broadcast.to(socket.currentRoom).emit('newTopic', newTopic);
-  //           socket.emit('newTopic', newTopic);
-  //         })
-  //       })
-  //     }
-  //   });
-  // });
+  socket.on('newTopic', (newTopic) => {
+    newTopic.save((err, newTopic) => {
+      if(err){
+        console.log("Error saving newTopic to database:", err);
+      } else {
+        Class.findById(newTopic.referenceClass, (err, classObj) => {
+          classObj.topics.push(newTopic._id);
+          classObj.save()
+        })
+      }
+    });
+  });
 
 
   socket.on('upVoteQuestion', (data) => {

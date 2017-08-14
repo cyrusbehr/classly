@@ -38,15 +38,30 @@ const taSignupData = {
 }
 
 const colorArray = [
-  '#FF6900',
-  '#FCB900',
-  '#7BDCB5',
-  '#8ED1FC',
-  '#0693E3',
-  '#ABB8C3',
-  '#EB144C',
-  '#F78DA7',
-  '#9900EF'
+  '#FDA1FF',
+  '#FA28FF',
+  '#AB149E',
+  '#AEA1FF',
+  '#7B64FF',
+  '#73D8FF',
+  '#009CE0',
+  '#0062B1',
+  '#68CCCA',
+  '#16A5A5',
+  '#0C797D',
+  '#A4DD00',
+  '#68BC00',
+  '#194D33',
+  '#DBDF00',
+  '#B0BC00',
+  '#FCDC00',
+  '#FB9E00',
+  '#FE9200',
+  '#C45100',
+  '#F44E3B',
+  '#CCCCCC',
+  '#999999',
+  '#666666'
 ]
 
 module.exports = {

@@ -4,7 +4,8 @@ import { SET_USER_TYPE,
   TOGGLE_FILTER,
   UPVOTE_QUESTION, ADD_TOPIC,
   VOTE_TOPIC, DELETE_QUESTION,
-  DELETE_TOPIC, TOGGLE_STAR, TOGGLE_RESOLVE, NEW_COMMENT} from '../constants/ActionTypes';
+  DELETE_TOPIC, TOGGLE_STAR,
+  TOGGLE_RESOLVE, NEW_COMMENT, LIKE_QUESTION} from '../constants/ActionTypes';
 
   export function setUserType(userType) {
     return {
@@ -102,6 +103,15 @@ import { SET_USER_TYPE,
       questionId
     }
   }
+
+  export function likeQuestion(questionId, direction) {
+    return {
+      type: LIKE_QUESTION,
+      questionId: questionId,
+      direction: direction,
+    }
+  }
+
 
   // export function setColor(questionId) {
   //   return {

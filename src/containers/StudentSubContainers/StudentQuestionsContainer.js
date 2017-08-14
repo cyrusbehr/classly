@@ -63,7 +63,6 @@ class StudentQuestionsContainer extends Component {
 
     return (
       <div className="questions-container">
-        <AddQuestion />
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {this.setColor()}
         {sortedArray.map((question, i) => {
@@ -85,7 +84,9 @@ class StudentQuestionsContainer extends Component {
             )
           }
         )}
+        <div className="question-container-bottom-buffer"></div>
         <span id="anchor"></span>
+        <AddQuestion />
       </div>
     );
   }
