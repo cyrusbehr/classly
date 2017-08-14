@@ -67,6 +67,7 @@ class ProfessorQuestion extends Component {
 
   replyButtonPressed(e) {
     e.preventDefault();
+    if(this.state.commentText === "") return;
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
