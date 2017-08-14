@@ -146,7 +146,6 @@ class ProfessorQuestion extends Component {
                         >Resolved</div>
                     : null }
                   </div>
-
                   <div className="delete-button-container">
                     <svg className="delete-question" onClick={(e)=> this.deleteItem(e)} width="40px" height="40px">
                       <path d="M13.172 16L.586 3.414c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L16 13.172 28.586.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828L18.828 16l12.586 12.586c.78.78.78 2.047 0 2.828-.78.78-2.048.78-2.828 0L16 18.828 3.414 31.414c-.78.78-2.047.78-2.828 0-.78-.78-.78-2.047 0-2.828L13.172 16z"/>
@@ -236,17 +235,6 @@ class ProfessorQuestion extends Component {
                 </div>
                 <div className="question-comment-container-wrapper">
                   <div className="question-comments-container-spacer">
-                  </div>
-                  <div className="question-comment-container">
-                    <textarea
-                      onKeyPress={(e) => this.onTestChange(e)}
-                      value={this.state.commentText}
-                      type="text"
-                      onChange={(e) => this.updateCommentText(e)}
-                      placeholder="Add a reply..."
-                      className="question-comment-textarea"
-                    />
-                    <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
                   </div>
                 </div>
               </div>
