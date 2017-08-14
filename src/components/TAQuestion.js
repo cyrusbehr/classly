@@ -12,11 +12,12 @@ class TAQuestion extends Component {
       alreadyClicked: false,
       votes: this.props.currentUpVotes,
       commentText: "",
-      toggle: true
+      toggle: true,
+      processing: false
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
-      this.setState({votes: this.props.currentUpVotes})
+      this.setState({votes: this.props.currentUpVotes, processing: false})
     });
   }
 
@@ -31,6 +32,9 @@ class TAQuestion extends Component {
  }
 
   handleUpvote(e) {
+    if(this.state.processing) return
+    this.setState({processing: true});
+
     if(!this.state.alreadyClicked){
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
