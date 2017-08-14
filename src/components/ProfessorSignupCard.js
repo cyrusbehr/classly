@@ -26,13 +26,24 @@ class ProfessorSignupCard extends Component {
       }
     });
 
-
     this.props.socket.on('Joined', room => {
       this.props.socket.emit('createClass', this.state);
     });
     this.props.socket.on('classCreated', newClass => {
+      // this.props.socket.emit('')
+
       this.props.addClassAction(newClass);
       this.props.setUsernameAction(this.state.name);
+      //TODO: Create a resolvedQuestions topic when a new class is created
+      const newTopic = {
+        text: "ResolvedQuestions",
+        votes: 0,
+        timestamp: Date.now(),
+        referenceClass: newClass._id,
+        username: this.props.username,
+        color: thisColor,
+      }
+      this.props.socket.emit('generateTopic', newTopic);
       this.redirect();
     });
   }
