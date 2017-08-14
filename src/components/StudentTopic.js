@@ -71,11 +71,11 @@ class StudentTopic extends Component {
     }
 
     if(this.props.greyOut){
-      style['background-color'] = 'lightgray';
+      style['backgroundColor'] = 'lightgray';
     }
 
     if(this.props.color){
-      style['border-left'] = this.props.color + ' solid 7px';
+      style['borderLeft'] = this.props.color + ' solid 7px';
     }
 
     // var allTopicsGreyedOut = this.props.text === "All Topics" && this.props.greyOut;

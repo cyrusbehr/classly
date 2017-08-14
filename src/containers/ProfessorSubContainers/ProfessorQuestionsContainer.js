@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import _ from 'underscore';
 import {addComment, deleteTopic, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve} from '../../actions/Actions';
 import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
+import now from 'date-now';
+import dateFormat from 'dateformat';
 
 class ProfessorQuestionsContainer extends Component {
   constructor(props) {
@@ -43,6 +45,12 @@ class ProfessorQuestionsContainer extends Component {
     }
   }
 
+  dateNow() {
+    var ts = now()
+    var formatedTime = dateFormat(ts, "fullDate")
+    return formatedTime
+  }
+
   render() {
 
     // var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
@@ -70,7 +78,7 @@ class ProfessorQuestionsContainer extends Component {
           {/* <span># Students: XX</span> */}
           {/* <span>#Q's: {this.props.questionsArray.length}</span> */}
           <span className="lecturer">Prof {profname}</span>
-          <span className="date">1st Aug 2017</span>
+          <span className="date">{this.dateNow()}</span>
         </div>
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {this.setColor()}

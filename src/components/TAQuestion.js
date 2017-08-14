@@ -67,6 +67,7 @@ class TAQuestion extends Component {
 
   replyButtonPressed(e) {
     e.preventDefault();
+    if(this.state.commentText === "") return;
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
@@ -191,7 +192,7 @@ class TAQuestion extends Component {
                           <div className="comment-section-header">{this.props.comments.length} Replies</div>
                           {this.props.comments ? this.props.comments.map((comment) => {
                             return(
-                              <div>
+                              <div key={comment.text + comment.creator}>
                                 <div className="comment-creator">{comment.creator}: </div>
                                 <div className="comment">{comment.text}</div>
                               </div>

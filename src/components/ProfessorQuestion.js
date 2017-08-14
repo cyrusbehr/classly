@@ -67,6 +67,7 @@ class ProfessorQuestion extends Component {
 
   replyButtonPressed(e) {
     e.preventDefault();
+    if(this.state.commentText === "") return;
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
@@ -185,10 +186,39 @@ class ProfessorQuestion extends Component {
                   </div>
                 </div>
               </div>
-              <div className="question-comment-section">
-                <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
-                  <div className="question-comments-container">
-                    <div className="question-comments-container-spacer">
+                  <div className="question-comment-section">
+                    <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
+                      <div className="question-comments-container">
+                        <div className="question-comments-container-spacer">
+                        </div>
+                        <div className="question-comments-container-main">
+                          <div className="comment-section-header">{this.props.comments.length} Replies</div>
+                          {this.props.comments ? this.props.comments.map((comment) => {
+                            return(
+                              <div key={comment.text + comment.creator}>
+                                <div className="comment-creator">{comment.creator}: </div>
+                                <div className="comment">{comment.text}</div>
+                              </div>
+                            )
+                          })
+                          :null
+                        }
+                      </div>
+                    </div>
+                    <div className="question-comment-container-wrapper">
+                      <div className="question-comments-container-spacer">
+                      </div>
+                      <div className="question-comment-container">
+                        <textarea
+                          onKeyPress={(e) => this.onTestChange(e)}
+                          value={this.state.commentText}
+                          type="text"
+                          onChange={(e) => this.updateCommentText(e)}
+                          placeholder="Add a reply..."
+                          className="question-comment-textarea"
+                        />
+                        <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+                      </div>
                     </div>
                     <div className="question-comments-container-main">
                       <div className="comment-section-header">{this.props.comments.length} Replies</div>
