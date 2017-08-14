@@ -99,6 +99,11 @@ class TAQuestion extends Component {
         style.backgroundColor = 'lightgray';
       }
 
+      var darkGreenStyle = {
+        color: '#10a02a',
+        fontSize: 30,
+      }
+
       return (
         <div className="question" style={style}>
           <div className="question-main-section">
@@ -129,6 +134,14 @@ class TAQuestion extends Component {
                       >chat</i>
                       {this.props.comments.length}
                     </div>
+                    {this.props.isResolved
+                      ?
+                      <div
+                        className="resolve"
+                        style={darkGreenStyle}
+                        onClick={(e)=> this.toggleThisResolve(e)}
+                        >Resolved</div>
+                    : null }
                   </div>
 
                   <div className="delete-button-container">
