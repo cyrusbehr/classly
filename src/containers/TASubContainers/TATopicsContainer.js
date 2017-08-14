@@ -25,7 +25,7 @@ class TATopicsContainer extends Component {
     var numOfQuestions = this.props.questions.length;
     return (
       <div className="topics-container">
-        <div style={{display:'flex', 'justify-content': 'space-between', 'align-items':'center'}}>
+        <div style={{display:'flex', 'justifyContent': 'space-between', 'alignItems':'center'}}>
           <p className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')} , {numOfQuestions + (numOfQuestions<2 ? ' Question in Total' : ' Questions in Total')}</p>
           {this.props.currentFilter==='' ? null : <i id='return-button' className="material-icons" onClick={()=>{this.onReturn()}}>keyboard_return</i>}
         </div>
