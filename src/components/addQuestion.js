@@ -90,14 +90,14 @@ class AddQuestion extends Component{
       })
 
       // BOOKMARK
+
       // $('.questions-container').animate({
-      //   scrollTop: $('.questions-container').height()
-      // },
-      // 500,
-      // "swing");
+      //   scrollTop: $('#anchor').offset().top
+      // }, 500, "swing");
       $('.questions-container').animate({
-        scrollTop: $('#anchor').offset().top
+        scrollTop: 228 + this.props.questionsArray.length * $('.question').height() // TODO: THIS IS HARDCODED, MIGHT CAUSE ISSUE WHEN THE HEIGHT OF EACH QUESTION IS CHANGED
       }, 500, "swing");
+
     }
   }
   componentWillReceiveProps(nextProps){
@@ -168,6 +168,7 @@ const mapStateToProps = state => {
     currentFilter: state.filterReducer,
     userType: state.userReducer.userType,
     topicsArr: state.classReducer.classState.topics,
+    questionsArray: state.classReducer.classState.questions,
   }
 }
 
