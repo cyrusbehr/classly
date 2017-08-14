@@ -92,6 +92,11 @@ class ProfessorQuestion extends Component {
       var nameArr = this.props.questionCreator.split(' ');
       var questionCreatorFirstName = nameArr[0];
 
+      var darkGreenStyle = {
+        color: '#10a02a',
+        fontSize: 30,
+      }
+
       var style = {};
       if(this.state.alreadyClicked){ //TODO: this needs fixing
         style.backgroundColor = '#D9FFF5';
@@ -132,6 +137,14 @@ class ProfessorQuestion extends Component {
                       >chat</i>
                       {this.props.comments.length}
                     </div>
+                    {this.props.isResolved
+                      ?
+                      <div
+                        className="resolve"
+                        style={darkGreenStyle}
+                        onClick={(e)=> this.toggleThisResolve(e)}
+                        >Resolved</div>
+                    : null }
                   </div>
 
                   <div className="delete-button-container">
@@ -153,25 +166,26 @@ class ProfessorQuestion extends Component {
                         <ReactTooltip id='star' type='warning'>
                           <span>Pin question</span>
                         </ReactTooltip>
-
-                        <svg
-                          className="resolve"
-                          width="40px"
-                          height="40px"
-                          style={this.props.isResolved ? {fill:'green'} : {}}
-                          onClick={(e)=> this.toggleThisResolve(e)}
-                          data-tip
-                          data-for='resolve'
-                          >
-                            <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
-                          </svg>
-                          <ReactTooltip id='resolve' type='success'>
-                            <span>Mark as resolved</span>
-                          </ReactTooltip>
+                        <div>
+                          <svg
+                            className="resolve"
+                            width="40px"
+                            height="40px"
+                            style={this.props.isResolved ? {fill:'green'} : {}}
+                            onClick={(e)=> this.toggleThisResolve(e)}
+                            data-tip
+                            data-for='resolve'
+                            >
+                              <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
+                            </svg>
+                            <ReactTooltip id='resolve' type='success'>
+                              <span>Mark as resolved</span>
+                            </ReactTooltip>
                         </div>
-                      </div>
                     </div>
                   </div>
+                </div>
+              </div>
                   <div className="question-comment-section">
                     <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
                       <div className="question-comments-container">
@@ -206,12 +220,41 @@ class ProfessorQuestion extends Component {
                         <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
                       </div>
                     </div>
+                    <div className="question-comments-container-main">
+                      <div className="comment-section-header">{this.props.comments.length} Replies</div>
+                      {this.props.comments ? this.props.comments.map((comment) => {
+                        return(
+                          <div>
+                            <div className="comment-creator">{comment.creator}: </div>
+                            <div className="comment">{comment.text}</div>
+                          </div>
+                        )
+                      })
+                      :null
+                    }
+                  </div>
+                </div>
+                <div className="question-comment-container-wrapper">
+                  <div className="question-comments-container-spacer">
+                  </div>
+                  <div className="question-comment-container">
+                    <textarea
+                      onKeyPress={(e) => this.onTestChange(e)}
+                      value={this.state.commentText}
+                      type="text"
+                      onChange={(e) => this.updateCommentText(e)}
+                      placeholder="Add a reply..."
+                      className="question-comment-textarea"
+                    />
+                    <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
                   </div>
                 </div>
               </div>
-            );
-          }
-        }
+            </div>
+          </div>
+        );
+      }
+    }
 
         const mapStateToProps = state => {
 
