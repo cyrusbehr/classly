@@ -11,11 +11,12 @@ class StudentQuestion extends Component {
       hover: false,
       votes: this.props.currentUpVotes,
       commentText: "",
-      toggle: true
+      toggle: true,
+      processing: false
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
-      this.setState({votes: this.props.currentUpVotes})
+      this.setState({votes: this.props.currentUpVotes, processing: false});
     });
   }
 
@@ -30,6 +31,8 @@ class StudentQuestion extends Component {
  }
 
   handleUpvote(e, questionId) {
+    if(this.state.processing) return
+    this.setState({processing: true});
     if(this.props.likedQuestions.indexOf(questionId) === -1){
       this.setState({votes: this.state.votes + 1})
       this.props.likeQuestionAction(questionId, "UP");
@@ -169,53 +172,72 @@ class StudentQuestion extends Component {
                       <path d="M16 .7c-.4 0-.7.2-.9.6l-4.4 8.9-9.8 1.4c-.4.1-.7.4-.9.7-.1.4 0 .8.3 1l7.1 6.9L5.7 30c-.1.4.1.8.4 1 .2.1.4.2.6.2.2 0 .3 0 .5-.1l8.8-4.6 8.8 4.6c.1.1.3.1.5.1s.4-.1.6-.2c.3-.2.5-.6.4-1l-1.7-9.8 7.1-6.9c.3-.3.4-.7.3-1-.1-.4-.4-.6-.8-.7l-9.9-1.4-4.4-8.9c-.2-.4-.5-.6-.9-.6z"/>
                     </svg>
                     : null }
-                  </div>
+                { isCreator
+                ?
+                <div>
+                  <svg
+                    className="resolve"
+                    width="40px"
+                    height="40px"
+                    style={this.props.isResolved ? {fill:'green'} : {}}
+                    onClick={(e)=> this.toggleThisResolve(e)}
+                    data-tip
+                    data-for='resolve'
+                    >
+                      <path d="M10 28c-.512 0-1.024-.195-1.414-.586l-8-8c-.78-.78-.78-2.047 0-2.828.78-.78 2.048-.78 2.828 0L10 23.172 28.586 4.586c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-20 20c-.39.39-.902.586-1.414.586z"/>
+                    </svg>
+                    <ReactTooltip id='resolve' type='success'>
+                      <span>Mark as resolved</span>
+                    </ReactTooltip>
+                </div>
+              : null }
                 </div>
               </div>
-              <div className="question-comment-section">
-                <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
-                  <div className="question-comment-container-wrapper">
-                    <div className="question-comments-container-spacer">
-                    </div>
-                  </div>
-                  <div className="question-comments-container">
-                    <div className="question-comments-container-spacer">
-                    </div>
-                    <div className="question-comments-container-main">
-                      <div className="comment-section-header">{this.props.comments.length} Replies</div>
-                      {this.props.comments ? this.props.comments.map((comment) => {
-                        return(
-                          <div key={comment.text + comment.creator}>
-                            <div className="comment-creator">{comment.creator}: </div>
-                            <div className="comment">{comment.text}</div>
-                          </div>
-                        )
-                      })
-                      :null
-                    }
-                  </div>
-                </div>
+            </div>
+            <div className="question-comment-section">
+              <div className={this.state.toggle ? "question-footer" : "question-footer-1"}>
                 <div className="question-comment-container-wrapper">
                   <div className="question-comments-container-spacer">
                   </div>
-                  <div className="question-comment-container">
-                    <textarea
-                      onKeyPress={(e) => this.onTestChange(e)}
-                      value={this.state.commentText}
-                      type="text"
-                      onChange={(e) => this.updateCommentText(e)}
-                      placeholder="Add a reply..."
-                      className="question-comment-textarea"
-                    />
-                    <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
+                </div>
+                <div className="question-comments-container">
+                  <div className="question-comments-container-spacer">
                   </div>
+                  <div className="question-comments-container-main">
+                    <div className="comment-section-header">{this.props.comments.length} Replies</div>
+                    {this.props.comments ? this.props.comments.map((comment) => {
+                      return(
+                        <div key={comment.text + comment.creator}>
+                          <div className="comment-creator">{comment.creator}: </div>
+                          <div className="comment">{comment.text}</div>
+                        </div>
+                      )
+                    })
+                    :null
+                  }
+                </div>
+              </div>
+              <div className="question-comment-container-wrapper">
+                <div className="question-comments-container-spacer">
+                </div>
+                <div className="question-comment-container">
+                  <textarea
+                    onKeyPress={(e) => this.onTestChange(e)}
+                    value={this.state.commentText}
+                    type="text"
+                    onChange={(e) => this.updateCommentText(e)}
+                    placeholder="Add a reply..."
+                    className="question-comment-textarea"
+                  />
+                  <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
                 </div>
               </div>
             </div>
           </div>
-        );
-      }
+        </div>
+      );
     }
+  }
 
 const mapStateToProps = state => {
 
