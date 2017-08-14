@@ -11,11 +11,12 @@ class StudentQuestion extends Component {
       hover: false,
       votes: this.props.currentUpVotes,
       commentText: "",
-      toggle: true
+      toggle: true,
+      processing: false
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
-      this.setState({votes: this.props.currentUpVotes})
+      this.setState({votes: this.props.currentUpVotes, processing: false});
     });
   }
 
@@ -30,6 +31,8 @@ class StudentQuestion extends Component {
  }
 
   handleUpvote(e, questionId) {
+    if(this.state.processing) return
+    this.setState({processing: true});
     if(this.props.likedQuestions.indexOf(questionId) === -1){
       this.setState({votes: this.state.votes + 1})
       this.props.likeQuestionAction(questionId, "UP");
