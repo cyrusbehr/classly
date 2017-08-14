@@ -105,7 +105,7 @@ class StudentQuestion extends Component {
       }
 
       return (
-        <div className="question" style={isAlreadyClicked ? {backgroundColor:'#D9FFF5'} : {backgroundColor:'white'} }>
+        <div className="question" style={style}>
           <div className="question-main-section">
             <div className="question-body">
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
