@@ -84,13 +84,14 @@ class ProfessorQuestion extends Component {
     }
 
     toggleReply(e) {
-      e.preventDefault();
-      if(this.state.toggle === false){
-        this.setState({toggle: true})
-      } else {
-        this.setState({toggle: false})
-      }
-    }
+          e.preventDefault();
+          if(this.state.toggle === false){
+            this.setState({toggle: true});
+          } else {
+            this.setState({toggle: false})
+            $(e.target).parents('.question').find('.question-comment-textarea').focus();
+          }
+        }
 
     render() {
       var nameArr = this.props.questionCreator.split(' ');
