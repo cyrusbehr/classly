@@ -78,6 +78,10 @@ class StudentTopic extends Component {
       style['borderLeft'] = this.props.color + ' solid 7px';
     }
 
+    // if(this.props.isDefault === true){
+    //   style.minHeight = '30px';
+    //   style.fontSize = 14;
+    // }
     // var allTopicsGreyedOut = this.props.text === "All Topics" && this.props.greyOut;
     // var isAllTopics = this.props.text === "All Topics"
 
@@ -94,13 +98,10 @@ class StudentTopic extends Component {
          <div className="topic-alert-icon">
            <i className="material-icons">help_outline</i>
          </div>
-
           <div className="topic-alert-number">
             {questionsWithTheTopic.length}
           </div>
-
         </div>
-
         <div className='delete-topic'>
           {
             isCreatorOrProfessorOrTA ?
@@ -111,7 +112,6 @@ class StudentTopic extends Component {
             null
           }
         </div>
-
       </div>
     );
   }

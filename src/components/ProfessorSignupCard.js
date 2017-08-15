@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {addClass, setUsername} from '../actions/Actions'
-import $ from 'jquery'
+import $ from 'jquery';
+import {colorArray} from '../constants/const';
+import {randomColor} from '../constants/algorithmicos';
 
 class ProfessorSignupCard extends Component {
   constructor(props) {
@@ -26,13 +28,38 @@ class ProfessorSignupCard extends Component {
       }
     });
 
-
     this.props.socket.on('Joined', room => {
       this.props.socket.emit('createClass', this.state);
     });
     this.props.socket.on('classCreated', newClass => {
+      // this.props.socket.emit('')
+      // var thisColor = randomColor(colorArray);
+      // var thisColor2 = randomColor(colorArray);
+
       this.props.addClassAction(newClass);
       this.props.setUsernameAction(this.state.name);
+      //TODO: Create a resolvedQuestions topic when a new class is created
+
+      // const newTopic2 = {
+      //   text: "All",
+      //   votes: 0,
+      //   timestamp: Date.now(),
+      //   referenceClass: newClass._id,
+      //   username: this.props.username,
+      //   color: thisColor2,
+      // }
+      // this.props.socket.emit('generateTopic', newTopic2);
+
+      // const newTopic = {
+      //   text: "ResolvedQuestions",
+      //   votes: 0,
+      //   timestamp: Date.now(),
+      //   referenceClass: newClass._id,
+      //   username: this.props.username,
+      //   isDefault: true,
+      //   color: thisColor,
+      // }
+      // this.props.socket.emit('generateTopic', newTopic);
       this.redirect();
     });
   }

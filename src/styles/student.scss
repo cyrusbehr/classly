@@ -575,6 +575,12 @@ button:focus {
 input[type="text"]{
   font-size:16px;
 }
+
+// .resolvedQuestionTopic {
+//   min-height: 30px;
+//   max-height: 60px;
+// }
+
 /*content inside topic container*/
 .topic{
    min-height: 75px;
@@ -712,4 +718,19 @@ top: -15px;
 
 .question-container-bottom-buffer {
   height: 115px;
+}
+
+.resolved-questions-button {
+  // width: 100px;
+  align-items: flex-end;
+  border: $green solid 1px;
+  color: $green;
+  // position: absolute;
+  // left: 50px;
+  // bottom: 50px;
+  background-color: #EFEFEF;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 5px;
+  transition: color 0.3s, background-color 0.3s
 }
