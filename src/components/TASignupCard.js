@@ -11,7 +11,6 @@ class TASignupCard extends Component {
     this.state = {
       name: "",
       accessCode: "",
-      wrongAccessCode: true,
       nameEmpty: true,
       codeEmpty: true
     }
@@ -33,8 +32,8 @@ class TASignupCard extends Component {
     })
 
     this.props.socket.on('error1', () => {
+      this.props.updateWrongAccessCode(false);
       this.props.setNotLoadingAction();
-      this.setState({wrongAccessCode: false});
     })
 
     this.props.socket.on('getStudentState', (classObj) => {
@@ -66,7 +65,7 @@ class TASignupCard extends Component {
   handleAccessCodeChange(event) {
     this.setState({accessCode: event.target.value})
     this.setState({codeEmpty: true});
-    this.setState({wrongAccessCode: true});
+    this.props.updateWrongAccessCode(true);
   }
 
   onSubmit(e) {
@@ -113,10 +112,10 @@ class TASignupCard extends Component {
                   value={this.state.title}
                   placeholder="Access Code"
                   onChange={(event) => this.handleAccessCodeChange(event)}
-                  className= {this.state.codeEmpty ? this.state.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
+                  className= {this.state.codeEmpty ? this.props.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
                 />
                 <div>
-                {this.state.codeEmpty ? this.state.wrongAccessCode ?
+                {this.state.codeEmpty ? this.props.wrongAccessCode ?
                   <div>
                   </div> :
                   <div className="wrong-access-alert">

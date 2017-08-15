@@ -5,6 +5,17 @@ import { connect } from 'react-redux';
 
 
 class TASignupContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      wrongAccessCode: true,
+    }
+  }
+
+  updateWrongAccessCode(value){
+    this.setState({wrongAccessCode: value})
+  }
+
   render() {
     return(
       <div className="student-signup-cards-container">
@@ -23,6 +34,8 @@ class TASignupContainer extends Component {
               </div>
             </div>
             <TASignupCard
+              wrongAccessCode={this.state.wrongAccessCode}
+              updateWrongAccessCode={(value) => this.updateWrongAccessCode(value)}
               URL={taSignupData.URL}
               title={taSignupData.title}
               redirectRoute={taSignupData.redirectRoute}
