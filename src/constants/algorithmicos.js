@@ -55,7 +55,8 @@ export function sortByMagic(arrayOfQuestions) {
   })
 
   //concatenate and return them in order in one array
-  var returnArray = notResolvedAndStarred.concat(notResolvedAndNotStarred, resolvedAndStarred, resolvedAndNotStarred);
+  // var returnArray = notResolvedAndStarred.concat(notResolvedAndNotStarred, resolvedAndStarred, resolvedAndNotStarred);
+  var returnArray = notResolvedAndStarred.concat(notResolvedAndNotStarred);
   // console.log("this is sortByMagic return", returnArray);
   return returnArray;
 }
@@ -73,7 +74,8 @@ export function sortByCategory(category, arrayOfQuestions) {
     }
   }
 
-  var arr0 = sortByMagic(categoryArray);
+  var arr0 = oldSortByMagic(categoryArray);
+
   return arr0;
 }
 
@@ -183,6 +185,68 @@ export function sortByResolved(arrayOfQuestions) {
 
   //concatenate and return them in order in one array
   var returnArray = resolvedAndStarred.concat(resolvedAndNotStarred);
+  // console.log("this is sortByMagic return", returnArray);
+  return returnArray;
+}
+
+export function oldSortByMagic(arrayOfQuestions) {
+  //returns new sorted array
+  var resolvedArray = [];
+  var notResolvedArray = [];
+
+  //split into resolved and not resolved
+  for(var i = 0; i < arrayOfQuestions.length; i++){
+    if(arrayOfQuestions[i].isResolved){
+      resolvedArray.push(arrayOfQuestions[i]);
+    } else {
+      notResolvedArray.push(arrayOfQuestions[i]);
+    }
+  }
+
+  var notResolvedAndStarred = [];
+  var notResolvedAndNotStarred = [];
+
+  //split into further arrays
+  for(var j = 0; j < notResolvedArray.length; j++) {
+    if(notResolvedArray[j].isStarred){
+      notResolvedAndStarred.push(notResolvedArray[j]);
+    } else {
+      notResolvedAndNotStarred.push(notResolvedArray[j]);
+    }
+  }
+
+  //more arrays
+  var resolvedAndStarred = [];
+  var resolvedAndNotStarred = [];
+
+  for(var k = 0; k < resolvedArray.length; k++){
+    if(resolvedArray[k].isStarred){
+      resolvedAndStarred.push(resolvedArray[k]);
+    } else {
+      resolvedAndNotStarred.push(resolvedArray[k]);
+    }
+  }
+
+  //sort each array by upVotes
+  notResolvedAndStarred.sort((a, b) => {
+    return b.upVotes - a.upVotes;
+  });
+
+  notResolvedAndNotStarred.sort((a, b) => {
+    return b.upVotes - a.upVotes;
+  });
+
+  resolvedAndStarred.sort((a, b) => {
+    return b.upVotes - a.upVotes;
+  });
+
+  resolvedAndNotStarred.sort((a, b) => {
+    return b.upVotes - a.upVotes;
+  })
+
+  //concatenate and return them in order in one array
+  var returnArray = notResolvedAndStarred.concat(notResolvedAndNotStarred, resolvedAndStarred, resolvedAndNotStarred);
+  // var returnArray = notResolvedAndStarred.concat(notResolvedAndNotStarred);
   // console.log("this is sortByMagic return", returnArray);
   return returnArray;
 }
