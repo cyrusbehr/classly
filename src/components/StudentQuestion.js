@@ -110,7 +110,7 @@ class StudentQuestion extends Component {
 
       var darkGreenStyle = {
         color: '#10a02a',
-        fontSize: 30,
+        fontSize: 17,
       }
 
       return (
@@ -143,14 +143,14 @@ class StudentQuestion extends Component {
                     >chat</i>
                     {this.props.comments.length}
                   </div>
+
                   {this.props.isResolved
                     ?
                     <div
-                      className="resolve"
                       style={darkGreenStyle}
-                      onClick={(e)=> this.toggleThisResolve(e)}
                       >Resolved</div>
                   : null }
+
                 </div>
 
                 <div className="delete-button-container">
