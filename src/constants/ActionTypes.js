@@ -13,3 +13,5 @@ export const TOGGLE_STAR = "TOGGLE_STAR";
 export const TOGGLE_RESOLVE = "TOGGLE_RESOLVE";
 export const NEW_COMMENT = "NEW_COMMENT";
 export const LIKE_QUESTION = "LIKE_QUESTION";
+export const LOADING = "LOADING";
+export const NOT_LOADING = "NOT_LOADING";

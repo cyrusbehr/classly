@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
-import {addClass, setUsername} from '../actions/Actions'
+import {addClass, setUsername, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 
 
@@ -13,7 +13,7 @@ class StudentSignupCard extends Component {
       accessCode: "",
       wrongAccessCode: true,
       nameEmpty: true,
-      codeEmpty: true
+      codeEmpty: true,
     }
     if(this.props.userType === ""){
       this.props.history.push('/')
@@ -23,10 +23,10 @@ class StudentSignupCard extends Component {
   componentDidMount() {
     let self = this;
     $("input").on('keyup', function (e) {
-    if (e.keyCode == 13) {
-      self.onSubmit(e)
-    }
-});
+      if (e.keyCode == 13) {
+        self.onSubmit(e)
+      }
+    });
 
 
     this.props.socket.on('Joined', () => {
@@ -34,6 +34,7 @@ class StudentSignupCard extends Component {
     })
 
     this.props.socket.on('error1', () => {
+      this.props.setNotLoadingAction();
       this.setState({wrongAccessCode: false});
     })
 
@@ -47,9 +48,9 @@ class StudentSignupCard extends Component {
         classObj.questions = sortedArray;
       }
       //update the state with the class and the username
-        this.props.addClassAction(classObj)
-        this.props.setUsernameAction(this.state.name);
-        this.redirect()
+      this.props.addClassAction(classObj)
+      this.props.setUsernameAction(this.state.name);
+      this.redirect()
     })
   }
 
@@ -59,8 +60,8 @@ class StudentSignupCard extends Component {
 
 
   handleNameChange(event, stateProp) {
-      this.setState({name: event.target.value});
-      this.setState({nameEmpty: true});
+    this.setState({name: event.target.value});
+    this.setState({nameEmpty: true});
   }
 
   handleAccessCodeChange(event) {
@@ -82,95 +83,90 @@ class StudentSignupCard extends Component {
     if(!this.state.accessCode || !this.state.name) return;
 
     if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
+      this.props.setLoadingAction()
       this.props.socket.emit('join', this.state.accessCode);
     }
   }
 
   render() {
     return (
-          <div className="student-signup-card">
-            <form>
-              <label>
-                  <input
-                    type="text"
-                    value={this.state.name}
-                    placeholder="Full Name"
-                    onChange={(event) => this.handleNameChange(event)}
-                    className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
-                  />
+      <div className="student-signup-card">
+        <form>
+          <label>
+            <input
+              type="text"
+              value={this.state.name}
+              placeholder="Full Name"
+              onChange={(event) => this.handleNameChange(event)}
+              className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
+            />
+            <div>
+              {this.state.nameEmpty ?
+                <div>
+                </div> :
+                <div className="empty-name-alert">
+                  Name can't be empty!
+                </div>}
+              </div>
+            </label>
+            <br></br>
+            <label>
+              <input
+                type="text"
+                value={this.state.title}
+                placeholder="Access Code"
+                onChange={(event) => this.handleAccessCodeChange(event)}
+                className= {this.state.codeEmpty ? this.state.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
+              />
+              <div>
+                {this.state.codeEmpty ? this.state.wrongAccessCode ?
                   <div>
-                  {this.state.nameEmpty ?
-                    <div>
-                    </div> :
-                    <div className="empty-name-alert">
-                      Name can't be empty!
-                    </div>}
-                  </div>
+                  </div> :
+                  <div className="wrong-access-alert">
+                    Wrong access code!
+                  </div> :
+                  <div className="empty-access-alert">
+                    Access code can't be empty!
+                  </div> }
+                </div>
               </label>
               <br></br>
-              <label>
-                {/* <input
-                  type="text"
-                  value={this.state.title}
-                  placeholder="Access Code"
-                  onChange={(event) => this.handleAccessCodeChange(event)}
-                  className="student-signup-acesscode-input"
-                /> */}
-                  <input
-                    type="text"
-                    value={this.state.title}
-                    placeholder="Access Code"
-                    onChange={(event) => this.handleAccessCodeChange(event)}
-                    className= {this.state.codeEmpty ? this.state.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
-                  />
-                  <div>
-                  {this.state.codeEmpty ? this.state.wrongAccessCode ?
-                    <div>
-                    </div> :
-                    <div className="wrong-access-alert">
-                      Wrong access code!
-                    </div> :
-                    <div className="empty-access-alert">
-                      Access code can't be empty!
-                    </div> }
-                  </div>
-              </label>
-              <br></br>
-              {/* <input type="submit"
-                value="Join Class"
-                onClick={(e) => this.onSubmit(e)}
-                className="student-signup-submit"
-              /> */}
               <button
                 type="button"
                 onClick={(e) => this.onSubmit(e)}
                 className="student-signup-submit hvr-grow"
-              >Join Class</button>
+                >Join Class</button>
               </form>
             </div>
-      )
-    }
-  }
-
-  const mapStateToProps = state => {
-    return{
-      socket: state.socketReducer.socket,
-      userType: state.userReducer.userType,
-    }
-  }
-
-  const mapDispatchToProps = dispatch => {
-    return {
-      addClassAction: (newClass) => {
-        dispatch(addClass(newClass));
-      },
-      setUsernameAction: (username) => {
-        dispatch(setUsername(username))
+          )
+        }
       }
-    }
-  }
 
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(StudentSignupCard);
+      const mapStateToProps = state => {
+        return{
+          socket: state.socketReducer.socket,
+          userType: state.userReducer.userType,
+        }
+      }
+
+      const mapDispatchToProps = dispatch => {
+        return {
+          addClassAction: (newClass) => {
+            dispatch(addClass(newClass));
+          },
+          setUsernameAction: (username) => {
+            dispatch(setUsername(username))
+          },
+          setLoadingAction: () => {
+            dispatch(loading())
+          },
+          setNotLoadingAction: () => {
+            dispatch(notLoading())
+          },
+        }
+      }
+
+      export default connect(
+        mapStateToProps,
+        mapDispatchToProps
+      )(StudentSignupCard);
