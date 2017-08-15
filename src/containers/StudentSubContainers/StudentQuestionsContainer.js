@@ -71,9 +71,12 @@ class StudentQuestionsContainer extends Component {
 
     return (
       <div className="questions-container">
+        <div className="questions-container-header">
+          <span className="course">{this.props.className}</span>
+          <span className="date">{this.dateNow()}</span>
+        </div>
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {this.setColor()}
-        {this.dateNow()}
         {sortedArray.map((question, i) => {
           return(
             <StudentQuestion

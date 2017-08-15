@@ -68,11 +68,10 @@ class TAQuestionsContainer extends Component {
         <div className="questions-container-header">
           <span className="course">{this.props.className}</span>
           <span className="lecturer">Prof {profname}</span>
-          <span className="date">1st Aug 2017</span>
+          <span className="date">{this.dateNow()}</span>
         </div>
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {this.setColor()}
-        {this.dateNow()}
         {sortedArray.map((question, i) => {
           return(
             <TAQuestion

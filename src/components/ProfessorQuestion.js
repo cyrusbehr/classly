@@ -87,8 +87,7 @@ class ProfessorQuestion extends Component {
       if(this.state.toggle === false){
         this.setState({toggle: true})
       } else {
-        this.setState({toggle: false});
-        $(e.target).parents('.question').find('.question-comment-textarea').focus();
+        this.setState({toggle: false})
       }
     }
 
@@ -223,19 +222,6 @@ class ProfessorQuestion extends Component {
                         <button className="question-comment-button" onClick={(e) => this.replyButtonPressed(e)}>Reply</button>
                       </div>
                     </div>
-                    <div className="question-comments-container-main">
-                      <div className="comment-section-header">{this.props.comments.length} Replies</div>
-                      {this.props.comments ? this.props.comments.map((comment) => {
-                        return(
-                          <div>
-                            <div className="comment-creator">{comment.creator}: </div>
-                            <div className="comment">{comment.text}</div>
-                          </div>
-                        )
-                      })
-                      :null
-                    }
-                  </div>
                 </div>
                 <div className="question-comment-container-wrapper">
                   <div className="question-comments-container-spacer">
