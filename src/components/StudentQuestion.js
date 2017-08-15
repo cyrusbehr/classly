@@ -99,7 +99,7 @@ class StudentQuestion extends Component {
       // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
 
       var style = {};
-      if(this.state.alreadyClicked){ //TODO: this needs fixing
+      if(isAlreadyClicked){ //TODO: this needs fixing
         style.backgroundColor = '#D9FFF5';
       } else {
         style.backgroundColor = 'white';

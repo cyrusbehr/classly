@@ -102,7 +102,7 @@ class ProfessorQuestion extends Component {
       }
 
       var style = {};
-      if(this.state.votes >= 1){
+      if(this.state.votes >= 5){
         if(!this.props.isResolved){
           style.backgroundColor = '#D9FFF5';
         }
