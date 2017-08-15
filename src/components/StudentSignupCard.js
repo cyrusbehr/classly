@@ -88,6 +88,11 @@ class StudentSignupCard extends Component {
     }
   }
 
+  register(e) {
+    e.preventDefault();
+    this.props.history.push('/student/register')
+  }
+
   render() {
     return (
       <div className="student-signup-card">
@@ -96,7 +101,7 @@ class StudentSignupCard extends Component {
             <input
               type="text"
               value={this.state.name}
-              placeholder="Full Name"
+              placeholder="Email"
               onChange={(event) => this.handleNameChange(event)}
               className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
             />
@@ -105,7 +110,7 @@ class StudentSignupCard extends Component {
                 <div>
                 </div> :
                 <div className="empty-name-alert">
-                  Name can't be empty!
+                  Email can't be empty!
                 </div>}
               </div>
             </label>
@@ -114,7 +119,7 @@ class StudentSignupCard extends Component {
               <input
                 type="text"
                 value={this.state.title}
-                placeholder="Access Code"
+                placeholder="Password"
                 onChange={(event) => this.handleAccessCodeChange(event)}
                 className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
                   "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
@@ -124,10 +129,10 @@ class StudentSignupCard extends Component {
                   <div>
                   </div> :
                   <div className="wrong-access-alert">
-                    Wrong access code!
+                    Wrong password!
                   </div> :
                   <div className="empty-access-alert">
-                    Access code can't be empty!
+                    Password can't be empty!
                   </div> }
                 </div>
               </label>
@@ -140,8 +145,8 @@ class StudentSignupCard extends Component {
                 <br></br>
                 <button
                   type="button"
-                  onClick={(e) => this.onSubmit(e)}
-                  className="student-signup-submit hvr-grow"
+                  onClick={(e) => this.register(e)}
+                  className="student-signup-register hvr-grow"
                   >Register</button>
               </form>
             </div>

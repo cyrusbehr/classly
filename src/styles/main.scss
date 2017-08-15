@@ -5,6 +5,9 @@ $main-bg-color: #f1f2f0;
 $green: #00c993;
 $lightGreen: #00e5a4;
 $dark: #343434;
+$lightBlue: #00AAE5;
+$blue: #2979FF;
+
 
 
 .background-picture {
@@ -508,6 +511,26 @@ img{
   cursor: pointer;
 }
 
+.student-signup-register {
+  background-color: $lightBlue; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  width: 280px;
+  border-radius: 4px;
+  margin-top: 20px;
+  transition: color 0.3s, background-color 0.3s;
+  font-family: 'Raleway', sans-serif;
+}
+
+.student-signup-register:hover {
+  cursor: pointer;
+}
+
 .hvr-grow {
     display: inline-block;
     vertical-align: middle;
@@ -522,7 +545,7 @@ img{
 .hvr-grow:hover,
 .hvr-grow:focus,
 .hvr-grow:active {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
 .professor-signup-submit {
