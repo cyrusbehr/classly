@@ -116,6 +116,7 @@ class ProfessorQuestion extends Component {
         <div className="question" style={style}>
           <div className="question-main-section">
             <div className="question-body">
+              {console.log('lmaoooooooooo')}
               {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>

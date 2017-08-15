@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StudentTopicsContainer from './StudentTopicsContainer';
 import StudentQuestionsContainer from './StudentQuestionsContainer';
+import {close} from '../../actions/Actions';
+import ReactModal from 'react-modal';
 
 class StudentMainViewContainer extends Component {
   constructor(props){
@@ -23,12 +25,17 @@ class StudentMainViewContainer extends Component {
           this.props.userType
           ?
           <div className="body-container">
-            <div className="questions-container-header">
-              {/* <span>This is {this.props.userType} view</span> */}
-              <span className="course">{this.props.className}</span>
-              <span className="lecturer">Prof {profname}</span>
-              <span className="date">1st Aug 2017</span>
-            </div>
+            <div>
+              <ReactModal
+                isOpen={this.props.showModal}
+                contentLabel="Minimal Modal Example"
+                onRequestClose={() => this.props.close()}
+                className="guide-modal"
+                overlayClassName="guide-modal-overlay"
+                >
+                <button onClick={() => this.props.close()}>Close Modal</button>
+                </ReactModal>
+              </div>
             <StudentTopicsContainer />
             <StudentQuestionsContainer />
           </div>
@@ -46,11 +53,15 @@ const mapStateToProps = state => {
     professorName: state.classReducer.classState.professorName,
     userType: state.userReducer.userType,
     className: state.classReducer.classState.className,
+    showModal: state.modalReducer,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    close: () => {
+      dispatch(close())
+  },
   };
 }
 

@@ -4,13 +4,16 @@ import userReducer from './userReducer';
 import socketReducer from './socketReducer';
 import filterReducer from './filterReducer';
 import pageReducer from './pageReducer';
+import modalReducer from './modalReducer';
+
 
 const rootReducer = combineReducers({
   classReducer,
   userReducer,
   filterReducer,
   socketReducer,
-  pageReducer
+  pageReducer,
+  modalReducer
 });
 
 export default rootReducer;

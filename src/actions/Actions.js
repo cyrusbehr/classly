@@ -6,7 +6,7 @@ import { SET_USER_TYPE,
   VOTE_TOPIC, DELETE_QUESTION,
   DELETE_TOPIC, TOGGLE_STAR,
   TOGGLE_RESOLVE, NEW_COMMENT, LIKE_QUESTION,
-LOADING, NOT_LOADING} from '../constants/ActionTypes';
+LOADING, NOT_LOADING, CLOSE, OPEN} from '../constants/ActionTypes';
 
   export function setUserType(userType) {
     return {
@@ -125,6 +125,17 @@ LOADING, NOT_LOADING} from '../constants/ActionTypes';
     }
   }
 
+  export function close() {
+    return {
+      type: CLOSE,
+    }
+  }
+
+  export function open() {
+    return {
+      type: OPEN,
+    }
+  }
 
   // export function setColor(questionId) {
   //   return {
