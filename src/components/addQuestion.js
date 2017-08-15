@@ -161,9 +161,6 @@ class AddQuestion extends Component{
           }}
         />
         }
-
-
-
         </div>
         {this.state.questionEmpty ?
           <div className="new-question-footer">
