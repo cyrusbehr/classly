@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-import { setUserType } from '../actions/Actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 class LoginCard extends Component {
@@ -9,7 +8,6 @@ class LoginCard extends Component {
   }
 
   redirect() {
-    this.props.setUserTypeAction(this.props.title)
     this.props.history.push(this.props.redirectRoute);
   }
 
@@ -34,9 +32,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUserTypeAction: (userType) => {
-      dispatch(setUserType(userType))
-    }
   };
 }
 

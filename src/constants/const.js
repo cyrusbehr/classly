@@ -37,6 +37,8 @@ const taSignupData = {
   redirectRoute: '/ta/main'
 }
 
+const baseDomain = "http://localhost:3000/"
+
 const colorArray = [
   '#FDA1FF',
   '#FA28FF',
@@ -65,5 +67,6 @@ module.exports = {
   taSignupData,
   StudentSignupData,
   ProfessorSignupData,
-  colorArray
+  colorArray,
+  baseDomain
 }

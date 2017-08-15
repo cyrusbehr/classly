@@ -1,6 +1,6 @@
-import { SET_USER_TYPE,
+import {
   SET_SOCKET, ADD_CLASS,
-  SET_USERNAME, ADD_QUESTION,
+  SET_USER, ADD_QUESTION,
   TOGGLE_FILTER,
   UPVOTE_QUESTION, ADD_TOPIC,
   VOTE_TOPIC, DELETE_QUESTION,
@@ -8,12 +8,6 @@ import { SET_USER_TYPE,
   TOGGLE_RESOLVE, NEW_COMMENT, LIKE_QUESTION,
 LOADING, NOT_LOADING, CLOSE, OPEN} from '../constants/ActionTypes';
 
-  export function setUserType(userType) {
-    return {
-      type: SET_USER_TYPE,
-      userType
-    };
-  }
 
   export function setSocket(socket) {
     return {
@@ -29,10 +23,10 @@ LOADING, NOT_LOADING, CLOSE, OPEN} from '../constants/ActionTypes';
     }
   }
 
-  export function setUsername(username) {
+  export function setUsername(user) {
     return {
-      type: SET_USERNAME,
-      username
+      type: SET_USER,
+      user
     }
   }
 
