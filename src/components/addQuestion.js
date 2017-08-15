@@ -165,7 +165,6 @@ class AddQuestion extends Component{
 
 
         </div>
-
         {this.state.questionEmpty ?
           <div className="new-question-footer">
             <button data-tip="question-help" data-for="question-help" id="question-help">?</button>
