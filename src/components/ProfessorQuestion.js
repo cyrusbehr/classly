@@ -31,19 +31,19 @@ class ProfessorQuestion extends Component {
     }
   }
 
-  handleUpvote(e) {
-    if(this.state.processing) return;
-    this.setState({processing: true})
-    if(!this.state.alreadyClicked){
-      this.setState({votes: this.state.votes + 1})
-      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
-      this.setState({alreadyClicked: true});
-    } else {
-      this.setState({votes: this.state.votes - 1})
-      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
-      this.setState({alreadyClicked: false});
-    }
-  }
+  // handleUpvote(e) {
+  //   if(this.state.processing) return;
+  //   this.setState({processing: true})
+  //   if(!this.state.alreadyClicked){
+  //     this.setState({votes: this.state.votes + 1})
+  //     this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
+  //     this.setState({alreadyClicked: true});
+  //   } else {
+  //     this.setState({votes: this.state.votes - 1})
+  //     this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
+  //     this.setState({alreadyClicked: false});
+  //   }
+  // }
 
   deleteItem(e) {
     e.preventDefault()
@@ -102,9 +102,9 @@ class ProfessorQuestion extends Component {
       }
 
       var style = {};
-      if(this.state.alreadyClicked){ //TODO: this needs fixing
+      if(this.state.votes >= 5){
         style.backgroundColor = '#D9FFF5';
-      } else {
+      }else {
         style.backgroundColor = 'white';
       }
 
@@ -116,11 +116,9 @@ class ProfessorQuestion extends Component {
         <div className="question" style={style}>
           <div className="question-main-section">
             <div className="question-body">
-              {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
               <div className="question-main-section-question-creator"> - {this.props.questionCreator}</div>
-              {/*  TODO: DONOVAN add formating here, feel free to move this around */}
             </div>
 
             <div className="all-buttons-container">
@@ -129,7 +127,7 @@ class ProfessorQuestion extends Component {
                   <i
                     id="upvote-icon"
                     className="material-icons"
-                    onClick={(e) => this.handleUpvote(e)}
+                    // onClick={(e) => this.handleUpvote(e)}
                     >keyboard_arrow_up</i>
                     {this.state.votes}
                   </div>
