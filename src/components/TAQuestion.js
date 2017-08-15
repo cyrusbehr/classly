@@ -12,11 +12,12 @@ class TAQuestion extends Component {
       alreadyClicked: false,
       votes: this.props.currentUpVotes,
       commentText: "",
-      toggle: true
+      toggle: true,
+      processing: false
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
       this.props.upVoteQuestionAction(updatedQuestion);
-      this.setState({votes: this.props.currentUpVotes})
+      this.setState({votes: this.props.currentUpVotes, processing: false})
     });
   }
 
@@ -31,6 +32,9 @@ class TAQuestion extends Component {
  }
 
   handleUpvote(e) {
+    if(this.state.processing) return
+    this.setState({processing: true});
+
     if(!this.state.alreadyClicked){
       this.setState({votes: this.state.votes + 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
@@ -100,6 +104,11 @@ class TAQuestion extends Component {
         style.backgroundColor = 'lightgray';
       }
 
+      var darkGreenStyle = {
+        color: '#10a02a',
+        fontSize: 30,
+      }
+
       return (
         <div className="question" style={style}>
           <div className="question-main-section">
@@ -130,6 +139,14 @@ class TAQuestion extends Component {
                       >chat</i>
                       {this.props.comments.length}
                     </div>
+                    {this.props.isResolved
+                      ?
+                      <div
+                        className="resolve"
+                        style={darkGreenStyle}
+                        onClick={(e)=> this.toggleThisResolve(e)}
+                        >Resolved</div>
+                    : null }
                   </div>
 
                   <div className="delete-button-container">
