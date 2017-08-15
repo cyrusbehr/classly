@@ -332,9 +332,10 @@ io.on('connection', socket => {
 
       socket.broadcast.to(socket.currentRoom).emit('newComment', newComment);
     })
-  })
-
+  });
 });
+
+
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
