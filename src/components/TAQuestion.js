@@ -89,6 +89,7 @@ class TAQuestion extends Component {
         this.setState({toggle: true})
       } else {
         this.setState({toggle: false})
+        $(e.target).parents('.question').find('.question-comment-textarea').focus();
       }
     }
 

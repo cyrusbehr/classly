@@ -87,7 +87,8 @@ class ProfessorQuestion extends Component {
       if(this.state.toggle === false){
         this.setState({toggle: true})
       } else {
-        this.setState({toggle: false})
+        this.setState({toggle: false});
+        $(e.target).parents('.question').find('.question-comment-textarea').focus();
       }
     }
 
