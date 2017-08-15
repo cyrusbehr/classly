@@ -312,8 +312,9 @@ io.on('connection', socket => {
     .populate('questions')
     .populate('topics')
     .then((classObj) => {
-      if(!classObj) {
+      if(classObj === null) {
         socket.emit('error1');
+        console.log("Abort, we had an error 1");
       } else {
         socket.emit('getStudentState', classObj);
       }

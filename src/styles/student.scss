@@ -8,6 +8,7 @@ $red: #FF7E65;
 $hoverGray: #4B4B4B;
 $blue: #2979FF;
 $lightDarkGray: #c0c0c0;
+$lightBlue: #00AAE5;
 
 /*page setup*/
 html, body{
@@ -575,6 +576,12 @@ button:focus {
 input[type="text"]{
   font-size:16px;
 }
+
+// .resolvedQuestionTopic {
+//   min-height: 30px;
+//   max-height: 60px;
+// }
+
 /*content inside topic container*/
 .topic{
    min-height: 75px;
@@ -717,4 +724,91 @@ top: -15px;
 
 .question-container-bottom-buffer {
   height: 115px;
+}
+
+.resolved-questions-button {
+  // width: 100px;
+  align-items: flex-end;
+  border: $green solid 1px;
+  color: $green;
+  // position: absolute;
+  // left: 50px;
+  // bottom: 50px;
+  background-color: #EFEFEF;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 5px;
+  transition: color 0.3s, background-color 0.3s
+
+}
+// scaling... any units
+$width: 100px;
+
+.loader {
+  position: relative;
+  margin: 0 auto;
+  width: $width;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes color {
+  100%,
+  0% {
+    stroke: $green;
+  }
+  40% {
+    stroke: $lightBlue;
+  }
+  66% {
+    stroke: $green;
+  }
+  80%,
+  90% {
+    stroke: $lightBlue;
+  }
 }
