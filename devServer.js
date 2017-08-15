@@ -9,6 +9,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const auth = require('./backend/routes/auth');
+const expressValidator = require('express-validator')
 const { User } = require('./backend/models/User');
 
 const app = express();
@@ -345,6 +346,23 @@ io.on('connection', socket => {
 // AUTHENTICATION
 
 app.use(bodyParser.json());
+
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+    };
+  }
+}));
+
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat' }));
 

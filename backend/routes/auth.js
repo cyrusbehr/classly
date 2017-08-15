@@ -1,40 +1,93 @@
 var express = require('express');
 var router = express.Router();
 var { User } = require('../models/User');
+var util = require('util');
 
 module.exports = function(passport) {
 
   // POST registration page
   router.post('/register', function(req, res) {
-    // TODO: improve validation
+
     console.log('POST in /register');
+    req.checkBody('userType', 'Invalid userType').isIn(['student', 'professor', 'ta']);
+    req.checkBody('firstname', 'Firstname cannot be empty').notEmpty();
+    req.checkBody('lastname', 'Lastname cannot be empty').notEmpty();
+    req.checkBody('email', 'Error with email').isEmail();
+    req.checkBody('passwordRepeat', 'Passwords must be the same').equals(req.body.password);
 
-    if(req.body.password === req.body.password_repeat) {
-      var user = new User({
-        username: req.body.username,
-        password: req.body.password
-      });
-
-      user.save(function(err, user) {
-        if (err) {
-          console.log(err);
-          res.json({
-            success: false,
-            error: 'Error in saving user in database'
-          });
-          return;
-        }
-        console.log(user);
-        res.json({
-          success: true
+    req.getValidationResult()
+    .then(function(result){
+      if (!result.isEmpty()) { // Error in the validations above
+        res.status(400).json({
+          error: util.inspect(result.array())
         });
-      });
-    } else {
-      res.json({
-        success: false,
-        error: 'Invalid register field(s)'
-      });
-    }
+        return;
+      }
+
+      User.findOne({email: req.body.email})
+      .then(function(foundUser){
+        if(foundUser){
+          throw new Error('email is taken');
+        } else {
+          var user = new User({
+            userType: req.body.userType,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: req.body.password
+          });
+
+          return user.save()
+        }
+      })
+      .then(function(savedUser){
+        res.json({
+          error: null,
+          response: savedUser
+        })
+      })
+      .catch(function(error){
+        res.json({
+          error
+        })
+      })
+    })
+
+    // if(!error) {
+    //
+    //   User.findOne({email: req.body.email})
+    //   .then(function(foundUser){
+    //     if(foundUser){
+    //       throw new Error('email is taken');
+    //     } else {
+    //       var user = new User({
+    //         userType: req.body.userType,
+    //         firstname: req.body.firstname,
+    //         lastname: req.body.lastname,
+    //         email: req.body.email,
+    //         password: req.body.password
+    //       });
+    //
+    //       return user.save()
+    //     }
+    //   })
+    //   .then(function(savedUser){
+    //     res.json({
+    //       error: null,
+    //       response: savedUser
+    //     })
+    //   })
+    //   .catch(function(error){
+    //     res.json({
+    //       error
+    //     })
+    //   })
+    //
+    // } else {
+    //   res.json({
+    //     error
+    //   });
+    // }
 
   });
 
