@@ -22,7 +22,7 @@ class ProfessorTopicsContainer extends Component {
   }
 
   handleClick(id, e) {
-    if(this.props.currentFilter === '' || this.props.currentFilter !== this.props.text){
+    if(this.props.currentFilter !== "ResolvedQuestions"){
       this.props.toggleFilter("ResolvedQuestions");
     } else {
       this.props.toggleFilter('');

@@ -58,7 +58,6 @@ class ProfessorQuestionsContainer extends Component {
     // })
 
     var sortedArray;
-
     if(this.props.filter === "ResolvedQuestions"){
       sortedArray = sortByResolved(this.props.questionsArray);
       console.log(this.props.questionsArray);

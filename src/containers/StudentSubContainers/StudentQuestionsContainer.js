@@ -4,7 +4,7 @@ import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
 import {addComment, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve, setColor} from '../../actions/Actions';
-import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
+import {sortByMagic, sortByCategory, sortByResolved} from '../../constants/algorithmicos';
 import now from 'date-now';
 import dateFormat from 'dateformat';
 
@@ -56,14 +56,23 @@ class StudentQuestionsContainer extends Component {
     // var sortedArray = _.sortBy(this.props.questionsArray, (question) => {
     //   return -1 * question.upVotes; //negative changes to descending order
     // })
-    var sortedArray;
+    // var sortedArray;
 
-    if(this.props.filter){
+    // if(this.props.filter){
+    //   sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
+    // } else {
+    //   sortedArray = sortByMagic(this.props.questionsArray);
+    // }
+
+
+    var sortedArray;
+    if(this.props.filter === "ResolvedQuestions"){
+      sortedArray = sortByResolved(this.props.questionsArray);
+    } else if (this.props.filter){
       sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
     } else {
       sortedArray = sortByMagic(this.props.questionsArray);
     }
-
     // console.log("The new sorted array is: ", sortedArray);
 
     // var proffArr = this.props.professorName.split(" ");

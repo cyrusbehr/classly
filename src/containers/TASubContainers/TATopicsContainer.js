@@ -18,6 +18,14 @@ class TATopicsContainer extends Component {
     this.props.toggleFilter('');
   }
 
+  handleClick(id, e) {
+    if(this.props.currentFilter !== "ResolvedQuestions"){
+      this.props.toggleFilter("ResolvedQuestions");
+    } else {
+      this.props.toggleFilter('');
+    }
+  }
+
   render() {
     var proffArr = this.props.classObj.professorName.split(" ")
     var profname = proffArr[1] || proffArr[0];
@@ -28,6 +36,7 @@ class TATopicsContainer extends Component {
         <div style={{display:'flex', 'justifyContent': 'space-between', 'alignItems':'center'}}>
           <p className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')} , {numOfQuestions + (numOfQuestions<2 ? ' Question in Total' : ' Questions in Total')}</p>
           {this.props.currentFilter==='' ? null : <i id='return-button' className="material-icons" onClick={()=>{this.onReturn()}}>keyboard_return</i>}
+          <button id='resolved-questions-button' className="resolved-questions-button" onClick={(e)=>{this.handleClick(e)}}>See Resolved Questions</button>
         </div>
         {/* <AddTopic /> */}
         {this.props.topics.map((topic, i) => {
