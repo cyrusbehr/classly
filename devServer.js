@@ -3,6 +3,13 @@ const express = require('express');
 // const webpack = require('webpack');
 // const config = require('./webpack.config.dev');
 // const {randomColor} = require('./src/constants/algorithmicos');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const auth = require('./backend/routes/auth');
+const { User } = require('./backend/models/User');
 
 const app = express();
 // const compiler = webpack(config);
@@ -335,7 +342,48 @@ io.on('connection', socket => {
   });
 });
 
+// AUTHENTICATION
 
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat' }));
+
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(new LocalStrategy(function(username, password, done) {
+  // Find the user with the given username
+  User.findOne({ username: username }, function (err, user) {
+    // if there's an error, finish trying to authenticate (auth failed)
+    if (err) {
+      console.log(err);
+      return done(err);
+    }
+    // if no user present, auth failed
+    if (!user) {
+      console.log(user);
+      return done(null, false, { message: 'Incorrect username.' });
+    }
+    // if passwords do not match, auth failed
+    if (user.password !== password) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+    // auth has has succeeded
+    return done(null, user);
+  });
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/', auth(passport));
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
