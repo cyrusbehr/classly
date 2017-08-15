@@ -9,8 +9,11 @@ class StudentRegisterCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: "",
-      accessCode: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      passwordRepeat: "",
       wrongAccessCode: true,
       nameEmpty: true,
       codeEmpty: true,
@@ -59,15 +62,25 @@ class StudentRegisterCard extends Component {
   }
 
 
-  handleNameChange(event, stateProp) {
-    this.setState({name: event.target.value});
+  handleFirstNameChange(event, stateProp) {
+    this.setState({firstname: event.target.value});
     this.setState({nameEmpty: true});
   }
 
-  handleAccessCodeChange(event) {
-    this.setState({accessCode: event.target.value})
-    this.setState({codeEmpty: true});
-    this.props.updateWrongAccessCode(true);
+  handleLastNameChange(e) {
+    this.setState({lastname: e.target.value});
+  }
+
+  handleEmailChange(e) {
+    this.setState({email: e.target.value});
+  }
+
+  handlePasswordChange(e) {
+    this.setState({password: e.target.value});
+  }
+
+  handlePasswordRepeatChange(e) {
+    this.setState({passwordRepeat: e.target.value});
   }
 
   onSubmit(e) {
@@ -101,7 +114,7 @@ class StudentRegisterCard extends Component {
             <input
               type="text"
               value={this.state.name}
-              placeholder="Full Name"
+              placeholder="First Name"
               onChange={(event) => this.handleNameChange(event)}
               className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
             />
@@ -114,13 +127,30 @@ class StudentRegisterCard extends Component {
                 </div>}
               </div>
             </label>
+            <label>
+              <input
+                type="text"
+                value={this.state.firstname}
+                placeholder="Last Name"
+                onChange={(event) => this.handleFirstNameChange(event)}
+                className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
+              />
+              <div>
+                {this.state.nameEmpty ?
+                  <div>
+                  </div> :
+                  <div className="empty-name-alert">
+                    Name can't be empty!
+                  </div>}
+                </div>
+              </label>
             <br></br>
             <label>
               <input
                 type="text"
-                value={this.state.title}
+                value={this.state.lastname}
                 placeholder="Email"
-                onChange={(event) => this.handleAccessCodeChange(event)}
+                onChange={(event) => this.handleLastNameChange(event)}
                 className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
                   "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
                 />
@@ -141,6 +171,7 @@ class StudentRegisterCard extends Component {
                   type="password"
                   value={this.state.password}
                   placeholder="Password"
+                  onChange={(e) => this.handlePasswordChange(e)}
                   className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
                     "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
                 />
@@ -149,6 +180,7 @@ class StudentRegisterCard extends Component {
                   type="password"
                   value={this.state.repeatPassword}
                   placeholder="Repeat Password"
+                  onChange={(e) => this.handlePasswordRepeatChange(e)}
                   className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
                     "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
                 />
