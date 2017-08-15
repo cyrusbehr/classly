@@ -28,14 +28,13 @@ class StudentSignupCard extends Component {
       }
     });
 
-
     this.props.socket.on('Joined', () => {
       this.props.socket.emit('getStudentState', this.state.accessCode)
     })
 
     this.props.socket.on('error1', () => {
-      this.props.setNotLoadingAction();
       this.setState({wrongAccessCode: false});
+      this.props.setNotLoadingAction();
     })
 
     this.props.socket.on('getStudentState', (classObj) => {
@@ -116,7 +115,8 @@ class StudentSignupCard extends Component {
                 value={this.state.title}
                 placeholder="Access Code"
                 onChange={(event) => this.handleAccessCodeChange(event)}
-                className= {this.state.codeEmpty ? this.state.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
+                className= {this.state.codeEmpty ? this.state.wrongAccessCode ?
+                  "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
               />
               <div>
                 {this.state.codeEmpty ? this.state.wrongAccessCode ?

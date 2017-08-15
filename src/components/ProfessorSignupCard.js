@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {addClass, setUsername} from '../actions/Actions'
+import {addClass, setUsername, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 
 class ProfessorSignupCard extends Component {
@@ -65,6 +65,7 @@ class ProfessorSignupCard extends Component {
       let nameArr = this.state.name.split(" ")
       let str = nameArr[0].concat(this.state.title.replace(/ /g,''));
       this.props.socket.emit('join', str.toLowerCase());
+      this.props.setLoadingAction();
     }
   }
 
@@ -132,7 +133,13 @@ const mapDispatchToProps = dispatch => {
     },
     setUsernameAction: (username) => {
       dispatch(setUsername(username))
-    }
+    },
+    setLoadingAction: () => {
+      dispatch(loading())
+    },
+    setNotLoadingAction: () => {
+      dispatch(notLoading())
+    },
   }
 }
 

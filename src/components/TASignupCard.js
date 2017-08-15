@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
-import {addClass, setUsername} from '../actions/Actions'
+import {addClass, setUsername, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 
 
@@ -33,8 +33,8 @@ class TASignupCard extends Component {
     })
 
     this.props.socket.on('error1', () => {
+      this.props.setNotLoadingAction();
       this.setState({wrongAccessCode: false});
-
     })
 
     this.props.socket.on('getStudentState', (classObj) => {
@@ -80,6 +80,7 @@ class TASignupCard extends Component {
     }
 
     if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
+      this.props.setLoadingAction()
       this.props.socket.emit('join', this.state.accessCode);
     }
   }
@@ -152,7 +153,13 @@ class TASignupCard extends Component {
       },
       setUsernameAction: (username) => {
         dispatch(setUsername(username))
-      }
+      },
+      setLoadingAction: () => {
+        dispatch(loading())
+      },
+      setNotLoadingAction: () => {
+        dispatch(notLoading())
+      },
     }
   }
 
