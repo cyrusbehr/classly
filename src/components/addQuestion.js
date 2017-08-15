@@ -37,6 +37,19 @@ class AddQuestion extends Component{
     });
   }
 
+  updateAutocompleteMenuPosition(){
+    var autocomplete = $('#new-tag').children('div');
+    var oldTop = $("#tag").offset().top;
+    var newTop = oldTop - autocomplete.height() - $("#tag").height() - 10;
+
+    console.log('@@@ $("#tag").offset().top', $("#tag").offset().top);
+    console.log('@@@ $("#tag").height()', $("#tag").height());
+    console.log('autocomplete.height()', autocomplete.height());
+    console.log('@@@ newTop', newTop);
+
+    autocomplete.css('top', newTop);
+  }
+
   updateTags(e) {
     this.setState({tags: e.target.value})
   }
@@ -105,6 +118,8 @@ class AddQuestion extends Component{
       tags: nextProps.currentFilter,
     })
   }
+
+
   render() {
     return (
       <div className="new-question-container">
@@ -127,8 +142,9 @@ class AddQuestion extends Component{
                 {item.text}
               </div>
             }
+            open={true}
             value={this.state.tags}
-            onChange={(e) => this.updateTags(e)}
+            onChange={(e) => {this.updateTags(e); this.updateAutocompleteMenuPosition();}}
             onSelect={(val) => this.setState({tags:val})}
             shouldItemRender={ (item, val)=>{
               return item.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
