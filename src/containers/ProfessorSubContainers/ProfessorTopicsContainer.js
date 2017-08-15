@@ -21,7 +21,16 @@ class ProfessorTopicsContainer extends Component {
     this.props.toggleFilter('');
   }
 
+  handleClick(id, e) {
+    if(this.props.currentFilter === '' || this.props.currentFilter !== this.props.text){
+      this.props.toggleFilter("ResolvedQuestions");
+    } else {
+      this.props.toggleFilter('');
+    }
+  }
+
   render() {
+
     var proffArr = this.props.classObj.professorName.split(" ")
     var profname = proffArr[1] || proffArr[0];
     var numOfTopics = this.props.topics.length;
@@ -31,6 +40,7 @@ class ProfessorTopicsContainer extends Component {
         <div style={{display:'flex', 'justifyContent': 'space-between', 'alignItems':'center'}}>
           <p className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')} , {numOfQuestions + (numOfQuestions<2 ? ' Question in Total' : ' Questions in Total')}</p>
           {this.props.currentFilter==='' ? null : <i id='return-button' className="material-icons" onClick={()=>{this.onReturn()}}>keyboard_return</i>}
+          <button id='resolved-questions-button' className="resolved-questions-button" onClick={(e)=>{this.handleClick(e)}}>See Resolved Questions</button>
         </div>
         {/* <div className="topics-container-header">
           <span className="course">MECH 101</span>
@@ -42,7 +52,6 @@ class ProfessorTopicsContainer extends Component {
         </div> */}
         {/* <AddTopic /> */}
         {this.props.topics.map((topic, i) => {
-
           return(
             <StudentTopic
               text={topic.text}

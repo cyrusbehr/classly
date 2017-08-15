@@ -98,12 +98,33 @@ export function randomColor(colorArray) {
 // // then push all starred questions to the front and sort them in order by votes
 // // then sort the rest by upvotes
 
+
+
 export function isUnique(topicText, topicsArray) {
   for(var i = 0; i < topicsArray.length; i++ ) {
     if(topicsArray[i].text === topicText) return false
   }
   return true
 }
+
+
+// export function sortByResolved(arrayOfQuestions) {
+//   //returns new sorted array
+//   var resolvedArray = [];
+//   var notResolvedArray = [];
+//
+//   //split into resolved and not resolved
+//   for(var i = 0; i < arrayOfQuestions.length; i++){
+//     if(arrayOfQuestions[i].isResolved){
+//       resolvedArray.push(arrayOfQuestions[i]);
+//     } else {
+//       notResolvedArray.push(arrayOfQuestions[i]);
+//     }
+//   }
+//
+//   return resolvedArray;
+// }
+
 
 export function sortByResolved(arrayOfQuestions) {
   //returns new sorted array
