@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 // const webpack = require('webpack');
 // const config = require('./webpack.config.dev');
+// const {randomColor} = require('./src/constants/algorithmicos');
 
 const app = express();
 // const compiler = webpack(config);
@@ -26,6 +27,12 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
   console.log('connected to database')
 })
+
+function randomize(array) {
+  const randomDigit = Math.floor((Math.random() * array.length));
+  const selected = array[randomDigit];
+  return selected;
+}
 
 io.on('connection', socket => {
 
@@ -140,41 +147,57 @@ io.on('connection', socket => {
     });
   })
 
-
   socket.on('createClass', (localState) => {
-    let nameArr = localState.name.split(" ");
-    let str = nameArr[0].concat(localState.title.replace(/ /g,''));
-    let newClass = new Class({
-      professorName: localState.name,
-      accessCode: str.toLowerCase(),
-      className: localState.title,
-      timestamp: Date.now(),
-      questions: [],
-      topics: [],
-    });
-    newClass.save((err, newClass) => {
-      if(err){
-        console.log("Error creating newClass:", err);
-      } else {
-        // let newTopic = new Topic({
-        //   text: "All Topics",
-        //   votes: 0,
-        //   timestamp: Date.now(),
-        //   referenceClass: newClass._id,
-        //   username: 'default_topic',
-        //   isDefault: true
-        // });
-        Class.findById(newClass._id, (err, classObj) => {
-          // classObj.topics.push(savedTopic._id);
-          classObj.save()
-          .then(() => {
-            socket.emit('classCreated', newClass);
-            // socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
-            // socket.emit('newTopic', savedTopic);
+    let existed = true;
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+    let accessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
+    console.log('accessCode', accessCode);
+
+    function accessCodeRecursion(newAccessCode) {
+      Class.findOne({accessCode: newAccessCode}, (err, classObj) => {
+        if(!classObj){
+          let newClass = new Class({
+            professorName: localState.name,
+            accessCode: newAccessCode,
+            className: localState.title,
+            timestamp: Date.now(),
+            questions: [],
+            topics: [],
+          });
+          newClass.save((err, newClass) => {
+            if(err){
+              console.log("Error creating newClass:", err);
+            } else {
+              // let newTopic = new Topic({
+              //   text: "All Topics",
+              //   votes: 0,
+              //   timestamp: Date.now(),
+              //   referenceClass: newClass._id,
+              //   username: 'default_topic',
+              //   isDefault: true
+              // });
+              Class.findById(newClass._id, (err, classObj) => {
+                // classObj.topics.push(savedTopic._id);
+                classObj.save()
+                .then(() => {
+                  socket.emit('classCreated', newClass);
+                  // socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
+                  // socket.emit('newTopic', savedTopic);
+                  return null;
+                })
+              })
+            }
           })
-        })
-      }
-    })
+        } else {
+           newAccessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
+           return accessCodeRecursion(newAccessCode);
+          }
+        }
+      )
+    }
+    accessCodeRecursion(accessCode);
   });
 
   socket.on('newQuestion', (newQuestion) => {
