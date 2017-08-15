@@ -28,9 +28,6 @@ class ProfessorSignupCard extends Component {
       }
     });
 
-    this.props.socket.on('Joined', room => {
-      this.props.socket.emit('createClass', this.state);
-    });
     this.props.socket.on('classCreated', newClass => {
       // this.props.socket.emit('')
       // var thisColor = randomColor(colorArray);
@@ -89,9 +86,7 @@ class ProfessorSignupCard extends Component {
     }
 
     if(this.state.name.trim() !== '' && this.state.title.trim() !== '') {
-      let nameArr = this.state.name.split(" ")
-      let str = nameArr[0].concat(this.state.title.replace(/ /g,''));
-      this.props.socket.emit('join', str.toLowerCase());
+      this.props.socket.emit('createClass', this.state);
       this.props.setLoadingAction();
     }
   }

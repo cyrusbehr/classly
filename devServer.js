@@ -182,6 +182,11 @@ io.on('connection', socket => {
                 // classObj.topics.push(savedTopic._id);
                 classObj.save()
                 .then(() => {
+
+                  socket.join(accessCode);
+                  console.log("user has joined", accessCode);
+                  socket.currentRoom = accessCode;
+                  socket.emit("Joined", accessCode);
                   socket.emit('classCreated', newClass);
                   // socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
                   // socket.emit('newTopic', savedTopic);
