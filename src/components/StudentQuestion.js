@@ -73,7 +73,8 @@ class StudentQuestion extends Component {
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
-      creator: this.props.username
+      creator: this.props.username,
+      title: ''
     }
     this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
@@ -84,10 +85,9 @@ class StudentQuestion extends Component {
     toggleReply(e) {
       e.preventDefault();
       if(this.state.toggle === false){
-        this.setState({toggle: true});
+        this.setState({toggle: true})
       } else {
         this.setState({toggle: false})
-        $(e.target).parents('.question').find('.question-comment-textarea').focus();
       }
     }
 

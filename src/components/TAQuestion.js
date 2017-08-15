@@ -75,7 +75,8 @@ class TAQuestion extends Component {
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
-      creator: this.props.username
+      creator: this.props.username,
+      title: 'TA'
     }
     this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
@@ -89,7 +90,6 @@ class TAQuestion extends Component {
         this.setState({toggle: true})
       } else {
         this.setState({toggle: false})
-        $(e.target).parents('.question').find('.question-comment-textarea').focus();
       }
     }
 
@@ -198,7 +198,7 @@ class TAQuestion extends Component {
                           {this.props.comments ? this.props.comments.map((comment) => {
                             return(
                               <div key={comment.text + comment.creator}>
-                                <div className="comment-creator">{comment.creator}: </div>
+                                <div><text className="highlight-teacher-ta">{comment.title} </text><text className="comment-creator">{' ' + comment.creator}: </text></div>
                                 <div className="comment">{comment.text}</div>
                               </div>
                             )
