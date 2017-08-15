@@ -430,6 +430,10 @@ img{
   font-family: 'Raleway', sans-serif;
 }
 
+.student-signup-firstname-input:focus, .student-signup-acesscode-input:focus, .professor-signup-firstname-input:focus, .professor-signup-lecture-input:focus{
+  border-bottom: 1px solid $green;
+}
+
 // input[type="text"].student-signup-wrongacesscode-input::-webkit-input-placeholder{
 //   font-family: 'Raleway', sans-serif;
 // }
