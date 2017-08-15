@@ -35,7 +35,7 @@ class StudentRegisterCard extends Component {
   }
 
   redirect() {
-    this.props.history.push('/');
+    this.props.history.push('/student/dashboard');
   }
 
 
