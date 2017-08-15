@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { addQuestion, addTopic } from '../actions/Actions';
+import { addQuestion, addTopic, open } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
@@ -59,15 +59,23 @@ class AddQuestion extends Component{
     this.setState({questionEmpty: true})
   }
 
+  open(e) {
+    e.preventDefault();
+    this.props.open();
+  }
+
   submitPressed(e) {
     e.preventDefault();
-
     if(this.state.questionText.trim() === ''){
       this.setState({questionEmpty: false});
     } else {
 
       var isUniqueTopic = isUnique(this.state.tags, this.props.topicsArr);
       var thisColor = randomColor(colorArray)
+
+      if(this.state.tags === "ResolvedQuestions"){
+        this.setState({tags: ""})
+      }
 
       const data = {
         text: this.state.questionText,
@@ -121,6 +129,7 @@ class AddQuestion extends Component{
 
 
   render() {
+    var isResolvedQuestionTag = (this.state.tags === "ResolvedQuestions");
     return (
       <div className="new-question-container">
         <div className="new-question-input-field">
@@ -132,6 +141,8 @@ class AddQuestion extends Component{
             placeholder="New Question..."
           />
 
+          {isResolvedQuestionTag
+          ?
           <Autocomplete
             wrapperProps={{id:'new-tag'}}
             inputProps={{id:'tag', placeholder:'#topic'}}
@@ -142,7 +153,6 @@ class AddQuestion extends Component{
                 {item.text}
               </div>
             }
-            open={true}
             value={this.state.tags}
             onChange={(e) => {this.updateTags(e); this.updateAutocompleteMenuPosition();}}
             onSelect={(val) => this.setState({tags:val})}
@@ -150,12 +160,29 @@ class AddQuestion extends Component{
               return item.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
             }}
           />
-
+        :
+        <Autocomplete
+          wrapperProps={{id:'new-tag'}}
+          inputProps={{id:'tag', placeholder:'#topic'}}
+          getItemValue={(item) => item.text}
+          items={this.props.classObj.topics}
+          renderItem={(item, isHighlighted) =>
+            <div id="menu-item" style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+              {item.text}
+            </div>
+          }
+          value={this.state.tags}
+          onChange={(e) => this.updateTags(e)}
+          onSelect={(val) => this.setState({tags:val})}
+          shouldItemRender={ (item, val)=>{
+            return item.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
+          }}
+        />
+        }
         </div>
-
         {this.state.questionEmpty ?
           <div className="new-question-footer">
-            <button data-tip="question-help" data-for="question-help" id="question-help">?</button>
+            <button id="question-help" onClick={(e) => this.open(e)}>?</button>
             <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
           </div> :
           <div className="empty-new-question-footer">
@@ -163,14 +190,11 @@ class AddQuestion extends Component{
               Question can't be empty!
             </div>
             <div className="empty-new-question-container">
-              <button data-tip="question-help" data-for="question-help" id="question-help">?</button>
+              <button id="question-help" onClick={(e) => this.open(e)}>?</button>
               <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
             </div>
           </div>
         }
-        <ReactTooltip id='question-help' type='info'>
-          <span>Here you can ask any questions you have. <br/>You can add optional topic tags, <br/>and vote on other questions</span>
-        </ReactTooltip>
       </div>
     );
   }
@@ -195,7 +219,10 @@ const mapDispatchToProps = dispatch => {
     },
     addTopicAction: (savedTopic) => {
       dispatch(addTopic(savedTopic))
-    }
+    },
+    open: () => {
+      dispatch(open())
+    },
   }
 }
 

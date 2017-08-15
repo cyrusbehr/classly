@@ -4,7 +4,7 @@ import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
 import {addComment, deleteTopic, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve} from '../../actions/Actions';
-import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
+import {sortByMagic, sortByCategory, sortByResolved} from '../../constants/algorithmicos';
 import now from 'date-now';
 import dateFormat from 'dateformat';
 
@@ -58,9 +58,11 @@ class ProfessorQuestionsContainer extends Component {
     // })
 
     var sortedArray;
-
-
-    if(this.props.filter){
+    if(this.props.filter === "ResolvedQuestions"){
+      sortedArray = sortByResolved(this.props.questionsArray);
+      console.log(this.props.questionsArray);
+      console.log("this is sortByResolved: ", sortedArray);
+    } else if (this.props.filter){
       sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
     } else {
       sortedArray = sortByMagic(this.props.questionsArray);

@@ -4,7 +4,7 @@ import AddQuestion from '../../components/AddQuestion';
 import { connect } from 'react-redux';
 import _ from 'underscore';
 import {addComment, deleteQuestion, upVoteQuestion, toggleStar, toggleResolve} from '../../actions/Actions';
-import {sortByMagic, sortByCategory} from '../../constants/algorithmicos';
+import {sortByMagic, sortByCategory, sortByResolved} from '../../constants/algorithmicos';
 import now from 'date-now';
 import dateFormat from 'dateformat';
 
@@ -53,12 +53,19 @@ class TAQuestionsContainer extends Component {
     // })
 
     var sortedArray;
-
-    if(this.props.filter){
-      sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
-    } else {
-      sortedArray = sortByMagic(this.props.questionsArray);
-    }
+      if(this.props.filter === "ResolvedQuestions"){
+        sortedArray = sortByResolved(this.props.questionsArray);
+      } else if (this.props.filter){
+        sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
+      } else {
+        sortedArray = sortByMagic(this.props.questionsArray);
+      };
+    //
+    // if(this.props.filter){
+    //   sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
+    // } else {
+    //   sortedArray = sortByMagic(this.props.questionsArray);
+    // }
 
     var proffArr = this.props.professorName.split(" ")
     var profname = proffArr[1] || proffArr[0]
@@ -68,11 +75,10 @@ class TAQuestionsContainer extends Component {
         <div className="questions-container-header">
           <span className="course">{this.props.className}</span>
           <span className="lecturer">Prof {profname}</span>
-          <span className="date">1st Aug 2017</span>
+          <span className="date">{this.dateNow()}</span>
         </div>
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
         {this.setColor()}
-        {this.dateNow()}
         {sortedArray.map((question, i) => {
           return(
             <TAQuestion
