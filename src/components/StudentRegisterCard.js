@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
-import {addClass, setUsername, loading, notLoading} from '../actions/Actions'
+import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
+import axios from 'axios'
+import {baseDomain} from '../constants/const'
 
 
 class StudentRegisterCard extends Component {
@@ -27,34 +29,9 @@ class StudentRegisterCard extends Component {
     let self = this;
     $("input").on('keyup', function (e) {
       if (e.keyCode == 13) {
-        self.onSubmit(e)
+        self.handleRegister(e)
       }
     });
-
-    this.props.socket.on('Joined', () => {
-      this.props.socket.emit('getStudentState', this.state.accessCode)
-    })
-
-    this.props.socket.on('error1', () => {
-      console.log("this error1 was hit for some fucking reason!");
-      this.props.updateWrongAccessCode(false);
-      this.props.setNotLoadingAction();
-    })
-
-    this.props.socket.on('getStudentState', (classObj) => {
-      //sort the questions by upvotes
-      let questionsArray = classObj.questions.slice()
-      if(questionsArray.length > 0) {
-        let sortedArray = _.sortBy(questionsArray, (question) => {
-          return -1 * question.upVotes; //negative changes to descending order
-        })
-        classObj.questions = sortedArray;
-      }
-      //update the state with the class and the username
-      this.props.addClassAction(classObj)
-      this.props.setUsernameAction(this.state.name);
-      this.redirect()
-    })
   }
 
   redirect() {
@@ -83,22 +60,43 @@ class StudentRegisterCard extends Component {
     this.setState({passwordRepeat: e.target.value});
   }
 
-  onSubmit(e) {
+  handleRegister(e) {
     e.preventDefault();
-    if(this.state.name.trim() === ''){
-      this.setState({nameEmpty: false});
-    }
+    // TODO: Do some propper validation here to make sure fields are not empty
+    //or just use a form that has built in validation from codepen
 
-    if(this.state.accessCode.trim() === ''){
-      this.setState({codeEmpty: false});
-    }
+    // if(this.state.name.trim() === ''){
+    //   this.setState({nameEmpty: false});
+    // }
+    //
+    // if(this.state.accessCode.trim() === ''){
+    //   this.setState({codeEmpty: false});
+    // }
 
-    if(!this.state.accessCode || !this.state.name) return;
+    // if(!this.state.accessCode || !this.state.name) return;
 
-    if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
+    // if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
       this.props.setLoadingAction()
-      this.props.socket.emit('join', this.state.accessCode);
-    }
+      axios.post(baseDomain + 'register', {
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        email: this.state.email,
+        password: this.state.password,
+        passwordRepeat: this.state.passwordRepeat,
+        userType: "student"
+      })
+      .then((r) => {
+        if(r.error) {
+          this.props.setNotLoadingAction();
+          // TODO: alert the user that there was an error, and do the corresponding action
+          // this.props.updateWrongAccessCode(false);
+        }else{
+          this.props.setUserAction(r.response);
+          this.props.setNotLoadingAction();
+          this.redirect();
+        }
+      })
+    // }
   }
 
   handleback(e) {
@@ -113,9 +111,9 @@ class StudentRegisterCard extends Component {
           <label>
             <input
               type="text"
-              value={this.state.name}
+              value={this.state.firstname}
               placeholder="First Name"
-              onChange={(event) => this.handleNameChange(event)}
+              onChange={(event) => this.handleFirstNameChange(event)}
               className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
             />
             <div>
@@ -130,9 +128,9 @@ class StudentRegisterCard extends Component {
             <label>
               <input
                 type="text"
-                value={this.state.firstname}
+                value={this.state.lastname}
                 placeholder="Last Name"
-                onChange={(event) => this.handleFirstNameChange(event)}
+                onChange={(event) => this.handleLastNameChange(event)}
                 className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
               />
               <div>
@@ -148,9 +146,9 @@ class StudentRegisterCard extends Component {
             <label>
               <input
                 type="text"
-                value={this.state.lastname}
+                value={this.state.email}
                 placeholder="Email"
-                onChange={(event) => this.handleLastNameChange(event)}
+                onChange={(event) => this.handleEmailChange(event)}
                 className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
                   "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
                 />
@@ -187,7 +185,7 @@ class StudentRegisterCard extends Component {
                 <br></br>
                 <button
                   type="button"
-                  onClick={(e) => this.onSubmit(e)}
+                  onClick={(e) => this.handleRegister(e)}
                   className="student-signup-submit hvr-grow"
                   >Register</button>
                   <br></br>
@@ -211,11 +209,8 @@ class StudentRegisterCard extends Component {
 
           const mapDispatchToProps = dispatch => {
             return {
-              addClassAction: (newClass) => {
-                dispatch(addClass(newClass));
-              },
-              setUsernameAction: (username) => {
-                dispatch(setUsername(username))
+              setUserAction: (user) => {
+                dispatch(setUser(user))
               },
               setLoadingAction: () => {
                 dispatch(loading())

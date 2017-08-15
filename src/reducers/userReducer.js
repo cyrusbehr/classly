@@ -1,26 +1,19 @@
-import { SET_USER_TYPE, SET_USERNAME, LIKE_QUESTION } from '../constants/ActionTypes';
+import { SET_USER , LIKE_QUESTION } from '../constants/ActionTypes';
 
 
 const initialState = {
-  userType: "",
-  username: "",
+  user: {},
   likedQuestions: [],
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
-  case SET_USER_TYPE:
-    let newState = Object.assign({}, state, {userType: action.userType})
-      return newState;
 
-  case SET_USERNAME:
-    let newState2 = Object.assign({}, state, {username: action.username})
-      return newState2;
+  case SET_USER:
+  var newState = Object.assign({}, state, {user: action.user})
+  return newState
 
   case LIKE_QUESTION:
-    // console.log("entering LIKE_QUESTION")
-    // console.log("state.likedQuestions:", state.likedQuestions);
-    // console.log("ACTION:", action);
     var newState3;
     //if already liked
     if(action.direction === "DOWN"){
