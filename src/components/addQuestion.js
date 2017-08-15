@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { addQuestion, addTopic } from '../actions/Actions';
+import { addQuestion, addTopic, open } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
@@ -46,9 +46,13 @@ class AddQuestion extends Component{
     this.setState({questionEmpty: true})
   }
 
+  open(e) {
+    e.preventDefault();
+    this.props.open();
+  }
+
   submitPressed(e) {
     e.preventDefault();
-
     if(this.state.questionText.trim() === ''){
       this.setState({questionEmpty: false});
     } else {
@@ -164,7 +168,7 @@ class AddQuestion extends Component{
         </div>
         {this.state.questionEmpty ?
           <div className="new-question-footer">
-            <button data-tip="question-help" data-for="question-help" id="question-help">?</button>
+            <button id="question-help" onClick={(e) => this.open(e)}>?</button>
             <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
           </div> :
           <div className="empty-new-question-footer">
@@ -172,14 +176,11 @@ class AddQuestion extends Component{
               Question can't be empty!
             </div>
             <div className="empty-new-question-container">
-              <button data-tip="question-help" data-for="question-help" id="question-help">?</button>
+              <button id="question-help" onClick={(e) => this.open(e)}>?</button>
               <button id="submit-question" onClick={(e) => this.submitPressed(e)}>Submit</button>
             </div>
           </div>
         }
-        <ReactTooltip id='question-help' type='info'>
-          <span>Here you can ask any questions you have. <br/>You can add optional topic tags, <br/>and vote on other questions</span>
-        </ReactTooltip>
       </div>
     );
   }
@@ -204,7 +205,10 @@ const mapDispatchToProps = dispatch => {
     },
     addTopicAction: (savedTopic) => {
       dispatch(addTopic(savedTopic))
-    }
+    },
+    open: () => {
+      dispatch(open())
+    },
   }
 }
 

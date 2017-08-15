@@ -69,7 +69,7 @@ StudentTopicsContainer{
 }
 
 .questions-container-header{
-  z-index: 999;
+  z-index: 2;
   position: fixed;
   right: 0;
   left: 0;
@@ -336,7 +336,7 @@ StudentTopicsContainer{
   display: flex;
   flex-direction: column;
 
-  z-index: 999;
+  z-index: 2;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -486,7 +486,7 @@ StudentTopicsContainer{
   color: gray;
   font-size: 18px;
   margin-top: 55px;
-  z-index: 0;
+  z-index: 2;
 }
 
 #alert{
