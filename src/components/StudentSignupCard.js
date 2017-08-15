@@ -1,22 +1,20 @@
 import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
-import {addClass, setUsername, loading, notLoading} from '../actions/Actions'
+import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
-
+import axios from 'axios'
+import {baseDomain} from '../constants/const'
 
 class StudentSignupCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: "",
-      accessCode: "",
+      email: "",
+      password: "",
       wrongAccessCode: true,
       nameEmpty: true,
       codeEmpty: true,
-    }
-    if(this.props.userType === ""){
-      this.props.history.push('/')
     }
   }
 
@@ -28,63 +26,77 @@ class StudentSignupCard extends Component {
       }
     });
 
-    this.props.socket.on('Joined', () => {
-      this.props.socket.emit('getStudentState', this.state.accessCode)
-    })
+    // this.props.socket.on('Joined', () => {
+    //   this.props.socket.emit('getStudentState', this.state.password)
+    // })
 
-    this.props.socket.on('error1', () => {
-      console.log("this error1 was hit for some fucking reason!");
-      this.props.updateWrongAccessCode(false);
-      this.props.setNotLoadingAction();
-    })
+    // this.props.socket.on('error1', () => {
+    //   console.log("this error1 was hit for some fucking reason!");
+    //   this.props.updateWrongAccessCode(false);
+    //   this.props.setNotLoadingAction();
+    // })
 
-    this.props.socket.on('getStudentState', (classObj) => {
-      //sort the questions by upvotes
-      let questionsArray = classObj.questions.slice()
-      if(questionsArray.length > 0) {
-        let sortedArray = _.sortBy(questionsArray, (question) => {
-          return -1 * question.upVotes; //negative changes to descending order
-        })
-        classObj.questions = sortedArray;
-      }
-      //update the state with the class and the username
-      this.props.addClassAction(classObj)
-      this.props.setUsernameAction(this.state.name);
-      this.redirect()
-    })
+    // this.props.socket.on('getStudentState', (classObj) => {
+    //   //sort the questions by upvotes
+    //   let questionsArray = classObj.questions.slice()
+    //   if(questionsArray.length > 0) {
+    //     let sortedArray = _.sortBy(questionsArray, (question) => {
+    //       return -1 * question.upVotes; //negative changes to descending order
+    //     })
+    //     classObj.questions = sortedArray;
+    //   }
+    //   //update the state with the class and the username
+    //   this.props.addClassAction(classObj)
+    //   this.props.setUsernameAction(this.state.email);
+    //   this.redirect()
+    // })
   }
 
   redirect() {
-    this.props.history.push(this.props.redirectRoute);
+    this.props.history.push('/student/dashboard');
   }
 
-
-  handleNameChange(event, stateProp) {
-    this.setState({name: event.target.value});
+  handleEmailChange(event, stateProp) {
+    this.setState({email: event.target.value});
     this.setState({nameEmpty: true});
   }
 
-  handleAccessCodeChange(event) {
-    this.setState({accessCode: event.target.value})
+  handlePasswordChange(event) {
+    this.setState({password: event.target.value})
     this.setState({codeEmpty: true});
     this.props.updateWrongAccessCode(true);
   }
 
   onSubmit(e) {
     e.preventDefault();
-    if(this.state.name.trim() === ''){
+    if(this.state.email.trim() === ''){
       this.setState({nameEmpty: false});
     }
 
-    if(this.state.accessCode.trim() === ''){
+    if(this.state.password.trim() === ''){
       this.setState({codeEmpty: false});
     }
 
-    if(!this.state.accessCode || !this.state.name) return;
+    if(!this.state.password || !this.state.email) return;
 
-    if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
+    if(this.state.email.trim() !== '' && this.state.password.trim() !== '') {
       this.props.setLoadingAction()
-      this.props.socket.emit('join', this.state.accessCode);
+      // this.props.socket.emit('join', this.state.password);
+      axios.post(baseDomain + 'login', {
+        email: this.state.email,
+        password: this.state.password,
+        userType: 'student'
+      })
+      .then((r) => {
+        if(r.error) {
+          this.props.setNotLoadingAction();
+          // TODO: handle the errors here and give feedback to the user
+        }else {
+          this.props.setUserAction(r.response);
+          this.props.setNotLoadingAction();
+          this.redirect();
+        }
+      })
     }
   }
 
@@ -100,13 +112,13 @@ class StudentSignupCard extends Component {
           <label>
             <input
               type="text"
-              value={this.state.name}
+              value={this.state.email}
               placeholder="Email"
-              onChange={(event) => this.handleNameChange(event)}
-              className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
+              onChange={(event) => this.handleEmailChange(event)}
+              className= {this.state.emailEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
             />
             <div>
-              {this.state.nameEmpty ?
+              {this.state.emailEmpty ?
                 <div>
                 </div> :
                 <div className="empty-name-alert">
@@ -117,10 +129,10 @@ class StudentSignupCard extends Component {
             <br></br>
             <label>
               <input
-                type="text"
+                type="password"
                 value={this.state.title}
                 placeholder="Password"
-                onChange={(event) => this.handleAccessCodeChange(event)}
+                onChange={(event) => this.handlePasswordChange(event)}
                 className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
                   "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
               />
@@ -163,11 +175,8 @@ class StudentSignupCard extends Component {
 
       const mapDispatchToProps = dispatch => {
         return {
-          addClassAction: (newClass) => {
-            dispatch(addClass(newClass));
-          },
-          setUsernameAction: (username) => {
-            dispatch(setUsername(username))
+          setUserAction: (user) => {
+            dispatch(setUser(user))
           },
           setLoadingAction: () => {
             dispatch(loading())

@@ -20,9 +20,6 @@ class StudentRegisterCard extends Component {
       nameEmpty: true,
       codeEmpty: true,
     }
-    if(this.props.userType === ""){
-      this.props.history.push('/')
-    }
   }
 
   componentDidMount() {
