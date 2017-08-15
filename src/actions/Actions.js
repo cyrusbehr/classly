@@ -23,7 +23,7 @@ LOADING, NOT_LOADING, CLOSE, OPEN} from '../constants/ActionTypes';
     }
   }
 
-  export function setUsername(user) {
+  export function setUser(user) {
     return {
       type: SET_USER,
       user
