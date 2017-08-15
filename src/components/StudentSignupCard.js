@@ -33,7 +33,8 @@ class StudentSignupCard extends Component {
     })
 
     this.props.socket.on('error1', () => {
-      this.setState({wrongAccessCode: false});
+      console.log("this error1 was hit for some fucking reason!");
+      this.props.updateWrongAccessCode(false);
       this.props.setNotLoadingAction();
     })
 
@@ -66,7 +67,7 @@ class StudentSignupCard extends Component {
   handleAccessCodeChange(event) {
     this.setState({accessCode: event.target.value})
     this.setState({codeEmpty: true});
-    this.setState({wrongAccessCode: true});
+    this.props.updateWrongAccessCode(true);
   }
 
   onSubmit(e) {
@@ -115,11 +116,11 @@ class StudentSignupCard extends Component {
                 value={this.state.title}
                 placeholder="Access Code"
                 onChange={(event) => this.handleAccessCodeChange(event)}
-                className= {this.state.codeEmpty ? this.state.wrongAccessCode ?
+                className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
                   "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
               />
               <div>
-                {this.state.codeEmpty ? this.state.wrongAccessCode ?
+                {this.state.codeEmpty ? this.props.wrongAccessCode ?
                   <div>
                   </div> :
                   <div className="wrong-access-alert">
