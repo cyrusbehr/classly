@@ -56,6 +56,10 @@ class AddQuestion extends Component{
       var isUniqueTopic = isUnique(this.state.tags, this.props.topicsArr);
       var thisColor = randomColor(colorArray)
 
+      if(this.state.tags === "ResolvedQuestions"){
+        this.setState({tags: ""})
+      }
+
       const data = {
         text: this.state.questionText,
         username: this.props.username,
