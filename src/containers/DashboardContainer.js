@@ -21,9 +21,10 @@ class DashboardContainer extends Component {
         console.log("there was an error loading the dashboard");
       } else {
         // TODO: update the state here
+
       }
     })
-    .catch((err) => console.log("there was an error: ", err);)
+    .catch((err) => console.log("there was an error: ", err))
   }
 
   onCardClick() {
