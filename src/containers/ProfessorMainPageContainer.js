@@ -3,12 +3,10 @@ import LoginCard from '../components/LoginCard'
 import {LoginCardData} from '../constants/const'
 import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupContainer';
 import { connect } from 'react-redux';
-import {setUserType} from '../actions/Actions'
 
 class ProfessorMainPageContainer extends Component {
   clearUserTypeAndRedirect(e) {
     e.preventDefault();
-    this.props.setUserTypeAction("");
     this.props.history.push('/');
   }
 
@@ -63,9 +61,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUserTypeAction: (userType) => {
-      dispatch(setUserType(userType))
-    }
+
   }
 }
 
