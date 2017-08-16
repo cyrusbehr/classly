@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {loading, notLoading} from '../actions/Actions'
 import StudentDashboardCard from './StudentDashboardCard';
 
 class DashboardContainer extends Component {
@@ -7,6 +8,10 @@ class DashboardContainer extends Component {
     super(props)
     this.state = {
     };
+  }
+
+  componenetDidMount() {
+
   }
 
   //TODO: Axios get request for user classes
@@ -61,13 +66,20 @@ class DashboardContainer extends Component {
 
 const mapStateToProps = state => {
   return{
-    user: state.userReducer
+    user: state.userReducer,
+    isLoading: state.pageReducer.isLoading
+
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    setLoadingAction: () => {
+      dispatch(loading())
+    },
+    setNotLoadingAction: () => {
+      dispatch(notLoading())
+    },
   }
 }
 
