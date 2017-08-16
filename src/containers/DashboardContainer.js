@@ -1,63 +1,101 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {loading, notLoading} from '../actions/Actions'
+import {loading, notLoading} from '../actions/Actions';
 import StudentDashboardCard from './StudentDashboardCard';
-import axios from 'axios'
-import {baseDomain} from '../constants/const'
-
+import axios from 'axios';
+import {baseDomain} from '../constants/const';
+import {addCourse} from '../actions/Actions';
 import Modal from 'react-modal';
 
 class DashboardContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      showModal: false,
+      showCreateCourseModal: false,
       professorName: "",
       courseTitle: "",
-    };
+      courseCode: "",
+    }
   }
 
-  componentDidMount() {
-    this.props.setLoadingAction();
-    axios.get(baseDomain + 'dashboard')
-    .then((r) => {
-      if(r.data.error) {
-        console.log("there was an error loading the dashboard");
-      } else {
-        // TODO: update the state here
-      }
-    })
-    .catch((err) => console.log("there was an error: ", err))
-  }
-
-  onCardClick() {
-    //Re render dashboard with classes inside the Course
-  }
-  
-  //TODO: Axios get request for user classes
-  onNameChange( e){
-    this.setState({professorName: e.target.value});
-  }
+  // componentDidMount() {
+  //   this.props.setLoadingAction();
+  //   axios.get(baseDomain + 'dashboard')
+  //   .then((r) => {
+  //     if(r.data.error) {
+  //       console.log("there was an error loading the dashboard");
+  //     } else {
+  //       // TODO: update the state here
+  //     }
+  //   })
+  //   .catch((err) => console.log("there was an error: ", err))
+  // }
 
   onCreateCourseClick(e) {
     //open modal
-    this.setState({showModal: true});
+    this.setState({showCreateCourseModal: true});
     //information is filled out and saved in this.state
+  }
+
+  onNameChange(e){
+    this.setState({professorName: e.target.value});
+  }
+
+  onCourseTitleChange(e){
+    this.setState({courseTitle: e.target.value});
+  }
+
+  onCourseCodeChange(e){
+    this.setState({courseCode: e.target.value});
+  }
+
+  onCardClick() {
+    //get classes
+    //Re render dashboard with classes inside the Course
   }
 
   onSubmitModal(e){
     //create course object from what is saved in this.state
+    e.preventDefault();
+    var data = {
+      professorName: this.state.professorName,
+      courseTitle: this.state.courseTitle,
+      courseCode: this.state.courseCode,
+      accessCode: "",
+      classes: [],
+    };
     //axios post request to backend with that object
-        //use baseDomain in axios request and import it from the constants file
-        //on the .then of this action dispatch action to the reducer
-        //to add the course to the course reducer. need to write this action. courses is an array in reducer
-        //immutable --> splice array to make deep copy then resave
+    //use baseDomain in axios request and import it from the constants file
+    //on the .then of this action dispatch action to the reducer
+    //to add the course to the course reducer. need to write this action. courses is an array in reducer
+    //immutable --> splice array to make deep copy then resave
+    axios.post(baseDomain + 'dashboard', {
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      email: this.state.email,
+      password: this.state.password,
+      passwordRepeat: this.state.passwordRepeat,
+      userType: "student"
+    })
+    .then((r) => {
+      if(r.data.error) {
+        this.props.setNotLoadingAction();
+        console.log("Error encountered while creating new course: ", r.data);
+      } else {
+        this.props.setNotLoadingAction();
+        //dispatch action to reducer to add coures to course reduver
+        this.props.addCourseAction(r.data.response);
+      }
+    })
+    .catch((err) => {
+      console.log("there was an error with the request : ", err);
+    });
     //close modal
-    this.setState({showModal: false});
+    this.setState({showCreateCourseModal: false});
   }
 
-  onCloseModal(e){
-    this.setSTate({showModal: false});
+  onCloseModal(){
+    this.setState({showCreateCourseModal: false});
   }
 
   onCardClick() {
@@ -65,7 +103,9 @@ class DashboardContainer extends Component {
   }
 
   onCreateClassClick(){
-
+    //open class modal
+    //information is filloud out and saved in this.state
+    //create new class modal
   }
 
 
@@ -98,33 +138,44 @@ class DashboardContainer extends Component {
             <button className="dashboardBody-button" onClick={(e) => this.onCreateCourseClick(e)}>Create a Course</button>
           </div>
           <Modal
-          isOpen={this.state.showModal}
+          isOpen={this.state.showCreateCourseModal}
           contentLabel="Create a Course"
           >
             <h2>Fill out the following information to create a new course</h2>
-            <button onClick={this.onCloseModal}>close</button>
             <div>I am a modal</div>
             <form>
               <input
                 type="text"
                 value={this.state.professorName}
                 placeholder="Professor Name"
-                onChange={(event) => this.handleChange(professorName, event)}
+                onChange={(e) => this.onNameChange(e)}
               />
               <input
                 type="text"
-                value={this.state.professorName}
+                value={this.state.courseTitle}
                 placeholder="Course Title"
-                onChange={(event) => this.handleChange(professorName, event)}
+                onChange={(e) => this.onCourseTitleChange(e)}
               />
-              <button>Create Course</button>
+              <input
+                type="text"
+                value={this.state.courseCode}
+                placeholder="Course Code"
+                onChange={(e) => this.onCourseCodeChange(e)}
+              />
+              <button
+                onClick={(e) => this.onSubmitModal(e)}
+                >Create Course</button>
+              <button
+                onClick={() => this.onCloseModal()}
+                >Close</button>
             </form>
           </Modal>
           <div className="dashboardBody-container-body">
             <StudentDashboardCard/>
           </div>
+        </div>
         }
-      </div>
+    </div>
     )
   }
 }
@@ -133,7 +184,6 @@ const mapStateToProps = state => {
   return{
     user: state.userReducer,
     isLoading: state.pageReducer.isLoading
-
   }
 }
 
@@ -145,6 +195,9 @@ const mapDispatchToProps = dispatch => {
     setNotLoadingAction: () => {
       dispatch(notLoading())
     },
+    addCourseAction: (courseObj) => {
+      dispatch(addCourse(courseObj))
+    }
   }
 }
 
