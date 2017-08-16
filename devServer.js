@@ -11,6 +11,7 @@ const LocalStrategy = require('passport-local');
 const auth = require('./backend/routes/auth');
 const expressValidator = require('express-validator')
 const { User } = require('./src/Models/models.js');
+const dashboard = require('./backend/routes/dashboard');
 
 const app = express();
 // const compiler = webpack(config);
@@ -412,6 +413,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', auth(passport));
+app.use('/api', dashboard());
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
