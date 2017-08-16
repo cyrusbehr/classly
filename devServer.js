@@ -10,7 +10,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const auth = require('./backend/routes/auth');
 const expressValidator = require('express-validator')
-const { User } = require('./backend/models/User');
+const { User } = require('./src/Models/models.js');
 
 const app = express();
 // const compiler = webpack(config);

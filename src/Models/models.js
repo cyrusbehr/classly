@@ -51,9 +51,11 @@ const CourseSchema = mongoose.Schema({
   classes: [{
       type: mongoose.Schema.ObjectId,
       ref: 'Class'
+
+    }]
 })
 
-const userSchema = Schema({
+const userSchema = mongoose.Schema({
   firstname:{
     type: String,
     required: true
@@ -86,5 +88,6 @@ module.exports = {
   Class,
   Question,
   Topic,
-  Course
+  Course,
+  User
 }
