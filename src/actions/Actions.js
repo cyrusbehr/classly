@@ -6,7 +6,8 @@ import {
   VOTE_TOPIC, DELETE_QUESTION,
   DELETE_TOPIC, TOGGLE_STAR,
   TOGGLE_RESOLVE, NEW_COMMENT, LIKE_QUESTION,
-LOADING, NOT_LOADING, CLOSE, OPEN} from '../constants/ActionTypes';
+LOADING, NOT_LOADING, CLOSE, OPEN,
+POPULATE_COURSES} from '../constants/ActionTypes';
 
 
   export function setSocket(socket) {
@@ -128,6 +129,13 @@ LOADING, NOT_LOADING, CLOSE, OPEN} from '../constants/ActionTypes';
   export function open() {
     return {
       type: OPEN,
+    }
+  }
+
+  export function populateCourse(courseArray) {
+    return {
+      type: POPULATE_COURSES,
+      courseArray
     }
   }
 

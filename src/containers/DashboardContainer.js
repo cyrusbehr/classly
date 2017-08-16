@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {loading, notLoading} from '../actions/Actions'
+import {loading, notLoading, populateCourse} from '../actions/Actions'
 import StudentDashboardCard from './StudentDashboardCard';
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
@@ -20,8 +20,8 @@ class DashboardContainer extends Component {
       if(r.data.error) {
         console.log("there was an error loading the dashboard");
       } else {
-        // TODO: update the state here
-
+        this.props.populateCourseAction(r.response);
+        this.props.setNotLoadingAction();
       }
     })
     .catch((err) => console.log("there was an error: ", err))
@@ -93,6 +93,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    populateCourseAction: (courseArray) => {
+      dispatch(populateCourse(courseArray))
+    },
     setLoadingAction: () => {
       dispatch(loading())
     },
