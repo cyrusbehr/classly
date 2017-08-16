@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 
-class DashboardCard extends Component {
+class DashboardCourseCard extends Component {
   constructor(props){
     super(props)
   }
@@ -37,4 +37,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DashboardCard);
+)(DashboardCourseCard);
