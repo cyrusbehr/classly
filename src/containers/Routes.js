@@ -10,7 +10,6 @@ import StudentMainPageContainer from './StudentMainPageContainer'
 import TAMainPageContainer from './TAMainPageContainer'
 import StudentMainRegisterContainer from './StudentMainRegisterContainer'
 import DashboardContainer from './DashboardContainer'
-import StudentDashboardCard from './StudentDashboardCard'
 import ProfessorMainRegisterContainer from './ProfessorMainRegisterContainer'
 import TAMainRegisterContainer from './TAMainRegisterContainer'
 

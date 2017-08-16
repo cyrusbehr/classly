@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {loading, notLoading, populateCourse} from '../actions/Actions'
-import StudentDashboardCard from './StudentDashboardCard';
+import DashboardCard from './DashboardCard';
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
 
@@ -76,7 +76,7 @@ class DashboardContainer extends Component {
             <div className="dashboardBody-container-body">
               {this.props.courses.map((course) => {
                 return (
-                  <StudentDashboardCard
+                  <DashboardCard
                     professorName={course.professorName}
                     courseTitle={course.courseTitle}
                     courseCode={course.courseCode}
