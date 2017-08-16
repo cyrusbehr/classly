@@ -53,7 +53,7 @@ class StudentSignupCard extends Component {
   }
 
   redirect() {
-    this.props.history.push('/student/dashboard');
+    this.props.history.push('/dashboard');
   }
 
   handleEmailChange(event, stateProp) {

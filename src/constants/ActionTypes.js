@@ -17,3 +17,4 @@ export const LOADING = "LOADING";
 export const NOT_LOADING = "NOT_LOADING";
 export const CLOSE = "CLOSE";
 export const OPEN = "OPEN";
+export const ADD_COURSE = "ADD_COURSE";

@@ -6,7 +6,7 @@ import {
   VOTE_TOPIC, DELETE_QUESTION,
   DELETE_TOPIC, TOGGLE_STAR,
   TOGGLE_RESOLVE, NEW_COMMENT, LIKE_QUESTION,
-LOADING, NOT_LOADING, CLOSE, OPEN} from '../constants/ActionTypes';
+LOADING, NOT_LOADING, CLOSE, OPEN, ADD_COURSE} from '../constants/ActionTypes';
 
 
   export function setSocket(socket) {
@@ -130,6 +130,15 @@ LOADING, NOT_LOADING, CLOSE, OPEN} from '../constants/ActionTypes';
       type: OPEN,
     }
   }
+
+  export function addCourse(courseObject) {
+    return {
+      type: ADD_COURSE,
+      courseObject: courseObject,
+    }
+  }
+
+
 
   // export function setColor(questionId) {
   //   return {
