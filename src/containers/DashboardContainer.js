@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {loading, notLoading} from '../actions/Actions'
 import StudentDashboardCard from './StudentDashboardCard';
+import axios from 'axios'
+import {baseDomain} from '../constants/const'
+
 import Modal from 'react-modal';
 
 class DashboardContainer extends Component {
@@ -13,6 +17,23 @@ class DashboardContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.setLoadingAction();
+    axios.get(baseDomain + 'dashboard')
+    .then((r) => {
+      if(r.data.error) {
+        console.log("there was an error loading the dashboard");
+      } else {
+        // TODO: update the state here
+      }
+    })
+    .catch((err) => console.log("there was an error: ", err))
+  }
+
+  onCardClick() {
+    //Re render dashboard with classes inside the Course
+  }
+  
   //TODO: Axios get request for user classes
   onNameChange( e){
     this.setState({professorName: e.target.value});
@@ -55,13 +76,21 @@ class DashboardContainer extends Component {
       <div className="dashboard">
         <div className="dashboard-header">
           <span>Class.ly</span>
-          <span>This is DashboardContainer</span>
+          <span>This is Dashboard Container</span>
           <span>UserType: {this.props.userType}</span>
           <div>
             <span>Icon</span>
             <span>  Icon</span>
           </div>
         </div>
+        {this.props.isLoading
+          ?
+          <div className="loader-dashboard">
+            <svg className="circular-dashboard" viewBox="25 25 50 50">
+              <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
+            </svg>
+          </div>
+          :
         <div className="dashboardBody-container">
           <div className="dashboardBody-container-header">
             <h1>Dashboard</h1>
@@ -94,7 +123,7 @@ class DashboardContainer extends Component {
           <div className="dashboardBody-container-body">
             <StudentDashboardCard/>
           </div>
-        </div>
+        }
       </div>
     )
   }
@@ -102,13 +131,20 @@ class DashboardContainer extends Component {
 
 const mapStateToProps = state => {
   return{
-    user: state.userReducer
+    user: state.userReducer,
+    isLoading: state.pageReducer.isLoading
+
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    setLoadingAction: () => {
+      dispatch(loading())
+    },
+    setNotLoadingAction: () => {
+      dispatch(notLoading())
+    },
   }
 }
 
