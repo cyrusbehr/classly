@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 */
 import './styles/main.scss';
 import './styles/student.scss';
+import './styles/dashboard.scss';
 
 /**
 * Both configureStore and Root are required conditionally.
