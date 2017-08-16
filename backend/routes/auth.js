@@ -18,7 +18,7 @@ module.exports = function(passport) {
     req.getValidationResult()
     .then(function(result){
       if (!result.isEmpty()) { // Error in the validations above
-        res.status(400).json({
+        res.json({
           error: util.inspect(result.array())
         });
         return;
