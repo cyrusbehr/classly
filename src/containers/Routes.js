@@ -26,9 +26,9 @@ export default class Routes extends Component {
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
            <Route path="/" exact={true} component={MainPageContainer}/>
+           {/* <Route path="/" exact={true} component={StudentDashboardContainer}/> */}
          </Switch>
        </div>
      )
    }
-
 }
