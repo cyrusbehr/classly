@@ -18,7 +18,7 @@ module.exports = function(passport) {
     req.getValidationResult()
     .then(function(result){
       if (!result.isEmpty()) { // Error in the validations above
-        res.status(400).json({
+        res.json({
           error: util.inspect(result.array())
         });
         return;
@@ -52,55 +52,18 @@ module.exports = function(passport) {
         })
       })
     })
-
-    // if(!error) {
-    //
-    //   User.findOne({email: req.body.email})
-    //   .then(function(foundUser){
-    //     if(foundUser){
-    //       throw new Error('email is taken');
-    //     } else {
-    //       var user = new User({
-    //         userType: req.body.userType,
-    //         firstname: req.body.firstname,
-    //         lastname: req.body.lastname,
-    //         email: req.body.email,
-    //         password: req.body.password
-    //       });
-    //
-    //       return user.save()
-    //     }
-    //   })
-    //   .then(function(savedUser){
-    //     res.json({
-    //       error: null,
-    //       response: savedUser
-    //     })
-    //   })
-    //   .catch(function(error){
-    //     res.json({
-    //       error
-    //     })
-    //   })
-    //
-    // } else {
-    //   res.json({
-    //     error
-    //   });
-    // }
-
   });
 
   // POST Login page
   router.post('/login', passport.authenticate('local', {'failureRedirect': '/failure'} ), function(req, res) {
     res.json({
-      success: true
+      error: null,
+      response: req.user
     });
   });
 
   router.get('/failure', function(req, res) {
     res.json({
-      success: false,
       error: 'Incorrect username or password'
     });
   });
