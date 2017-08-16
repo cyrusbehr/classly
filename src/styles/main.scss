@@ -653,7 +653,15 @@ img{
   padding: 10px 10px 10px 10px;
 }
 
+.dashboardBody-button {
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 20;
+  // border-style: solid;
+}
+
 .dashboardBody-container-body {
   border-style: solid;
 }
+
 textarea, input, button { outline: none; }

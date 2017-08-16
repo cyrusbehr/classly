@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-// import StudentDashboardCard from './StudentDashboardCard';
+import StudentDashboardCard from './StudentDashboardCard';
 
 class DashboardBodyContainer extends Component {
   constructor(props){
@@ -15,10 +15,10 @@ class DashboardBodyContainer extends Component {
       <div className="dashboardBody-container">
         <div className="dashboardBody-container-header">
           <h1>Dashboard</h1>
-          <button>Add another class</button>
+          <button className="dashboardBody-button">Add another class</button>
         </div>
         <div className="dashboardBody-container-body">
-          map all cards here
+          <StudentDashboardCard/>
         </div>
       </div>
     )
