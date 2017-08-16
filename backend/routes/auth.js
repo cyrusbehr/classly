@@ -62,6 +62,14 @@ module.exports = function(passport) {
     });
   });
 
+  // GET
+  router.get('/getcourses', passport.authenticate('local', {'failureRedirect': '/failure'} ), function(req, res) {
+    res.json({
+      error: null,
+      response: req.user
+    });
+  });
+
   router.get('/failure', function(req, res) {
     res.json({
       error: 'Incorrect username or password'
