@@ -356,15 +356,15 @@ app.use(bodyParser.json());
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
       var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
+      ,root = namespace.shift()
+      ,formParam = root;
 
     while(namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
     return {
-      param : formParam,
-      msg   : msg,
+      param: formParam,
+      msg: msg,
     };
   }
 }));
@@ -382,9 +382,13 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.use(new LocalStrategy(function(username, password, done) {
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function(username, password, done) {
   // Find the user with the given username
-  User.findOne({ username: username }, function (err, user) {
+  User.findOne({ email: username }, function (err, user) {
     // if there's an error, finish trying to authenticate (auth failed)
     if (err) {
       console.log(err);
