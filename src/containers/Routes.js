@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+ import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import MainPageContainer from './MainPageContainer';
 import StudentMainViewContainer from './StudentSubContainers/StudentMainViewContainer';
