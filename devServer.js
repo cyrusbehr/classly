@@ -9,6 +9,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const auth = require('./backend/routes/auth');
+const create_course_class = require('./backend/routes/create_course_class');
 const expressValidator = require('express-validator')
 const { User } = require('./src/Models/models.js');
 
@@ -156,12 +157,10 @@ io.on('connection', socket => {
   })
 
   socket.on('createClass', (localState) => {
-    let existed = true;
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
     let accessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
-    console.log('accessCode', accessCode);
 
     function accessCodeRecursion(newAccessCode) {
       Class.findOne({accessCode: newAccessCode}, (err, classObj) => {
@@ -412,6 +411,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', auth(passport));
+app.use('/api', create_course_class());
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
