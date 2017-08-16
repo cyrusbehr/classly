@@ -3,7 +3,6 @@ mongoose.connect(process.env.MONGODB_URI);
 
 const ClassSchema = mongoose.Schema({
   professorName: String,
-  accessCode: String,
   className: String,
   timestamp: Number,
   questions: [{
@@ -46,6 +45,8 @@ const TopicSchema = mongoose.Schema({
 const CourseSchema = mongoose.Schema({
   professorName: String,
   courseTitle: String,
+  accessCode: String,
+  courseCode: String,
   classes: [{
       type: mongoose.Schema.ObjectId,
       ref: 'Class'

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
-import {addClass, setUsername, loading, notLoading} from '../actions/Actions'
+import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 
 
@@ -147,11 +147,8 @@ class TASignupCard extends Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-      addClassAction: (newClass) => {
-        dispatch(addClass(newClass));
-      },
-      setUsernameAction: (username) => {
-        dispatch(setUsername(username))
+      setUserAction: (user) => {
+        dispatch(setUser(user))
       },
       setLoadingAction: () => {
         dispatch(loading())
