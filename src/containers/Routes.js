@@ -21,7 +21,7 @@ export default class Routes extends Component {
       return(
        <div>
          <Switch>
-           <Route path="/student/dashboard" exact={true} component={DashboardContainer}/>
+           <Route path="/dashboard" exact={true} component={DashboardContainer}/>
            <Route path="/student/register" exact={true} component={StudentMainRegisterContainer}/>
            <Route path="/student/signup" exact={true} component={StudentMainPageContainer}/>
            <Route path="/professor/signup" exact={true} component={ProfessorMainPageContainer}/>
