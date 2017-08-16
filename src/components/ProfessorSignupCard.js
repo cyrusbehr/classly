@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {colorArray} from '../constants/const';
 import {randomColor} from '../constants/algorithmicos';
-import {addClass, setUsername, loading, notLoading} from '../actions/Actions'
+import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 
 class ProfessorSignupCard extends Component {
@@ -150,11 +150,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addClassAction: (newClass) => {
-      dispatch(addClass(newClass))
-    },
-    setUsernameAction: (username) => {
-      dispatch(setUsername(username))
+    setUserAction: (user) => {
+      dispatch(setUser(user))
     },
     setLoadingAction: () => {
       dispatch(loading())

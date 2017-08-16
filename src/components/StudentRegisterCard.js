@@ -87,6 +87,7 @@ class StudentRegisterCard extends Component {
           this.props.setNotLoadingAction();
           // TODO: alert the user that there was an error, and do the corresponding action
           // this.props.updateWrongAccessCode(false);
+          console.log("there was an error registering: ", r.data);
         }else{
           this.props.setUserAction(r.data.response);
           this.props.setNotLoadingAction();

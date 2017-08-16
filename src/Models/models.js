@@ -3,7 +3,6 @@ mongoose.connect(process.env.MONGODB_URI);
 
 const ClassSchema = mongoose.Schema({
   professorName: String,
-  accessCode: String,
   className: String,
   timestamp: Number,
   questions: [{
@@ -13,7 +12,8 @@ const ClassSchema = mongoose.Schema({
   topics: [{
     type: mongoose.Schema.ObjectId,
     ref: 'Topics'
-  }]
+  }],
+  courseReference: String,
 });
 
 //reference is referance classSchema - done
@@ -43,13 +43,52 @@ const TopicSchema = mongoose.Schema({
   color: String
 });
 
+const CourseSchema = mongoose.Schema({
+  professorName: String,
+  courseTitle: String,
+  accessCode: String,
+  courseCode: String,
+  classes: [{
+      type: mongoose.Schema.ObjectId,
+      ref: 'Class'
 
+    }]
+})
+
+const userSchema = mongoose.Schema({
+  userType: String,
+  firstname:{
+    type: String,
+    required: true
+  },
+  lastname:{
+    type: String,
+    required: true
+  },
+  email:{
+    type: String,
+    required: true
+  },
+  password:{
+    type: String,
+    required: true
+  },
+  courses:[{
+    type: mongoose.Schema.ObjectId,
+    ref: 'Course'
+  }]
+});
+
+const Course = mongoose.model('Course', CourseSchema);
 const Class = mongoose.model('Class', ClassSchema);
 const Question = mongoose.model('Question', QuestionSchema);
-const Topic = mongoose.model('Topics', TopicSchema)
+const Topic = mongoose.model('Topics', TopicSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = {
   Class,
   Question,
   Topic,
+  Course,
+  User
 }

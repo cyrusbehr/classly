@@ -11,6 +11,9 @@ import TAMainPageContainer from './TAMainPageContainer'
 import StudentMainRegisterContainer from './StudentMainRegisterContainer'
 import DashboardContainer from './DashboardContainer'
 import StudentDashboardCard from './StudentDashboardCard'
+import ProfessorMainRegisterContainer from './ProfessorMainRegisterContainer'
+import TAMainRegisterContainer from './TAMainRegisterContainer'
+
 
 export default class Routes extends Component {
 
@@ -22,8 +25,10 @@ export default class Routes extends Component {
            <Route path="/student/register" exact={true} component={StudentMainRegisterContainer}/>
            <Route path="/student/signup" exact={true} component={StudentMainPageContainer}/>
            <Route path="/professor/signup" exact={true} component={ProfessorMainPageContainer}/>
+           <Route path="/professor/register" exact={true} component={ProfessorMainRegisterContainer}/>
            <Route path="/ta/main" exact={true} component={TAMainViewContainer}/>
            <Route path="/ta/signup" exact={true} component={TAMainPageContainer}/>
+           <Route path="/ta/register" exact={true} component={TAMainRegisterContainer}/>
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
            {/* <Route path="/" exact={true} component={MainPageContainer}/> */}
