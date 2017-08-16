@@ -11,12 +11,10 @@ class DashboardContainer extends Component {
     return(
       <div className="dashboard">
         <div className="dashboard-header">
-          <span>Class.ly</span>
-          <span>This is DashboardContainer</span>
-          <span>UserType: {this.props.userType}</span>
-          <div>
+          <text className="dashboard-header-name">Class.ly</text>
+          <div className="dashboard-header-nav-bar">
+            <img src="../assets/alert.png"/>
             <span>Icon</span>
-            <span>  Icon</span>
           </div>
         </div>
         <DashboardBodyContainer/>
