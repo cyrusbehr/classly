@@ -62,12 +62,24 @@ module.exports = function(passport) {
     });
   });
 
-  // GET
-  router.get('/getcourses', passport.authenticate('local', {'failureRedirect': '/failure'} ), function(req, res) {
-    res.json({
-      error: null,
-      response: req.user
-    });
+
+  // TODO: DEBUG THIS ROUTE
+  router.post('/getcourses', function(req, res) {
+    User.findById(req.body.user._id)
+    .populate('courses')
+    .then((user) => {
+      if(!user){
+        res.json({
+          error: "User is null",
+          response: "Error"
+        })
+      } else {
+        res.json({
+          error: null,
+          user: user
+        })
+      }
+    })
   });
 
   router.get('/failure', function(req, res) {
