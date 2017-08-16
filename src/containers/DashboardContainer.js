@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {loading, notLoading} from '../actions/Actions'
 import StudentDashboardCard from './StudentDashboardCard';
+import axios from 'axios'
 
 class DashboardContainer extends Component {
   constructor(props){
@@ -12,9 +13,8 @@ class DashboardContainer extends Component {
 
   componentDidMount() {
     this.props.setLoadingAction();
-  }
 
-  //TODO: Axios get request for user classes
+  }
 
   onCardClick() {
     //Re render dashboard with classes inside the Course
@@ -62,7 +62,6 @@ class DashboardContainer extends Component {
               <button className="dashboardBody-button">Join a course</button>
               <button className="dashboardBody-button">Create a Course</button>
             </div>
-
             <div className="dashboardBody-container-body">
               <StudentDashboardCard/>
             </div>
