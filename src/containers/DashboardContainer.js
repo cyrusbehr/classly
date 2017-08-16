@@ -10,8 +10,8 @@ class DashboardContainer extends Component {
     };
   }
 
-  componenetDidMount() {
-
+  componentDidMount() {
+    this.props.setLoadingAction();
   }
 
   //TODO: Axios get request for user classes
@@ -41,24 +41,33 @@ class DashboardContainer extends Component {
       <div className="dashboard">
         <div className="dashboard-header">
           <span>Class.ly</span>
-          <span>This is DashboardContainer</span>
+          <span>This is Dashboard Container</span>
           <span>UserType: {this.props.userType}</span>
           <div>
             <span>Icon</span>
             <span>  Icon</span>
           </div>
         </div>
-        <div className="dashboardBody-container">
-          <div className="dashboardBody-container-header">
-            <h1>Dashboard</h1>
-            <button className="dashboardBody-button">Join a course</button>
-            <button className="dashboardBody-button">Create a Course</button>
+        {this.props.isLoading
+          ?
+          <div className="loader-dashboard">
+            <svg className="circular-dashboard" viewBox="25 25 50 50">
+              <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
+            </svg>
           </div>
+          :
+          <div className="dashboardBody-container">
+            <div className="dashboardBody-container-header">
+              <h1>Dashboard</h1>
+              <button className="dashboardBody-button">Join a course</button>
+              <button className="dashboardBody-button">Create a Course</button>
+            </div>
 
-          <div className="dashboardBody-container-body">
-            <StudentDashboardCard/>
+            <div className="dashboardBody-container-body">
+              <StudentDashboardCard/>
+            </div>
           </div>
-        </div>
+        }
       </div>
     )
   }
