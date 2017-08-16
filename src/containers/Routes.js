@@ -10,13 +10,15 @@ import StudentMainPageContainer from './StudentMainPageContainer'
 import TAMainPageContainer from './TAMainPageContainer'
 import StudentMainRegisterContainer from './StudentMainRegisterContainer'
 import StudentDashboardContainer from './StudentDashboardContainer'
+import StudentDashboardCard from './StudentDashboardCard'
+
 
 export default class Routes extends Component {
 
    render() {
       return(
        <div>
-           <Switch>
+         <Switch>
           <Route path="/student/dashboard" exact={true} component={StudentDashboardContainer}/>
            <Route path="/student/register" exact={true} component={StudentMainRegisterContainer}/>
            <Route path="/student/signup" exact={true} component={StudentMainPageContainer}/>

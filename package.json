@@ -51,6 +51,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "concurrently": "^3.5.0",
