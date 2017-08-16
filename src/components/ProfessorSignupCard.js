@@ -5,6 +5,8 @@ import {colorArray} from '../constants/const';
 import {randomColor} from '../constants/algorithmicos';
 import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
+import {baseDomain} from '../constants/const'
+
 
 class ProfessorSignupCard extends Component {
   constructor(props) {

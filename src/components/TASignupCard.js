@@ -3,6 +3,8 @@ import _ from 'underscore'
 import { connect } from 'react-redux';
 import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
+import {baseDomain} from '../constants/const'
+
 
 
 class TASignupCard extends Component {

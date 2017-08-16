@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {loading, notLoading} from '../actions/Actions'
 import StudentDashboardCard from './StudentDashboardCard';
 import axios from 'axios'
+import {baseDomain} from '../constants/const'
+
 
 class DashboardContainer extends Component {
   constructor(props){
@@ -13,7 +15,15 @@ class DashboardContainer extends Component {
 
   componentDidMount() {
     this.props.setLoadingAction();
-
+    axios.get(baseDomain + 'dashboard')
+    .then((r) => {
+      if(r.data.error) {
+        console.log("there was an error loading the dashboard");
+      } else {
+        // TODO: update the state here
+      }
+    })
+    .catch((err) => console.log("there was an error: ", err);)
   }
 
   onCardClick() {
