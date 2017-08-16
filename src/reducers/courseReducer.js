@@ -1,6 +1,6 @@
 import { POPULATE_COURSES } from '../constants/ActionTypes';
 
-initialState = [];
+var initialState = [];
 //action that gets passsed in will be of type TOGGLE_FILTER
 //and have a string attached that is the new filter
 
