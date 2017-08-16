@@ -15,7 +15,7 @@ class DashboardContainer extends Component {
 
   componentDidMount() {
     this.props.setLoadingAction();
-    axios.get(baseDomain + 'dashboard')
+    axios.get(baseDomain + 'api/dashboard')
     .then((r) => {
       if(r.data.error) {
         console.log("there was an error loading the dashboard");
@@ -80,6 +80,7 @@ class DashboardContainer extends Component {
                     professorName={course.professorName}
                     courseTitle={course.courseTitle}
                     courseCode={course.courseCode}
+                    classID={course._id}
                   />
                 )
               })}
