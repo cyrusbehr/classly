@@ -9,11 +9,10 @@ import ProfessorMainPageContainer from './ProfessorMainPageContainer'
 import StudentMainPageContainer from './StudentMainPageContainer'
 import TAMainPageContainer from './TAMainPageContainer'
 import StudentMainRegisterContainer from './StudentMainRegisterContainer'
-import StudentDashboardContainer from './StudentDashboardContainer'
+import DashboardContainer from './DashboardContainer'
 import StudentDashboardCard from './StudentDashboardCard'
 import ProfessorMainRegisterContainer from './ProfessorMainRegisterContainer'
 import TAMainRegisterContainer from './TAMainRegisterContainer'
-
 
 
 export default class Routes extends Component {
@@ -22,7 +21,7 @@ export default class Routes extends Component {
       return(
        <div>
          <Switch>
-          <Route path="/student/dashboard" exact={true} component={StudentDashboardContainer}/>
+           <Route path="/student/dashboard" exact={true} component={DashboardContainer}/>
            <Route path="/student/register" exact={true} component={StudentMainRegisterContainer}/>
            <Route path="/student/signup" exact={true} component={StudentMainPageContainer}/>
            <Route path="/professor/signup" exact={true} component={ProfessorMainPageContainer}/>
@@ -33,9 +32,9 @@ export default class Routes extends Component {
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
            <Route path="/" exact={true} component={MainPageContainer}/>
+           {/* <Route path="/" exact={true} component={DashboardContainer}/> */}
          </Switch>
        </div>
      )
    }
-
 }
