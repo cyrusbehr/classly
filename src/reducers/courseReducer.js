@@ -9,6 +9,8 @@ export default function (state = initialState, action) {
   case POPULATE_COURSES:
   return action.courseArray
 
+
+
   default:
     return state;
   }

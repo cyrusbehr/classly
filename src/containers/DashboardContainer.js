@@ -86,7 +86,8 @@ class DashboardContainer extends Component {
 const mapStateToProps = state => {
   return{
     user: state.userReducer,
-    isLoading: state.pageReducer.isLoading
+    isLoading: state.pageReducer.isLoading,
+    courses: state.courseReducer
 
   }
 }
