@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var { User } = require('../models/User');
+var { User } = require('../../src/models/User');
 var util = require('util');
 
 module.exports = function(passport) {
@@ -8,7 +8,6 @@ module.exports = function(passport) {
   // POST registration page
   router.post('/register', function(req, res) {
 
-    console.log('POST in /register');
     req.checkBody('userType', 'Invalid userType').isIn(['student', 'professor', 'ta']);
     req.checkBody('firstname', 'Firstname cannot be empty').notEmpty();
     req.checkBody('lastname', 'Lastname cannot be empty').notEmpty();

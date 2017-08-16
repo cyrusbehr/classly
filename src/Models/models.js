@@ -43,13 +43,46 @@ const TopicSchema = mongoose.Schema({
   color: String
 });
 
+const CourseSchema = mongoose.Schema({
+  professorName: String,
+  courseTitle: String,
+  classes: [{
+      type: mongoose.Schema.ObjectId,
+      ref: 'Class'
+})
 
+const userSchema = Schema({
+  firstname:{
+    type: String,
+    required: true
+  },
+  lastname:{
+    type: String,
+    required: true
+  },
+  email:{
+    type: String,
+    required: true
+  },
+  password:{
+    type: String,
+    required: true
+  },
+  courses:[{
+    type: mongoose.Schema.ObjectId,
+    ref: 'Course'
+  }]
+});
+
+const Course = mongoose.model('Course', CourseSchema);
 const Class = mongoose.model('Class', ClassSchema);
 const Question = mongoose.model('Question', QuestionSchema);
-const Topic = mongoose.model('Topics', TopicSchema)
+const Topic = mongoose.model('Topics', TopicSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = {
   Class,
   Question,
   Topic,
+  Course
 }
