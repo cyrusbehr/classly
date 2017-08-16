@@ -10,11 +10,13 @@ class StudentDashboardCard extends Component {
     return(
       <div className="dashboard-card hvr-grow">
         <div className="dashboard-card-title">
-          Asian Ancient Text from 1960 to 2000
+          {this.props.courseTitle}
+          <br/>
+          {this.props.courseCode}
         </div>
         <br></br>
         <div className="dashboard-card-professor">
-          Professor
+          {this.props.professorName}
         </div>
       </div>
     )

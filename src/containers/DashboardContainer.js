@@ -74,7 +74,15 @@ class DashboardContainer extends Component {
               <button className="dashboardBody-button">Create a Course</button>
             </div>
             <div className="dashboardBody-container-body">
-              <StudentDashboardCard/>
+              {this.props.courses.map((course) => {
+                return (
+                  <StudentDashboardCard
+                    professorName={course.professorName}
+                    courseTitle={course.courseTitle}
+                    courseCode={course.courseCode}
+                  />
+                )
+              })}
             </div>
           </div>
         }
