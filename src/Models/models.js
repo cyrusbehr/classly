@@ -56,6 +56,7 @@ const CourseSchema = mongoose.Schema({
 })
 
 const userSchema = mongoose.Schema({
+  userType: String,
   firstname:{
     type: String,
     required: true

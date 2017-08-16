@@ -33,7 +33,8 @@ module.exports = function(passport) {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            userType: req.body.userType
           });
 
           return user.save()
