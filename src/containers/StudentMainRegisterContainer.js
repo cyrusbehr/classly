@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
 import StudentRegisterContainer from './StudentSubContainers/StudentRegisterContainer';
 import { connect } from 'react-redux';
-import {setUserType} from '../actions/Actions'
 
 class StudentMainRegisterContainer extends Component {
   clearUserTypeAndRedirect(e) {
     e.preventDefault();
-    this.props.setUserTypeAction("");
     this.props.history.push('/');
   }
 
@@ -61,9 +59,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUserTypeAction: (userType) => {
-      dispatch(setUserType(userType))
-    }
   }
 }
 

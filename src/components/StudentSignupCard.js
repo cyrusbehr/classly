@@ -88,14 +88,17 @@ class StudentSignupCard extends Component {
         userType: 'student'
       })
       .then((r) => {
-        if(r.error) {
+        if(r.data.error) {
           this.props.setNotLoadingAction();
           // TODO: handle the errors here and give feedback to the user
         }else {
-          this.props.setUserAction(r.response);
+          this.props.setUserAction(r.data.response);
           this.props.setNotLoadingAction();
           this.redirect();
         }
+      })
+      .catch((err) => {
+        console.log("there was an error with the request : ", err);
       })
     }
   }
