@@ -12,7 +12,8 @@ const ClassSchema = mongoose.Schema({
   topics: [{
     type: mongoose.Schema.ObjectId,
     ref: 'Topics'
-  }]
+  }],
+  courseReference: String,
 });
 
 //reference is referance classSchema - done
