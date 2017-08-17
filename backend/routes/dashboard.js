@@ -2,10 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { User, Course, Class } = require('../../src/Models/models');
 
-  router.get('/checkLogin', function(req, res) {
-    res.json({ loggedIn: !!req.user });
-  })
-
 
   router.use(function(req, res, next){
     if(!req.user){

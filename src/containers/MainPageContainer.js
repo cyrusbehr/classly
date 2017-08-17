@@ -4,6 +4,8 @@ import {LoginCardData} from '../constants/const'
 import LoginContainer from './LoginContainer';
 import { connect } from 'react-redux';
 import {setUserType} from '../actions/Actions'
+import axios from 'axios'
+import {baseDomain} from '../constants/const'
 
 class MainPageContainer extends Component {
   clearUserTypeAndRedirect(e) {
@@ -12,8 +14,14 @@ class MainPageContainer extends Component {
     this.props.history.push('/');
   }
 
+  componentDidMount() {
+    axios.get(baseDomain + 'checkLogin')
+    .then((r) => {
+      console.log("the response is : ", r)
+    })
+  }
+
   render() {
-    console.log('render Login Container');
     return(
       <div className="login-container">
         <div className="background-picture">
