@@ -44,7 +44,7 @@ module.exports = function() {
           // TODO: check structure of User.courses
           var courses = foundUser.courses.map(val=>val._id.toString());
           if (courses.includes(req.params.id.substring(1))) { // find if the user is enrolled in that course
-            return Course.findById(req.params.id.substring(1))
+            return Course.findById(req.params.id.substring(1)).populate('classes').exec()
           } else {
             throw new Error('User is not enrolled in this course')
           }
@@ -71,5 +71,39 @@ module.exports = function() {
       });
     }
   });
+
+  router.post('/addclass', function(req, res){
+    if(!req.user){
+      res.json({
+        error: 'User is not logged in'
+      })
+      return;
+    }
+    Course.findById(req.body.accessCode)
+      .then(foundCourse => {
+        if (!foundCourse) {
+          res.json({
+            error: 'Access code is invalid'
+          });
+          return;
+        }
+        return Promise.all( [ User.findById(req.user._id), foundCourse ] );
+      })
+      .then(result => {
+        var user = result[0];
+        var course = result[1];
+        user.courses.push(course);
+        return Promise.all( [ user.save(), foundCourse ] );
+      })
+      .then(result => {
+        var newCourse = result[1];
+        res.json({
+          error: null,
+          response: newCourse
+        })
+      })
+  })
+
+
   return router;
 };
