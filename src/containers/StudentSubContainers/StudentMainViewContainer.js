@@ -21,9 +21,6 @@ class StudentMainViewContainer extends Component {
 
     return (
       <div className="body-parent">
-        {
-          this.props.userType
-          ?
           <div className="body-container">
             <div>
               <ReactModal
@@ -39,9 +36,6 @@ class StudentMainViewContainer extends Component {
             <StudentTopicsContainer />
             <StudentQuestionsContainer />
           </div>
-          :null
-        }
-
       </div>
     );
   }

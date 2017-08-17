@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {loading, notLoading, populateCourse} from '../actions/Actions'
-import DashboardCourseCard from './DashboardCourseCard';
+import DashboardClassCard from './DashboardClassCard';
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
 import {addCourse, addClassToArray} from '../actions/Actions';
@@ -15,20 +15,6 @@ class DashboardClassContainer extends Component {
       classTitle: "",
     }
   }
-
-//   componentDidMount() {
-//     this.props.setLoadingAction();
-//     axios.get(baseDomain + 'api/dashboard')
-//     .then((r) => {
-//       if(r.data.error) {
-//         console.log("there was an error loading the dashboard : ", r.data.error);
-//       } else {
-//         this.props.populateCourseAction(data.response);
-//         this.props.setNotLoadingAction();
-//       }
-//     })
-//     .catch((err) => console.log("there was an error: ", err))
-// }
 
   onCardClick() {
     //get classes
@@ -46,25 +32,22 @@ class DashboardClassContainer extends Component {
   }
 
   onSubmitClassModal(e){
+    console.log("Entering onSubmitClassModal");
     e.preventDefault();
-    console.log("data");
-    //axios post request to backend with that object
-    //use baseDomain in axios request and import it from the constants file
-    //on the .then of this action dispatch action to the reducer
-    //to add the course to the course reducer. need to write this action. courses is an array in reducer
-    //immutable --> splice array to make deep copy then resave
+
     axios.post(baseDomain + 'api/create/class', {
       classTitle: this.state.classTitle,
-      courseReference: this.props.math.url.coursereference, //TODO: Make sure this gets passed in to props
+      courseReference: this.props.match.params.coursereference, //TODO: Make sure this gets passed in to props
     })
     .then((r) => {
+      this.setState({classTitle: ""});
       if(r.data.error) {
         this.props.setNotLoadingAction();
         console.log("Error encountered while creating new class: ", r.data);
       } else {
         this.props.setNotLoadingAction();
         //dispatch action to reducer to add coures to course reduver
-        console.log("asdfasdfasdfasdf");
+        console.log("adding Class to array reducer");
         this.props.addClassToArrayAction(r.data.response);
       }
     })
@@ -81,7 +64,7 @@ class DashboardClassContainer extends Component {
 
   render() {
     var isProfessor = (this.props.userType === "Professor");
-
+    console.log("the classes are: ", this.props);
     return(
       <div className="dashboard">
         <div className="dashboard-header">
@@ -108,13 +91,15 @@ class DashboardClassContainer extends Component {
                 >Create a class</button>
             </div>
             <div className="dashboardBody-container-body">
-              {this.props.courses.map((course) => {
+              {this.props.classes.map((thisClass) => {
                 return (
-                  <DashboardCourseCard
-                    professorName={course.professorName}
-                    courseTitle={course.courseTitle}
-                    courseCode={course.courseCode}
-                    classID={course._id}
+                  <DashboardClassCard
+                    key={thisClass._id}
+                    professorName={thisClass.professorName}
+                    className={thisClass.className}
+                    courseReference={thisClass.courseReference}
+                    classID={thisClass._id}
+                    {...this.props}
                   />
                 )
               })}
@@ -133,8 +118,8 @@ class DashboardClassContainer extends Component {
                 onChange={(e) => this.onClassTitleChange(e)}
               />
               <button className="dashboardBody-button"
-                onClick={() => this.onCreateClassClick()}
-                >Create a class</button>
+                onClick={(e) => this.onSubmitClassModal(e)}
+                >Create class!</button>
               <button
                 onClick={() => this.onCloseClassModal()}
                 >Close</button>
@@ -151,9 +136,8 @@ const mapStateToProps = state => {
   return{
     user: state.userReducer,
     isLoading: state.pageReducer.isLoading,
-    courses: state.courseReducer,
+    classes: state.classArrayReducer,
     isLoading: state.pageReducer.isLoading
-    //pass in courseId
   }
 }
 
