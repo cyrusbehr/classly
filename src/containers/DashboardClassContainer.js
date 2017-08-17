@@ -116,6 +116,8 @@ class DashboardClassContainer extends Component {
             </div>
           </div>
           <Modal
+          className="guide-modal"
+          overlayClassName="guide-modal-overlay"
           isOpen={this.state.showCreateClassModal}
           contentLabel="Create a Course"
           >
