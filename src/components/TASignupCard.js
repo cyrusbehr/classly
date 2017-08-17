@@ -120,7 +120,7 @@ class TASignupCard extends Component {
                   type="text"
                   value={this.state.email}
                   placeholder="Email"
-                  onChange={(event) => this.handleNameChange(event)}
+                  onChange={(event) => this.handleEmailChange(event)}
                   className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
                 />
                 <div>
@@ -138,7 +138,7 @@ class TASignupCard extends Component {
                   type="password"
                   value={this.state.password}
                   placeholder="Password"
-                  onChange={(event) => this.handleAccessCodeChange(event)}
+                  onChange={(event) => this.handlePasswordChange(event)}
                   className= {this.state.codeEmpty ? this.props.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
                 />
                 <div>

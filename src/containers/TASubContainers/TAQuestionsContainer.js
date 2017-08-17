@@ -60,21 +60,12 @@ class TAQuestionsContainer extends Component {
       } else {
         sortedArray = sortByMagic(this.props.questionsArray);
       };
-    //
-    // if(this.props.filter){
-    //   sortedArray = sortByCategory(this.props.filter, this.props.questionsArray);
-    // } else {
-    //   sortedArray = sortByMagic(this.props.questionsArray);
-    // }
-
-    var proffArr = this.props.professorName.split(" ")
-    var profname = proffArr[1] || proffArr[0]
 
     return (
       <div className="questions-container">
         <div className="questions-container-header">
           <span className="course">{this.props.className}</span>
-          <span className="lecturer">Prof {profname}</span>
+          <span className="lecturer">Prof {this.props.professorName}</span>
           <span className="date">{this.dateNow()}</span>
         </div>
         <p className="questions-title">{sortedArray.length + ' Questions: ' + (this.props.filter==='' ? 'All Topics' : this.props.filter)}</p>
@@ -87,9 +78,12 @@ class TAQuestionsContainer extends Component {
               id={question._id}
               currentUpVotes={question.upVotes}
               text={question.text}
+              email={question.email}
               isResolved={question.isResolved}
               isStarred={question.isStarred}
               tags={question.tags}
+              firstname={question.firstname}
+              lastname={question.lastname}
               questionCreator={question.username}
               userType={question.userType}
               comments={question.comments}

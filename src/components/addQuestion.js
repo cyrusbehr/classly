@@ -79,8 +79,10 @@ class AddQuestion extends Component{
 
       const data = {
         text: this.state.questionText,
-        username: this.props.username,
+        firstname: this.props.user.firstname,
+        lastname: this.props.user.lastname,
         userType: this.props.userType,
+        email: this.props.user.email,
         tags: this.state.tags,
         referenceClass: this.props.classObj._id,
         isResolved: false,
@@ -91,12 +93,15 @@ class AddQuestion extends Component{
         comments: []
       }
 
+      console.log("DATA:", data);
+
       this.props.socket.emit('generateQuestion', data);
 
         if(isUniqueTopic && data.tags !== "") {
           const newTopic = {
             text: this.state.tags,
             votes: 0,
+            email: this.props.user.email,
             timestamp: Date.now(),
             referenceClass: this.props.classObj._id,
             username: this.props.username,
@@ -203,10 +208,10 @@ class AddQuestion extends Component{
 const mapStateToProps = state => {
   return{
     socket: state.socketReducer.socket,
-    username: state.userReducer.username,
+    user: state.userReducer.user,
     classObj: state.classReducer.classState,
     currentFilter: state.filterReducer,
-    userType: state.userReducer.userType,
+    userType: state.userReducer.user.userType,
     topicsArr: state.classReducer.classState.topics,
     questionsArray: state.classReducer.classState.questions,
   }
