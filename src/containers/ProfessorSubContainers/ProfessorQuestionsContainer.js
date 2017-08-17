@@ -75,10 +75,6 @@ class ProfessorQuestionsContainer extends Component {
       <div className="questions-container">
         <div className="questions-container-header">
           <span className="course">{this.props.className}</span>
-          {/* <span>This is {this.props.userType} view</span> */}
-          <span>Course Access Code: {this.props.code} </span>
-          {/* <span># Students: XX</span> */}
-          {/* <span>#Q's: {this.props.questionsArray.length}</span> */}
           <span className="lecturer">Prof {profname}</span>
           <span className="date">{this.dateNow()}</span>
         </div>
