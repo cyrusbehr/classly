@@ -121,7 +121,7 @@ class DashboardClassContainer extends Component {
           isOpen={this.state.showCreateClassModal}
           contentLabel="Create a Course"
           >
-            <h2>Fill out the following information to create a new Class!!!!</h2>
+            <h2>Create a new class</h2>
             <form>
               <input
                 type="text"

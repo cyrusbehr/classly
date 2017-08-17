@@ -105,7 +105,7 @@ $light-green: #8dcdc1;
 
 .dashboard-class-name {
   margin-top: 18px;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 600;
   // overflow: hidden;
   max-height: 100px;
@@ -113,7 +113,8 @@ $light-green: #8dcdc1;
 }
 
 .dashboard-class-date {
-  font-size: 25px;
+  margin: 10px 0;
+  font-size: 22px;
   font-weight: 600;
 }
 
@@ -122,10 +123,11 @@ $light-green: #8dcdc1;
 }
 
 .card-name {
-  font-size: 18px;
+  font-size: 20px;
   padding: 5px;
   margin: 0;
   position:fixed;
+  margin-left: 5px;
   left:0;
   top:0;
   text-decoration: underline;
