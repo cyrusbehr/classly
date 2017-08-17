@@ -232,7 +232,7 @@ class TAQuestion extends Component {
 
           return {
             socket: state.socketReducer.socket,
-            questionsArray: state.classReducer.classState.questions,
+            questionsArray: state.classReducer.questions,
             username: state.userReducer.username,
             userType: state.userReducer.userType,
           }

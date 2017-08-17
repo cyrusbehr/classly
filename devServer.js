@@ -23,7 +23,8 @@ const port = process.env.PORT || 3000;
 
 
 // app.use('/dist/', express.static(path.join(__dirname, 'dist')));
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
+app.use('/', express.static(path.join(__dirname, 'dist')));
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
@@ -431,7 +432,7 @@ app.use('/api', dashboard, create_course_class);
 
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
+  res.sendFile(path.join(__dirname, '/dist/index.html'));
 });
 
 server.listen(port, (err) => {

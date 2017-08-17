@@ -209,11 +209,11 @@ const mapStateToProps = state => {
   return{
     socket: state.socketReducer.socket,
     user: state.userReducer.user,
-    classObj: state.classReducer.classState,
+    classObj: state.classReducer,
     currentFilter: state.filterReducer,
     userType: state.userReducer.user.userType,
-    topicsArr: state.classReducer.classState.topics,
-    questionsArray: state.classReducer.classState.questions,
+    topicsArr: state.classReducer.topics,
+    questionsArray: state.classReducer.questions,
   }
 }
 

@@ -44,9 +44,9 @@ class StudentMainViewContainer extends Component {
 const mapStateToProps = state => {
   return {
     userType: state.userReducer.userType,
-    professorName: state.classReducer.classState.professorName,
+    professorName: state.classReducer.professorName,
     userType: state.userReducer.userType,
-    className: state.classReducer.classState.className,
+    className: state.classReducer.className,
     showModal: state.modalReducer,
   };
 };
