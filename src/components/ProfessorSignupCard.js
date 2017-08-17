@@ -129,7 +129,7 @@ class ProfessorSignupCard extends Component {
                   type="button"
                   onClick={(e) => this.onSubmit(e)}
                   className="student-signup-submit hvr-grow"
-                >Create Class</button>
+                >Login</button>
                 <button
                   type="button"
                   onClick={(e) => this.register(e)}
