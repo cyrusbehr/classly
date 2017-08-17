@@ -68,7 +68,7 @@ module.exports = function() {
       });
   });
 
-  router.get('/joinclass/:id', function(req, res){
+  router.get('/getclass/:id', function(req, res){
     Class.findById(req.params.id)
       .populate('questions')
       .populate('topics')

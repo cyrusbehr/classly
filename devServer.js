@@ -56,7 +56,6 @@ io.on('connection', socket => {
     socket.join(room);
     console.log("user has joined", room);
     socket.currentRoom = room;
-    socket.emit("Joined", room);
   });
 
   //No data needed for this emit event
