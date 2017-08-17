@@ -17,7 +17,6 @@ module.exports = function() {
     function accessCodeRecursion(newAccessCode) {
       Course.findOne({accessCode: newAccessCode}, (err, courseObj) => {
         if(!courseObj){
-          req.checkBody('professorName', 'Professor name cannot be empty').notEmpty();
           req.checkBody('courseTitle', 'Course title cannot be empty').notEmpty();
           req.checkBody('courseCode', 'Course code cannot be empty').notEmpty();
         req.getValidationResult()
@@ -29,7 +28,7 @@ module.exports = function() {
             return;
           }
           const newCourse = new Course({
-            professorName: req.body.professorName,
+            professorName: "Prof: " + req.user.lastname,
             courseTitle: req.body.courseTitle,
             accessCode: req.body.accessCode,
             courseCode: req.body.courseCode,
@@ -64,16 +63,14 @@ module.exports = function() {
   })
 
   router.post('/create/class', function(req, res){
-    req.checkBody('professorName', 'Professor name cannot be empty').notEmpty();
     req.checkBody('className', 'Class name cannot be empty').notEmpty();
-    req.checkBody('timestamp', 'Time stamp cannot be empty').notEmpty();
     req.checkBody('courseReference', 'Course reference cannot be empty').notEmpty();
     req.getValidationResult()
     .then(function(result){
       const newClass = new Class({
-        professorName: req.body.professorName,
+        professorName: "Prof: " + req.user.lastname,
         className: req.body.className,
-        timestamp: req.body.timestamp,
+        timestamp: new Date(),
         questions: [],
         topics:[],
         courseReference: req.body.courseReference
