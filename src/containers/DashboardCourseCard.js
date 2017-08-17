@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
-import {loading, notLoading} from '../actions/Actions'
+import {loading, notLoading, populateClass} from '../actions/Actions'
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
 
@@ -18,8 +18,9 @@ class DashboardCourseCard extends Component {
       if(r.data.error) {
         console.log("there was an error loading the class");
       } else {
-        
+        this.props.populateClassAction(r.data.response);
         this.props.setNotLoadingAction();
+        // TODO: redirect to the container
       }
     }).catch((err) => console.log("there was an error: ", err))
   }
@@ -55,6 +56,9 @@ const mapDispatchToProps = dispatch => {
     setNotLoadingAction: () => {
       dispatch(notLoading())
     },
+    populateClassAction: (classArray) => {
+      dispatch(populateClass(classArray))
+    }
   }
 }
 

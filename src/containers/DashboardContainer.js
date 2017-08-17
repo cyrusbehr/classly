@@ -50,16 +50,16 @@ class DashboardContainer extends Component {
   onSubmitModal(e){
     //create course object from what is saved in this.state
     e.preventDefault();
-    //axios post request to backend with that object
-    //use baseDomain in axios request and import it from the constants file
-    //on the .then of this action dispatch action to the reducer
-    //to add the course to the course reducer. need to write this action. courses is an array in reducer
-    //immutable --> splice array to make deep copy then resave
+
     axios.post(baseDomain + 'api/create/course', {
       courseTitle: this.state.courseTitle,
       courseCode: this.state.courseCode,
     })
     .then((r) => {
+      this.setState({
+        courseTitle: "",
+        courseCode: "",
+      })
       if(r.data.error) {
         this.props.setNotLoadingAction();
         console.log("Error encountered while creating new course: ", r.data);
