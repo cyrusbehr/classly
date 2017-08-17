@@ -71,5 +71,39 @@ module.exports = function() {
       });
     }
   });
+
+  router.post('/addclass', function(req, res){
+    if(!req.user){
+      res.json({
+        error: 'User is not logged in'
+      })
+      return;
+    }
+    Course.findById(req.body.accessCode)
+      .then(foundCourse=>{
+        if(!foundCourse){
+          res.json({
+            error: 'Access code is invalid'
+          })
+          return;
+        }
+        return Promise.all( [ User.findById(req.user._id), foundCourse ] );
+      })
+      .then(result){
+        var user = result[0];
+        var course = result[1];
+        user.courses.push(course);
+        return Promise.all( [ user.save(), foundCourse ] );
+      }
+      .then(result){
+        var newCourse = result[1];
+        res.json({
+          error: null,
+          response: newCourse
+        })
+      }
+  })
+
+
   return router;
 };
