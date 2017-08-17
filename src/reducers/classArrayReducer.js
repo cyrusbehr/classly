@@ -1,4 +1,4 @@
-import { POPULATE_CLASS } from '../constants/ActionTypes';
+import { POPULATE_CLASS, ADD_CLASS_TO_ARRAY } from '../constants/ActionTypes';
 
 var initialState = [];
 //action that gets passsed in will be of type TOGGLE_FILTER
@@ -8,6 +8,11 @@ export default function (state = initialState, action) {
   switch (action.type) {
   case POPULATE_CLASS:
   return action.classArray
+
+  case ADD_CLASS_TO_ARRAY:
+  newState = [...state];
+  newState.push(action.classObject);
+  return newState;
 
   default:
     return state;

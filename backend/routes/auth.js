@@ -45,10 +45,20 @@ module.exports = function(passport) {
         }
       })
       .then(function(savedUser){
-        res.json({
-          error: null,
-          response: savedUser
-        })
+        req.login(savedUser, function(err) {
+          if (err) {
+            console.log('Error in logging in user after registration', err);
+            res.json({
+              error: 'Error in logging in user after registration'
+            })
+          } else {
+            res.json({
+              error: null,
+              response: savedUser
+            })
+          }
+        });
+
       })
       .catch(function(error){
         res.json({
