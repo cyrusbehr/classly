@@ -26,13 +26,22 @@ class StudentTopicsContainer extends Component {
 
   onReturn(){
     this.props.toggleFilter('');
+    this.setState({
+      toggle: false
+    })
   }
 
   handleClick(id, e) {
     if(this.props.currentFilter !== "ResolvedQuestions"){
       this.props.toggleFilter("ResolvedQuestions");
+      this.setState({
+        toggle: true
+      })
     } else {
       this.props.toggleFilter('');
+      this.setState({
+        toggle: false
+      })
     }
   }
 
@@ -48,6 +57,7 @@ class StudentTopicsContainer extends Component {
           </div>
           <div style={{'maxWidth': 250, 'margin': 16}}>
             <Toggle
+              toggled={this.state.toggle}
               label="See resolved questions"
               thumbSwitchedStyle={{backgroundColor: '#00C993'}}
               trackSwitchedStyle={{backgroundColor: '#D9FFF5'}}
