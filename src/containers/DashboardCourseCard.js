@@ -28,6 +28,7 @@ class DashboardCourseCard extends Component {
   }
 
   render() {
+    var isProfessor = (this.props.user.userType === "professor")
     return(
       <div onClick={(e) => this.handleClick(e)} className="dashboard-card hvr-grow-cards">
         <div className="card-name">course</div>
@@ -39,6 +40,10 @@ class DashboardCourseCard extends Component {
         </div>
         <div className="dashboard-card-professor">
           {this.props.professorName}
+          {isProfessor
+          ?
+          this.props.accessCode
+          :null}
         </div>
       </div>
     )
@@ -48,6 +53,7 @@ class DashboardCourseCard extends Component {
 const mapStateToProps = state => {
   return{
     isLoading: state.pageReducer.isLoading,
+    user: state.userReducer.user
   }
 }
 

@@ -157,7 +157,7 @@ class DashboardContainer extends Component {
 
 
   render() {
-    var isProfessor = (this.props.userType === "Professor");
+    var isProfessor = (this.props.user.userType === 'professor')
 
     return(
       <div className="dashboard">
@@ -182,13 +182,16 @@ class DashboardContainer extends Component {
               <div className="dashboardBody-container-header">
                 <text className="dashboardBody-container-dashboard-name">Dashboard</text>
                 <div className="dashboardBody-container-buttons">
-                  <button className="dashboardBody-button hvr-fade"
-                    onClick={(e) => this.onCreateCourseClick(e)}
-                    >Create a Course</button>
-
+                  {isProfessor
+                    ?
+                    <button className="dashboardBody-button hvr-fade"
+                      onClick={(e) => this.onCreateCourseClick(e)}
+                      >Create a Course</button>
+                    :
                     <button className="dashboardBody-button hvr-fade"
                       onClick={(e) => this.handleAddCourseClick(e)}
                       >Add a New Course</button>
+                    }
                 </div>
               </div>
             </div>
@@ -201,6 +204,7 @@ class DashboardContainer extends Component {
                     courseTitle={course.courseTitle}
                     courseCode={course.courseCode}
                     courseID={course._id}
+                    accessCode={course.accessCode}
                     {...this.props}
                   />
                 )
@@ -266,7 +270,8 @@ const mapStateToProps = state => {
     user: state.userReducer,
     isLoading: state.pageReducer.isLoading,
     courses: state.courseReducer,
-    isLoading: state.pageReducer.isLoading
+    isLoading: state.pageReducer.isLoading,
+    user: state.userReducer.user
     //pass in courseId
   }
 }

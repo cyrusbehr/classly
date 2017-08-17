@@ -1,9 +1,38 @@
 $green: #00c993;
 $main-bg-color: #f1f2f0;
+$blue: #2979FF;
+
+$light-green: #8dcdc1;
 
 .dashboard-card {
   width: 1000px;
   height: 90px;
+  // border-style: solid;
+  // border-color: $green;
+  // background-color: $green;
+  border-bottom: 7px solid $green;
+  // border-top: 1px solid $green;
+  // border-left: 1px solid $green;
+  // border-right: 1px solid $green;
+  box-shadow:0 0 20px rgba(black, 0.1);
+  margin-left: 20px;
+  margin-left: 20px;
+  margin-top: 20px;
+  color: black;
+  display: flex;
+  padding: 25px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-family: 'Raleway', sans-serif;
+  // -webkit-box-shadow: 0 10px 6px -6px #777;
+	// -moz-box-shadow: 0 10px 6px -6px #777;
+	// box-shadow: 0 10px 6px -6px #777;
+}
+
+.dashboard-class-card {
+  width: 150px;
+  height: 175px;
   // border-style: solid;
   // border-color: $green;
   // background-color: $green;
@@ -67,6 +96,14 @@ $main-bg-color: #f1f2f0;
 }
 
 .dashboard-course-title {
+  margin-top: 11px;
+  font-size: 25px;
+  font-weight: 600;
+  max-height: 150px;
+  overflow: scroll;
+}
+
+.dashboard-class-name {
   margin-top: 18px;
   font-size: 25px;
   font-weight: 600;
@@ -148,4 +185,26 @@ $main-bg-color: #f1f2f0;
 
 .dashboard-profile {
   margin-right: 15px;
+}
+
+.dashboardBody-container-body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 120px;
+}
+
+.dashboardBody-container-card-body {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 120px;
+}
+
+.dashboardBody-container-card-body-container {
+  display: flex;
+  justify-content: center;
+  border-style:solid;
 }
