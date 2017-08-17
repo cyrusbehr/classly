@@ -74,12 +74,12 @@ class ProfessorQuestion extends Component {
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
-      creator: this.props.username,
+      creator: this.props.firstname + " " + this.props.lastname,
       title: 'Prof'
     }
     this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
-      username: this.props.username, text: this.state.commentText});
+      username: this.props.firstname + " " + this.props.lastname, text: this.state.commentText});
       this.setState({commentText: ""});
     }
 
@@ -237,8 +237,9 @@ class ProfessorQuestion extends Component {
           return {
             socket: state.socketReducer.socket,
             questionsArray: state.classReducer.questions,
-            username: state.userReducer.username,
-            userType: state.userReducer.userType,
+            firstname: state.userReducer.user.firstname,
+            lastname: state.userReducer.user.lastname,
+            userType: state.userReducer.user.userType,
             user: state.userReducer.user,
           }
         }
