@@ -16,7 +16,6 @@ module.exports = function() {
     let accessCode = '0n9u';
 
     function accessCodeRecursion(newAccessCode) {
-      console.log('sdsdsdsdsdsdsdsd', newAccessCode);
       Course.findOne({accessCode: newAccessCode}, (err, courseObj) => {
         if(!courseObj){
           req.checkBody('courseTitle', 'Course title cannot be empty').notEmpty();

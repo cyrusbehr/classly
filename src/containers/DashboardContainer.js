@@ -77,6 +77,7 @@ class DashboardContainer extends Component {
         this.props.addCourseAction(r.data.response);
       }
     })
+    this.setState({showAddClassModal: false});
   }
 
   onSubmitModal(e){

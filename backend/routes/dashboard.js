@@ -41,7 +41,6 @@ module.exports = function() {
       .populate('courses')
       .exec()
       .then(foundUser => {
-        console.log('@@@ foundUser', foundUser);
         // TODO: check structure of User.courses
         var courses = foundUser.courses.map(val=>val._id.toString());
         if (courses.includes(req.params.id)) { // find if the user is enrolled in that course
@@ -51,7 +50,6 @@ module.exports = function() {
         }
       })
       .then(foundCourse => {
-        console.log('@@@ foundCourse', foundCourse);
         if (foundCourse) {
           res.json({
             error: null,
