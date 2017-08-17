@@ -16,6 +16,9 @@ class DashboardContainer extends Component {
       courseCode: "",
       showCreateClassModal: false,
       className: "",
+      classTitle: "",
+      showAddClassModal: false,
+      accessCode: "",
     }
   }
 
@@ -34,17 +37,46 @@ class DashboardContainer extends Component {
 }
 
   onCreateCourseClick(e) {
+    e.preventDefault();
     //open modal
     this.setState({showCreateCourseModal: true});
     //information is filled out and saved in this.state
+  }
+
+  handleAddCourseClick(e) {
+    e.preventDefault();
+    this.setState({showAddClassModal: true});
+  }
+
+  onCloseAddCourseModal(e) {
+    e.preventDefault();
+    this.setState({showAddClassModal: false})
   }
 
   onCourseTitleChange(e){
     this.setState({courseTitle: e.target.value});
   }
 
+  onAccessCodeChange(e) {
+    this.setState({accessCode: e.target.value});
+  }
+
   onCourseCodeChange(e){
     this.setState({courseCode: e.target.value});
+  }
+
+  onSubmitAddCourseModal(e) {
+    e.preventDefault();
+    axios.post(baseDomain + 'api/addClass', {
+      accessCode: this.state.accessCode
+    })
+    .then((r) => {
+      if(r.data.error) {
+        console.log("there was an error: ", r.data.error);
+      } else {
+        this.props.addCourseAction(r.data.response);
+      }
+    })
   }
 
   onSubmitModal(e){
@@ -61,10 +93,8 @@ class DashboardContainer extends Component {
         courseCode: "",
       })
       if(r.data.error) {
-        this.props.setNotLoadingAction();
         console.log("Error encountered while creating new course: ", r.data);
       } else {
-        this.props.setNotLoadingAction();
         this.props.addCourseAction(r.data.response);
       }
     })
@@ -75,7 +105,8 @@ class DashboardContainer extends Component {
     this.setState({showCreateCourseModal: false});
   }
 
-  onCloseModal(){
+  onCloseModal(e){
+    e.preventDefault()
     this.setState({showCreateCourseModal: false});
   }
 
@@ -123,7 +154,8 @@ class DashboardContainer extends Component {
     this.setState({showCreateClassModal: false});
   }
 
-  onCloseClassModal(){
+  onCloseClassModal(e){
+    e.preventDefault()
     this.setState({showCreateClassModal: false});
   }
 
@@ -154,12 +186,13 @@ class DashboardContainer extends Component {
           <div className="dashboardBody-container">
             <div className="dashboardBody-container-header">
               <h1>Dashboard</h1>
-      
-                <button className="dashboardBody-button"
-                  >Join a course</button>
               <button className="dashboardBody-button"
                 onClick={(e) => this.onCreateCourseClick(e)}
-                >Create a Course</button>
+                >Create a Course (this will only appear for Professors)</button>
+
+                <button className="dashboardBody-button"
+                  onClick={(e) => this.handleAddCourseClick(e)}
+                  >Add a new Course (this will only appear for TAs and Students)</button>
             </div>
             <div className="dashboardBody-container-body">
               {this.props.courses.map((course) => {
@@ -170,6 +203,7 @@ class DashboardContainer extends Component {
                     courseTitle={course.courseTitle}
                     courseCode={course.courseCode}
                     courseID={course._id}
+                    {...this.props}
                   />
                 )
               })}
@@ -198,27 +232,27 @@ class DashboardContainer extends Component {
                 onClick={(e) => this.onSubmitModal(e)}
                 >Create Course</button>
               <button
-                onClick={() => this.onCloseModal()}
+                onClick={(e) => this.onCloseModal(e)}
                 >Close</button>
             </form>
           </Modal>
           <Modal
-          isOpen={this.state.showCreateClassModal}
-          contentLabel="Create a Course"
+          isOpen={this.state.showAddClassModal}
+          contentLabel="Add a new course"
           >
-            <h2>Fill out the following information to create a new Class!!!!</h2>
+            <h2>Fill out the following information to add a new Class!!!!</h2>
             <form>
               <input
                 type="text"
-                value={this.state.className}
-                placeholder="Class Title"
-                onChange={(e) => this.onclassNameChange(e)}
+                value={this.state.accessCode}
+                placeholder="Access Code"
+                onChange={(e) => this.onAccessCodeChange(e)}
               />
               <button
-                onClick={(e) => this.onSubmitClassModal(e)}
+                onClick={(e) => this.onSubmitAddCourseModal(e)}
                 >Create Course</button>
               <button
-                onClick={() => this.onCloseClassModal()}
+                onClick={(e) => this.onCloseAddCourseModal(e)}
                 >Close</button>
             </form>
           </Modal>
