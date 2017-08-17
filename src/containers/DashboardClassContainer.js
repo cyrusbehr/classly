@@ -63,17 +63,15 @@ class DashboardClassContainer extends Component {
   }
 
   render() {
-    var isProfessor = (this.props.userType === "Professor");
+    var isProfessor = (this.props.user.userType === "professor");
     console.log("the classes are: ", this.props);
     return(
       <div className="dashboard">
         <div className="dashboard-header">
-          <span>Class.ly</span>
-          <span>This is Dashboard CLASS Container</span>
-          <span>UserType: {this.props.userType}</span>
-          <div>
-            <span>Icon</span>
-            <span>  Icon</span>
+          <text className="dashboard-header-name">Class.ly</text>
+          <div className="dashboard-navbar">
+            <text className="dashboard-profile">Profile</text>
+            <text className="dashboard-logout">Log out</text>
           </div>
         </div>
         {this.props.isLoading
@@ -86,25 +84,35 @@ class DashboardClassContainer extends Component {
           :
           <div>
           <div className="dashboardBody-container">
-            <div className="dashboardBody-container-header">
-              <h1>Class Dashboard</h1>
-              <button className="dashboardBody-button"
-                onClick={() => this.onCreateClassClick()}
-                >Create a class</button>
+            <div className="dashboardBody-container-header-container">
+              <div className="dashboardBody-container-header">
+                <text className="dashboardBody-container-dashboard-name">Dashboard</text>
+                <div className="dashboardBody-container-buttons">
+                  {isProfessor
+                    ?
+                    <button className="dashboardBody-button hvr-fade"
+                      onClick={() => this.onCreateClassClick()}
+                      >Create a class</button>
+                  :null
+                }
+                </div>
+              </div>
             </div>
-            <div className="dashboardBody-container-body">
-              {this.props.classes.map((thisClass) => {
-                return (
-                  <DashboardClassCard
-                    key={thisClass._id}
-                    professorName={thisClass.professorName}
-                    className={thisClass.className}
-                    courseReference={thisClass.courseReference}
-                    classID={thisClass._id}
-                    {...this.props}
-                  />
-                )
-              })}
+            <div className="dashboardBody-container-card-body-container">
+              <div className="dashboardBody-container-card-body">
+                {this.props.classes.map((thisClass) => {
+                  return (
+                    <DashboardClassCard
+                      key={thisClass._id}
+                      professorName={thisClass.professorName}
+                      className={thisClass.className}
+                      courseReference={thisClass.courseReference}
+                      classID={thisClass._id}
+                      {...this.props}
+                    />
+                  )
+                })}
+              </div>
             </div>
           </div>
           <Modal
@@ -139,7 +147,8 @@ const mapStateToProps = state => {
     user: state.userReducer,
     isLoading: state.pageReducer.isLoading,
     classes: state.classArrayReducer,
-    isLoading: state.pageReducer.isLoading
+    isLoading: state.pageReducer.isLoading,
+    user: state.userReducer.user
   }
 }
 

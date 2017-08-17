@@ -41,7 +41,6 @@ module.exports = function() {
       .populate('courses')
       .exec()
       .then(foundUser => {
-        console.log('@@@ foundUser', foundUser);
         // TODO: check structure of User.courses
         var courses = foundUser.courses.map(val=>val._id.toString());
         if (courses.includes(req.params.id)) { // find if the user is enrolled in that course
@@ -51,7 +50,6 @@ module.exports = function() {
         }
       })
       .then(foundCourse => {
-        console.log('@@@ foundCourse', foundCourse);
         if (foundCourse) {
           res.json({
             error: null,
@@ -68,7 +66,7 @@ module.exports = function() {
       });
   });
 
-  router.get('/joinclass/:id', function(req, res){
+  router.get('/getclass/:id', function(req, res){
     Class.findById(req.params.id)
       .populate('questions')
       .populate('topics')
@@ -88,7 +86,8 @@ module.exports = function() {
   });
 
   router.post('/addclass', function(req, res){
-    Course.findById(req.body.accessCode)
+    console.log('received POST at /api/addclass');
+    Course.findOne({accessCode: req.body.accessCode})
       .then(foundCourse => {
         if (!foundCourse) {
           res.json({
@@ -102,7 +101,7 @@ module.exports = function() {
         var user = result[0];
         var course = result[1];
         user.courses.push(course);
-        return Promise.all( [ user.save(), foundCourse ] );
+        return Promise.all( [ user.save(), course ] );
       })
       .then(result => {
         var newCourse = result[1];
@@ -110,6 +109,9 @@ module.exports = function() {
           error: null,
           response: newCourse
         })
+      })
+      .catch((err) => {
+        console.log("we had a crazy fucking error : ", err);
       })
   });
 
