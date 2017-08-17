@@ -15,7 +15,10 @@ class DashboardContainer extends Component {
       courseTitle: "",
       courseCode: "",
       showCreateClassModal: false,
+      className: "",
       classTitle: "",
+      showAddClassModal: false,
+      accessCode: "",
     }
   }
 
@@ -34,17 +37,46 @@ class DashboardContainer extends Component {
 }
 
   onCreateCourseClick(e) {
+    e.preventDefault();
     //open modal
     this.setState({showCreateCourseModal: true});
     //information is filled out and saved in this.state
+  }
+
+  handleAddCourseClick(e) {
+    e.preventDefault();
+    this.setState({showAddClassModal: true});
+  }
+
+  onCloseAddCourseModal(e) {
+    e.preventDefault();
+    this.setState({showAddClassModal: false})
   }
 
   onCourseTitleChange(e){
     this.setState({courseTitle: e.target.value});
   }
 
+  onAccessCodeChange(e) {
+    this.setState({accessCode: e.target.value});
+  }
+
   onCourseCodeChange(e){
     this.setState({courseCode: e.target.value});
+  }
+
+  onSubmitAddCourseModal(e) {
+    e.preventDefault();
+    axios.post(baseDomain + 'api/addClass', {
+      accessCode: this.state.accessCode
+    })
+    .then((r) => {
+      if(r.data.error) {
+        console.log("there was an error: ", r.data.error);
+      } else {
+        this.props.addCourseAction(r.data.response);
+      }
+    })
   }
 
   onSubmitModal(e){
@@ -61,10 +93,8 @@ class DashboardContainer extends Component {
         courseCode: "",
       })
       if(r.data.error) {
-        this.props.setNotLoadingAction();
         console.log("Error encountered while creating new course: ", r.data);
       } else {
-        this.props.setNotLoadingAction();
         this.props.addCourseAction(r.data.response);
       }
     })
@@ -75,7 +105,8 @@ class DashboardContainer extends Component {
     this.setState({showCreateCourseModal: false});
   }
 
-  onCloseModal(){
+  onCloseModal(e){
+    e.preventDefault()
     this.setState({showCreateCourseModal: false});
   }
 
@@ -90,23 +121,20 @@ class DashboardContainer extends Component {
     //information is filloud out and saved in this.state
   }
 
-  onClassTitleChange(e){
-    this.setState({classTitle: e.target.value});
+  onclassNameChange(e){
+    this.setState({className: e.target.value});
   }
 
   onSubmitClassModal(e){
     e.preventDefault();
-    var data = {
-      classTitle: this.state.classTitle,
-      courseReference: this.props.courseReference, //TODO: Make sure this gets passed in to props
-    };
     //axios post request to backend with that object
     //use baseDomain in axios request and import it from the constants file
     //on the .then of this action dispatch action to the reducer
     //to add the course to the course reducer. need to write this action. courses is an array in reducer
     //immutable --> splice array to make deep copy then resave
     axios.post(baseDomain + 'api/create/class', {
-      data: data
+        className: this.state.className,
+        courseReference: this.props.courseReference, //TODO: Make sure this gets passed in to props
     })
     .then((r) => {
       if(r.data.error) {
@@ -126,7 +154,8 @@ class DashboardContainer extends Component {
     this.setState({showCreateClassModal: false});
   }
 
-  onCloseClassModal(){
+  onCloseClassModal(e){
+    e.preventDefault()
     this.setState({showCreateClassModal: false});
   }
 
@@ -158,13 +187,12 @@ class DashboardContainer extends Component {
             <div className="dashboardBody-container-header">
               <h1>Dashboard</h1>
               <button className="dashboardBody-button"
-                onClick={() => this.onCreateClassClick()}
-                >Create a class</button>
-                <button className="dashboardBody-button"
-                  >Join a course</button>
-              <button className="dashboardBody-button"
                 onClick={(e) => this.onCreateCourseClick(e)}
-                >Create a Course</button>
+                >Create a Course (this will only appear for Professors)</button>
+
+                <button className="dashboardBody-button"
+                  onClick={(e) => this.handleAddCourseClick(e)}
+                  >Add a new Course (this will only appear for TAs and Students)</button>
             </div>
             <div className="dashboardBody-container-body">
               {this.props.courses.map((course) => {
@@ -175,6 +203,7 @@ class DashboardContainer extends Component {
                     courseTitle={course.courseTitle}
                     courseCode={course.courseCode}
                     courseID={course._id}
+                    {...this.props}
                   />
                 )
               })}
@@ -203,27 +232,27 @@ class DashboardContainer extends Component {
                 onClick={(e) => this.onSubmitModal(e)}
                 >Create Course</button>
               <button
-                onClick={() => this.onCloseModal()}
+                onClick={(e) => this.onCloseModal(e)}
                 >Close</button>
             </form>
           </Modal>
           <Modal
-          isOpen={this.state.showCreateClassModal}
-          contentLabel="Create a Course"
+          isOpen={this.state.showAddClassModal}
+          contentLabel="Add a new course"
           >
-            <h2>Fill out the following information to create a new Class!!!!</h2>
+            <h2>Fill out the following information to add a new Class!!!!</h2>
             <form>
               <input
                 type="text"
-                value={this.state.classTitle}
-                placeholder="Class Title"
-                onChange={(e) => this.onClassTitleChange(e)}
+                value={this.state.accessCode}
+                placeholder="Access Code"
+                onChange={(e) => this.onAccessCodeChange(e)}
               />
               <button
-                onClick={(e) => this.onSubmitClassModal(e)}
+                onClick={(e) => this.onSubmitAddCourseModal(e)}
                 >Create Course</button>
               <button
-                onClick={() => this.onCloseClassModal()}
+                onClick={(e) => this.onCloseAddCourseModal(e)}
                 >Close</button>
             </form>
           </Modal>

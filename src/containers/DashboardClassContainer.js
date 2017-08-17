@@ -47,17 +47,15 @@ class DashboardClassContainer extends Component {
 
   onSubmitClassModal(e){
     e.preventDefault();
-    var data = {
-      classTitle: this.state.classTitle,
-      courseReference: this.props.courseReference, //TODO: Make sure this gets passed in to props
-    };
+    console.log("data");
     //axios post request to backend with that object
     //use baseDomain in axios request and import it from the constants file
     //on the .then of this action dispatch action to the reducer
     //to add the course to the course reducer. need to write this action. courses is an array in reducer
     //immutable --> splice array to make deep copy then resave
     axios.post(baseDomain + 'api/create/class', {
-      data: data
+      classTitle: this.state.classTitle,
+      courseReference: this.props.math.url.coursereference, //TODO: Make sure this gets passed in to props
     })
     .then((r) => {
       if(r.data.error) {
@@ -66,6 +64,7 @@ class DashboardClassContainer extends Component {
       } else {
         this.props.setNotLoadingAction();
         //dispatch action to reducer to add coures to course reduver
+        console.log("asdfasdfasdfasdf");
         this.props.addClassToArrayAction(r.data.response);
       }
     })
@@ -135,9 +134,9 @@ class DashboardClassContainer extends Component {
                 placeholder="Class Title"
                 onChange={(e) => this.onClassTitleChange(e)}
               />
-              <button
-                onClick={(e) => this.onSubmitClassModal(e)}
-                >Create Course</button>
+              <button className="dashboardBody-button"
+                onClick={() => this.onCreateClassClick()}
+                >Create a class</button>
               <button
                 onClick={() => this.onCloseClassModal()}
                 >Close</button>

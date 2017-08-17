@@ -66,7 +66,6 @@ io.on('connection', socket => {
 
   socket.on('deleteQuestion', (data) => {
     Question.findByIdAndRemove(data.questionId, (err) => {
-      //now we must remove it from the class
       Class.findById(data.reference, (err, classObj) => {
         let questionsArray = classObj.questions;
         let index;
