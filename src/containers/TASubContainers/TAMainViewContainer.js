@@ -16,9 +16,7 @@ class TAMainViewContainer extends Component {
   render() {
     return (
       <div className="body-parent">
-        {
-          this.props.userType
-          ?
+
           <div  className="body-container">
             <div>
               <ReactModal
@@ -34,8 +32,6 @@ class TAMainViewContainer extends Component {
             <TATopicsContainer />
             <TAQuestionsContainer />
           </div>
-          :null
-        }
       </div>
     );
   }

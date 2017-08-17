@@ -30,11 +30,13 @@ class ProfessorTopicsContainer extends Component {
   }
 
   render() {
-
-    var proffArr = this.props.classObj.professorName.split(" ")
-    var profname = proffArr[1] || proffArr[0];
-    var numOfTopics = this.props.topics.length;
-    var numOfQuestions = this.props.questions.length;
+    // console.log("class object" ,this.props.classObj);
+    // var proffArr = this.props.classObj.professorName.split(" ")
+    // var profname = proffArr[1] || proffArr[0];
+    console.log("topics", this.props.topics);
+    console.log("questions", this.props.questions);
+    var numOfTopics = this.props.classObj.topics.length;
+    var numOfQuestions = this.props.classObj.questions.length;
     return (
       <div className="topics-container">
         <div style={{display:'flex', 'justifyContent': 'space-between', 'alignItems':'center'}}>
@@ -58,6 +60,7 @@ class ProfessorTopicsContainer extends Component {
               votes={topic.votes}
               id={topic._id}
               key={i}
+              email={topic.email}
               reference={topic.referenceClass}
               topicCreator={topic.username}
               hightlight={this.props.currentFilter===topic.text ? true : false}
@@ -77,9 +80,9 @@ const mapStateToProps = state => {
   return {
     classObj: state.classReducer.classState,
     topics: state.classReducer.classState.topics,
+    questions: state.classReducer.classState.questions,
     currentFilter: state.filterReducer,
     socket: state.socketReducer.socket,
-    questions: state.classReducer.classState.questions,
   }
 }
 
