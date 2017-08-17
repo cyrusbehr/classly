@@ -20,7 +20,6 @@ class DashboardClassContainer extends Component {
     var self = this;
     axios.get(baseDomain + 'checkLogin')
     .then((r) => {
-      console.log("the response is: ", r.data);
       if(r.data.loggedIn) {
         if(!this.props.user.userType){
           self.props.history.push('/dashboard')
