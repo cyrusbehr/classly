@@ -417,7 +417,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', auth(passport));
-app.use('/api', create_course_class());
+app.use('/api', dashboard, create_course_class);
+// app.use('/api', create_course_class);
 
 // app.use('/', function(req, res){
 //   if(req.user){
@@ -427,7 +428,7 @@ app.use('/api', create_course_class());
 //   }
 // })
 
-app.use('/api', dashboard());
+
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
