@@ -157,9 +157,7 @@ class DashboardContainer extends Component {
           <div className="dashboardBody-container">
             <div className="dashboardBody-container-header">
               <h1>Dashboard</h1>
-              <button className="dashboardBody-button"
-                onClick={() => this.onCreateClassClick()}
-                >Create a class</button>
+      
                 <button className="dashboardBody-button"
                   >Join a course</button>
               <button className="dashboardBody-button"
