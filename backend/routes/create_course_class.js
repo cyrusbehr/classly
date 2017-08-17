@@ -72,7 +72,7 @@ module.exports = function() {
       const newClass = new Class({
         professorName: "Prof: " + req.user.lastname,
         className: req.body.className,
-        timestamp: d.toString(),
+        timestamp: d.getTime(),
         questions: [],
         topics:[],
         courseReference: req.body.courseReference
