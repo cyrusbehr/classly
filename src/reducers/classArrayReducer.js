@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
   return action.classArray
 
   case ADD_CLASS_TO_ARRAY:
-  newState = [...state];
+  var newState = [...state];
   newState.push(action.classObject);
   return newState;
 

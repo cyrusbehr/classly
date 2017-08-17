@@ -158,7 +158,7 @@ import {
   export function addClassToArray(classObject) {
     return {
       type: ADD_CLASS_TO_ARRAY,
-      courseObject: classObject,
+      classObject: classObject,
     }
   }
 
