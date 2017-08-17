@@ -58,11 +58,11 @@ class StudentTopicsContainer extends Component {
           <div style={{'maxWidth': 250, 'margin': 16}}>
             <Toggle
               toggled={this.state.toggle}
-              label="See resolved questions"
+              label="Resolved questions"
               thumbSwitchedStyle={{backgroundColor: '#00C993'}}
               trackSwitchedStyle={{backgroundColor: '#D9FFF5'}}
               onToggle={(e)=>{this.handleClick(e)}}
-              iconStyle={{'marginLeft':-26}}
+              iconStyle={{'marginLeft':-40}}
               style={{'marginTop': 10}}
               labelStyle={{'color':'gray'}}
             />
