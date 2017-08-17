@@ -107,8 +107,8 @@ $light-green: #8dcdc1;
   margin-top: 18px;
   font-size: 24px;
   font-weight: 600;
-  // overflow: hidden;
-  max-height: 100px;
+  overflow: scroll;
+  max-height: 110px;
   overflow-wrap: break-word
 }
 

@@ -41,6 +41,14 @@ class DashboardClassContainer extends Component {
     //information is filloud out and saved in this.state
   }
 
+  handleLogout(e) {
+    var self = this;
+    axios.get(baseDomain + 'logout')
+    .then(() => {
+      self.props.history.push('/');
+    })
+  }
+
   onClassTitleChange(e){
     this.setState({classTitle: e.target.value});
   }
@@ -85,7 +93,7 @@ class DashboardClassContainer extends Component {
           <text className="dashboard-header-name">Class.ly</text>
           <div className="dashboard-navbar">
             <text className="dashboard-profile">Profile</text>
-            <text className="dashboard-logout">Log out</text>
+            <text onClick={(e) => this.handleLogout(e)} className="dashboard-logout">Log out</text>
           </div>
         </div>
         {this.props.isLoading
