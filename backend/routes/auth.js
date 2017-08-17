@@ -107,9 +107,16 @@ module.exports = function(passport) {
 
 
   router.get('/checkLogin', function(req, res) {
+    var responseUser = null;
+    if(req.user) {
+       responseUser = Object.assign({}, req.user)
+       responseUser = responseUser._doc;
+      delete responseUser.password;
+    }
+
     res.json({
       loggedIn: !!req.user,
-      user: Object.assign({}, req.user)
+      user: responseUser
     });
   })
 

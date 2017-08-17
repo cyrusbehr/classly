@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {loading, notLoading, populateCourse} from '../actions/Actions'
+import {loading, notLoading, populateCourse, setUser} from '../actions/Actions'
 import DashboardCourseCard from './DashboardCourseCard';
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
@@ -23,6 +23,16 @@ class DashboardContainer extends Component {
   }
 
   componentDidMount() {
+    var self = this;
+    axios.get(baseDomain + 'checkLogin')
+    .then((r) => {
+      if(r.data.loggedIn) {
+        self.props.setUserAction(r.data.user);
+      } else {
+        self.props.history.push('/')
+      }
+    })
+
     this.props.setLoadingAction();
     axios.get(baseDomain + 'api/dashboard')
     .then((r) => {
@@ -288,7 +298,6 @@ const mapStateToProps = state => {
     courses: state.courseReducer,
     isLoading: state.pageReducer.isLoading,
     user: state.userReducer.user
-    //pass in courseId
   }
 }
 
@@ -308,7 +317,10 @@ const mapDispatchToProps = dispatch => {
     },
     addClassToArrayAction: (classObj) => {
       dispatch(addClassToArray(classObj))
-    }
+    },
+    setUserAction: (user) => {
+      dispatch(setUser(user))
+    },
   }
 }
 

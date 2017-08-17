@@ -425,16 +425,6 @@ app.use(passport.session());
 
 app.use('/', auth(passport));
 app.use('/api', dashboard, create_course_class);
-// app.use('/api', create_course_class);
-
-// app.use('/', function(req, res){
-//   if(req.user){
-//     res.redirect('/' + req.user.userType + '/dashboard')
-//   } else {
-//     next();
-//   }
-// })
-
 
 
 app.get('/*', (req, res) => {
