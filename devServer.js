@@ -52,6 +52,7 @@ io.on('connection', socket => {
 //   room: room access code
 //}
   socket.on('join', (room) => {
+
     socket.join(room);
     console.log("user has joined", room);
     socket.currentRoom = room;
