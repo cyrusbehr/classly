@@ -110,11 +110,6 @@ class DashboardContainer extends Component {
     this.setState({showCreateCourseModal: false});
   }
 
-  onCardClick() {
-    //get classes
-    //Re render dashboard with classes inside the Course
-  }
-
   onCreateClassClick(){
     //open class modal
     this.setState({showCreateClassModal: true})
