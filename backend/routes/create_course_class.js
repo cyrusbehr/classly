@@ -16,18 +16,13 @@ module.exports = function() {
     let accessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
 
     function accessCodeRecursion(newAccessCode) {
-      console.log('How many times???');
       Course.findOne({accessCode: newAccessCode}, (err, courseObj) => {
         if(!courseObj){
-          console.log('body', req.body);
-          console.log('user', req.user);
           req.checkBody('courseTitle', 'Course title cannot be empty').notEmpty();
           req.checkBody('courseCode', 'Course code cannot be empty').notEmpty();
         req.getValidationResult()
         .then(function(result){
-          console.log('result', result)
           if (!result.isEmpty()) { // Error in the validations above
-            console.log('1')
             // res.json({
             //   error: util.inspect(result.array())
             // });
@@ -40,30 +35,24 @@ module.exports = function() {
             courseCode: req.body.courseCode,
             classes:[]
           });
-
-          console.log("the new course is: ", newCourse);
           return newCourse.save()
           .then(function(savedNewCourse){
-            console.log(savedNewCourse)
-            User.findById(req.user._id)
-            .then(function(foundUser){
-              foundUser.courses.push(savedNewCourse._id)
-              foundUser.save()
-              console.log('2')
+            return Promise.all([User.findById(req.user._id), savedNewCourse]);
+          })
+          .then(function(values){
+              values[0].courses.push(values[1]._id)
+              values[0].save()
               res.json({
                 error: null,
-                response: savedNewCourse
+                response: values[1]
               })
               return null;
             })
             .catch(function(error){
-              console.log('3')
-              console.log('error', error)
               res.json({
                 error
               })
             })
-          });
         })
       } else {
         newAccessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
