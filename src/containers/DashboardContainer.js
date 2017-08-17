@@ -26,7 +26,7 @@ class DashboardContainer extends Component {
       if(r.data.error) {
         console.log("there was an error loading the dashboard : ", r.data.error);
       } else {
-        this.props.populateCourseAction(data.response);
+        this.props.populateCourseAction(r.data.response);
         this.props.setNotLoadingAction();
       }
     })
@@ -178,7 +178,7 @@ class DashboardContainer extends Component {
                     professorName={course.professorName}
                     courseTitle={course.courseTitle}
                     courseCode={course.courseCode}
-                    classID={course._id}
+                    courseID={course._id}
                   />
                 )
               })}
