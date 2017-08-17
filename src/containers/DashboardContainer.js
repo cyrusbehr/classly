@@ -16,6 +16,8 @@ class DashboardContainer extends Component {
       courseCode: "",
       showCreateClassModal: false,
       classTitle: "",
+      showAddClassModal: false,
+      accessCode: "",
     }
   }
 
@@ -34,9 +36,15 @@ class DashboardContainer extends Component {
 }
 
   onCreateCourseClick(e) {
+    e.preventDefault();
     //open modal
     this.setState({showCreateCourseModal: true});
     //information is filled out and saved in this.state
+  }
+
+  handleAddCourseClick(e) {
+    e.preventDefault();
+    // this.setState
   }
 
   onCourseTitleChange(e){
@@ -164,7 +172,11 @@ class DashboardContainer extends Component {
                   >Join a course</button>
               <button className="dashboardBody-button"
                 onClick={(e) => this.onCreateCourseClick(e)}
-                >Create a Course</button>
+                >Create a Course (this will only appear for Professors)</button>
+
+                <button className="dashboardBody-button"
+                  onClick={(e) => this.handleAddCourseClick(e)}
+                  >Add a new Course (this will only appear for TAs and Students)</button>
             </div>
             <div className="dashboardBody-container-body">
               {this.props.courses.map((course) => {
@@ -175,6 +187,7 @@ class DashboardContainer extends Component {
                     courseTitle={course.courseTitle}
                     courseCode={course.courseCode}
                     courseID={course._id}
+                    {...this.props}
                   />
                 )
               })}

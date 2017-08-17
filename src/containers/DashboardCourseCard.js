@@ -16,11 +16,13 @@ class DashboardCourseCard extends Component {
     axios.get(baseDomain + 'api/class/:' + this.props.courseID)
     .then((r) => {
       if(r.data.error) {
-        console.log("there was an error loading the class");
+        console.log("there was an error loading the class ", r.data);
       } else {
+        console.log("we made it to this point in the space time continuim");
         this.props.populateClassAction(r.data.response);
         this.props.setNotLoadingAction();
-        // TODO: redirect to the container
+        this.props.history.push('/dashboard/class/:' + this.props.courseID);
+
       }
     }).catch((err) => console.log("there was an error: ", err))
   }
