@@ -94,6 +94,9 @@ class StudentQuestionsContainer extends Component {
               id={question._id}
               currentUpVotes={question.upVotes}
               text={question.text}
+              firstname={question.firstname}
+              lastname={question.lastname}
+              email={question.email}
               isStarred={question.isStarred}
               isResolved={question.isResolved}
               tags={question.tags}

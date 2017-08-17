@@ -93,7 +93,7 @@ class StudentQuestion extends Component {
       }
 
     render() {
-      var isCreator = (this.props.questionCreator === this.props.username);
+      var isCreator = (this.props.email === this.props.user.email);
       var isStudentStarred = (this.props.userType === "Student" && this.props.isStarred);
       var isProfessorOrTA = (this.props.questionCreatorType === "Professor" || this.props.questionCreatorType === "TA");
       var isAlreadyClicked = (this.props.likedQuestions.indexOf(this.props.id) !== -1)
@@ -124,7 +124,7 @@ class StudentQuestion extends Component {
               <div className="question-content"> {this.props.text} </div>
               {isCreator || isProfessorOrTA
                 ?
-                <div className="question-main-section-question-creator"> -{this.props.questionCreator}</div>
+                <div className="question-main-section-question-creator"> -{this.props.user.firstname + this.props.user.lastname}</div>
               : null}
             </div>
             <div className="all-buttons-container">
@@ -246,8 +246,8 @@ const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
     questionsArray: state.classReducer.classState.questions,
-    username: state.userReducer.username,
-    userType: state.userReducer.userType,
+    user: state.userReducer.user,
+    userType: state.userReducer.user.userType,
     likedQuestions: state.userReducer.likedQuestions,
   }
 }

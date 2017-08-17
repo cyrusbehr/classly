@@ -110,14 +110,13 @@ class TAQuestion extends Component {
         color: '#10a02a',
         fontSize: 30,
       }
-
       return (
         <div className="question" style={style}>
           <div className="question-main-section">
             <div className="question-body">
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
-              <div className="question-main-section-question-creator"> - {this.props.questionCreator}</div>
+              <div className="question-main-section-question-creator"> - {this.props.firstname + " " + this.props.lastname}</div>
               {/*  TODO: DONOVAN add formating here, feel free to move this around */}
               {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
             </div>
