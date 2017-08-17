@@ -109,10 +109,10 @@ module.exports = function(passport) {
   router.get('/checkLogin', function(req, res) {
     res.json({
       loggedIn: !!req.user,
-      userType: req.user ? req.user.userType : null
+      user: Object.assign({}, req.user)
     });
   })
-  
+
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
