@@ -34,17 +34,13 @@ class DashboardClassContainer extends Component {
   onSubmitClassModal(e){
     console.log("Entering onSubmitClassModal");
     e.preventDefault();
-    // console.log("courseReference from url", this.props.match);
-    //axios post request to backend with that object
-    //use baseDomain in axios request and import it from the constants file
-    //on the .then of this action dispatch action to the reducer
-    //to add the course to the course reducer. need to write this action. courses is an array in reducer
-    //immutable --> splice array to make deep copy then resave
+
     axios.post(baseDomain + 'api/create/class', {
       classTitle: this.state.classTitle,
       courseReference: this.props.match.params.coursereference, //TODO: Make sure this gets passed in to props
     })
     .then((r) => {
+      this.setState({classTitle: ""});
       if(r.data.error) {
         this.props.setNotLoadingAction();
         console.log("Error encountered while creating new class: ", r.data);
@@ -103,7 +99,7 @@ class DashboardClassContainer extends Component {
                     key={thisClass._id}
                     professorName={thisClass.professorName}
                     className={thisClass.className}
-                    courseReference={course.courseReference}
+                    courseReference={thisClass.courseReference}
                     classID={thisClass._id}
                     {...this.props}
                   />

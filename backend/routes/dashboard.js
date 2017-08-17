@@ -43,8 +43,8 @@ module.exports = function() {
           console.log('@@@ foundUser', foundUser);
           // TODO: check structure of User.courses
           var courses = foundUser.courses.map(val=>val._id.toString());
-          if (courses.includes(req.params.id.substring(1))) { // find if the user is enrolled in that course
-            return Course.findById(req.params.id.substring(1)).populate('classes').exec()
+          if (courses.includes(req.params.id)) { // find if the user is enrolled in that course
+            return Course.findById(req.params.id).populate('classes').exec()
           } else {
             throw new Error('User is not enrolled in this course')
           }
