@@ -107,12 +107,19 @@ module.exports = function(passport) {
 
 
   router.get('/checkLogin', function(req, res) {
+    var responseUser = null;
+    if(req.user) {
+       responseUser = Object.assign({}, req.user)
+       responseUser = responseUser._doc;
+      delete responseUser.password;
+    }
+
     res.json({
       loggedIn: !!req.user,
-      userType: req.user ? req.user.userType : null
+      user: responseUser
     });
   })
-  
+
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();

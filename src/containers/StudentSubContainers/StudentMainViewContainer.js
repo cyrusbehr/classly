@@ -4,13 +4,32 @@ import StudentTopicsContainer from './StudentTopicsContainer';
 import StudentQuestionsContainer from './StudentQuestionsContainer';
 import {close} from '../../actions/Actions';
 import ReactModal from 'react-modal';
+import axios from 'axios'
+import {baseDomain} from '../../constants/const'
+
+
 
 class StudentMainViewContainer extends Component {
   constructor(props){
     super(props)
-    if(this.props.userType === ""){
-      this.props.history.push('/')
+    this.state = {
+      hasLoaded: false
     }
+  }
+
+  componentDidMount() {
+    var self = this;
+    axios.get(baseDomain + 'checkLogin')
+    .then((r) => {
+      if(r.data.loggedIn) {
+        if(!this.props.user.userType){
+          self.props.history.push('/dashboard')
+        }
+        this.setState({hasLoaded: true});
+      } else {
+        self.props.history.push('/')
+      }
+    })
   }
 
   render() {
@@ -21,21 +40,24 @@ class StudentMainViewContainer extends Component {
 
     return (
       <div className="body-parent">
-          <div className="body-container">
-            <div>
-              <ReactModal
-                isOpen={this.props.showModal}
-                contentLabel="Minimal Modal Example"
-                onRequestClose={() => this.props.close()}
-                className="guide-modal"
-                overlayClassName="guide-modal-overlay"
-                >
-                <button onClick={() => this.props.close()}>Close Modal</button>
-                </ReactModal>
-              </div>
-            <StudentTopicsContainer />
-            <StudentQuestionsContainer />
-          </div>
+        {this.state.hasLoaded
+        ?
+        <div className="body-container">
+          <div>
+            <ReactModal
+              isOpen={this.props.showModal}
+              contentLabel="Minimal Modal Example"
+              onRequestClose={() => this.props.close()}
+              className="guide-modal"
+              overlayClassName="guide-modal-overlay"
+              >
+              <button onClick={() => this.props.close()}>Close Modal</button>
+              </ReactModal>
+            </div>
+          <StudentTopicsContainer />
+          <StudentQuestionsContainer />
+        </div>
+      :null}
       </div>
     );
   }
@@ -48,6 +70,7 @@ const mapStateToProps = state => {
     userType: state.userReducer.userType,
     className: state.classReducer.className,
     showModal: state.modalReducer,
+    user: state.userReducer.user
   };
 };
 

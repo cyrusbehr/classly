@@ -4,19 +4,37 @@ import TATopicsContainer from './TATopicsContainer';
 import TAQuestionsContainer from './TAQuestionsContainer';
 import {close} from '../../actions/Actions';
 import ReactModal from 'react-modal';
+import axios from 'axios'
+import {baseDomain} from '../../constants/const'
 
 class TAMainViewContainer extends Component {
   constructor(props){
     super(props)
-    if(this.props.userType === ""){
-      this.props.history.push('/')
+    this.state = {
+      hasLoaded: false
     }
+  }
+
+  componentDidMount() {
+    var self = this;
+    axios.get(baseDomain + 'checkLogin')
+    .then((r) => {
+      if(r.data.loggedIn) {
+        if(!this.props.user.userType){
+          self.props.history.push('/dashboard')
+        }
+        this.setState({hasLoaded: true});
+      } else {
+        self.props.history.push('/')
+      }
+    })
   }
 
   render() {
     return (
       <div className="body-parent">
-
+        {this.state.hasLoaded
+        ?
           <div  className="body-container">
             <div>
               <ReactModal
@@ -32,6 +50,8 @@ class TAMainViewContainer extends Component {
             <TATopicsContainer />
             <TAQuestionsContainer />
           </div>
+          :null
+        }
       </div>
     );
   }
@@ -41,6 +61,7 @@ const mapStateToProps = state => {
   return {
     userType: state.userReducer.userType,
     showModal: state.modalReducer,
+    user: state.userReducer.user
   };
 };
 

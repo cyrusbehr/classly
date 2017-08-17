@@ -16,6 +16,20 @@ class DashboardClassContainer extends Component {
     }
   }
 
+  componentDidMount() {
+    var self = this;
+    axios.get(baseDomain + 'checkLogin')
+    .then((r) => {
+      if(r.data.loggedIn) {
+        if(!this.props.user.userType){
+          self.props.history.push('/dashboard')
+        }
+      } else {
+        self.props.history.push('/')
+      }
+    })
+  }
+
   onCardClick() {
     //get classes
     //Re render dashboard with classes inside the Course
@@ -25,6 +39,14 @@ class DashboardClassContainer extends Component {
     //open class modal
     this.setState({showCreateClassModal: true})
     //information is filloud out and saved in this.state
+  }
+
+  handleLogout(e) {
+    var self = this;
+    axios.get(baseDomain + 'logout')
+    .then(() => {
+      self.props.history.push('/');
+    })
   }
 
   onClassTitleChange(e){
@@ -71,7 +93,7 @@ class DashboardClassContainer extends Component {
           <text className="dashboard-header-name">Class.ly</text>
           <div className="dashboard-navbar">
             <text className="dashboard-profile">Profile</text>
-            <text className="dashboard-logout">Log out</text>
+            <text onClick={(e) => this.handleLogout(e)} className="dashboard-logout">Log out</text>
           </div>
         </div>
         {this.props.isLoading
