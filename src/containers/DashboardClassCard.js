@@ -33,7 +33,7 @@ class DashboardClassCard extends Component {
 
   render() {
     return(
-      <div onClick={(e) => this.handleClick(e)} className="dashboard-card hvr-grow">
+      <div onClick={(e) => this.handleClick(e)} className="dashboard-card hvr-grow-cards">
         <div className="dashboard-card-title">
           {this.props.className}
           <br/>

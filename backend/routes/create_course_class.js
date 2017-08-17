@@ -23,11 +23,11 @@ module.exports = function() {
           req.checkBody('courseCode', 'Course code cannot be empty').notEmpty();
         req.getValidationResult()
         .then(function(result){
-          if (!result.isEmpty()) { // Error in the validations above
-            res.json({
-              error: util.inspect(result.array())
-            });
-            return;
+          // if (!result.isEmpty()) { // Error in the validations above
+          //   res.json({
+          //     error: util.inspect(result.array())
+          //   });
+          //   return;
           }
           const newCourse = new Course({
             professorName: "Prof: " + req.user.lastname,
@@ -70,11 +70,12 @@ module.exports = function() {
     var d = new Date();
     req.getValidationResult()
     .then(function(result){
+      console.log(result);
       if (!result.isEmpty()) { // Error in the validations above
-        res.json({
-          error: util.inspect(result.array())
-        });
-        return;
+        // res.json({
+        //   error: util.inspect(result.array())
+        // });
+        // return;
       }
       const newClass = new Class({
         professorName: "Prof: " + req.user.lastname,
