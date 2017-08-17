@@ -9,7 +9,7 @@ export default function (state = initialState, action) {
 
     case ADD_COURSE:
     //slice deep copy
-    var newState = [...state]
+    var newState = [...state];
     newState.push(action.courseObject);
     return newState;
 
