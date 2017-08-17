@@ -432,7 +432,7 @@ app.use('/api', dashboard, create_course_class);
 
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/dist/index.html'));
+  res.sendFile(path.join(__dirname, process.env.NODE_ENV === 'production' ? '/dist/index.html' : '/public/devIndex.html'));
 });
 
 server.listen(port, (err) => {
