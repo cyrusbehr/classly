@@ -34,17 +34,23 @@ module.exports = function() {
   })
 
   router.get('/class/:id', function(req, res){
+    console.log('received GET at /class/:id');
     if (req.user) {
       User.findById(req.user._id)
+        .populate('courses')
+        .exec()
         .then(foundUser => {
+          console.log('@@@ foundUser', foundUser);
           // TODO: check structure of User.courses
-          if (foundUser.courses.includes(req.params.id)) { // find if the user is enrolled in that course
-            return Course.findById(req.params.id)
+          var courses = foundUser.courses.map(val=>val._id.toString());
+          if (courses.includes(req.params.id.substring(1))) { // find if the user is enrolled in that course
+            return Course.findById(req.params.id.substring(1))
           } else {
             throw new Error('User is not enrolled in this course')
           }
         })
         .then(foundCourse => {
+          console.log('@@@ foundCourse', foundCourse);
           if (foundCourse) {
             res.json({
               error: null,
