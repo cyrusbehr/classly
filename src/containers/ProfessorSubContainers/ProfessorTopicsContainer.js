@@ -76,11 +76,11 @@ class ProfessorTopicsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("In the map state to props:", state.classReducer.classState);
+  console.log("In the map state to props:", state.classReducer);
   return {
-    classObj: state.classReducer.classState,
-    topics: state.classReducer.classState.topics,
-    questions: state.classReducer.classState.questions,
+    classObj: state.classReducer,
+    topics: state.classReducer.topics,
+    questions: state.classReducer.questions,
     currentFilter: state.filterReducer,
     socket: state.socketReducer.socket,
   }

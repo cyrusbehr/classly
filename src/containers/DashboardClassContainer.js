@@ -85,7 +85,7 @@ class DashboardClassContainer extends Component {
           <div>
           <div className="dashboardBody-container">
             <div className="dashboardBody-container-header-container">
-              <div className="dashboardBody-container-header">
+              <div className="dashboardBody-container-header-class">
                 <text className="dashboardBody-container-dashboard-name">Dashboard</text>
                 <div className="dashboardBody-container-buttons">
                   {isProfessor
@@ -116,10 +116,12 @@ class DashboardClassContainer extends Component {
             </div>
           </div>
           <Modal
+          className="guide-modal"
+          overlayClassName="guide-modal-overlay"
           isOpen={this.state.showCreateClassModal}
           contentLabel="Create a Course"
           >
-            <h2>Fill out the following information to create a new Class!!!!</h2>
+            <h2>Create a new class</h2>
             <form>
               <input
                 type="text"

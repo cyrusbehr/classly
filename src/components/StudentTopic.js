@@ -123,7 +123,7 @@ const mapStateToProps = state => {
     user: state.userReducer.user,
     currentFilter: state.filterReducer,
     userType: state.userReducer.userType,
-    questions: state.classReducer.classState.questions,
+    questions: state.classReducer.questions,
   }
 }
 

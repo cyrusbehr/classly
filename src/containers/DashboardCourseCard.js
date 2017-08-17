@@ -40,11 +40,11 @@ class DashboardCourseCard extends Component {
         </div>
         <div className="dashboard-card-professor">
           {this.props.professorName}
+        </div>
           {isProfessor
           ?
-          this.props.accessCode
+          <div className="dashboard-card-access-code">Sharable Code: {this.props.accessCode}</div>
           :null}
-        </div>
       </div>
     )
   }

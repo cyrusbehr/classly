@@ -31,7 +31,7 @@ $light-green: #8dcdc1;
 }
 
 .dashboard-class-card {
-  width: 150px;
+  width: 125px;
   height: 175px;
   // border-style: solid;
   // border-color: $green;
@@ -105,10 +105,17 @@ $light-green: #8dcdc1;
 
 .dashboard-class-name {
   margin-top: 18px;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 600;
-  max-height: 150px;
-  overflow: scroll;
+  // overflow: hidden;
+  max-height: 100px;
+  overflow-wrap: break-word
+}
+
+.dashboard-class-date {
+  margin: 10px 0;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .dashboard-course-code {
@@ -116,10 +123,11 @@ $light-green: #8dcdc1;
 }
 
 .card-name {
-  font-size: 18px;
+  font-size: 20px;
   padding: 5px;
   margin: 0;
   position:fixed;
+  margin-left: 5px;
   left:0;
   top:0;
   text-decoration: underline;
@@ -149,6 +157,18 @@ $light-green: #8dcdc1;
   justify-content: space-between;
   align-items: center;
   width: 1000px;
+}
+
+.dashboardBody-container-header-class {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  // display: flex;
+  // justify-content: flex-start;
+  padding: 10px 10px 10px 10px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 950px;
 }
 
 .hvr-fade {
@@ -201,10 +221,10 @@ $light-green: #8dcdc1;
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 120px;
+  width: 1000px;
 }
 
 .dashboardBody-container-card-body-container {
   display: flex;
   justify-content: center;
-  border-style:solid;
 }

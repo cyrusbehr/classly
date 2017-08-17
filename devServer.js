@@ -23,7 +23,15 @@ const port = process.env.PORT || 3000;
 
 
 // app.use('/dist/', express.static(path.join(__dirname, 'dist')));
-app.use('/', express.static(path.join(__dirname, 'public')));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'dist')));
+} else {
+  app.get('/bundle.js', function(req, res) {
+    res.sendFile(path.join(__dirname, '/public/bundle.js'));
+  });
+}
+app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
@@ -416,7 +424,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', auth(passport));
-app.use('/api', create_course_class());
+app.use('/api', dashboard, create_course_class);
+// app.use('/api', create_course_class);
 
 // app.use('/', function(req, res){
 //   if(req.user){
@@ -426,10 +435,10 @@ app.use('/api', create_course_class());
 //   }
 // })
 
-app.use('/api', dashboard());
+
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
+  res.sendFile(path.join(__dirname, process.env.NODE_ENV === 'production' ? '/dist/index.html' : '/public/devIndex.html'));
 });
 
 server.listen(port, (err) => {

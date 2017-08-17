@@ -236,7 +236,7 @@ class ProfessorQuestion extends Component {
 
           return {
             socket: state.socketReducer.socket,
-            questionsArray: state.classReducer.classState.questions,
+            questionsArray: state.classReducer.questions,
             username: state.userReducer.username,
             userType: state.userReducer.userType,
             user: state.userReducer.user,

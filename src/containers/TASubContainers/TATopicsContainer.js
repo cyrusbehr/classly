@@ -60,11 +60,11 @@ class TATopicsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    classObj: state.classReducer.classState,
-    topics: state.classReducer.classState.topics,
+    classObj: state.classReducer,
+    topics: state.classReducer.topics,
     currentFilter: state.filterReducer,
     socket: state.socketReducer.socket,
-    questions: state.classReducer.classState.questions,
+    questions: state.classReducer.questions,
   }
 }
 

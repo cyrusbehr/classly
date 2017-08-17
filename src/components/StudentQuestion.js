@@ -245,7 +245,7 @@ const mapStateToProps = state => {
 
   return {
     socket: state.socketReducer.socket,
-    questionsArray: state.classReducer.classState.questions,
+    questionsArray: state.classReducer.questions,
     user: state.userReducer.user,
     userType: state.userReducer.user.userType,
     likedQuestions: state.userReducer.likedQuestions,

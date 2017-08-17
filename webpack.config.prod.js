@@ -25,9 +25,9 @@ module.exports = {
      * include a hash in the filename which changes every compilation.
      */
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'public/index.html',
       filename: 'index.html',
-      title: 'Simple Redux Boilerplate',
+      title: 'Classly',
       inject: 'body'
     }),
     /**
@@ -57,6 +57,12 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'style!css!sass'
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file?hash=sha512&digest=hex&name=images/[name].[ext]'
+        ]
       }
     ]
   }

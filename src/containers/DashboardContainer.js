@@ -161,6 +161,10 @@ class DashboardContainer extends Component {
     this.setState({showCreateClassModal: false});
   }
 
+  handleLogout(e) {
+    axios.get(baseDomain + 'logout')
+    this.props.history.push('/');
+  }
 
   render() {
     var isProfessor = (this.props.user.userType === 'professor')
@@ -171,7 +175,7 @@ class DashboardContainer extends Component {
           <text className="dashboard-header-name">Class.ly</text>
           <div className="dashboard-navbar">
             <text className="dashboard-profile">Profile</text>
-            <text className="dashboard-logout">Log out</text>
+            <text onClick={(e) => this.handleLogout(e)} className="dashboard-logout">Log out</text>
           </div>
         </div>
         {this.props.isLoading
@@ -220,6 +224,8 @@ class DashboardContainer extends Component {
           <Modal
           isOpen={this.state.showCreateCourseModal}
           contentLabel="Create a Course"
+          className="guide-modal"
+          overlayClassName="guide-modal-overlay"
           >
             <h2>Fill out the following information to create a new course</h2>
             <div>I am a modal</div>
@@ -245,6 +251,8 @@ class DashboardContainer extends Component {
             </form>
           </Modal>
           <Modal
+            className="guide-modal"
+            overlayClassName="guide-modal-overlay"
           isOpen={this.state.showAddClassModal}
           contentLabel="Add a new course"
           >
