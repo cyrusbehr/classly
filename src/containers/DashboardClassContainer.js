@@ -90,7 +90,7 @@ class DashboardClassContainer extends Component {
                 <div className="dashboardBody-container-buttons">
                   {isProfessor
                     ?
-                    <button className="dashboardBody-button hvr-fade"
+                    <button className="dashboardBody-button hvr-grow"
                       onClick={() => this.onCreateClassClick()}
                       >Create a class</button>
                   :null
@@ -116,26 +116,33 @@ class DashboardClassContainer extends Component {
             </div>
           </div>
           <Modal
-          className="guide-modal"
+          className="guide-modal-create-class"
           overlayClassName="guide-modal-overlay"
           isOpen={this.state.showCreateClassModal}
           contentLabel="Create a Course"
           >
-            <h2>Create a new class</h2>
-            <form>
-              <input
-                type="text"
-                value={this.state.classTitle}
-                placeholder="Class Title"
-                onChange={(e) => this.onClassTitleChange(e)}
-              />
-              <button className="dashboardBody-button"
+            <div className="modal-header">
+              <text>Create a new class</text>
+            </div>
+            <div className="modal-body">
+              <form>
+                <input
+                  className="modal-input-field"
+                  type="text"
+                  value={this.state.classTitle}
+                  placeholder="Class Title"
+                  onChange={(e) => this.onClassTitleChange(e)}
+                />
+                </form>
+            </div>
+            <div className="modal-footer">
+              <button className="dashboardBody-create-class-button hvr-grow"
                 onClick={(e) => this.onSubmitClassModal(e)}
-                >Create class!</button>
-              <button
+                >Create</button>
+              <button className="dashboardBody-close-button hvr-grow"
                 onClick={() => this.onCloseClassModal()}
                 >Close</button>
-            </form>
+            </div>
           </Modal>
         </div>
         }

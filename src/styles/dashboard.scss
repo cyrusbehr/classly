@@ -228,3 +228,133 @@ $light-green: #8dcdc1;
   display: flex;
   justify-content: center;
 }
+
+.modal-header {
+  border-bottom-style: solid;
+  border-bottom-color: $main-bg-color;
+  border-bottom-width: 1px;
+  padding: 10px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: flex-start;
+  width: 500px;
+}
+
+.modal-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top-style: solid;
+  border-top-color: $main-bg-color;
+  border-top-width: 1px;
+  padding: 10px;
+  width:100%;
+}
+
+.guide-modal {
+  width: 500px;
+  height: 500px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  z-index: 3;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guide-modal-create-class {
+  width: 500px;
+  height: 350px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  z-index: 3;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-input-field {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  width: 240px;
+}
+
+.modal-input-field-course-title {
+  margin-bottom: 30px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  width: 240px;
+}
+
+.modal-input-field-course-code {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  width: 240px;
+}
+
+.dashboardBody-create-class-button {
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-left:25px;
+  padding-right:25px;
+  border-radius:15px;
+  background-color:transparent;
+  margin-right:10px;
+  font-family: 'Raleway', sans-serif;
+  border-style: solid;
+  font-weight: 600;
+  border-color: black;
+  border-width: 1px;
+  font-size: 16px;
+}
+
+.dashboardBody-close-button {
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-left:25px;
+  padding-right:25px;
+  border-radius:15px;
+  font-weight: 600;
+  background-color:transparent;
+  margin-right:10px;
+  font-family: 'Raleway', sans-serif;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  font-size: 16px;
+}
+
+.modal-body-create-course {
+  width:100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

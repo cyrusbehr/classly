@@ -194,11 +194,11 @@ class DashboardContainer extends Component {
                 <div className="dashboardBody-container-buttons">
                   {isProfessor
                     ?
-                    <button className="dashboardBody-button hvr-fade"
+                    <button className="dashboardBody-button hvr-grow"
                       onClick={(e) => this.onCreateCourseClick(e)}
                       >Create a Course</button>
                     :
-                    <button className="dashboardBody-button hvr-fade"
+                    <button className="dashboardBody-button hvr-grow"
                       onClick={(e) => this.handleAddCourseClick(e)}
                       >Add a New Course</button>
                     }
@@ -224,31 +224,42 @@ class DashboardContainer extends Component {
           <Modal
           isOpen={this.state.showCreateCourseModal}
           contentLabel="Create a Course"
-          className="guide-modal"
+          className="guide-modal-create-class"
           overlayClassName="guide-modal-overlay"
           >
-            <h2>Fill out the following information to create a new course</h2>
-            <div>I am a modal</div>
-            <form>
-              <input
-                type="text"
-                value={this.state.courseTitle}
-                placeholder="Course Title"
-                onChange={(e) => this.onCourseTitleChange(e)}
-              />
-              <input
-                type="text"
-                value={this.state.courseCode}
-                placeholder="Course Code"
-                onChange={(e) => this.onCourseCodeChange(e)}
-              />
+            <div className="modal-header">
+              Create a new course
+            </div>
+            <div className="modal-body-create-course">
+              <form>
+                <input
+                  type="text"
+                  className="modal-input-field-course-title"
+                  value={this.state.courseTitle}
+                  placeholder="Course Title"
+                  onChange={(e) => this.onCourseTitleChange(e)}
+                />
+                </form>
+                <form>
+                <input
+                  type="text"
+                  className="modal-input-field-course-code"
+                  value={this.state.courseCode}
+                  placeholder="Course Code"
+                  onChange={(e) => this.onCourseCodeChange(e)}
+                />
+              </form>
+            </div>
+            <div className="modal-footer">
               <button
+                className="dashboardBody-create-class-button hvr-grow"
                 onClick={(e) => this.onSubmitModal(e)}
                 >Create Course</button>
               <button
+                className="dashboardBody-close-button hvr-grow"
                 onClick={(e) => this.onCloseModal(e)}
                 >Close</button>
-            </form>
+            </div>
           </Modal>
           <Modal
             className="guide-modal"
