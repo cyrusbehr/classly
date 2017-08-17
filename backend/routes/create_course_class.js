@@ -16,43 +16,54 @@ module.exports = function() {
     let accessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
 
     function accessCodeRecursion(newAccessCode) {
+      console.log('How many times???');
       Course.findOne({accessCode: newAccessCode}, (err, courseObj) => {
         if(!courseObj){
+          console.log('body', req.body);
+          console.log('user', req.user);
           req.checkBody('courseTitle', 'Course title cannot be empty').notEmpty();
           req.checkBody('courseCode', 'Course code cannot be empty').notEmpty();
         req.getValidationResult()
         .then(function(result){
+          console.log('result', result)
           if (!result.isEmpty()) { // Error in the validations above
-            res.json({
-              error: util.inspect(result.array())
-            });
-            return;
+            console.log('1')
+            // res.json({
+            //   error: util.inspect(result.array())
+            // });
+            // return;
           }
           const newCourse = new Course({
             professorName: "Prof: " + req.user.lastname,
             courseTitle: req.body.courseTitle,
-            accessCode: req.body.accessCode,
+            accessCode: newAccessCode,
             courseCode: req.body.courseCode,
             classes:[]
           });
-          return newCourse.save();
-        })
-        .then(function(savedNewCourse){
-          User.findById(req.user._id)
-          .then(function(foundUser){
-            foundUser.courses.push(savedNewCourse._id)
-            foundUser.save()
-            res.json({
-              error: null,
-              response: savedNewCourse
+
+          console.log("the new course is: ", newCourse);
+          return newCourse.save()
+          .then(function(savedNewCourse){
+            console.log(savedNewCourse)
+            User.findById(req.user._id)
+            .then(function(foundUser){
+              foundUser.courses.push(savedNewCourse._id)
+              foundUser.save()
+              console.log('2')
+              res.json({
+                error: null,
+                response: savedNewCourse
+              })
+              return null;
             })
-            return null;
-          })
-          .catch(function(error){
-            res.json({
-              error
+            .catch(function(error){
+              console.log('3')
+              console.log('error', error)
+              res.json({
+                error
+              })
             })
-          })
+          });
         })
       } else {
         newAccessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
@@ -66,17 +77,18 @@ module.exports = function() {
   router.post('/create/class', function(req, res){
     req.checkBody('className', 'Class name cannot be empty').notEmpty();
     req.checkBody('courseReference', 'Course reference cannot be empty').notEmpty();
+    var d = new Date();
     req.getValidationResult()
     .then(function(result){
       const newClass = new Class({
         professorName: "Prof: " + req.user.lastname,
         className: req.body.className,
-        timestamp: new Date(),
+        timestamp: d.toString(),
         questions: [],
         topics:[],
         courseReference: req.body.courseReference
       });
-      return Class.save();
+      return newClass.save();
     })
     .then(function(savedClass){
       Course.findById(req.body.courseReference)

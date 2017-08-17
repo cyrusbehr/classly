@@ -50,19 +50,14 @@ class DashboardContainer extends Component {
   onSubmitModal(e){
     //create course object from what is saved in this.state
     e.preventDefault();
-    var data = {
-      courseTitle: this.state.courseTitle,
-      courseCode: this.state.courseCode,
-      accessCode: "",
-      classes: [],
-    };
     //axios post request to backend with that object
     //use baseDomain in axios request and import it from the constants file
     //on the .then of this action dispatch action to the reducer
     //to add the course to the course reducer. need to write this action. courses is an array in reducer
     //immutable --> splice array to make deep copy then resave
     axios.post(baseDomain + 'api/create/course', {
-      data: data
+      courseTitle: this.state.courseTitle,
+      courseCode: this.state.courseCode,
     })
     .then((r) => {
       if(r.data.error) {
@@ -70,7 +65,6 @@ class DashboardContainer extends Component {
         console.log("Error encountered while creating new course: ", r.data);
       } else {
         this.props.setNotLoadingAction();
-        //dispatch action to reducer to add coures to course reduver
         this.props.addCourseAction(r.data.response);
       }
     })
@@ -111,7 +105,7 @@ class DashboardContainer extends Component {
     //on the .then of this action dispatch action to the reducer
     //to add the course to the course reducer. need to write this action. courses is an array in reducer
     //immutable --> splice array to make deep copy then resave
-    axios.post(baseDomain + '/api/create/class', {
+    axios.post(baseDomain + 'api/create/class', {
       data: data
     })
     .then((r) => {
@@ -120,8 +114,9 @@ class DashboardContainer extends Component {
         console.log("Error encountered while creating new class: ", r.data);
       } else {
         this.props.setNotLoadingAction();
-        //dispatch action to reducer to add coures to course reduver
         this.props.addClassToArrayAction(r.data.response);
+        console.log("We actually hit this route!");
+
       }
     })
     .catch((err) => {
@@ -175,6 +170,7 @@ class DashboardContainer extends Component {
               {this.props.courses.map((course) => {
                 return (
                   <DashboardCourseCard
+                    key={course._id}
                     professorName={course.professorName}
                     courseTitle={course.courseTitle}
                     courseCode={course.courseCode}
