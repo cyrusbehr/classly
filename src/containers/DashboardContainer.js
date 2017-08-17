@@ -172,15 +172,15 @@ class DashboardContainer extends Component {
   }
 
   handleLogout(e) {
-    console.log("the base domain is : ", baseDomain + 'logout');
-    axios.get(baseDomain + 'logout').
-    then((r) => console.log(r.data))
-    this.props.history.push('/');
+    var self = this;
+    axios.get(baseDomain + 'logout')
+    .then(() => {
+      self.props.history.push('/');
+    })
   }
 
   render() {
     var isProfessor = (this.props.user.userType === 'professor')
-
     return(
       <div className="dashboard">
         <div className="dashboard-header">
