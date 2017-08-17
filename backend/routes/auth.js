@@ -1,7 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var { User } = require('../../src/Models/models');
-var util = require('util');
+const express = require('express');
+const router = express.Router();
+const { User } = require('../../src/Models/models');
+const util = require('util');
+const bcrypt = require('bcrypt');
 
 module.exports = function(passport) {
 
@@ -28,12 +29,15 @@ module.exports = function(passport) {
         if(foundUser){
           throw new Error('email is taken');
         } else {
+          const saltRounds = 10;
+          const hash = bcrypt.hashSync(req.body.password, saltRounds);
+
           var user = new User({
             userType: req.body.userType,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            password: req.body.password,
+            password: hash,
             userType: req.body.userType
           });
 
@@ -56,9 +60,12 @@ module.exports = function(passport) {
 
   // POST Login page
   router.post('/login', passport.authenticate('local', {'failureRedirect': '/failure'} ), function(req, res) {
+    var responseUser = Object.assign({}, req.user)
+    var responseUser = responseUser._doc;
+    delete responseUser.password;
     res.json({
       error: null,
-      response: req.user
+      response: responseUser
     });
   });
 

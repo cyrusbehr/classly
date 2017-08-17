@@ -12,6 +12,8 @@ const auth = require('./backend/routes/auth');
 const create_course_class = require('./backend/routes/create_course_class');
 const expressValidator = require('express-validator')
 const { User } = require('./src/Models/models.js');
+const dashboard = require('./backend/routes/dashboard');
+const bcrypt = require('bcrypt');
 
 const app = express();
 // const compiler = webpack(config);
@@ -398,12 +400,13 @@ passport.use(new LocalStrategy({
       console.log(user);
       return done(null, false, { message: 'Incorrect username.' });
     }
-    // if passwords do not match, auth failed
-    if (user.password !== password) {
+
+    if (bcrypt.compareSync(password, user.password)) {
+      // auth has has succeeded
+      return done(null, user);
+    } else {
       return done(null, false, { message: 'Incorrect password.' });
     }
-    // auth has has succeeded
-    return done(null, user);
   });
 }));
 
@@ -412,6 +415,16 @@ app.use(passport.session());
 
 app.use('/', auth(passport));
 app.use('/api', create_course_class());
+
+// app.use('/', function(req, res){
+//   if(req.user){
+//     res.redirect('/' + req.user.userType + '/dashboard')
+//   } else {
+//     next();
+//   }
+// })
+
+app.use('/api', dashboard());
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));

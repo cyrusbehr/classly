@@ -51,8 +51,7 @@ const CourseSchema = mongoose.Schema({
   classes: [{
       type: mongoose.Schema.ObjectId,
       ref: 'Class'
-
-    }]
+  }]
 })
 
 const userSchema = mongoose.Schema({

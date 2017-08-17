@@ -9,7 +9,7 @@ function randomize(array) {
 }
 
 module.exports = function() {
-  route.post('/create/course', function(req, res){
+  router.post('/create/course', function(req, res){
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     let accessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
@@ -63,7 +63,7 @@ module.exports = function() {
     accessCodeRecursion(accessCode);
   })
 
-  route.post('/create/class', function(req, res){
+  router.post('/create/class', function(req, res){
     req.checkBody('professorName', 'Professor name cannot be empty').notEmpty();
     req.checkBody('className', 'Class name cannot be empty').notEmpty();
     req.checkBody('timestamp', 'Time stamp cannot be empty').notEmpty();
@@ -97,4 +97,5 @@ module.exports = function() {
       })
     })
   })
+  return router;
 }
