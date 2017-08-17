@@ -25,7 +25,7 @@ class DashboardClassCard extends Component {
         console.log("this is the response ", r.data.response);
           this.props.addClassAction(r.data.response)
           this.props.setNotLoadingAction()
-          // this.props.history.push('/' + this.props.user.userType + '/main');
+          this.props.history.push('/' + this.props.user.userType + '/main');
       }
     })
 
