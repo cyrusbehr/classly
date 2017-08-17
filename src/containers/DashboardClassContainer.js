@@ -7,7 +7,7 @@ import {baseDomain} from '../constants/const'
 import {addCourse, addClassToArray} from '../actions/Actions';
 import Modal from 'react-modal';
 
-class DashboardContainer extends Component {
+class DashboardClassContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -177,4 +177,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DashboardContainer);
+)(DashboardClassContainer);
