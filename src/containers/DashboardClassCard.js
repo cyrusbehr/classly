@@ -12,16 +12,15 @@ class DashboardClassCard extends Component {
 
   handleClick(e) {
     e.preventDefault();
-  
+
   }
 
   render() {
     return(
       <div onClick={(e) => this.handleClick(e)} className="dashboard-card hvr-grow">
         <div className="dashboard-card-title">
-          {this.props.courseTitle}
+          {this.props.className}
           <br/>
-          {this.props.courseCode}
         </div>
         <br></br>
         <div className="dashboard-card-professor">

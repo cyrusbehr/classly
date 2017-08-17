@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {loading, notLoading, populateCourse} from '../actions/Actions'
-import DashboardCourseCard from './DashboardCourseCard';
+import DashboardClassCard from './DashboardClassCard';
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
 import {addCourse, addClassToArray} from '../actions/Actions';
@@ -67,7 +67,7 @@ class DashboardClassContainer extends Component {
 
   render() {
     var isProfessor = (this.props.userType === "Professor");
-
+    console.log("the classes are: ", this.props);
     return(
       <div className="dashboard">
         <div className="dashboard-header">
@@ -96,13 +96,15 @@ class DashboardClassContainer extends Component {
                 >Create a class</button>
             </div>
             <div className="dashboardBody-container-body">
-              {this.props.courses.map((course) => {
+              {this.props.classes.map((thisClass) => {
                 return (
-                  <DashboardCourseCard
-                    professorName={course.professorName}
-                    courseTitle={course.courseTitle}
-                    courseCode={course.courseCode}
-                    classID={course._id}
+                  <DashboardClassCard
+                    key={thisClass._id}
+                    professorName={thisClass.professorName}
+                    className={thisClass.className}
+                    courseReference={course.courseReference}
+                    classID={thisClass._id}
+                    {...this.props}
                   />
                 )
               })}
