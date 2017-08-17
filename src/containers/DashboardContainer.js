@@ -190,8 +190,6 @@ class DashboardContainer extends Component {
               <button className="dashboardBody-button"
                 onClick={() => this.onCreateClassClick()}
                 >Create a class</button>
-                <button className="dashboardBody-button"
-                  >Join a course</button>
               <button className="dashboardBody-button"
                 onClick={(e) => this.onCreateCourseClick(e)}
                 >Create a Course (this will only appear for Professors)</button>
