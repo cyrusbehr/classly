@@ -37,7 +37,7 @@ const taSignupData = {
   redirectRoute: '/ta/main'
 }
 
-const baseDomain = "https://sleepy-temple-51119.herokuapp.com/"
+const baseDomain = "http://localhost:3000/"
 
 const colorArray = [
   '#FDA1FF',

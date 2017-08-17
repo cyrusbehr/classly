@@ -23,8 +23,15 @@ const port = process.env.PORT || 3000;
 
 
 // app.use('/dist/', express.static(path.join(__dirname, 'dist')));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'dist')));
+} else {
+  app.get('/bundle.js', function(req, res) {
+    res.sendFile(path.join(__dirname, '/public/bundle.js'));
+  });
+}
 app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
-app.use('/', express.static(path.join(__dirname, 'dist')));
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
