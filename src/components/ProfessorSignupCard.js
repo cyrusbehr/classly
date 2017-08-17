@@ -30,38 +30,6 @@ class ProfessorSignupCard extends Component {
         self.onSubmit(e)
       }
     });
-
-    // this.props.socket.on('classCreated', newClass => {
-    //   // this.props.socket.emit('')
-    //   // var thisColor = randomColor(colorArray);
-    //   // var thisColor2 = randomColor(colorArray);
-    //
-    //   this.props.addClassAction(newClass);
-    //   this.props.setUsernameAction(this.state.name);
-    //   //TODO: Create a resolvedQuestions topic when a new class is created
-    //
-    //   // const newTopic2 = {
-    //   //   text: "All",
-    //   //   votes: 0,
-    //   //   timestamp: Date.now(),
-    //   //   referenceClass: newClass._id,
-    //   //   username: this.props.username,
-    //   //   color: thisColor2,
-    //   // }
-    //   // this.props.socket.emit('generateTopic', newTopic2);
-    //
-    //   // const newTopic = {
-    //   //   text: "ResolvedQuestions",
-    //   //   votes: 0,
-    //   //   timestamp: Date.now(),
-    //   //   referenceClass: newClass._id,
-    //   //   username: this.props.username,
-    //   //   isDefault: true,
-    //   //   color: thisColor,
-    //   // }
-    //   // this.props.socket.emit('generateTopic', newTopic);
-    //   this.redirect();
-    // });
   }
 
   redirect() {
@@ -101,8 +69,8 @@ class ProfessorSignupCard extends Component {
     .then((r) => {
       if(r.data.error) {
         this.props.setNotLoadingAction();
-        // TODO: handle the errors here and give feedback to the user
-      }else {
+        console.log("there was an error: ", r.data.error);
+        }else {
         this.props.setUserAction(r.data.response);
         this.props.setNotLoadingAction();
         this.redirect();

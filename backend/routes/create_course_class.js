@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var { Course, Class, User } = require('../../src/Models/models');
+const express = require('express');
+const router = express.Router();
+const { Course, Class, User } = require('../../src/Models/models');
+const util = require('util');
 
 function randomize(array) {
   const randomDigit = Math.floor((Math.random() * array.length));
@@ -37,7 +38,7 @@ module.exports = function() {
           return newCourse.save();
         })
         .then(function(savedNewCourse){
-          User.findByID(req.user._id)
+          User.findById(req.user._id)
           .then(function(foundUser){
             foundUser.courses.push(savedNewCourse._id)
             foundUser.save()
@@ -78,7 +79,7 @@ module.exports = function() {
       return Class.save();
     })
     .then(function(savedClass){
-      Course.findByID(req.body.courseReference)
+      Course.findById(req.body.courseReference)
       .then(function(foundCourse){
         foundCourse.classes.push(savedClass._id)
         foundCourse.save()
