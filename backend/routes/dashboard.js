@@ -86,7 +86,8 @@ module.exports = function() {
   });
 
   router.post('/addclass', function(req, res){
-    Course.findById(req.body.accessCode)
+    console.log('received POST at /api/addclass');
+    Course.findOne({accessCode: req.body.accessCode})
       .then(foundCourse => {
         if (!foundCourse) {
           res.json({
@@ -100,7 +101,7 @@ module.exports = function() {
         var user = result[0];
         var course = result[1];
         user.courses.push(course);
-        return Promise.all( [ user.save(), foundCourse ] );
+        return Promise.all( [ user.save(), course ] );
       })
       .then(result => {
         var newCourse = result[1];
@@ -108,6 +109,9 @@ module.exports = function() {
           error: null,
           response: newCourse
         })
+      })
+      .catch((err) => {
+        console.log("we had a crazy fucking error : ", err);
       })
   });
 

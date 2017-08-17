@@ -94,9 +94,6 @@ class ProfessorQuestion extends Component {
         }
 
     render() {
-      var nameArr = this.props.questionCreator.split(' ');
-      var questionCreatorFirstName = nameArr[0];
-
       var darkGreenStyle = {
         color: '#10a02a',
         fontSize: 30,
@@ -121,7 +118,7 @@ class ProfessorQuestion extends Component {
             <div className="question-body">
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
-              <div className="question-main-section-question-creator"> - {this.props.questionCreator}</div>
+              <div className="question-main-section-question-creator"> - {this.props.user.firstname + " " + this.props.user.lastname} </div>
             </div>
 
             <div className="all-buttons-container">
@@ -242,6 +239,7 @@ class ProfessorQuestion extends Component {
             questionsArray: state.classReducer.classState.questions,
             username: state.userReducer.username,
             userType: state.userReducer.userType,
+            user: state.userReducer.user,
           }
         }
 
