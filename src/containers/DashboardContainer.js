@@ -18,20 +18,20 @@ class DashboardContainer extends Component {
       classTitle: "",
     }
   }
-
-//   componentDidMount() {
-//     this.props.setLoadingAction();
-//     axios.get(baseDomain + 'api/dashboard')
-//     .then((r) => {
-//       if(r.data.error) {
-//         console.log("there was an error loading the dashboard");
-//       } else {
-//         this.props.populateCourseAction(r.response);
-//         this.props.setNotLoadingAction();
-//       }
-//     })
-//     .catch((err) => console.log("there was an error: ", err))
-// }
+  
+  componentDidMount() {
+    this.props.setLoadingAction();
+    axios.get(baseDomain + 'api/dashboard')
+    .then({data} => {
+      if(data.error) {
+        console.log("there was an error loading the dashboard : ", data.error);
+      } else {
+        this.props.populateCourseAction(data.response);
+        this.props.setNotLoadingAction();
+      }
+    })
+    .catch((err) => console.log("there was an error: ", err))
+}
 
   onCreateCourseClick(e) {
     //open modal
