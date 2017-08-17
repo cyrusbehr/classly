@@ -60,9 +60,12 @@ module.exports = function(passport) {
 
   // POST Login page
   router.post('/login', passport.authenticate('local', {'failureRedirect': '/failure'} ), function(req, res) {
+    var responseUser = Object.assign({}, req.user)
+    var responseUser = responseUser._doc;
+    delete responseUser.password;
     res.json({
       error: null,
-      response: req.user
+      response: responseUser
     });
   });
 
