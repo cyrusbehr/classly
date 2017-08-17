@@ -61,8 +61,8 @@ class StudentTopic extends Component {
       return question.tags.includes(this.props.text);
     })
 
-    var isCreator = (this.props.topicCreator === this.props.username);
-    var isCreatorOrProfessorOrTA = (this.props.topicCreator === this.props.username || this.props.userType === 'Professor' || this.props.userType === 'TA') && !this.props.isDefault;
+    var isCreator = (this.props.user.email === this.props.email);
+    var isCreatorOrProfessorOrTA = (this.props.email === this.props.user.email || this.props.user.userType === 'Professor' || this.props.user.userType === 'TA') && !this.props.isDefault;
     var style = {};
 
     if(this.props.hightlight){
@@ -120,7 +120,7 @@ class StudentTopic extends Component {
 const mapStateToProps = state => {
   return {
     socket: state.socketReducer.socket,
-    username: state.userReducer.username,
+    user: state.userReducer.user,
     currentFilter: state.filterReducer,
     userType: state.userReducer.userType,
     questions: state.classReducer.classState.questions,

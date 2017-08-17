@@ -17,9 +17,7 @@ class ProfessorMainViewContainer extends Component {
     console.log("the userTpye is: ", this.props);
     return(
       <div className="body-parent">
-        {
-          this.props.userType
-          ?
+
           <div className="body-container">
             <div>
               <ReactModal
@@ -35,8 +33,6 @@ class ProfessorMainViewContainer extends Component {
             <ProfessorTopicsContainer />
             <ProfessorQuestionsContainer />
           </div>
-          :null
-        }
 
       </div>
     )
