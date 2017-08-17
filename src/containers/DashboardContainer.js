@@ -26,7 +26,7 @@ class DashboardContainer extends Component {
       if(r.data.error) {
         console.log("there was an error loading the dashboard : ", r.data.error);
       } else {
-        this.props.populateCourseAction(data.response);
+        this.props.populateCourseAction(r.data.response);
         this.props.setNotLoadingAction();
       }
     })
