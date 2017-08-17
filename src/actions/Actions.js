@@ -5,9 +5,11 @@ import {
   UPVOTE_QUESTION, ADD_TOPIC,
   VOTE_TOPIC, DELETE_QUESTION,
   DELETE_TOPIC, TOGGLE_STAR,
-  TOGGLE_RESOLVE, NEW_COMMENT, LIKE_QUESTION,
-LOADING, NOT_LOADING, CLOSE, OPEN,
-POPULATE_COURSES, POPULATE_CLASS, ADD_COURSE} from '../constants/ActionTypes';
+  TOGGLE_RESOLVE, NEW_COMMENT,
+  LIKE_QUESTION, LOADING,
+  NOT_LOADING, CLOSE, OPEN,
+  POPULATE_COURSES, POPULATE_CLASS,
+  ADD_COURSE, ADD_CLASS_TO_ARRAY} from '../constants/ActionTypes';
 
 
   export function setSocket(socket) {
@@ -152,6 +154,14 @@ POPULATE_COURSES, POPULATE_CLASS, ADD_COURSE} from '../constants/ActionTypes';
       courseObject: courseObject,
     }
   }
+
+  export function addClassToArray(classObject) {
+    return {
+      type: ADD_CLASS_TO_ARRAY,
+      courseObject: classObject,
+    }
+  }
+
 
   // export function setColor(questionId) {
   //   return {
