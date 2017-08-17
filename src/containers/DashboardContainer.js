@@ -166,12 +166,10 @@ class DashboardContainer extends Component {
     return(
       <div className="dashboard">
         <div className="dashboard-header">
-          <span>Class.ly</span>
-          <span>This is Dashboard Container</span>
-          <span>UserType: {this.props.userType}</span>
-          <div>
-            <span>Icon</span>
-            <span>  Icon</span>
+          <text className="dashboard-header-name">Class.ly</text>
+          <div className="dashboard-navbar">
+            <text className="dashboard-profile">Profile</text>
+            <text className="dashboard-logout">Log out</text>
           </div>
         </div>
         {this.props.isLoading
@@ -184,15 +182,19 @@ class DashboardContainer extends Component {
           :
           <div>
           <div className="dashboardBody-container">
-            <div className="dashboardBody-container-header">
-              <h1>Dashboard</h1>
-              <button className="dashboardBody-button"
-                onClick={(e) => this.onCreateCourseClick(e)}
-                >Create a Course (this will only appear for Professors)</button>
+            <div className="dashboardBody-container-header-container">
+              <div className="dashboardBody-container-header">
+                <text className="dashboardBody-container-dashboard-name">Dashboard</text>
+                <div className="dashboardBody-container-buttons">
+                  <button className="dashboardBody-button hvr-fade"
+                    onClick={(e) => this.onCreateCourseClick(e)}
+                    >Create a Course</button>
 
-                <button className="dashboardBody-button"
-                  onClick={(e) => this.handleAddCourseClick(e)}
-                  >Add a new Course (this will only appear for TAs and Students)</button>
+                    <button className="dashboardBody-button hvr-fade"
+                      onClick={(e) => this.handleAddCourseClick(e)}
+                      >Add a New Course</button>
+                </div>
+              </div>
             </div>
             <div className="dashboardBody-container-body">
               {this.props.courses.map((course) => {
