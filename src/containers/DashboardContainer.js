@@ -162,7 +162,9 @@ class DashboardContainer extends Component {
   }
 
   handleLogout(e) {
-    axios.get(baseDomain + 'logout')
+    console.log("the base domain is : ", baseDomain + 'logout');
+    axios.get(baseDomain + 'logout').
+    then((r) => console.log(r.data))
     this.props.history.push('/');
   }
 

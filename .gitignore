@@ -5,3 +5,4 @@ lib
 coverage
 env.sh
 public/bundle.js
+dist/*

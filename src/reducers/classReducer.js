@@ -4,70 +4,75 @@ import { ADD_CLASS, ADD_QUESTION,
   DELETE_TOPIC, TOGGLE_STAR, TOGGLE_RESOLVE, NEW_COMMENT } from '../constants/ActionTypes';
   import _ from 'underscore';
 
-  const initialState =  {
-    classState: {},
+  // STATE refers to a single quesiton in the questions array
+  function handleQuestion(state, action) {
+    switch (action.type) {
+      case UPVOTE_QUESTION:
+        if (state._id !== action.updatedQuestion._id) {
+          return state;
+        }
+
+        return action.updatedQuestion;
+      case NEW_COMMENT:
+        if (state._id !== action.newCommentObj.questionId) {
+          return state;
+        }
+
+        return Object.assign({}, state, {
+          comments: [...state.comments, action.newCommentObj]
+        });
+      default:
+        return state;
+    }
   }
 
-  export default function (state = initialState, action) {
+  export default function (state = {}, action) {
     switch (action.type) {
-      case ADD_CLASS:
-      let newState = Object.assign({}, state, {classState: action.newClass})
-      return newState;
-
+      case ADD_CLASS: {
+        return Object.assign({}, state, action.newClass);
+      }
       case UPVOTE_QUESTION:
-      let originalState = Object.assign({}, state);
-      var index = _.findIndex(originalState.classState.questions, function(q){
-        return q._id === action.updatedQuestion._id;
-      });
-      //destructure question array
-      let questionArray = originalState.classState.questions;
-      //replace old question with updated one
-      questionArray[index] = action.updatedQuestion;
-      //new state write over to ensure deep copy
-      originalState.classState.questions = [...questionArray];
-      return originalState;
-
-      case VOTE_TOPIC:
-      let originalState4 = Object.assign({}, state);
-      var index = _.findIndex(originalState4.classState.topics, function(q){
-        return q._id === action.updatedTopic._id;
-      });
-      //destructure question array
-      let topicsArray = originalState4.classState.topics;
-      //replace old question with updated one
-      topicsArray[index] = action.updatedTopic;
-      //new state write over to ensure deep copy
-      originalState4.classState.topics = [...topicsArray];
-      return originalState4;
-
-      case ADD_QUESTION:
-      let originalState1 = Object.assign({}, state);
-      originalState1.classState.questions = originalState1.classState.questions.concat(action.newQuestion)
-      return originalState1;
-
+      case NEW_COMMENT: {
+        return Object.assign({}, state, {
+          questions : state.questions.map(question => {
+            return handleQuestion(question, action);
+          })
+        });
+      }
+      case VOTE_TOPIC: {
+        let originalState4 = Object.assign({}, state);
+        var index = _.findIndex(originalState4.topics, function(q){
+          return q._id === action.updatedTopic._id;
+        });
+        //destructure question array
+        let topicsArray = originalState4.topics;
+        //replace old question with updated one
+        topicsArray[index] = action.updatedTopic;
+        //new state write over to ensure deep copy
+        originalState4.topics = [...topicsArray];
+        return originalState4;
+      }
+      case ADD_QUESTION: {
+        return Object.assign({}, state, {
+          questions: state.questions.concat(action.newQuestion)
+        });
+      }
       case ADD_TOPIC:
       let originalState7 = Object.assign({}, state);
-      originalState7.classState.topics = originalState7.classState.topics.concat(action.newTopic)
+      originalState7.topics = originalState7.topics.concat(action.newTopic)
       return originalState7;
 
-      case DELETE_QUESTION:
-      let originalState5 = Object.assign({}, state);
-      let questionsArray = originalState5.classState.questions
-      let index;
-
-      for(var i = 0; i < questionsArray.length; i++) {
-        if(questionsArray[i]._id === action.ID){
-          index = i;
-          break;
-        }
+      case DELETE_QUESTION: {
+        return Object.assign({}, state, {
+          questions: state.questions.filter(question => {
+            return question._id !== action.ID;
+          })
+        });
       }
-      questionsArray.splice(index,1);
-      originalState5.classState.questions = [...questionsArray];
-      return originalState5;
 
       case DELETE_TOPIC:
       let originalState8 = Object.assign({}, state);
-      let topicsArr = originalState8.classState.topics
+      let topicsArr = originalState8.topics
       let index1;
 
       for(var i = 0; i < topicsArr.length; i++) {
@@ -77,48 +82,34 @@ import { ADD_CLASS, ADD_QUESTION,
         }
       }
       topicsArr.splice(index1,1);
-      originalState8.classState.topics = [...topicsArr];
+      originalState8.topics = [...topicsArr];
       return originalState8;
-
-      case NEW_COMMENT:
-      var newState = JSON.parse(JSON.stringify(state));//Object.assign({}, state);
-      var questionsArray = newState.classState.questions;
-      var index;
-
-      for(var i = 0; i < questionsArray.length; i++) {
-        if(questionsArray[i]._id === action.newCommentObj.questionId){
-          index = i;
-          break;
-        }
-      }
-      questionsArray[index].comments.push(action.newCommentObj)
-      return newState;
-
+  
       case TOGGLE_STAR:
       let originalState9 = Object.assign({}, state);
-      var index2 = _.findIndex(originalState9.classState.questions, function(q){
+      var index2 = _.findIndex(originalState9.questions, function(q){
         return q._id === action.questionId;
       });
-      let questionArray2 = originalState9.classState.questions;
+      let questionArray2 = originalState9.questions;
       console.log("action.questionId:", action.questionId);
       console.log("questionArray2", questionArray2);
       console.log("index2", index2);
       console.log(questionArray2[index2]);
       questionArray2[index2].isStarred = !questionArray2[index2].isStarred;
 
-      originalState9.classState.questions = [...questionArray2];
+      originalState9.questions = [...questionArray2];
       return originalState9;
 
       case TOGGLE_RESOLVE:
       let originalState10 = Object.assign({}, state);
-      var index3 = _.findIndex(originalState10.classState.questions, function(q){
+      var index3 = _.findIndex(originalState10.questions, function(q){
         return q._id === action.questionId;
       });
-      let questionArray3 = originalState10.classState.questions;
+      let questionArray3 = originalState10.questions;
       console.log("questionArray3", questionArray3);
       questionArray3[index3].isResolved = !questionArray3[index3].isResolved;
 
-      originalState10.classState.questions = [...questionArray3];
+      originalState10.questions = [...questionArray3];
       return originalState10;
 
       default:

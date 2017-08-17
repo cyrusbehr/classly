@@ -105,9 +105,18 @@ module.exports = function(passport) {
     });
   });
 
+
+  router.get('/checkLogin', function(req, res) {
+    res.json({
+      loggedIn: !!req.user,
+      userType: req.user ? req.user.userType : null
+    });
+  })
+  
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
+    res.json({logout: true})
   });
 
   return router;

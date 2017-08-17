@@ -29,30 +29,6 @@ class TASignupCard extends Component {
       self.onSubmit(e)
     }
 });
-
-    // this.props.socket.on('Joined', () => {
-    //   this.props.socket.emit('getStudentState', this.state.accessCode)
-    // })
-    //
-    // this.props.socket.on('error1', () => {
-    //   this.props.updateWrongAccessCode(false);
-    //   this.props.setNotLoadingAction();
-    // })
-    //
-    // this.props.socket.on('getStudentState', (classObj) => {
-    //   //sort the questions by upvotes
-    //   let questionsArray = classObj.questions.slice()
-    //   if(questionsArray.length > 0) {
-    //     let sortedArray = _.sortBy(questionsArray, (question) => {
-    //       return -1 * question.upVotes; //negative changes to descending order
-    //     })
-    //     classObj.questions = sortedArray;
-    //   }
-    //   //update the state with the class and the username
-    //   this.props.addClassAction(classObj)
-    //   this.props.setUsernameAction(this.state.name);
-    //   this.redirect()
-    // })
   }
 
   redirect() {
@@ -73,18 +49,6 @@ class TASignupCard extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    // if(this.state.name.trim() === ''){
-    //   this.setState({nameEmpty: false});
-    // }
-    //
-    // if(this.state.accessCode.trim() === ''){
-    //   this.setState({codeEmpty: false});
-    // }
-    //
-    // if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
-    //   this.props.setLoadingAction()
-    //   this.props.socket.emit('join', this.state.accessCode);
-    // }
     axios.post(baseDomain + 'login', {
       email: this.state.email,
       password: this.state.password,
@@ -158,7 +122,7 @@ class TASignupCard extends Component {
                 type="button"
                 onClick={(e) => this.onSubmit(e)}
                 className="student-signup-submit hvr-grow"
-              >Join Class</button>
+              >Login</button>
               <button
                 type="button"
                 onClick={(e) => this.register(e)}

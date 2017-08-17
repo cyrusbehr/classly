@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { deleteTopic, addComment, updateFilter } from '../../actions/Actions';
 import StudentTopic from '../../components/StudentTopic';
 // import AddTopic from '../../components/AddTopic';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Toggle } from 'material-ui';
 
 class StudentTopicsContainer extends Component {
   constructor(props) {
@@ -25,13 +26,22 @@ class StudentTopicsContainer extends Component {
 
   onReturn(){
     this.props.toggleFilter('');
+    this.setState({
+      toggle: false
+    })
   }
 
   handleClick(id, e) {
     if(this.props.currentFilter !== "ResolvedQuestions"){
       this.props.toggleFilter("ResolvedQuestions");
+      this.setState({
+        toggle: true
+      })
     } else {
       this.props.toggleFilter('');
+      this.setState({
+        toggle: false
+      })
     }
   }
 
@@ -40,10 +50,23 @@ class StudentTopicsContainer extends Component {
     var numOfQuestions = this.props.questions.length;
     return (
       <div className="topics-container">
-        <div style={{display:'flex', 'justifyContent': 'space-between', 'alignItems':'center'}}>
-          <p className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')} , {numOfQuestions + (numOfQuestions<2 ? ' Question in Total' : ' Questions in Total')}</p>
-          {this.props.currentFilter==='' ? null : <i id='return-button' className="material-icons" onClick={()=>{this.onReturn()}}>keyboard_return</i>}
-          <button id='resolved-questions-button' className="resolved-questions-button" onClick={(e)=>{this.handleClick(e)}}>See Resolved Questions</button>
+        <div style={{display:'flex', 'flex-direction': 'column'}}>
+          <div style={{display: 'flex', 'alignItems': 'center', 'justifyContent': 'space-between', 'height':30}}>
+            <div className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')} , {numOfQuestions + (numOfQuestions<2 ? ' Question in Total' : ' Questions in Total')}</div>
+            {this.props.currentFilter==='' ? null : <div><i id='return-button' className="material-icons" onClick={()=>{this.onReturn()}}>keyboard_return</i></div>}
+          </div>
+          <div style={{'maxWidth': 250, 'margin': 16}}>
+            <Toggle
+              toggled={this.state.toggle}
+              label="Resolved questions"
+              thumbSwitchedStyle={{backgroundColor: '#00C993'}}
+              trackSwitchedStyle={{backgroundColor: '#D9FFF5'}}
+              onToggle={(e)=>{this.handleClick(e)}}
+              iconStyle={{'marginLeft':-40}}
+              style={{'marginTop': 10}}
+              labelStyle={{'color':'gray'}}
+            />
+          </div>
         </div>
 
         {/* <AddTopic /> */}
@@ -72,13 +95,13 @@ class StudentTopicsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("In the map state to props:", state.classReducer.classState);
+  console.log("In the map state to props:", state.classReducer);
   return {
     socket: state.socketReducer.socket,
-    classObj: state.classReducer.classState,
-    topics: state.classReducer.classState.topics,
+    classObj: state.classReducer,
+    topics: state.classReducer.topics,
     currentFilter: state.filterReducer,
-    questions: state.classReducer.classState.questions,
+    questions: state.classReducer.questions,
   }
 }
 

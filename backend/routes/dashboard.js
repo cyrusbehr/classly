@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { User, Course, Class } = require('../../src/Models/models');
 
-module.exports = function() {
 
-  router.use('/*', function(req, res, next){
+  router.use(function(req, res, next){
     if(!req.user){
       res.json({
         error: "User isn't logged in"
@@ -115,5 +114,4 @@ module.exports = function() {
       })
   });
 
-  return router;
-};
+  module.exports = router;
