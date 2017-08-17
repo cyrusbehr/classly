@@ -4,7 +4,7 @@ import {loading, notLoading, populateCourse} from '../actions/Actions'
 import DashboardCourseCard from './DashboardCourseCard';
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
-import {addCourse} from '../actions/Actions';
+import {addCourse, ADD_CLASS_TO_ARRAY} from '../actions/Actions';
 import Modal from 'react-modal';
 
 class DashboardContainer extends Component {
@@ -12,34 +12,31 @@ class DashboardContainer extends Component {
     super(props)
     this.state = {
       showCreateCourseModal: false,
-      professorName: "",
       courseTitle: "",
       courseCode: "",
+      showCreateClassModal: false,
+      classTitle: "",
     }
   }
 
-  componentDidMount() {
-    this.props.setLoadingAction();
-    axios.get(baseDomain + 'api/dashboard')
-    .then((r) => {
-      if(r.data.error) {
-        console.log("there was an error loading the dashboard");
-      } else {
-        this.props.populateCourseAction(r.response);
-        this.props.setNotLoadingAction();
-      }
-    })
-    .catch((err) => console.log("there was an error: ", err))
-}
+//   componentDidMount() {
+//     this.props.setLoadingAction();
+//     axios.get(baseDomain + 'api/dashboard')
+//     .then((r) => {
+//       if(r.data.error) {
+//         console.log("there was an error loading the dashboard");
+//       } else {
+//         this.props.populateCourseAction(r.response);
+//         this.props.setNotLoadingAction();
+//       }
+//     })
+//     .catch((err) => console.log("there was an error: ", err))
+// }
 
   onCreateCourseClick(e) {
     //open modal
     this.setState({showCreateCourseModal: true});
     //information is filled out and saved in this.state
-  }
-
-  onNameChange(e){
-    this.setState({professorName: e.target.value});
   }
 
   onCourseTitleChange(e){
@@ -50,16 +47,10 @@ class DashboardContainer extends Component {
     this.setState({courseCode: e.target.value});
   }
 
-  onCardClick() {
-    //get classes
-    //Re render dashboard with classes inside the Course
-  }
-
   onSubmitModal(e){
     //create course object from what is saved in this.state
     e.preventDefault();
     var data = {
-      professorName: this.state.professorName,
       courseTitle: this.state.courseTitle,
       courseCode: this.state.courseCode,
       accessCode: "",
@@ -70,13 +61,8 @@ class DashboardContainer extends Component {
     //on the .then of this action dispatch action to the reducer
     //to add the course to the course reducer. need to write this action. courses is an array in reducer
     //immutable --> splice array to make deep copy then resave
-    axios.post(baseDomain + 'dashboard', {
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      email: this.state.email,
-      password: this.state.password,
-      passwordRepeat: this.state.passwordRepeat,
-      userType: "student"
+    axios.post(baseDomain + 'api/create/course', {
+      data: data
     })
     .then((r) => {
       if(r.data.error) {
@@ -100,13 +86,53 @@ class DashboardContainer extends Component {
   }
 
   onCardClick() {
+    //get classes
     //Re render dashboard with classes inside the Course
   }
 
   onCreateClassClick(){
     //open class modal
+    this.setState({showCreateClassModal: true})
     //information is filloud out and saved in this.state
-    //create new class modal
+  }
+
+  onClassTitleChange(e){
+    this.setState({classTitle: e.target.value});
+  }
+
+  onSubmitClassModal(e){
+    e.preventDefault();
+    var data = {
+      classTitle: this.state.classTitle,
+      courseReference: this.props.courseReference, //TODO: Make sure this gets passed in to props
+    };
+    //axios post request to backend with that object
+    //use baseDomain in axios request and import it from the constants file
+    //on the .then of this action dispatch action to the reducer
+    //to add the course to the course reducer. need to write this action. courses is an array in reducer
+    //immutable --> splice array to make deep copy then resave
+    axios.post(baseDomain + '/api/create/class', {
+      data: data
+    })
+    .then((r) => {
+      if(r.data.error) {
+        this.props.setNotLoadingAction();
+        console.log("Error encountered while creating new class: ", r.data);
+      } else {
+        this.props.setNotLoadingAction();
+        //dispatch action to reducer to add coures to course reduver
+        this.props.addClassToArrayAction(r.data.response);
+      }
+    })
+    .catch((err) => {
+      console.log("there was an error with the request : ", err);
+    });
+    //close modal
+    this.setState({showCreateClassModal: false});
+  }
+
+  onCloseClassModal(){
+    this.setState({showCreateClassModal: false});
   }
 
 
@@ -136,8 +162,14 @@ class DashboardContainer extends Component {
           <div className="dashboardBody-container">
             <div className="dashboardBody-container-header">
               <h1>Dashboard</h1>
-              <button className="dashboardBody-button">Join a course</button>
-              <button className="dashboardBody-button" onClick={(e) => this.onCreateCourseClick(e)}>Create a Course</button>
+              <button className="dashboardBody-button"
+                onClick={() => this.onCreateClassClick()}
+                >Create a class</button>
+                <button className="dashboardBody-button"
+                  >Join a course</button>
+              <button className="dashboardBody-button"
+                onClick={(e) => this.onCreateCourseClick(e)}
+                >Create a Course</button>
             </div>
             <div className="dashboardBody-container-body">
               {this.props.courses.map((course) => {
@@ -161,12 +193,6 @@ class DashboardContainer extends Component {
             <form>
               <input
                 type="text"
-                value={this.state.professorName}
-                placeholder="Professor Name"
-                onChange={(e) => this.onNameChange(e)}
-              />
-              <input
-                type="text"
                 value={this.state.courseTitle}
                 placeholder="Course Title"
                 onChange={(e) => this.onCourseTitleChange(e)}
@@ -185,6 +211,26 @@ class DashboardContainer extends Component {
                 >Close</button>
             </form>
           </Modal>
+          <Modal
+          isOpen={this.state.showCreateClassModal}
+          contentLabel="Create a Course"
+          >
+            <h2>Fill out the following information to create a new Class!!!!</h2>
+            <form>
+              <input
+                type="text"
+                value={this.state.classTitle}
+                placeholder="Class Title"
+                onChange={(e) => this.onClassTitleChange(e)}
+              />
+              <button
+                onClick={(e) => this.onSubmitClassModal(e)}
+                >Create Course</button>
+              <button
+                onClick={() => this.onCloseClassModal()}
+                >Close</button>
+            </form>
+          </Modal>
         </div>
         }
     </div>
@@ -198,6 +244,7 @@ const mapStateToProps = state => {
     isLoading: state.pageReducer.isLoading,
     courses: state.courseReducer,
     isLoading: state.pageReducer.isLoading
+    //pass in courseId
   }
 }
 
@@ -214,6 +261,9 @@ const mapDispatchToProps = dispatch => {
     },
     addCourseAction: (courseObj) => {
       dispatch(addCourse(courseObj))
+    },
+    addClassToArrayAction: (classObj) => {
+      dispatch(addClassToArray(classObj))
     }
   }
 }
