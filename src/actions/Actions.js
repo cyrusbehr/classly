@@ -7,7 +7,7 @@ import {
   DELETE_TOPIC, TOGGLE_STAR,
   TOGGLE_RESOLVE, NEW_COMMENT, LIKE_QUESTION,
 LOADING, NOT_LOADING, CLOSE, OPEN,
-POPULATE_COURSES, POPULATE_CLASS} from '../constants/ActionTypes';
+POPULATE_COURSES, POPULATE_CLASS, ADD_COURSE} from '../constants/ActionTypes';
 
 
   export function setSocket(socket) {
@@ -143,6 +143,13 @@ POPULATE_COURSES, POPULATE_CLASS} from '../constants/ActionTypes';
     return {
       type: POPULATE_CLASS,
       classArray
+    }
+  }
+
+  export function addCourse(courseObject) {
+    return {
+      type: ADD_COURSE,
+      courseObject: courseObject,
     }
   }
 
