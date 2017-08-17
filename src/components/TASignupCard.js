@@ -3,6 +3,7 @@ import _ from 'underscore'
 import { connect } from 'react-redux';
 import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
+import axios from 'axios'
 import {baseDomain} from '../constants/const'
 
 

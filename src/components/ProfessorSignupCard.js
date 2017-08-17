@@ -6,6 +6,7 @@ import {randomColor} from '../constants/algorithmicos';
 import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 import {baseDomain} from '../constants/const'
+import axios from 'axios'
 
 
 class ProfessorSignupCard extends Component {
@@ -127,7 +128,7 @@ class ProfessorSignupCard extends Component {
                   value={this.state.email}
                   placeholder="Email"
                   className={this.state.nameEmpty ? "professor-signup-firstname-input" : "professor-signup-empty-firstname-input"}
-                  onChange={(event) => this.handleNameChange(event)}
+                  onChange={(event) => this.handleEmailChange(event)}
                 />
                 {this.state.nameEmpty ?
                   <div>
@@ -143,7 +144,7 @@ class ProfessorSignupCard extends Component {
                    value={this.state.password}
                    placeholder="Password"
                    className={this.state.nameEmpty ? "professor-signup-lecture-input" : "professor-signup-empty-firstname-input"}
-                   onChange={(event) => this.handleTitleChange(event)}
+                   onChange={(event) => this.handlePasswordChange(event)}
                 />
                 {this.state.lectureEmpty ?
                   <div>
