@@ -2,7 +2,7 @@ $green: #00c993;
 $main-bg-color: #f1f2f0;
 
 .dashboard-card {
-  width: 1200px;
+  width: 1000px;
   height: 90px;
   // border-style: solid;
   // border-color: $green;
@@ -67,8 +67,8 @@ $main-bg-color: #f1f2f0;
 }
 
 .dashboard-course-title {
-  margin-top: 30px;
-  font-size: 18px;
+  margin-top: 18px;
+  font-size: 25px;
   font-weight: 600;
   max-height: 150px;
   overflow: scroll;
@@ -111,7 +111,7 @@ $main-bg-color: #f1f2f0;
   display:flex;
   justify-content: space-between;
   align-items: center;
-  width: 1200px;
+  width: 1000px;
 }
 
 .hvr-fade {
