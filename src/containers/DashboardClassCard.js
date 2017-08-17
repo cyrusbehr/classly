@@ -38,6 +38,9 @@ class DashboardClassCard extends Component {
         <div className="dashboard-class-name">
           {this.props.className}
         </div>
+        <div className="dashboard-class-date">
+          8/17/2017
+        </div>
         <div className="dashboard-card-professor">
           {this.props.professorName}
         </div>
