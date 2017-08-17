@@ -38,7 +38,7 @@ module.exports = function(passport) {
             lastname: req.body.lastname,
             email: req.body.email,
             password: hash,
-            userType: req.body.userType
+            userType: req.body.userType,
           });
 
           return user.save()
