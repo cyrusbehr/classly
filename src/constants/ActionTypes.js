@@ -17,3 +17,6 @@ export const LOADING = "LOADING";
 export const NOT_LOADING = "NOT_LOADING";
 export const CLOSE = "CLOSE";
 export const OPEN = "OPEN";
+export const POPULATE_COURSES = "POPULATE_COURSES";
+export const POPULATE_CLASS = "POPULATE_CLASS";
+export const ADD_COURSE = "ADD_COURSE"

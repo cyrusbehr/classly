@@ -754,11 +754,35 @@ $width: 100px;
   }
 }
 
+.loader-dashboard {
+  // position: relative;
+  margin: auto auto;
+  width: $width;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
 .circular {
   animation: rotate 2s linear infinite;
   height: 100%;
   transform-origin: center center;
   width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.circular-dashboard {
+  animation: rotate 2s linear infinite;
+  height: 12%;
+  transform-origin: center center;
+  width: 12%;
   position: absolute;
   top: 0;
   bottom: 0;

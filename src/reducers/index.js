@@ -5,7 +5,8 @@ import socketReducer from './socketReducer';
 import filterReducer from './filterReducer';
 import pageReducer from './pageReducer';
 import modalReducer from './modalReducer';
-
+import courseReducer from './courseReducer'
+import classArrayReducer from './classArrayReducer'
 
 const rootReducer = combineReducers({
   classReducer,
@@ -13,7 +14,9 @@ const rootReducer = combineReducers({
   filterReducer,
   socketReducer,
   pageReducer,
-  modalReducer
+  modalReducer,
+  courseReducer,
+  classArrayReducer
 });
 
 export default rootReducer;
