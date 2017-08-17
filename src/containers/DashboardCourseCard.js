@@ -14,8 +14,8 @@ class DashboardCourseCard extends Component {
     e.preventDefault();
     this.props.setLoadingAction();
     axios.get(baseDomain + 'api/class/:' + this.props.classID)
-    .then({data} => {
-      if(data.error) {
+    .then((r) => {
+      if(r.data.error) {
         console.log("there was an error loading the class");
       } else {
         this.props.setNotLoadingAction();
