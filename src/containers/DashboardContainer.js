@@ -21,12 +21,11 @@ class DashboardContainer extends Component {
   componentDidMount() {
     this.props.setLoadingAction();
     axios.get(baseDomain + 'api/dashboard')
-    .then((r) => {
-      if(r.data.error) {
-        console.log("there was an error loading the dashboard");
+    .then({data} => {
+      if(data.error) {
+        console.log("there was an error loading the dashboard : ", data.error);
       } else {
-        console.log("THE RESPONSE IS : ", r);
-        this.props.populateCourseAction(r.response);
+        this.props.populateCourseAction(data.response);
         this.props.setNotLoadingAction();
       }
     })
