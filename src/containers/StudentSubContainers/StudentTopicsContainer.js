@@ -36,13 +36,10 @@ class StudentTopicsContainer extends Component {
   }
 
   render() {
-    var proffArr = this.props.classObj.professorName.split(" ")
-    var profname = proffArr[1] || proffArr[0]
     var numOfTopics = this.props.topics.length;
     var numOfQuestions = this.props.questions.length;
     return (
       <div className="topics-container">
-
         <div style={{display:'flex', 'justifyContent': 'space-between', 'alignItems':'center'}}>
           <p className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')} , {numOfQuestions + (numOfQuestions<2 ? ' Question in Total' : ' Questions in Total')}</p>
           {this.props.currentFilter==='' ? null : <i id='return-button' className="material-icons" onClick={()=>{this.onReturn()}}>keyboard_return</i>}
@@ -56,6 +53,8 @@ class StudentTopicsContainer extends Component {
               text={topic.text}
               votes={topic.votes}
               id={topic._id}
+              firstname={topic.firstname}
+              lastname={topic.lastname}
               key={i}
               reference={topic.referenceClass}
               topicCreator={topic.username}

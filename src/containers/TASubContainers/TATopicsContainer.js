@@ -27,8 +27,6 @@ class TATopicsContainer extends Component {
   }
 
   render() {
-    var proffArr = this.props.classObj.professorName.split(" ")
-    var profname = proffArr[1] || proffArr[0];
     var numOfTopics = this.props.topics.length;
     var numOfQuestions = this.props.questions.length;
     return (

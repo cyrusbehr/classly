@@ -109,9 +109,11 @@ io.on('connection', socket => {
   socket.on('generateQuestion', (data) => {
     const newQuestion = new Question ({
       text: data.text,
-      username: data.username,
+      firstname: data.firstname,
+      lastname: data.lastname,
       userType: data.userType,
       tags: data.tags,
+      email: data.email,
       referenceClass: data.referenceClass,
       isResolved: data.isResolved,
       isStarred: data.isStarred,
@@ -141,7 +143,8 @@ io.on('connection', socket => {
       timestamp: data.timestamp,
       referenceClass: data.referenceClass,
       username: data.username,
-      color: data.color
+      color: data.color,
+      email: data.email,
     })
     socket.broadcast.to(socket.currentRoom).emit('generateTopic', newTopic);
     socket.emit('generateTopic', newTopic);
