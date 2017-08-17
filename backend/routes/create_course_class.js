@@ -13,9 +13,10 @@ module.exports = function() {
   router.post('/create/course', function(req, res){
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-    let accessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
+    let accessCode = '0n9u';
 
     function accessCodeRecursion(newAccessCode) {
+      console.log('sdsdsdsdsdsdsdsd', newAccessCode);
       Course.findOne({accessCode: newAccessCode}, (err, courseObj) => {
         if(!courseObj){
           req.checkBody('courseTitle', 'Course title cannot be empty').notEmpty();
@@ -23,10 +24,10 @@ module.exports = function() {
         req.getValidationResult()
         .then(function(result){
           if (!result.isEmpty()) { // Error in the validations above
-            // res.json({
-            //   error: util.inspect(result.array())
-            // });
-            // return;
+            res.json({
+              error: util.inspect(result.array())
+            });
+            return;
           }
           const newCourse = new Course({
             professorName: "Prof: " + req.user.lastname,
@@ -69,6 +70,12 @@ module.exports = function() {
     var d = new Date();
     req.getValidationResult()
     .then(function(result){
+      if (!result.isEmpty()) { // Error in the validations above
+        res.json({
+          error: util.inspect(result.array())
+        });
+        return;
+      }
       const newClass = new Class({
         professorName: "Prof: " + req.user.lastname,
         className: req.body.classTitle,

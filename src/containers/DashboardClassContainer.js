@@ -69,11 +69,9 @@ class DashboardClassContainer extends Component {
       <div className="dashboard">
         <div className="dashboard-header">
           <span>Class.ly</span>
-          <span>This is Dashboard CLASS Container</span>
-          <span>UserType: {this.props.userType}</span>
           <div>
             <span>Icon</span>
-            <span>  Icon</span>
+            <span>Icon</span>
           </div>
         </div>
         {this.props.isLoading
