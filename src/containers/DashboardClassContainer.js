@@ -16,20 +16,6 @@ class DashboardClassContainer extends Component {
     }
   }
 
-//   componentDidMount() {
-//     this.props.setLoadingAction();
-//     axios.get(baseDomain + 'api/dashboard')
-//     .then((r) => {
-//       if(r.data.error) {
-//         console.log("there was an error loading the dashboard : ", r.data.error);
-//       } else {
-//         this.props.populateCourseAction(data.response);
-//         this.props.setNotLoadingAction();
-//       }
-//     })
-//     .catch((err) => console.log("there was an error: ", err))
-// }
-
   onCardClick() {
     //get classes
     //Re render dashboard with classes inside the Course
@@ -153,9 +139,8 @@ const mapStateToProps = state => {
   return{
     user: state.userReducer,
     isLoading: state.pageReducer.isLoading,
-    courses: state.courseReducer,
+    classes: state.classArrayReducer,
     isLoading: state.pageReducer.isLoading
-    //pass in courseId
   }
 }
 

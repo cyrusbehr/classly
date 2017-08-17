@@ -67,7 +67,7 @@ class DashboardContainer extends Component {
 
   onSubmitAddCourseModal(e) {
     e.preventDefault();
-    axios.post(baseDomain + 'api/addClass', {
+    axios.post(baseDomain + 'api/addclass', {
       accessCode: this.state.accessCode
     })
     .then((r) => {
