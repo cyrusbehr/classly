@@ -209,7 +209,7 @@ class StudentQuestion extends Component {
                     {this.props.comments ? this.props.comments.map((comment) => {
                       return(
                         <div key={comment.text + comment.creator}>
-                          <div className="comment-creator">{comment.creator}: </div>
+                          <div><text className="highlight-teacher-ta">{comment.title} </text><text className="comment-creator">{' ' + comment.creator}: </text></div>
                           <div className="comment">{comment.text}</div>
                         </div>
                       )
