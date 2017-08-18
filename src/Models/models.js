@@ -60,6 +60,7 @@ const CourseSchema = mongoose.Schema({
 
 const userSchema = mongoose.Schema({
   userType: String,
+  isModal: Boolean,
   firstname:{
     type: String,
     required: true

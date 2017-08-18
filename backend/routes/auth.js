@@ -38,6 +38,7 @@ module.exports = function(passport) {
             lastname: req.body.lastname,
             email: req.body.email,
             password: hash,
+            isModal: false,
             userType: req.body.userType,
           });
 

@@ -350,7 +350,8 @@ io.on('connection', socket => {
       newComment = {
         text: data.text,
         creator: data.username,
-        questionId: data.questionId
+        questionId: data.questionId,
+        title: data.title
       };
       questionObj.comments.push(newComment);
       questionObj.save();
