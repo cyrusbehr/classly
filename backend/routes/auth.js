@@ -50,7 +50,7 @@ module.exports = function(passport) {
           if (err) {
             console.log('Error in logging in user after registration', err);
             res.json({
-              error: 'Error in logging in user after registration'
+              error: [{param: 'email', msg: 'Error in logging in user after registration'}]
             })
           } else {
             res.json({
@@ -62,8 +62,9 @@ module.exports = function(passport) {
 
       })
       .catch(function(error){
+        console.log('error', error);
         res.json({
-          error
+          error: error.message
         })
       })
     })
