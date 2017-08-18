@@ -68,6 +68,7 @@ class ProfessorTopicsContainer extends Component {
               iconStyle={{'marginLeft':-40}}
               style={{'marginTop': 10}}
               labelStyle={{'color':'gray'}}
+
             />
           </div>
         </div>
