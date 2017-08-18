@@ -80,7 +80,7 @@ class TAQuestion extends Component {
     }
     this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
-      username: this.props.firstname + " " + this.props.lastname, text: this.state.commentText});
+      username: this.props.firstname + " " + this.props.lastname, text: this.state.commentText, title: 'TA'});
       this.setState({commentText: ""});
     }
 
