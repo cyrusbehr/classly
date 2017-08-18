@@ -123,7 +123,7 @@ class StudentQuestion extends Component {
               <div className="question-content"> {this.props.text} </div>
               {isCreator || isProfessorOrTA
                 ?
-                <div className="question-main-section-question-creator"> -{this.props.user.firstname + this.props.user.lastname}</div>
+                <div className="question-main-section-question-creator"> -{this.props.user.firstname + " " +  this.props.user.lastname}</div>
               : null}
             </div>
             <div className="all-buttons-container">
