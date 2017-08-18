@@ -24,6 +24,15 @@ $blue: #2979FF;
   z-index: 0;
 }
 
+.headshot {
+  height: 20%;
+  width: 20%;
+}
+
+.about-page {
+  overflow: scroll;
+}
+
 .background-overlay {
   background-color: black;
   opacity: 0.75;

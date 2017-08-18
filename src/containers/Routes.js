@@ -13,6 +13,7 @@ import DashboardContainer from './DashboardContainer'
 import ProfessorMainRegisterContainer from './ProfessorMainRegisterContainer'
 import TAMainRegisterContainer from './TAMainRegisterContainer'
 import DashboardClassContainer from './DashboardClassContainer'
+import AboutUs from '../components/AboutUs'
 
 export default class Routes extends Component {
 
@@ -30,7 +31,8 @@ export default class Routes extends Component {
            <Route path="/ta/register" exact={true} component={TAMainRegisterContainer}/>
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
-           <Route path="/" exact={true} component={MainPageContainer}/>
+           {/* <Route path="/" exact={true} component={MainPageContainer}/> */}
+           <Route path="/" exact={true} component={AboutUs}/>
            <Route path="/dashboard/class/:coursereference" component={DashboardClassContainer}/>
          </Switch>
        </div>
