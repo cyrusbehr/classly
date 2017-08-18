@@ -94,8 +94,8 @@ class StudentQuestion extends Component {
 
     render() {
       var isCreator = (this.props.email === this.props.user.email);
-      var isStudentStarred = (this.props.userType === "Student" && this.props.isStarred);
-      var isProfessorOrTA = (this.props.questionCreatorType === "Professor" || this.props.questionCreatorType === "TA");
+      var isStudentStarred = (this.props.userType === "student" && this.props.isStarred);
+      var isProfessorOrTA = (this.props.questionCreatorType === "professor" || this.props.questionCreatorType === "ta");
       var isAlreadyClicked = (this.props.likedQuestions.indexOf(this.props.id) !== -1)
       // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
 
