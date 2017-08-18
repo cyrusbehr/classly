@@ -89,8 +89,8 @@ $light-green: #8dcdc1;
 .hvr-grow-cards:focus,
 .hvr-grow-cards:active {
     transform: scale(1.01);
+    cursor: pointer;
 }
-
 
 .dashboard-header-name {
   font-size: 20px;
