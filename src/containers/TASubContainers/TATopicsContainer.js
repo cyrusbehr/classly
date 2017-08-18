@@ -78,6 +78,7 @@ class TATopicsContainer extends Component {
               greyOut={this.props.currentFilter!=='' && this.props.currentFilter!==topic.text}
               isDefault={topic.isDefault}
               color={topic.color}
+              email={topic.email}
             />
           )
         })}
