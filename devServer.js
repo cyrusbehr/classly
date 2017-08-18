@@ -55,10 +55,6 @@ function randomize(array) {
 
 io.on('connection', socket => {
   console.log('Connected to socket');
-
-//data = {
-//   room: room access code
-//}
   socket.on('join', (room) => {
     socket.join(room);
     console.log("user has joined", room);

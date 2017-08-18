@@ -25,9 +25,17 @@ class StudentMainViewContainer extends Component {
         if(!this.props.user.userType){
           self.props.history.push('/dashboard')
         }
-        this.setState({hasLoaded: true});
       } else {
         self.props.history.push('/')
+      }
+    })
+    axios.get(baseDomain + 'showModal')
+    .then((r) => {
+      if(r.data.isModal) {
+        this.props.close();
+        this.setState({hasLoaded: true});
+      } else {
+        this.setState({hasLoaded: true});
       }
     })
   }

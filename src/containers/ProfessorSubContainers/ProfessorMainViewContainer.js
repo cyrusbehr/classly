@@ -29,9 +29,7 @@ class ProfessorMainViewContainer extends Component {
     })
     axios.get(baseDomain + 'showModal')
     .then((r) => {
-      console.log('1111111111111111111111111111', r.data);
       if(r.data.isModal) {
-        console.log('clossse');
         this.props.close();
         this.setState({hasLoaded: true});
       } else {

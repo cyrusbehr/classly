@@ -146,6 +146,7 @@ $light-green: #8dcdc1;
   border-radius: 20px;
   border-color: black;
   background-color: transparent;
+  cursor:pointer;
 }
 
 .dashboardBody-container-header {
@@ -334,6 +335,7 @@ $light-green: #8dcdc1;
   border-color: black;
   border-width: 1px;
   font-size: 16px;
+  cursor:pointer;
 }
 
 .dashboardBody-close-button {
@@ -350,6 +352,7 @@ $light-green: #8dcdc1;
   border-color: black;
   border-width: 1px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .modal-body-create-course {
@@ -358,4 +361,8 @@ $light-green: #8dcdc1;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.dashboard-logout {
+  cursor:pointer;
 }
