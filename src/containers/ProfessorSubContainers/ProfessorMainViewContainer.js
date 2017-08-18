@@ -23,9 +23,19 @@ class ProfessorMainViewContainer extends Component {
         if(!this.props.user.userType){
           self.props.history.push('/dashboard')
         }
-        this.setState({hasLoaded: true});
       } else {
         self.props.history.push('/')
+      }
+    })
+    axios.get(baseDomain + 'showModal')
+    .then((r) => {
+      console.log('1111111111111111111111111111', r.data);
+      if(r.data.isModal) {
+        console.log('clossse');
+        this.props.close();
+        this.setState({hasLoaded: true});
+      } else {
+        this.setState({hasLoaded: true});
       }
     })
   }
