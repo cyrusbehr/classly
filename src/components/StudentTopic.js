@@ -20,7 +20,6 @@ class StudentTopic extends Component {
   }
 
   handleVote(e) {
-    console.log("this is inner click");
     e.stopPropagation();
     e.preventDefault();
     if(!this.state.alreadyClicked) {
@@ -61,8 +60,9 @@ class StudentTopic extends Component {
       return question.tags.includes(this.props.text);
     })
 
+    
     var isCreator = (this.props.user.email === this.props.email);
-    var isCreatorOrProfessorOrTA = (this.props.email === this.props.user.email || this.props.user.userType === 'Professor' || this.props.user.userType === 'TA') && !this.props.isDefault;
+    var isCreatorOrProfessorOrTA = (this.props.email === this.props.user.email || this.props.user.userType === 'professor' || this.props.user.userType === 'ta') && !this.props.isDefault;
     var style = {};
 
     if(this.props.hightlight){

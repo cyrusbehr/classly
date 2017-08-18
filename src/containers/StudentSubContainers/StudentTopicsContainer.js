@@ -86,6 +86,7 @@ class StudentTopicsContainer extends Component {
               isDefault={topic.isDefault}
               slideNumber={topic.slideNumber}
               color={topic.color}
+              email={topic.email}
             />
           )
         })}
