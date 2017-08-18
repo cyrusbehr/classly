@@ -75,12 +75,12 @@ class TAQuestion extends Component {
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
-      creator: this.props.username,
+      creator: this.props.firstname + " " + this.props.lastname,
       title: 'TA'
     }
     this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
-      username: this.props.username, text: this.state.commentText});
+      username: this.props.firstname + " " + this.props.lastname, text: this.state.commentText});
       this.setState({commentText: ""});
     }
 
@@ -116,7 +116,7 @@ class TAQuestion extends Component {
             <div className="question-body">
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
-              <div className="question-main-section-question-creator"> - {this.props.firstname + " " + this.props.lastname}</div>
+              <div className="question-main-section-question-creator"> - {this.props.creatorFirstname + " " + this.props.creatorLastName}</div>
               {/*  TODO: DONOVAN add formating here, feel free to move this around */}
               {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
             </div>
@@ -235,6 +235,8 @@ class TAQuestion extends Component {
             questionsArray: state.classReducer.questions,
             username: state.userReducer.username,
             userType: state.userReducer.userType,
+            firstname: state.userReducer.user.firstname,
+            lastname: state.userReducer.user.lastname,
           }
         }
 

@@ -84,6 +84,9 @@ class ProfessorQuestionsContainer extends Component {
           return(
             <ProfessorQuestion
               reference={question.referenceClass}
+              email={question.email}
+              creatorFirstname={question.firstname}
+              creatorLastName={question.lastname}
               key={question._id}
               id={question._id}
               currentUpVotes={question.upVotes}
@@ -91,7 +94,6 @@ class ProfessorQuestionsContainer extends Component {
               isResolved={question.isResolved}
               isStarred={question.isStarred}
               tags={question.tags}
-              questionCreator={question.username}
               comments={question.comments}
               userType={question.userType}
               color={question.color}

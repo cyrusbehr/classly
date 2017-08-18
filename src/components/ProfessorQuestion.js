@@ -31,20 +31,6 @@ class ProfessorQuestion extends Component {
     }
   }
 
-  // handleUpvote(e) {
-  //   if(this.state.processing) return;
-  //   this.setState({processing: true})
-  //   if(!this.state.alreadyClicked){
-  //     this.setState({votes: this.state.votes + 1})
-  //     this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
-  //     this.setState({alreadyClicked: true});
-  //   } else {
-  //     this.setState({votes: this.state.votes - 1})
-  //     this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
-  //     this.setState({alreadyClicked: false});
-  //   }
-  // }
-
   deleteItem(e) {
     e.preventDefault()
     this.props.deleteQuestionAction(this.props.id);
@@ -118,7 +104,7 @@ class ProfessorQuestion extends Component {
             <div className="question-body">
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
-              <div className="question-main-section-question-creator"> - {this.props.user.firstname + " " + this.props.user.lastname} </div>
+              <div className="question-main-section-question-creator"> - {this.props.creatorFirstname + " " + this.props.creatorLastName} </div>
             </div>
 
             <div className="all-buttons-container">

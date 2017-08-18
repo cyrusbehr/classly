@@ -73,12 +73,12 @@ class StudentQuestion extends Component {
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
-      creator: this.props.username,
+      creator: this.props.firstname + " " + this.props.lastname,
       title: ''
     }
     this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
-      username: this.props.username, text: this.state.commentText});
+      username: this.props.firstname + " " + this.props.lastname, text: this.state.commentText});
       this.setState({commentText: ""});
     }
 
@@ -119,7 +119,6 @@ class StudentQuestion extends Component {
         <div className="question" style={style}>
           <div className="question-main-section">
             <div className="question-body">
-              {/* <button onClick={(e) => this.toggleReply(e)}>HIIIIIIIIII</button> */}
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
               {isCreator || isProfessorOrTA
@@ -249,6 +248,8 @@ const mapStateToProps = state => {
     user: state.userReducer.user,
     userType: state.userReducer.user.userType,
     likedQuestions: state.userReducer.likedQuestions,
+    firstname: state.userReducer.user.firstname,
+    lastname: state.userReducer.user.lastname,
   }
 }
 
