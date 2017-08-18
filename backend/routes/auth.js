@@ -61,8 +61,9 @@ module.exports = function(passport) {
 
       })
       .catch(function(error){
+        console.log('error', error);
         res.json({
-          error
+          error: error.message
         })
       })
     })
