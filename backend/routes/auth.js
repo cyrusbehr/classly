@@ -121,6 +121,24 @@ module.exports = function(passport) {
     });
   })
 
+  router.get('/showModal', function(req, res) {
+    User.findById(req.user._id)
+    .then((user) => {
+      console.log(user);
+      if(!user.isModal){
+        res.json({
+          isModal: false
+        })
+        user.isModal = true;
+        user.save()
+      } else {
+        res.json({
+          isModal: true
+        })
+      }
+    })
+  })
+
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
