@@ -82,7 +82,9 @@ class TAQuestionsContainer extends Component {
               isResolved={question.isResolved}
               isStarred={question.isStarred}
               tags={question.tags}
-              firstname={question.firstname}
+              email={question.email}
+              creatorFirstname={question.firstname}
+              creatorLastName={question.lastname}
               lastname={question.lastname}
               questionCreator={question.username}
               userType={question.userType}
