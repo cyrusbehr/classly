@@ -121,12 +121,6 @@ class StudentSignupCard extends Component {
               className= {this.state.emailEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
             />
             <div>
-              {this.state.emailEmpty ?
-                <div>
-                </div> :
-                <div className="empty-name-alert">
-                  Email can't be empty!
-                </div>}
               </div>
             </label>
             <br></br>
