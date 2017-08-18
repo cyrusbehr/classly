@@ -117,8 +117,6 @@ class TAQuestion extends Component {
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
               <div className="question-main-section-question-creator"> - {this.props.creatorFirstname + " " + this.props.creatorLastName}</div>
-              {/*  TODO: DONOVAN add formating here, feel free to move this around */}
-              {/* {(this.props.studentName ? <div> </div> : <div></div>)} */}
             </div>
 
             <div className="all-buttons-container">

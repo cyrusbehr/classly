@@ -107,7 +107,7 @@ class DashboardClassContainer extends Component {
           <div className="dashboardBody-container">
             <div className="dashboardBody-container-header-container">
               <div className="dashboardBody-container-header-class">
-                <text className="dashboardBody-container-dashboard-name">Dashboard</text>
+                <text className="dashboardBody-container-dashboard-name">Class Dashboard</text>
                 <div className="dashboardBody-container-buttons">
                   {isProfessor
                     ?
