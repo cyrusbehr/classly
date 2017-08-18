@@ -86,7 +86,6 @@ class DashboardClassContainer extends Component {
 
   render() {
     var isProfessor = (this.props.user.userType === "professor");
-    console.log("the classes are: ", this.props);
     return(
       <div className="dashboard">
         <div className="dashboard-header">

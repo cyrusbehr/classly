@@ -6,6 +6,7 @@ import axios from 'axios'
 import {baseDomain} from '../constants/const'
 import {addCourse, ADD_CLASS_TO_ARRAY} from '../actions/Actions';
 import Modal from 'react-modal';
+import {TextField} from 'material-ui';
 
 class DashboardContainer extends Component {
   constructor(props){
@@ -212,7 +213,7 @@ class DashboardContainer extends Component {
                     :
                     <button className="dashboardBody-button hvr-grow"
                       onClick={(e) => this.handleAddCourseClick(e)}
-                      >Add a New Course</button>
+                      >Join a Course</button>
                     }
                 </div>
               </div>
@@ -240,27 +241,21 @@ class DashboardContainer extends Component {
           overlayClassName="guide-modal-overlay"
           >
             <div className="modal-header">
-              Create a new course
+              Create Course
             </div>
             <div className="modal-body-create-course">
-              <form>
-                <input
-                  type="text"
-                  className="modal-input-field-course-title"
-                  value={this.state.courseTitle}
-                  placeholder="Course Title"
-                  onChange={(e) => this.onCourseTitleChange(e)}
-                />
-                </form>
-                <form>
-                <input
-                  type="text"
-                  className="modal-input-field-course-code"
-                  value={this.state.courseCode}
-                  placeholder="Course Code"
-                  onChange={(e) => this.onCourseCodeChange(e)}
-                />
-              </form>
+              <TextField
+                hintText="Course Title"
+                underlineFocusStyle={{'borderColor': '#00c993'}}
+                value={this.state.courseTitle}
+                onChange={(e) => this.onCourseTitleChange(e)}
+              />
+              <TextField
+                hintText="Course Code"
+                underlineFocusStyle={{'borderColor': '#00c993'}}
+                value={this.state.courseCode}
+                onChange={(e) => this.onCourseCodeChange(e)}
+              />
             </div>
             <div className="modal-footer">
               <button
@@ -273,27 +268,32 @@ class DashboardContainer extends Component {
                 >Close</button>
             </div>
           </Modal>
+
           <Modal
             className="guide-modal"
             overlayClassName="guide-modal-overlay"
           isOpen={this.state.showAddClassModal}
           contentLabel="Add a new course"
           >
-            <h2>Fill out the following information to add a new Class!!!!</h2>
-            <form>
-              <input
-                type="text"
+            <div className="modal-header">
+              Join Course
+            </div>
+              <TextField
+                hintText="Access Code"
+                underlineFocusStyle={{'borderColor': '#00c993'}}
                 value={this.state.accessCode}
-                placeholder="Access Code"
                 onChange={(e) => this.onAccessCodeChange(e)}
               />
-              <button
-                onClick={(e) => this.onSubmitAddCourseModal(e)}
-                >Add Course</button>
-              <button
-                onClick={(e) => this.onCloseAddCourseModal(e)}
-                >Close</button>
-            </form>
+              <div className="modal-footer">
+                  <button
+                    className="dashboardBody-create-class-button hvr-grow"
+                    onClick={(e) => this.onSubmitAddCourseModal(e)}
+                  >Add Course</button>
+                  <button
+                    className="dashboardBody-close-button hvr-grow"
+                    onClick={(e) => this.onCloseAddCourseModal(e)}
+                  >Close</button>
+              </div>
           </Modal>
         </div>
         }

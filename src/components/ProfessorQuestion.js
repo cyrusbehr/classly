@@ -31,20 +31,6 @@ class ProfessorQuestion extends Component {
     }
   }
 
-  // handleUpvote(e) {
-  //   if(this.state.processing) return;
-  //   this.setState({processing: true})
-  //   if(!this.state.alreadyClicked){
-  //     this.setState({votes: this.state.votes + 1})
-  //     this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
-  //     this.setState({alreadyClicked: true});
-  //   } else {
-  //     this.setState({votes: this.state.votes - 1})
-  //     this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
-  //     this.setState({alreadyClicked: false});
-  //   }
-  // }
-
   deleteItem(e) {
     e.preventDefault()
     this.props.deleteQuestionAction(this.props.id);
@@ -74,12 +60,12 @@ class ProfessorQuestion extends Component {
     let newCommentObj = {
       questionId: this.props.id,
       text: this.state.commentText,
-      creator: this.props.username,
+      creator: this.props.firstname + " " + this.props.lastname,
       title: 'Prof'
     }
     this.props.addCommentAction(newCommentObj);
     this.props.socket.emit('newComment', {questionId: this.props.id,
-      username: this.props.username, text: this.state.commentText});
+      username: this.props.firstname + " " + this.props.lastname, text: this.state.commentText});
       this.setState({commentText: ""});
     }
 
@@ -118,7 +104,7 @@ class ProfessorQuestion extends Component {
             <div className="question-body">
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
-              <div className="question-main-section-question-creator"> - {this.props.user.firstname + " " + this.props.user.lastname} </div>
+              <div className="question-main-section-question-creator"> - {this.props.creatorFirstname + " " + this.props.creatorLastName} </div>
             </div>
 
             <div className="all-buttons-container">
@@ -237,8 +223,9 @@ class ProfessorQuestion extends Component {
           return {
             socket: state.socketReducer.socket,
             questionsArray: state.classReducer.questions,
-            username: state.userReducer.username,
-            userType: state.userReducer.userType,
+            firstname: state.userReducer.user.firstname,
+            lastname: state.userReducer.user.lastname,
+            userType: state.userReducer.user.userType,
             user: state.userReducer.user,
           }
         }

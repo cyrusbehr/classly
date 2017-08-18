@@ -5,8 +5,8 @@ $blue: #2979FF;
 $light-green: #8dcdc1;
 
 .dashboard-card {
-  width: 1000px;
-  height: 90px;
+  width: 80%;
+  // height: 90px;
   // border-style: solid;
   // border-color: $green;
   // background-color: $green;
@@ -15,9 +15,10 @@ $light-green: #8dcdc1;
   // border-left: 1px solid $green;
   // border-right: 1px solid $green;
   box-shadow:0 0 20px rgba(black, 0.1);
-  margin-left: 20px;
-  margin-left: 20px;
-  margin-top: 20px;
+  // margin-left: 20px;
+  // margin-left: 20px;
+  // margin-top: 20px;
+  margin-bottom: 30px;
   color: black;
   display: flex;
   padding: 25px;
@@ -87,9 +88,9 @@ $light-green: #8dcdc1;
 .hvr-grow-cards:hover,
 .hvr-grow-cards:focus,
 .hvr-grow-cards:active {
-    transform: scale(1.04);
+    transform: scale(1.01);
+    cursor: pointer;
 }
-
 
 .dashboard-header-name {
   font-size: 20px;
@@ -212,7 +213,7 @@ $light-green: #8dcdc1;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 120px;
+  // margin-bottom: 120px;
 }
 
 .dashboardBody-container-card-body {

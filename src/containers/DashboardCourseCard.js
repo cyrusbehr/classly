@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {loading, notLoading, populateClass} from '../actions/Actions'
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
+import {FlatButton} from 'material-ui';
 
 
 class DashboardCourseCard extends Component {
@@ -30,7 +31,8 @@ class DashboardCourseCard extends Component {
   render() {
     var isProfessor = (this.props.user.userType === "professor")
     return(
-      <div onClick={(e) => this.handleClick(e)} className="dashboard-card hvr-grow-cards">
+      <div className="dashboard-card hvr-grow-cards" onClick={(e) => this.handleClick(e)}>
+        
         <div className="card-name">course</div>
         <div className="dashboard-course-title">
           {this.props.courseTitle}
@@ -45,6 +47,7 @@ class DashboardCourseCard extends Component {
           ?
           <div className="dashboard-card-access-code">Sharable Code: {this.props.accessCode}</div>
           :null}
+
       </div>
     )
   }

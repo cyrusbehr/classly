@@ -50,7 +50,7 @@ class StudentTopicsContainer extends Component {
     var numOfQuestions = this.props.questions.length;
     return (
       <div className="topics-container">
-        <div style={{display:'flex', 'flex-direction': 'column'}}>
+        <div style={{display:'flex', 'flexDirection': 'column'}}>
           <div style={{display: 'flex', 'alignItems': 'center', 'justifyContent': 'space-between', 'height':30}}>
             <div className='topics-title'> {numOfTopics + (numOfTopics<=1? ' Topic' : ' Topics')} , {numOfQuestions + (numOfQuestions<2 ? ' Question in Total' : ' Questions in Total')}</div>
             {this.props.currentFilter==='' ? null : <div><i id='return-button' className="material-icons" onClick={()=>{this.onReturn()}}>keyboard_return</i></div>}
