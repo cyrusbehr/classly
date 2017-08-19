@@ -131,9 +131,6 @@ const mapDispatchToProps = dispatch => {
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
     },
-    deleteTopicAction: (topicID) => {
-      dispatch(deleteTopic(topicID));
-    }
   }
 }
 

@@ -89,7 +89,6 @@ io.on('connection', socket => {
 
   socket.on('deleteTopic', (data) => {
     Topic.findByIdAndRemove(data.topicId, (err) => {
-      //now we must remove it from the class
       Class.findById(data.reference, (err, classObj) => {
         let topicsArray = classObj.topics;
         let index;
@@ -103,7 +102,6 @@ io.on('connection', socket => {
         classObj.topics = topicsArray;
         classObj.save();
         var deletedTopicId = data.topicId;
-        console.log("delete topic id", data.topicId);
         socket.broadcast.to(socket.currentRoom).emit('deleteTopic', deletedTopicId);
       })
     })

@@ -81,6 +81,8 @@ class ProfessorTopicsContainer extends Component {
               id={topic._id}
               key={i}
               email={topic.email}
+              firstname={topic.firstname}
+              lastname={topic.lastname}
               reference={topic.referenceClass}
               topicCreator={topic.username}
               hightlight={this.props.currentFilter===topic.text ? true : false}
