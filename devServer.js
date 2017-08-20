@@ -57,14 +57,12 @@ io.on('connection', socket => {
   console.log('Connected to socket');
   socket.on('join', (room) => {
     socket.join(room);
-    console.log("user has joined", room);
     socket.currentRoom = room;
   });
 
   //No data needed for this emit event
   socket.on('disconnect', () => {
     socket.leave(socket.currentRoom);
-    console.log("user has left");
   });
 
   socket.on('deleteQuestion', (data) => {
@@ -73,12 +71,13 @@ io.on('connection', socket => {
         let questionsArray = classObj.questions;
         let index;
         for(var i = 0; i < questionsArray.length; i++) {
-          if(questionsArray[i].$oid === data.questionId){
+          if(questionsArray[i].toString() === data.questionId){
             index = i;
             break;
           }
         }
         questionsArray.splice(index,1);
+        console.log("the question array after the splice is: ", questionsArray);
         classObj.questions = questionsArray;
         classObj.save();
         var deletedQuestionId = data.questionId;
@@ -93,7 +92,7 @@ io.on('connection', socket => {
         let topicsArray = classObj.topics;
         let index;
         for(var i = 0; i < topicsArray.length; i++) {
-          if(topicsArray[i].$oid === data.topicId){
+          if(topicsArray[i].toString() === data.topicId){
             index = i;
             break;
           }
@@ -197,7 +196,6 @@ io.on('connection', socket => {
                 .then(() => {
 
                   socket.join(accessCode);
-                  console.log("user has joined", accessCode);
                   socket.currentRoom = accessCode;
                   socket.emit("Joined", accessCode);
                   socket.emit('classCreated', newClass);
@@ -219,7 +217,6 @@ io.on('connection', socket => {
   });
 
   socket.on('newQuestion', (newQuestion) => {
-    console.log(newQuestion);
     newQuestion.save((err, savedQuestion) => {
       if(err){
         console.log("Error saving newQuestion to database:", err);
@@ -247,14 +244,12 @@ io.on('connection', socket => {
 
 
   socket.on('upVoteQuestion', (data) => {
-    // console.log('upVoteQuestion Data: ', data);
     if(!data.toggle){
       let tempUpVote = data.previousUpVotes + 1;
       Question.findOneAndUpdate({_id: data.questionId}, { $set: { upVotes: tempUpVote}}, {new: true}, (err, updatedQuestion) => {
         if(err){
           console.log("Error upVoting question:", err);
         } else {
-          // console.log("updated upVote question: ", updatedQuestion);
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
         }
@@ -265,7 +260,6 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting question:", err);
         } else {
-          // console.log("updated upVote quesiton: ", updatedQuestion);
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
         }
@@ -402,7 +396,6 @@ passport.use(new LocalStrategy({
     }
     // if no user present, auth failed
     if (!user) {
-      console.log(user);
       return done(null, false, { message: 'Incorrect username.' });
     }
 

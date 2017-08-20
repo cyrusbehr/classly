@@ -14,15 +14,13 @@ class DashboardClassCard extends Component {
     this.props.setLoadingAction()
     e.preventDefault();
     this.props.socket.emit('join', this.props.classID);
-    console.log("the classID is: ", this.props.classID);
 
     axios.get(baseDomain + 'api/getclass/' + this.props.classID)
     .then((r) => {
+      console.log("this is the returned class : ", r.data.response);
       if(r.data.error) {
         this.props.setNotLoadingAction()
-        console.log("there was an error : ", r.data.error);
       } else {
-        console.log("this is the response ", r.data.response);
           this.props.addClassAction(r.data.response)
           this.props.setNotLoadingAction()
           this.props.history.push('/' + this.props.user.userType + '/main');
