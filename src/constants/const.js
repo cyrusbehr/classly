@@ -37,7 +37,7 @@ const taSignupData = {
   redirectRoute: '/ta/main'
 }
 
-const baseDomain = "https://class-ly.herokuapp.com/"
+const baseDomain = "http://livelecture.space/"
 
 const colorArray = [
   '#FDA1FF',
