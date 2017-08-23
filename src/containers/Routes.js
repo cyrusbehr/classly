@@ -16,8 +16,9 @@ import DashboardClassContainer from './DashboardClassContainer'
 import AboutUs from '../components/AboutUs'
 
 export default class Routes extends Component {
-
    render() {
+     console.log("This is the domain from which it was visited! :", window.location.hostname
+   );
       return(
        <div>
          <Switch>
@@ -32,7 +33,6 @@ export default class Routes extends Component {
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
            <Route path="/" exact={true} component={MainPageContainer}/>
-           {/* <Route path="/" exact={true} component={AboutUs}/> */}
            <Route path="/dashboard/class/:coursereference" component={DashboardClassContainer}/>
          </Switch>
        </div>
