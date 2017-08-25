@@ -54,9 +54,9 @@ class DashboardClassContainer extends Component {
   }
 
   onSubmitClassModal(e){
-    console.log("Entering onSubmitClassModal");
-    e.preventDefault();
-
+    if(e){
+      e.preventDefault();
+    }
     axios.post(baseDomain + 'api/create/class', {
       classTitle: this.state.classTitle,
       courseReference: this.props.match.params.coursereference, //TODO: Make sure this gets passed in to props
@@ -113,7 +113,7 @@ class DashboardClassContainer extends Component {
                     ?
                     <button className="dashboardBody-button hvr-grow"
                       onClick={() => this.onCreateClassClick()}
-                      >Create a class</button>
+                      >Create a new lecture</button>
                   :null
                 }
                 </div>
@@ -143,22 +143,20 @@ class DashboardClassContainer extends Component {
           contentLabel="Create a Course"
           >
             <div className="modal-header">
-              <text>Create a new class</text>
+              <text>Create a new lecture</text>
             </div>
             <div className="modal-body">
                 <TextField
-                  id="textfield"
-                  // className="modal-input-field"
+                  onKeyPress={(ev) => {
+                    if (ev.key === 'Enter') {
+                      this.onSubmitClassModal()
+                      ev.preventDefault();
+                    }
+                  }}
                   underlineFocusStyle={{'borderColor': '#00c993'}}
                   value={this.state.classTitle}
-                  hintText="Class Title"
+                  hintText="Lecture Title"
                   onChange={(e) => this.onClassTitleChange(e)}
-                />
-                <input
-                  value={this.state.classTitle}
-                  type="text"
-                  onChange={(e) => this.onClassTitleChange(e)}
-                  placeholder="New Question..."
                 />
             </div>
             <div className="modal-footer">
