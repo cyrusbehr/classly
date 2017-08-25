@@ -19,7 +19,6 @@ class DashboardCourseCard extends Component {
       if(r.data.error) {
         console.log("there was an error loading the class ", r.data);
       } else {
-        console.log("we made it to this point in the space time continue : ", r.data.response);
         this.props.populateClassAction(r.data.response.classes);
         this.props.setNotLoadingAction();
         this.props.history.push('/dashboard/class/' + this.props.courseID);
@@ -32,7 +31,7 @@ class DashboardCourseCard extends Component {
     var isProfessor = (this.props.user.userType === "professor")
     return(
       <div className="dashboard-card hvr-grow-cards" onClick={(e) => this.handleClick(e)}>
-        
+
         <div className="card-name">course</div>
         <div className="dashboard-course-title">
           {this.props.courseTitle}

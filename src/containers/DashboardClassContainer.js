@@ -97,11 +97,13 @@ class DashboardClassContainer extends Component {
         </div>
         {this.props.isLoading
           ?
+          <div className="dashboardBody-container">
           <div className="loader-dashboard">
             <svg className="circular-dashboard" viewBox="25 25 50 50">
               <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
             </svg>
           </div>
+        </div>
           :
           <div>
           <div className="dashboardBody-container">
@@ -180,7 +182,6 @@ const mapStateToProps = state => {
     user: state.userReducer,
     isLoading: state.pageReducer.isLoading,
     classes: state.classArrayReducer,
-    isLoading: state.pageReducer.isLoading,
     user: state.userReducer.user
   }
 }
