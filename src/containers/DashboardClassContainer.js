@@ -6,6 +6,7 @@ import axios from 'axios'
 import {baseDomain} from '../constants/const'
 import {addCourse, addClassToArray} from '../actions/Actions';
 import Modal from 'react-modal';
+import {TextField} from 'material-ui';
 
 class DashboardClassContainer extends Component {
   constructor(props){
@@ -146,15 +147,14 @@ class DashboardClassContainer extends Component {
               <text>Create a new class</text>
             </div>
             <div className="modal-body">
-              <form>
-                <input
-                  className="modal-input-field"
-                  type="text"
+                <TextField
+                  // className="modal-input-field"
+                  underlineFocusStyle={{'borderColor': '#00c993'}}
                   value={this.state.classTitle}
-                  placeholder="Class Title"
+                  hintText="Class Title"
                   onChange={(e) => this.onClassTitleChange(e)}
                 />
-                </form>
+
             </div>
             <div className="modal-footer">
               <button className="dashboardBody-create-class-button hvr-grow"
