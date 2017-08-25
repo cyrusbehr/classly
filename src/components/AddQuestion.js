@@ -121,7 +121,6 @@ class AddQuestion extends Component{
       $('.questions-container').animate({
         scrollTop: 228 + this.props.questionsArray.length * $('.question').height() // TODO: THIS IS HARDCODED, MIGHT CAUSE ISSUE WHEN THE HEIGHT OF EACH QUESTION IS CHANGED
       }, 500, "swing");
-
     }
     $('#new-question').focus();
   }
