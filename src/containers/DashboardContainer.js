@@ -45,7 +45,7 @@ class DashboardContainer extends Component {
       }
     })
     .catch((err) => console.log("there was an error: ", err))
-}
+  }
 
   onCreateCourseClick(e) {
     e.preventDefault();
@@ -98,8 +98,9 @@ class DashboardContainer extends Component {
   }
 
   onSubmitModal(e){
-    //create course object from what is saved in this.state
-    e.preventDefault();
+    if(e){
+      e.preventDefault();
+    }
 
     axios.post(baseDomain + 'api/create/course', {
       courseTitle: this.state.courseTitle,
@@ -124,7 +125,9 @@ class DashboardContainer extends Component {
   }
 
   onCloseModal(e){
-    e.preventDefault()
+    if(e){
+      e.preventDefault();
+    }
     this.setState({showCreateCourseModal: false});
   }
 
@@ -136,35 +139,6 @@ class DashboardContainer extends Component {
 
   onclassNameChange(e){
     this.setState({className: e.target.value});
-  }
-
-  onSubmitClassModal(e){
-    e.preventDefault();
-    //axios post request to backend with that object
-    //use baseDomain in axios request and import it from the constants file
-    //on the .then of this action dispatch action to the reducer
-    //to add the course to the course reducer. need to write this action. courses is an array in reducer
-    //immutable --> splice array to make deep copy then resave
-    axios.post(baseDomain + 'api/create/class', {
-        className: this.state.className,
-        courseReference: this.props.courseReference, //TODO: Make sure this gets passed in to props
-    })
-    .then((r) => {
-      if(r.data.error) {
-        this.props.setNotLoadingAction();
-        console.log("Error encountered while creating new class: ", r.data);
-      } else {
-        this.props.setNotLoadingAction();
-        this.props.addClassToArrayAction(r.data.response);
-        console.log("We actually hit this route!");
-
-      }
-    })
-    .catch((err) => {
-      console.log("there was an error with the request : ", err);
-    });
-    //close modal
-    this.setState({showCreateClassModal: false});
   }
 
   onCloseClassModal(e){
@@ -200,142 +174,154 @@ class DashboardContainer extends Component {
           </div>
           :
           <div>
-          <div className="dashboardBody-container">
-            <div className="dashboardBody-container-header-container">
-              <div className="dashboardBody-container-header">
-                <text className="dashboardBody-container-dashboard-name">Course Dashboard</text>
-                <div className="dashboardBody-container-buttons">
-                  {isProfessor
-                    ?
-                    <button className="dashboardBody-button hvr-grow"
-                      onClick={(e) => this.onCreateCourseClick(e)}
-                      >Create a Course</button>
-                    :
-                    <button className="dashboardBody-button hvr-grow"
-                      onClick={(e) => this.handleAddCourseClick(e)}
-                      >Join a Course</button>
-                    }
+            <div className="dashboardBody-container">
+              <div className="dashboardBody-container-header-container">
+                <div className="dashboardBody-container-header">
+                  <text className="dashboardBody-container-dashboard-name">Course Dashboard</text>
+                  <div className="dashboardBody-container-buttons">
+                    {isProfessor
+                      ?
+                      <button className="dashboardBody-button hvr-grow"
+                        onClick={(e) => this.onCreateCourseClick(e)}
+                        >Create a Course</button>
+                        :
+                        <button className="dashboardBody-button hvr-grow"
+                          onClick={(e) => this.handleAddCourseClick(e)}
+                          >Join a Course</button>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                  <div className="dashboardBody-container-body">
+                    {this.props.courses.map((course) => {
+                      return (
+                        <DashboardCourseCard
+                          key={course._id}
+                          professorName={course.professorName}
+                          courseTitle={course.courseTitle}
+                          courseCode={course.courseCode}
+                          courseID={course._id}
+                          accessCode={course.accessCode}
+                          {...this.props}
+                        />
+                      )
+                    })}
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="dashboardBody-container-body">
-              {this.props.courses.map((course) => {
-                return (
-                  <DashboardCourseCard
-                    key={course._id}
-                    professorName={course.professorName}
-                    courseTitle={course.courseTitle}
-                    courseCode={course.courseCode}
-                    courseID={course._id}
-                    accessCode={course.accessCode}
-                    {...this.props}
-                  />
-                )
-              })}
-            </div>
-          </div>
-          <Modal
-          isOpen={this.state.showCreateCourseModal}
-          contentLabel="Create a Course"
-          className="guide-modal-create-class"
-          overlayClassName="guide-modal-overlay"
-          >
-            <div className="modal-header">
-              Create Course
-            </div>
-            <div className="modal-body-create-course">
-              <TextField
-                hintText="Course Title"
-                underlineFocusStyle={{'borderColor': '#00c993'}}
-                value={this.state.courseTitle}
-                onChange={(e) => this.onCourseTitleChange(e)}
-              />
-              <TextField
-                hintText="Course Code"
-                underlineFocusStyle={{'borderColor': '#00c993'}}
-                value={this.state.courseCode}
-                onChange={(e) => this.onCourseCodeChange(e)}
-              />
-            </div>
-            <div className="modal-footer">
-              <button
-                className="dashboardBody-create-class-button hvr-grow"
-                onClick={(e) => this.onSubmitModal(e)}
-                >Create Course</button>
-              <button
-                className="dashboardBody-close-button hvr-grow"
-                onClick={(e) => this.onCloseModal(e)}
-                >Close</button>
-            </div>
-          </Modal>
+                <Modal
+                  isOpen={this.state.showCreateCourseModal}
+                  contentLabel="Create a Course"
+                  className="guide-modal-create-class"
+                  overlayClassName="guide-modal-overlay"
+                  >
+                    <div className="modal-header">
+                      Create Course
+                    </div>
+                    <div className="modal-body-create-course">
+                      <TextField
+                        hintText="Course Title"
+                        underlineFocusStyle={{'borderColor': '#00c993'}}
+                        value={this.state.courseTitle}
+                        onChange={(e) => this.onCourseTitleChange(e)}
+                        onKeyPress={(ev) => {
+                          if (ev.key === 'Enter') {
+                            this.onSubmitModal()
+                            ev.preventDefault();
+                          }
+                        }}
+                      />
+                      <TextField
+                        onKeyPress={(ev) => {
+                          if (ev.key === 'Enter') {
+                            this.onSubmitModal()
+                            ev.preventDefault();
+                          }
+                        }}
+                        hintText="Course Code"
+                        underlineFocusStyle={{'borderColor': '#00c993'}}
+                        value={this.state.courseCode}
+                        onChange={(e) => this.onCourseCodeChange(e)}
+                      />
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        className="dashboardBody-create-class-button hvr-grow"
+                        onClick={(e) => this.onSubmitModal(e)}
+                        >Create Course</button>
+                        <button
+                          className="dashboardBody-close-button hvr-grow"
+                          onClick={(e) => this.onCloseModal(e)}
+                          >Close</button>
+                        </div>
+                      </Modal>
 
-          <Modal
-            className="guide-modal"
-            overlayClassName="guide-modal-overlay"
-          isOpen={this.state.showAddClassModal}
-          contentLabel="Add a new course"
-          >
-            <div className="modal-header">
-              Join Course
-            </div>
-              <TextField
-                hintText="Access Code"
-                underlineFocusStyle={{'borderColor': '#00c993'}}
-                value={this.state.accessCode}
-                onChange={(e) => this.onAccessCodeChange(e)}
-              />
-              <div className="modal-footer">
-                  <button
-                    className="dashboardBody-create-class-button hvr-grow"
-                    onClick={(e) => this.onSubmitAddCourseModal(e)}
-                  >Add Course</button>
-                  <button
-                    className="dashboardBody-close-button hvr-grow"
-                    onClick={(e) => this.onCloseAddCourseModal(e)}
-                  >Close</button>
-              </div>
-          </Modal>
-        </div>
-        }
-    </div>
-    )
-  }
-}
+                      <Modal
+                        className="guide-modal"
+                        overlayClassName="guide-modal-overlay"
+                        isOpen={this.state.showAddClassModal}
+                        contentLabel="Add a new course"
+                        >
+                          <div className="modal-header">
+                            Join Course
+                          </div>
+                          <TextField
+                            hintText="Access Code"
+                            underlineFocusStyle={{'borderColor': '#00c993'}}
+                            value={this.state.accessCode}
+                            onChange={(e) => this.onAccessCodeChange(e)}
+                          />
+                          <div className="modal-footer">
+                            <button
+                              className="dashboardBody-create-class-button hvr-grow"
+                              onClick={(e) => this.onSubmitAddCourseModal(e)}
+                              >Add Course</button>
+                              <button
+                                className="dashboardBody-close-button hvr-grow"
+                                onClick={(e) => this.onCloseAddCourseModal(e)}
+                                >Close</button>
+                              </div>
+                            </Modal>
+                          </div>
+                        }
+                      </div>
+                    )
+                  }
+                }
 
-const mapStateToProps = state => {
-  return{
-    user: state.userReducer,
-    isLoading: state.pageReducer.isLoading,
-    courses: state.courseReducer,
-    isLoading: state.pageReducer.isLoading,
-    user: state.userReducer.user
-  }
-}
+                const mapStateToProps = state => {
+                  return{
+                    user: state.userReducer,
+                    isLoading: state.pageReducer.isLoading,
+                    courses: state.courseReducer,
+                    isLoading: state.pageReducer.isLoading,
+                    user: state.userReducer.user
+                  }
+                }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    populateCourseAction: (courseArray) => {
-      dispatch(populateCourse(courseArray))
-    },
-    setLoadingAction: () => {
-      dispatch(loading())
-    },
-    setNotLoadingAction: () => {
-      dispatch(notLoading())
-    },
-    addCourseAction: (courseObj) => {
-      dispatch(addCourse(courseObj))
-    },
-    addClassToArrayAction: (classObj) => {
-      dispatch(addClassToArray(classObj))
-    },
-    setUserAction: (user) => {
-      dispatch(setUser(user))
-    },
-  }
-}
+                const mapDispatchToProps = dispatch => {
+                  return {
+                    populateCourseAction: (courseArray) => {
+                      dispatch(populateCourse(courseArray))
+                    },
+                    setLoadingAction: () => {
+                      dispatch(loading())
+                    },
+                    setNotLoadingAction: () => {
+                      dispatch(notLoading())
+                    },
+                    addCourseAction: (courseObj) => {
+                      dispatch(addCourse(courseObj))
+                    },
+                    addClassToArrayAction: (classObj) => {
+                      dispatch(addClassToArray(classObj))
+                    },
+                    setUserAction: (user) => {
+                      dispatch(setUser(user))
+                    },
+                  }
+                }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DashboardContainer);
+                export default connect(
+                  mapStateToProps,
+                  mapDispatchToProps
+                )(DashboardContainer);

@@ -7,6 +7,7 @@ import {baseDomain} from '../constants/const'
 import {addCourse, addClassToArray} from '../actions/Actions';
 import Modal from 'react-modal';
 import {TextField} from 'material-ui';
+import $ from 'jquery';
 
 class DashboardClassContainer extends Component {
   constructor(props){
@@ -37,9 +38,7 @@ class DashboardClassContainer extends Component {
   }
 
   onCreateClassClick(){
-    //open class modal
     this.setState({showCreateClassModal: true})
-    //information is filloud out and saved in this.state
   }
 
   handleLogout(e) {
@@ -148,13 +147,19 @@ class DashboardClassContainer extends Component {
             </div>
             <div className="modal-body">
                 <TextField
+                  id="textfield"
                   // className="modal-input-field"
                   underlineFocusStyle={{'borderColor': '#00c993'}}
                   value={this.state.classTitle}
                   hintText="Class Title"
                   onChange={(e) => this.onClassTitleChange(e)}
                 />
-
+                <input
+                  value={this.state.classTitle}
+                  type="text"
+                  onChange={(e) => this.onClassTitleChange(e)}
+                  placeholder="New Question..."
+                />
             </div>
             <div className="modal-footer">
               <button className="dashboardBody-create-class-button hvr-grow"
