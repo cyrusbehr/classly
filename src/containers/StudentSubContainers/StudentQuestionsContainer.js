@@ -90,6 +90,8 @@ class StudentQuestionsContainer extends Component {
           return(
             <StudentQuestion
               reference={question.referenceClass}
+              creatorFirstname={question.firstname}
+              creatorLastname={question.lastname}
               key={question._id}
               id={question._id}
               currentUpVotes={question.upVotes}

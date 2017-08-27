@@ -95,9 +95,7 @@ class StudentQuestion extends Component {
     render() {
       var isCreator = (this.props.email === this.props.user.email);
       var isStudentStarred = (this.props.userType === "student" && this.props.isStarred);
-      var isProfessorOrTA = (this.props.questionCreatorType === "professor" || this.props.questionCreatorType === "ta");
       var isAlreadyClicked = (this.props.likedQuestions.indexOf(this.props.id) !== -1)
-      // var isTA = (this.props.userType === "TA" || this.props.userType === "Professor");
 
       var style = {};
       if(isAlreadyClicked){ //TODO: this needs fixing
@@ -121,9 +119,9 @@ class StudentQuestion extends Component {
             <div className="question-body">
               <div className="question-header">{this.props.tags[0]==="" ? null : <span className="tag" style={{background: this.props.color}}>#{this.props.tags}</span>}</div>
               <div className="question-content"> {this.props.text} </div>
-              {isCreator || isProfessorOrTA
+              {isCreator
                 ?
-                <div className="question-main-section-question-creator"> -{this.props.user.firstname + " " +  this.props.user.lastname}</div>
+                <div className="question-main-section-question-creator"> -{this.props.creatorFirstname + " " +  this.props.creatorLastname}</div>
               : null}
             </div>
             <div className="all-buttons-container">
