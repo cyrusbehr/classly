@@ -86,6 +86,7 @@ class DashboardClassContainer extends Component {
 
   render() {
     var isProfessor = (this.props.user.userType === "professor");
+
     return(
       <div className="dashboard">
         <div className="dashboard-header">
@@ -124,6 +125,8 @@ class DashboardClassContainer extends Component {
             <div className="dashboardBody-container-card-body-container">
               <div className="dashboardBody-container-card-body">
                 {this.props.classes.map((thisClass) => {
+                  var date = new Date(thisClass.timestamp);
+                  var dateString = String(date.getMonth() + 1) + '/' + String(date.getDate()) + '/' + String(date.getFullYear());
                   return (
                     <DashboardClassCard
                       key={thisClass._id}
@@ -131,6 +134,7 @@ class DashboardClassContainer extends Component {
                       className={thisClass.className}
                       courseReference={thisClass.courseReference}
                       classID={thisClass._id}
+                      date={dateString}
                       {...this.props}
                     />
                   )

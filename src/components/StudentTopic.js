@@ -60,7 +60,7 @@ class StudentTopic extends Component {
       return question.tags.includes(this.props.text);
     })
 
-    
+
     var isCreator = (this.props.user.email === this.props.email);
     var isCreatorOrProfessorOrTA = (this.props.email === this.props.user.email || this.props.user.userType === 'professor' || this.props.user.userType === 'ta') && !this.props.isDefault;
     var style = {};
@@ -94,7 +94,7 @@ class StudentTopic extends Component {
         <div className="topic-content">
           <div className="topic-title" style={this.props.greyOut ? {'color':'darkgray'} : {}}>{'#' + this.props.text}</div>
         </div>
-        <div className="topic-alert">
+        <div className="topic-alert" style={this.props.greyOut ? {'color':'darkgray'} : {}}>
          <div className="topic-alert-icon">
            <i className="material-icons">help_outline</i>
          </div>
