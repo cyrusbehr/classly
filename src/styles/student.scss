@@ -260,15 +260,10 @@ StudentTopicsContainer{
 .delete-question:hover{
   fill: $red;
   stroke: $red;
-  stroke-width: 4px;
+  // stroke-width: 2px;
 }
 
 .delete-topic{
-  // transform: scale(0.3);
-  // fill: darkgray;
-  // position: relative;
-  // top: -8px;
-  // left: 10px;
   width: 24px;
   color: #DFDFDF;
 }
@@ -283,19 +278,18 @@ StudentTopicsContainer{
 .delete-topic:hover{
   fill: $red;
   stroke: $red;
-  stroke-width: 4px;
 }
 
 .star:hover{
   fill: $red;
   stroke: $red;
-  stroke-width: 4px;
+  // stroke-width: 2px;
 }
 
 .resolve:hover{
   fill: green;
   stroke: green;
-  stroke-width: 4px;
+  // stroke-width: 2px;
 }
 
 #reply-icon{
