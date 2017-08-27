@@ -260,7 +260,6 @@ StudentTopicsContainer{
 .delete-question:hover{
   fill: $red;
   stroke: $red;
-  // stroke-width: 2px;
 }
 
 .delete-topic{
@@ -283,13 +282,11 @@ StudentTopicsContainer{
 .star:hover{
   fill: $red;
   stroke: $red;
-  // stroke-width: 2px;
 }
 
 .resolve:hover{
   fill: green;
   stroke: green;
-  // stroke-width: 2px;
 }
 
 #reply-icon{

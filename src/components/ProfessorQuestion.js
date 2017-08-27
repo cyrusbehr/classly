@@ -180,9 +180,9 @@ class ProfessorQuestion extends Component {
                         </div>
                         <div className="question-comments-container-main">
                           <div className="comment-section-header">{this.props.comments.length} Replies</div>
-                          {this.props.comments ? this.props.comments.map((comment) => {
+                          {this.props.comments ? this.props.comments.map((comment, index) => {
                             return(
-                              <div key={comment.text + comment.creator}>
+                              <div key={index}>
                                 <div><text className="highlight-teacher-ta">{comment.title} </text><text className="comment-creator">{' ' + comment.creator}: </text></div>
                                 <div className="comment">{comment.text}</div>
                               </div>
