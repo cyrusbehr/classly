@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { addQuestion, addTopic, open } from '../actions/Actions';
+import { addQuestion, addTopic, open, hasInitialized } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
@@ -19,6 +19,8 @@ class AddQuestion extends Component{
       questionEmpty: true
     }
 
+    if(!this.props.hasInitializedState){
+      this.props.hasInitializedAction()
     this.props.socket.on('generateQuestion', (newQuestion) => {
       this.props.addQuestionAction(newQuestion);
     })
@@ -26,6 +28,7 @@ class AddQuestion extends Component{
     this.props.socket.on('generateTopic', (newTopic) => {
       this.props.addTopicAction(newTopic);
     })
+  }
   }
 
   componentDidMount() {
@@ -201,6 +204,7 @@ const mapStateToProps = state => {
     userType: state.userReducer.user.userType,
     topicsArr: state.classReducer.topics,
     questionsArray: state.classReducer.questions,
+    hasInitializedState: state.userReducer.hasInitialized
   }
 }
 
@@ -212,9 +216,12 @@ const mapDispatchToProps = dispatch => {
     addTopicAction: (savedTopic) => {
       dispatch(addTopic(savedTopic))
     },
-    open: () => {
+    open:() => {
       dispatch(open())
     },
+    hasInitializedAction: () => {
+      dispatch(hasInitialized())
+    }
   }
 }
 

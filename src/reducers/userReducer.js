@@ -1,13 +1,18 @@
-import { SET_USER , LIKE_QUESTION } from '../constants/ActionTypes';
+import { SET_USER , LIKE_QUESTION, INITIALIZE } from '../constants/ActionTypes';
 
 
 const initialState = {
   user: {},
   likedQuestions: [],
+  hasInitialized: false
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+  case INITIALIZE:
+  var newState = Object.assign({}, state, {hasInitialized: true})
+  return newState
 
   case SET_USER:
   var newState = Object.assign({}, state, {user: action.user})
