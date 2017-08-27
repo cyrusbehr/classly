@@ -37,6 +37,7 @@ class StudentQuestion extends Component {
       this.setState({votes: this.state.votes + 1})
       this.props.likeQuestionAction(questionId, "UP");
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
+
     } else {
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
