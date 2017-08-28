@@ -38,7 +38,7 @@ const taSignupData = {
 }
 
 // const baseDomain = "https://class-ly.herokuapp.com/"
-const baseDomain = "https://class-ly.herokuapp.com/"
+const baseDomain = "http://localhost:3000/"
 
 const colorArray = [
   '#FDA1FF',
