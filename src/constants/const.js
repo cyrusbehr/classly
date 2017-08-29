@@ -1,18 +1,18 @@
 const LoginCardData = [
   {
-    URL: "/assets/student-card-picture.jpg",
+    URL: "http://res.cloudinary.com/dxih0rp6w/image/upload/v1503639178/student-card-picture_lkfv2q.png",
     title: "Student",
     redirectRoute: "/student/signup",
     thisClass: "student-class",
   },
   {
-    URL: "/assets/teacher-card-picture.jpg",
+    URL: "http://res.cloudinary.com/dxih0rp6w/image/upload/v1503639177/teacher-card-picture_gmmujs.jpg",
     title: "Professor",
     redirectRoute: "/professor/signup",
     thisClass: "professor-class",
   },
   {
-    URL: "/assets/ta-card-picture.jpg",
+    URL: "http://res.cloudinary.com/dxih0rp6w/image/upload/v1503639177/ta-card-picture_vkjlru.jpg",
     title: "TA",
     redirectRoute: "/ta/signup",
     thisClass: "TA-class",
@@ -37,7 +37,8 @@ const taSignupData = {
   redirectRoute: '/ta/main'
 }
 
-const baseDomain = "https://class-ly.herokuapp.com/"
+// const baseDomain = "https://class-ly.herokuapp.com/"
+const baseDomain = "http://localhost:3000/"
 
 const colorArray = [
   '#FDA1FF',
