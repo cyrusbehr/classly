@@ -131,78 +131,65 @@ class StudentRegisterCard extends Component {
   render() {
     return (
       <div className="student-signup-card">
-        <form>
-          <label>
-              <TextField
-                errorText={this.state.firstnameErrorMessage}
-                hintText="Firstname"
-                hintStyle={{'color':'#555555'}}
-                underlineFocusStyle={{borderColor:'#00C993'}}
-                inputStyle={{'color':'white'}}
-                value={this.state.firstname}
-                onChange={(event) => this.handleFirstNameChange(event)}
-              />
-            </label>
-            <label>
-                <TextField
-                  errorText={this.state.lastnameErrorMessage}
-                  hintText="Lastname"
-                  hintStyle={{'color':'#555555'}}
-                  underlineFocusStyle={{borderColor:'#00C993'}}
-                  inputStyle={{'color':'white'}}
-                  value={this.state.lastname}
-                  onChange={(event) => this.handleLastNameChange(event)}
-                />
-              </label>
-            <br></br>
-            <label>
-                  <TextField
-                    errorText={this.state.emailErrorMessage}
-                    hintText="Email"
-                    hintStyle={{'color':'#555555'}}
-                    underlineFocusStyle={{borderColor:'#00C993'}}
-                    inputStyle={{'color':'white'}}
-                    value={this.state.email}
-                    onChange={(event) => this.handleEmailChange(event)}
-                  />
-                </label>
-                <br></br>
-                <TextField
-                  errorText={this.state.passwordErrorMessage}
-                  hintText="Password"
-                  hintStyle={{'color':'#555555'}}
-                  underlineFocusStyle={{borderColor:'#00C993'}}
-                  inputStyle={{'color':'white'}}
-                  value={this.state.password}
-                  onChange={(event) => this.handlePasswordChange(event)}
-                />
-                <br></br>
-                <TextField
-                  errorText={this.state.passwordRepeatErrorMessage}
-                  hintText="Password Repeat"
-                  hintStyle={{'color':'#555555'}}
-                  underlineFocusStyle={{borderColor:'#00C993'}}
-                  inputStyle={{'color':'white'}}
-                  value={this.state.passwordRepeat}
-                  onChange={(event) => this.handlePasswordRepeatChange(event)}
-                />
-                <br></br>
-                <button
-                  type="button"
-                  onClick={(e) => this.handleRegister(e)}
-                  className="student-signup-submit hvr-grow"
-                  >Register</button>
-                  <br></br>
-                  <button
-                    type="button"
-                    onClick={(e) => this.handleback(e)}
-                    className="student-signup-register hvr-grow"
-                    >Back</button>
-                  </form>
-                </div>
-              )
-            }
-          }
+        <TextField
+          errorText={this.state.firstnameErrorMessage}
+          hintText="Firstname"
+          hintStyle={{'color':'#555555'}}
+          underlineFocusStyle={{borderColor:'#00C993'}}
+          inputStyle={{'color':'white'}}
+          value={this.state.firstname}
+          onChange={(event) => this.handleFirstNameChange(event)}
+        />
+        <TextField
+          errorText={this.state.lastnameErrorMessage}
+          hintText="Lastname"
+          hintStyle={{'color':'#555555'}}
+          underlineFocusStyle={{borderColor:'#00C993'}}
+          inputStyle={{'color':'white'}}
+          value={this.state.lastname}
+          onChange={(event) => this.handleLastNameChange(event)}
+        />
+          <TextField
+            errorText={this.state.emailErrorMessage}
+            hintText="Email"
+            hintStyle={{'color':'#555555'}}
+            underlineFocusStyle={{borderColor:'#00C993'}}
+            inputStyle={{'color':'white'}}
+            value={this.state.email}
+            onChange={(event) => this.handleEmailChange(event)}
+          />
+          <TextField
+            errorText={this.state.passwordErrorMessage}
+            hintText="Password"
+            hintStyle={{'color':'#555555'}}
+            underlineFocusStyle={{borderColor:'#00C993'}}
+            inputStyle={{'color':'white'}}
+            value={this.state.password}
+            onChange={(event) => this.handlePasswordChange(event)}
+          />
+          <TextField
+            errorText={this.state.passwordRepeatErrorMessage}
+            hintText="Password Repeat"
+            hintStyle={{'color':'#555555'}}
+            underlineFocusStyle={{borderColor:'#00C993'}}
+            inputStyle={{'color':'white'}}
+            value={this.state.passwordRepeat}
+            onChange={(event) => this.handlePasswordRepeatChange(event)}
+          />
+          <button
+            type="button"
+            onClick={(e) => this.handleRegister(e)}
+            className="student-signup-submit hvr-grow"
+            >Register</button>
+          <button
+          type="button"
+          onClick={(e) => this.handleback(e)}
+          className="student-signup-register hvr-grow"
+          >Back</button>
+        </div>
+    )
+  }
+}
 
           const mapStateToProps = state => {
             return{
