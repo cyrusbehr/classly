@@ -37,7 +37,7 @@ class DashboardClassCard extends Component {
           {this.props.className}
         </div>
         <div className="dashboard-class-date">
-          8/17/2017
+          {this.props.date}
         </div>
         <div className="dashboard-card-professor">
           {this.props.professorName}

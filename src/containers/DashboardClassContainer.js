@@ -6,6 +6,8 @@ import axios from 'axios'
 import {baseDomain} from '../constants/const'
 import {addCourse, addClassToArray} from '../actions/Actions';
 import Modal from 'react-modal';
+import {TextField} from 'material-ui';
+import $ from 'jquery';
 
 class DashboardClassContainer extends Component {
   constructor(props){
@@ -36,9 +38,7 @@ class DashboardClassContainer extends Component {
   }
 
   onCreateClassClick(){
-    //open class modal
     this.setState({showCreateClassModal: true})
-    //information is filloud out and saved in this.state
   }
 
   handleLogout(e) {
@@ -54,9 +54,9 @@ class DashboardClassContainer extends Component {
   }
 
   onSubmitClassModal(e){
-    console.log("Entering onSubmitClassModal");
-    e.preventDefault();
-
+    if(e){
+      e.preventDefault();
+    }
     axios.post(baseDomain + 'api/create/class', {
       classTitle: this.state.classTitle,
       courseReference: this.props.match.params.coursereference, //TODO: Make sure this gets passed in to props
@@ -86,6 +86,7 @@ class DashboardClassContainer extends Component {
 
   render() {
     var isProfessor = (this.props.user.userType === "professor");
+
     return(
       <div className="dashboard">
         <div className="dashboard-header">
@@ -97,11 +98,13 @@ class DashboardClassContainer extends Component {
         </div>
         {this.props.isLoading
           ?
+          <div className="dashboardBody-container">
           <div className="loader-dashboard">
             <svg className="circular-dashboard" viewBox="25 25 50 50">
               <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
             </svg>
           </div>
+        </div>
           :
           <div>
           <div className="dashboardBody-container">
@@ -113,7 +116,7 @@ class DashboardClassContainer extends Component {
                     ?
                     <button className="dashboardBody-button hvr-grow"
                       onClick={() => this.onCreateClassClick()}
-                      >Create a class</button>
+                      >Create a new lecture</button>
                   :null
                 }
                 </div>
@@ -122,6 +125,8 @@ class DashboardClassContainer extends Component {
             <div className="dashboardBody-container-card-body-container">
               <div className="dashboardBody-container-card-body">
                 {this.props.classes.map((thisClass) => {
+                  var date = new Date(thisClass.timestamp);
+                  var dateString = String(date.getMonth() + 1) + '/' + String(date.getDate()) + '/' + String(date.getFullYear());
                   return (
                     <DashboardClassCard
                       key={thisClass._id}
@@ -129,6 +134,7 @@ class DashboardClassContainer extends Component {
                       className={thisClass.className}
                       courseReference={thisClass.courseReference}
                       classID={thisClass._id}
+                      date={dateString}
                       {...this.props}
                     />
                   )
@@ -143,18 +149,21 @@ class DashboardClassContainer extends Component {
           contentLabel="Create a Course"
           >
             <div className="modal-header">
-              <text>Create a new class</text>
+              <text>Create a new lecture</text>
             </div>
             <div className="modal-body">
-              <form>
-                <input
-                  className="modal-input-field"
-                  type="text"
+                <TextField
+                  onKeyPress={(ev) => {
+                    if (ev.key === 'Enter') {
+                      this.onSubmitClassModal()
+                      ev.preventDefault();
+                    }
+                  }}
+                  underlineFocusStyle={{'borderColor': '#00c993'}}
                   value={this.state.classTitle}
-                  placeholder="Class Title"
+                  hintText="Lecture Title"
                   onChange={(e) => this.onClassTitleChange(e)}
                 />
-                </form>
             </div>
             <div className="modal-footer">
               <button className="dashboardBody-create-class-button hvr-grow"
@@ -177,7 +186,6 @@ const mapStateToProps = state => {
     user: state.userReducer,
     isLoading: state.pageReducer.isLoading,
     classes: state.classArrayReducer,
-    isLoading: state.pageReducer.isLoading,
     user: state.userReducer.user
   }
 }

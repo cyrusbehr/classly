@@ -80,7 +80,8 @@ const userSchema = mongoose.Schema({
   courses:[{
     type: mongoose.Schema.ObjectId,
     ref: 'Course'
-  }]
+  }],
+  likedQuestions: [],
 });
 
 const Course = mongoose.model('Course', CourseSchema);

@@ -9,7 +9,8 @@ import {
   LIKE_QUESTION, LOADING,
   NOT_LOADING, CLOSE, OPEN,
   POPULATE_COURSES, POPULATE_CLASS,
-  ADD_COURSE, ADD_CLASS_TO_ARRAY} from '../constants/ActionTypes';
+  ADD_COURSE, ADD_CLASS_TO_ARRAY,
+INITIALIZE} from '../constants/ActionTypes';
 
 
   export function setSocket(socket) {
@@ -159,6 +160,12 @@ import {
     return {
       type: ADD_CLASS_TO_ARRAY,
       classObject: classObject,
+    }
+  }
+
+  export function hasInitialized() {
+    return {
+      type: INITIALIZE
     }
   }
 

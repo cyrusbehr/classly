@@ -96,7 +96,7 @@ StudentTopicsContainer{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-bottom: 3px solid #DFDFDF;
+  border-bottom: 3px solid #F0F0F0;
   background-color: white;
   //#D9FFF5
 }
@@ -260,15 +260,9 @@ StudentTopicsContainer{
 .delete-question:hover{
   fill: $red;
   stroke: $red;
-  stroke-width: 4px;
 }
 
 .delete-topic{
-  // transform: scale(0.3);
-  // fill: darkgray;
-  // position: relative;
-  // top: -8px;
-  // left: 10px;
   width: 24px;
   color: #DFDFDF;
 }
@@ -283,19 +277,16 @@ StudentTopicsContainer{
 .delete-topic:hover{
   fill: $red;
   stroke: $red;
-  stroke-width: 4px;
 }
 
 .star:hover{
   fill: $red;
   stroke: $red;
-  stroke-width: 4px;
 }
 
 .resolve:hover{
   fill: green;
   stroke: green;
-  stroke-width: 4px;
 }
 
 #reply-icon{

@@ -252,6 +252,7 @@ io.on('connection', socket => {
         } else {
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
+          // TODO: find the user, and add the question to their array of likedQuestions
         }
       });
     } else {
@@ -262,6 +263,8 @@ io.on('connection', socket => {
         } else {
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
+          // TODO: find the user, and remove the question from their array of likedQuestions
+          // TODO: when the user first logs in, populate the likedQuestions array properly
         }
       });
     }

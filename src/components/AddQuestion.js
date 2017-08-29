@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { addQuestion, addTopic, open } from '../actions/Actions';
+import { addQuestion, addTopic, open, hasInitialized } from '../actions/Actions';
 import Autocomplete from 'react-autocomplete';
 import { matchStateToTerm } from 'react-autocomplete';
 import $ from 'jquery';
@@ -19,6 +19,8 @@ class AddQuestion extends Component{
       questionEmpty: true
     }
 
+    if(!this.props.hasInitializedState){
+      this.props.hasInitializedAction()
     this.props.socket.on('generateQuestion', (newQuestion) => {
       this.props.addQuestionAction(newQuestion);
     })
@@ -26,6 +28,7 @@ class AddQuestion extends Component{
     this.props.socket.on('generateTopic', (newTopic) => {
       this.props.addTopicAction(newTopic);
     })
+  }
   }
 
   componentDidMount() {
@@ -93,8 +96,6 @@ class AddQuestion extends Component{
         comments: []
       }
 
-      console.log("DATA:", data);
-
       this.props.socket.emit('generateQuestion', data);
 
         if(isUniqueTopic && data.tags !== "") {
@@ -123,8 +124,8 @@ class AddQuestion extends Component{
       $('.questions-container').animate({
         scrollTop: 228 + this.props.questionsArray.length * $('.question').height() // TODO: THIS IS HARDCODED, MIGHT CAUSE ISSUE WHEN THE HEIGHT OF EACH QUESTION IS CHANGED
       }, 500, "swing");
-
     }
+    $('#new-question').focus();
   }
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -134,7 +135,16 @@ class AddQuestion extends Component{
 
 
   render() {
-    var isResolvedQuestionTag = (this.state.tags === "ResolvedQuestions");
+    var isResolvedQuestionTag = (this.state.tags === "ResolvedQuestions") || true;
+    var menuStyle = {
+      borderRadius: '3px',
+      boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+      background: 'rgba(255, 255, 255, 0.9)',
+      fontSize: '90%',
+      position: 'fixed',
+      overflow: 'auto',
+      maxHeight: '26px', // TODO: don't cheat, let it flow to the bottom, 26px
+    }
     return (
       <div className="new-question-container">
         <div className="new-question-input-field">
@@ -146,44 +156,24 @@ class AddQuestion extends Component{
             placeholder="New Question..."
           />
 
-          {isResolvedQuestionTag
-          ?
           <Autocomplete
+            menuStyle={menuStyle}
             wrapperProps={{id:'new-tag'}}
             inputProps={{id:'tag', placeholder:'#topic'}}
             getItemValue={(item) => item.text}
             items={this.props.classObj.topics}
             renderItem={(item, isHighlighted) =>
-              <div id="menu-item" style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+              <div id="menu-item" style={{ background: isHighlighted ? '#EEEEEE' : 'white' }}>
                 {item.text}
               </div>
             }
             value={this.state.tags}
-            onChange={(e) => {this.updateTags(e); this.updateAutocompleteMenuPosition();}}
+            onChange={(e) => {this.updateTags(e)}}
             onSelect={(val) => this.setState({tags:val})}
             shouldItemRender={ (item, val)=>{
               return item.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
             }}
           />
-        :
-        <Autocomplete
-          wrapperProps={{id:'new-tag'}}
-          inputProps={{id:'tag', placeholder:'#topic'}}
-          getItemValue={(item) => item.text}
-          items={this.props.classObj.topics}
-          renderItem={(item, isHighlighted) =>
-            <div id="menu-item" style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-              {item.text}
-            </div>
-          }
-          value={this.state.tags}
-          onChange={(e) => this.updateTags(e)}
-          onSelect={(val) => this.setState({tags:val})}
-          shouldItemRender={ (item, val)=>{
-            return item.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
-          }}
-        />
-        }
         </div>
         {this.state.questionEmpty ?
           <div className="new-question-footer">
@@ -214,6 +204,7 @@ const mapStateToProps = state => {
     userType: state.userReducer.user.userType,
     topicsArr: state.classReducer.topics,
     questionsArray: state.classReducer.questions,
+    hasInitializedState: state.userReducer.hasInitialized
   }
 }
 
@@ -225,9 +216,12 @@ const mapDispatchToProps = dispatch => {
     addTopicAction: (savedTopic) => {
       dispatch(addTopic(savedTopic))
     },
-    open: () => {
+    open:() => {
       dispatch(open())
     },
+    hasInitializedAction: () => {
+      dispatch(hasInitialized())
+    }
   }
 }
 
