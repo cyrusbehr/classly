@@ -162,6 +162,7 @@ class StudentRegisterCard extends Component {
           <TextField
             errorText={this.state.passwordErrorMessage}
             hintText="Password"
+            type="password"
             hintStyle={{'color':'#555555'}}
             underlineFocusStyle={{borderColor:'#00C993'}}
             inputStyle={{'color':'white'}}
@@ -171,6 +172,7 @@ class StudentRegisterCard extends Component {
           <TextField
             errorText={this.state.passwordRepeatErrorMessage}
             hintText="Password Repeat"
+            type="password"
             hintStyle={{'color':'#555555'}}
             underlineFocusStyle={{borderColor:'#00C993'}}
             inputStyle={{'color':'white'}}

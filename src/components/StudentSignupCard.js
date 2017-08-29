@@ -137,6 +137,7 @@ class StudentSignupCard extends Component {
         <TextField
           errorText={this.state.passwordFieldErrorText}
           hintText="Password"
+          type="password"
           hintStyle={{'color':'#555555'}}
           underlineFocusStyle={{borderColor:'#00C993'}}
           inputStyle={{'color':'white'}}
