@@ -102,47 +102,37 @@ class ProfessorSignupCard extends Component {
   }
 
   render() {
-    return(
-      <div className="professor-signup-card">
-            <form>
-              <label>
-                <TextField
-                  errorText={this.state.emailFieldErrorText}
-                  hintText="Email"
-                  hintStyle={{'color':'#555555'}}
-                  underlineFocusStyle={{borderColor:'#00C993'}}
-                  inputStyle={{'color':'white'}}
-                  value={this.state.email}
-                  onChange={(event) => this.handleEmailChange(event)}
-                />
-              </label>
-              <br></br>
-              <label>
-                <TextField
-                  errorText={this.state.passwordFieldErrorText}
-                  hintText="Password"
-                  hintStyle={{'color':'#555555'}}
-                  underlineFocusStyle={{borderColor:'#00C993'}}
-                  inputStyle={{'color':'white'}}
-                  value={this.state.password}
-                  onChange={(event) => this.handlePasswordChange(event)}
-                />
-              </label>
-              <br></br>
-              {/* <input type="submit"
-                value="Create Class"
-                onClick={(e) => this.onSubmit(e)}/> */}
-                <button
-                  type="button"
-                  onClick={(e) => this.onSubmit(e)}
-                  className="student-signup-submit hvr-grow"
-                >Login</button>
-                <button
-                  type="button"
-                  onClick={(e) => this.register(e)}
-                  className="student-signup-register hvr-grow"
-                  >Register</button>
-            </form>
+    return (
+      <div className="student-signup-card">
+        <TextField
+          errorText={this.state.emailFieldErrorText}
+          hintText="Email"
+          hintStyle={{'color':'#555555'}}
+          underlineFocusStyle={{borderColor:'#00C993'}}
+          inputStyle={{'color':'white'}}
+          value={this.state.email}
+          onChange={(event) => this.handleEmailChange(event)}
+        />
+
+        <TextField
+          errorText={this.state.passwordFieldErrorText}
+          hintText="Password"
+          hintStyle={{'color':'#555555'}}
+          underlineFocusStyle={{borderColor:'#00C993'}}
+          inputStyle={{'color':'white'}}
+          value={this.state.password}
+          onChange={(event) => this.handlePasswordChange(event)}
+        />
+        <button
+          type="button"
+          onClick={(e) => this.onSubmit(e)}
+          className="student-signup-submit hvr-grow"
+          >Login</button>
+        <button
+          type="button"
+          onClick={(e) => this.register(e)}
+          className="student-signup-register hvr-grow"
+          >Register</button>
       </div>
     )
   }
