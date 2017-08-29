@@ -1,4 +1,4 @@
-import { SET_USER , LIKE_QUESTION, INITIALIZE } from '../constants/ActionTypes';
+import { SET_USER , LIKE_QUESTION, INITIALIZE, SET_LIKED_QUESTIONS } from '../constants/ActionTypes';
 
 
 const initialState = {
@@ -34,6 +34,10 @@ export default function (state = initialState, action) {
       newState3 = Object.assign({}, state, {likedQuestions: newArr});
     }
     return newState3;
+
+  case SET_LIKED_QUESTIONS:
+  var newState = Object.assign({}, state, {likedQuestions: action.likedQuestions})
+  return newState
 
   default:
     return state;

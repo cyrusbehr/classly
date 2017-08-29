@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
-import {setUser, loading, notLoading} from '../actions/Actions'
+import {setUser, loading, notLoading, setLikedQuestions} from '../actions/Actions'
 import $ from 'jquery'
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
@@ -84,6 +84,7 @@ class TASignupCard extends Component {
           })
         }else {
           this.props.setUserAction(r.data.response);
+          this.props.setLikedQuestionsAction(r.data.response.likedQuestions)
           this.props.setNotLoadingAction();
           this.redirect();
         }
@@ -156,6 +157,9 @@ class TASignupCard extends Component {
       setNotLoadingAction: () => {
         dispatch(notLoading())
       },
+      setLikedQuestionsAction: (likedQuestions) => {
+        dispatch(setLikedQuestions(likedQuestions))
+      }
     }
   }
 

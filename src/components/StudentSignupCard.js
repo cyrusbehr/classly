@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import _ from 'underscore'
 import { connect } from 'react-redux';
-import {setUser, loading, notLoading} from '../actions/Actions'
+import {setUser, loading, notLoading, setLikedQuestions} from '../actions/Actions'
 import $ from 'jquery'
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
@@ -29,30 +29,6 @@ class StudentSignupCard extends Component {
       }
     });
 
-    // this.props.socket.on('Joined', () => {
-    //   this.props.socket.emit('getStudentState', this.state.password)
-    // })
-
-    // this.props.socket.on('error1', () => {
-    //   console.log("this error1 was hit for some fucking reason!");
-    //   this.props.updateWrongAccessCode(false);
-    //   this.props.setNotLoadingAction();
-    // })
-
-    // this.props.socket.on('getStudentState', (classObj) => {
-    //   //sort the questions by upvotes
-    //   let questionsArray = classObj.questions.slice()
-    //   if(questionsArray.length > 0) {
-    //     let sortedArray = _.sortBy(questionsArray, (question) => {
-    //       return -1 * question.upVotes; //negative changes to descending order
-    //     })
-    //     classObj.questions = sortedArray;
-    //   }
-    //   //update the state with the class and the username
-    //   this.props.addClassAction(classObj)
-    //   this.props.setUsernameAction(this.state.email);
-    //   this.redirect()
-    // })
   }
 
   redirect() {
@@ -106,6 +82,8 @@ class StudentSignupCard extends Component {
           })
         }else {
           this.props.setUserAction(r.data.response);
+          this.props.setLikedQuestionsAction(r.data.response.likedQuestions);
+          console.log("these are your liked questions: ", r.data.response.likedQuestions);
           this.props.setNotLoadingAction();
           this.redirect();
         }
@@ -177,6 +155,9 @@ class StudentSignupCard extends Component {
           setNotLoadingAction: () => {
             dispatch(notLoading())
           },
+          setLikedQuestionsAction: (likedQuestions) => {
+            dispatch(setLikedQuestions(likedQuestions))
+          }
         }
       }
 

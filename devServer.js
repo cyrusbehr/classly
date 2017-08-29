@@ -83,6 +83,13 @@ io.on('connection', socket => {
         classObj.save();
         var deletedQuestionId = data.questionId;
         socket.broadcast.to(socket.currentRoom).emit('deleteQuestion', deletedQuestionId);
+        if(data.userID){
+          User.findById(data.userID, (err, user) => {
+            var index = user.likedQuestions.indexOf(data.questionId);
+            user.likedQuestions.splice(index, 1);
+            user.save();
+          })
+        }
       })
     })
   })

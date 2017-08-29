@@ -10,7 +10,7 @@ import {
   NOT_LOADING, CLOSE, OPEN,
   POPULATE_COURSES, POPULATE_CLASS,
   ADD_COURSE, ADD_CLASS_TO_ARRAY,
-INITIALIZE} from '../constants/ActionTypes';
+INITIALIZE, SET_LIKED_QUESTIONS} from '../constants/ActionTypes';
 
 
   export function setSocket(socket) {
@@ -169,9 +169,9 @@ INITIALIZE} from '../constants/ActionTypes';
     }
   }
 
-
-  // export function setColor(questionId) {
-  //   return {
-  //     type: SET_COLOR
-  //   }
-  // }
+  export function setLikedQuestions(likedQuestions) {
+    return {
+      type: SET_LIKED_QUESTIONS,
+      likedQuestions: likedQuestions
+    }
+  }

@@ -51,7 +51,7 @@ class TAQuestion extends Component {
     e.preventDefault()
     this.props.deleteQuestionAction(this.props.id);
     console.log('The question id is: ', this.props.id)
-    this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference});
+    this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference, userID: this.props.user._id});
   }
 
   toggleThisStar(e) {
@@ -230,6 +230,7 @@ class TAQuestion extends Component {
         const mapStateToProps = state => {
 
           return {
+            user: state.userReducer.user,
             socket: state.socketReducer.socket,
             questionsArray: state.classReducer.questions,
             username: state.userReducer.username,
