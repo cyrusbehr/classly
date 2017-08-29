@@ -130,11 +130,11 @@ module.exports = function(passport) {
         res.json({
           isModal: false
         })
-        user.isModal = true;
+        user.isModal = false;
         user.save()
       } else {
         res.json({
-          isModal: true
+          isModal: false
         })
       }
     })
