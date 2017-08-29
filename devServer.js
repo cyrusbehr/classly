@@ -15,6 +15,7 @@ const { User } = require('./src/Models/models.js');
 const dashboard = require('./backend/routes/dashboard');
 const bcrypt = require('bcrypt');
 
+
 const app = express();
 // const compiler = webpack(config);
 
@@ -252,7 +253,10 @@ io.on('connection', socket => {
         } else {
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
-          // TODO: find the user, and add the question to their array of likedQuestions
+          User.findById(data.userID, (err, user) => {
+            user.likedQuestions.push(data.questionId);
+            user.save()
+          })
         }
       });
     } else {
@@ -263,8 +267,11 @@ io.on('connection', socket => {
         } else {
           socket.broadcast.to(socket.currentRoom).emit('upVoteQuestion', updatedQuestion);
           socket.emit('upVoteQuestion', updatedQuestion);
-          // TODO: find the user, and remove the question from their array of likedQuestions
-          // TODO: when the user first logs in, populate the likedQuestions array properly
+          User.findById(data.userID, (err, user) => {
+            var index = user.likedQuestions.indexOf(data.questionId);
+            user.likedQuestions.splice(index, 1);
+            user.save();
+          })
         }
       });
     }

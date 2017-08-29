@@ -37,10 +37,12 @@ class StudentQuestion extends Component {
     if(this.props.likedQuestions.indexOf(questionId) === -1){
       this.setState({votes: this.state.votes + 1})
       this.props.likeQuestionAction(questionId, "UP");
-      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
+      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes,
+         toggle: false, userID: this.props.user._id});
     } else {
       this.setState({votes: this.state.votes - 1})
-      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
+      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes,
+         toggle: true, userID: this.props.user._id});
       this.props.likeQuestionAction(questionId, "DOWN");
     }
   }

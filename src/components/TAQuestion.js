@@ -36,11 +36,13 @@ class TAQuestion extends Component {
 
     if(!this.state.alreadyClicked){
       this.setState({votes: this.state.votes + 1})
-      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
+      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes,
+         toggle: false, userID: this.props.user._id});
       this.setState({alreadyClicked: true});
     } else {
       this.setState({votes: this.state.votes - 1})
-      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
+      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes,
+         toggle: true, userID: this.props.user._id});
       this.setState({alreadyClicked: false});
     }
   }
