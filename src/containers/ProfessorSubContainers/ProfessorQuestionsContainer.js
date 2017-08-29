@@ -26,6 +26,9 @@ class ProfessorQuestionsContainer extends Component {
     this.props.socket.on('toggleResolve', (updatedQuestion) => {
       this.props.toggleResolveAction(updatedQuestion._id);
     });
+    this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
+      this.props.upVoteQuestionAction(updatedQuestion);
+    });
   }
 
   setColor() {

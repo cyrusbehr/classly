@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
+import { toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 import ReactTooltip from 'react-tooltip';
@@ -16,7 +16,6 @@ class TAQuestion extends Component {
       processing: false
     };
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
-      this.props.upVoteQuestionAction(updatedQuestion);
       this.setState({votes: this.props.currentUpVotes, processing: false})
     });
   }
@@ -240,9 +239,6 @@ class TAQuestion extends Component {
 
         const mapDispatchToProps = dispatch => {
           return {
-            upVoteQuestionAction: (updatedQuestion) => {
-              dispatch(upVoteQuestion(updatedQuestion));
-            },
             deleteQuestionAction: (ID) => {
               dispatch(deleteQuestion(ID));
             },

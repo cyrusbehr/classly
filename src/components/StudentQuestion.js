@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {upVoteQuestion, likeQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
+import { likeQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 import ReactTooltip from 'react-tooltip';
@@ -14,10 +14,11 @@ class StudentQuestion extends Component {
       toggle: true,
       processing: false
     };
+
     this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
-      this.props.upVoteQuestionAction(updatedQuestion);
       this.setState({votes: this.props.currentUpVotes, processing: false});
     });
+
   }
 
   componenetDidMount() {
@@ -37,7 +38,6 @@ class StudentQuestion extends Component {
       this.setState({votes: this.state.votes + 1})
       this.props.likeQuestionAction(questionId, "UP");
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: false});
-
     } else {
       this.setState({votes: this.state.votes - 1})
       this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes, toggle: true});
@@ -254,9 +254,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    upVoteQuestionAction: (updatedQuestion) => {
-      dispatch(upVoteQuestion(updatedQuestion));
-    },
     deleteQuestionAction: (ID) => {
       dispatch(deleteQuestion(ID));
     },

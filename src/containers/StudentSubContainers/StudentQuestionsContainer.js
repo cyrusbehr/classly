@@ -15,16 +15,18 @@ class StudentQuestionsContainer extends Component {
       name: "",
       accessCode: "",
     }
-    //listener that calls deleteQuestionAction
+
+    this.props.socket.on('upVoteQuestion', (updatedQuestion) => {
+      this.props.upVoteQuestionAction(updatedQuestion);
+    });
+
     this.props.socket.on('deleteQuestion', (deletedQuestionId) => {
       this.props.deleteQuestionAction(deletedQuestionId);
     });
     this.props.socket.on('newComment', (newCommentObj) => {
-      console.log("This ones for your corey! : ", newCommentObj);
       this.props.addCommentAction(newCommentObj);
     });
     this.props.socket.on('toggleStar', (updatedQuestion) => {
-      console.log("this is toggleState listener updatedQuestion:", updatedQuestion);
       this.props.toggleStarAction(updatedQuestion._id);
     });
     this.props.socket.on('toggleResolve', (updatedQuestion) => {
@@ -148,9 +150,6 @@ const mapDispatchToProps = dispatch => {
     toggleResolveAction: (ID) => {
       dispatch(toggleResolve(ID))
     },
-    // setColor: (ID) => {
-    //   dispatch(setColor(ID))
-    // }
   }
 }
 
