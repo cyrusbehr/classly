@@ -27,7 +27,11 @@ module.exports = function(passport) {
       User.findOne({email: req.body.email})
       .then(function(foundUser){
         if(foundUser){
-          throw new Error('email is taken');
+          // throw new Error('email is taken');
+          throw [{
+            'param': 'email',
+            'msg': 'Email is taken'
+          }];
         } else {
           const saltRounds = 10;
           const hash = bcrypt.hashSync(req.body.password, saltRounds);
@@ -64,7 +68,7 @@ module.exports = function(passport) {
       .catch(function(error){
         console.log('error', error);
         res.json({
-          error: error.message
+          error: error
         })
       })
     })

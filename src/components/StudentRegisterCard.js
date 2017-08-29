@@ -77,6 +77,7 @@ class StudentRegisterCard extends Component {
         userType: "student"
       })
       .then((r) => {
+        console.log('r.data.error', r.data.error);
         if(r.data.error) {
           // this.props.setNotLoadingAction();
           // TODO: alert the user that there was an error, and do the corresponding action
