@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
+import {likeQuestion, toggleStar, toggleResolve, deleteQuestion, addComment} from '../actions/Actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 import ReactTooltip from 'react-tooltip';
@@ -9,7 +9,6 @@ class TAQuestion extends Component {
     super(props);
     this.state = {
       hover: false,
-      alreadyClicked: false,
       votes: this.props.currentUpVotes,
       commentText: "",
       toggle: true,
@@ -30,22 +29,21 @@ class TAQuestion extends Component {
    }
  }
 
-  handleUpvote(e) {
-    if(this.state.processing) return
-    this.setState({processing: true});
-
-    if(!this.state.alreadyClicked){
-      this.setState({votes: this.state.votes + 1})
-      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes,
-         toggle: false, userID: this.props.user._id});
-      this.setState({alreadyClicked: true});
-    } else {
-      this.setState({votes: this.state.votes - 1})
-      this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes,
-         toggle: true, userID: this.props.user._id});
-      this.setState({alreadyClicked: false});
-    }
-  }
+ handleUpvote(e, questionId) {
+   if(this.state.processing) return
+   this.setState({processing: true});
+   if(this.props.likedQuestions.indexOf(questionId) === -1){
+     this.setState({votes: this.state.votes + 1})
+     this.props.likeQuestionAction(questionId, "UP");
+     this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes,
+        toggle: false, userID: this.props.user._id});
+   } else {
+     this.setState({votes: this.state.votes - 1})
+     this.props.socket.emit('upVoteQuestion', {questionId: this.props.id, previousUpVotes: this.props.currentUpVotes,
+        toggle: true, userID: this.props.user._id});
+     this.props.likeQuestionAction(questionId, "DOWN");
+   }
+ }
 
   deleteItem(e) {
     e.preventDefault()
@@ -95,8 +93,10 @@ class TAQuestion extends Component {
       }
 
     render() {
+      var isAlreadyClicked = (this.props.likedQuestions.indexOf(this.props.id) !== -1)
+
       var style = {};
-      if(this.state.alreadyClicked){ //TODO: this needs fixing
+      if(isAlreadyClicked){ //TODO: this needs fixing
         style.backgroundColor = '#D9FFF5';
       } else {
         style.backgroundColor = 'white';
@@ -125,7 +125,7 @@ class TAQuestion extends Component {
                   <i
                     id="upvote-icon"
                     className="material-icons"
-                    onClick={(e) => this.handleUpvote(e)}
+                    onClick={(e) => this.handleUpvote(e, this.props.id)}
                     >keyboard_arrow_up</i>
                     {this.state.votes}
                   </div>
@@ -232,10 +232,10 @@ class TAQuestion extends Component {
             user: state.userReducer.user,
             socket: state.socketReducer.socket,
             questionsArray: state.classReducer.questions,
-            username: state.userReducer.username,
             userType: state.userReducer.userType,
             firstname: state.userReducer.user.firstname,
             lastname: state.userReducer.user.lastname,
+            likedQuestions: state.userReducer.user.likedQuestions,
           }
         }
 
@@ -252,6 +252,9 @@ class TAQuestion extends Component {
             },
             addCommentAction: (newComment) => {
               dispatch(addComment(newComment))
+            },
+            likeQuestionAction: (questionId, direction) => {
+              dispatch(likeQuestion(questionId, direction));
             }
           }
         }

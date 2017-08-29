@@ -80,6 +80,7 @@ class TAQuestionsContainer extends Component {
               key={question._id}
               id={question._id}
               currentUpVotes={question.upVotes}
+              id={question._id}
               text={question.text}
               email={question.email}
               isResolved={question.isResolved}

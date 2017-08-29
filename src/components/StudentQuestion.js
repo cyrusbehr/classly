@@ -53,12 +53,6 @@ class StudentQuestion extends Component {
     this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference, userID: this.props.user._id});
   }
 
-  toggleThisStar(e) {
-    e.preventDefault();
-    this.props.toggleStarAction(this.props.id);
-    this.props.socket.emit('toggleStar', {questionId: this.props.id, isStarred: this.props.isStarred});
-  }
-
   toggleThisResolve(e) {
     e.preventDefault();
     this.props.toggleResolveAction(this.props.id);
