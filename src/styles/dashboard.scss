@@ -218,6 +218,20 @@ $light-green: #8dcdc1;
   // margin-bottom: 120px;
 }
 
+.dashboardBody-container-body-empty {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  // margin-bottom: 120px;
+}
+
+.no-courses {
+  font-size:30px;
+  color:#c0c0c0;
+  margin-left:80px;
+}
+
 .dashboardBody-container-card-body {
   display: flex;
   justify-content: flex-start;
