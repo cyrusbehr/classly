@@ -194,7 +194,8 @@ class DashboardContainer extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="dashboardBody-container-body">
+                  <div className={this.props.courses.length === 0 ? "dashboardBody-container-body-empty" : "dashboardBody-container-body"}>
+                    {this.props.courses.length === 0 ? <div className="no-courses">You don't have any courses~</div> : null}
                     {this.props.courses.map((course) => {
                       return (
                         <DashboardCourseCard

@@ -645,4 +645,18 @@ img{
   margin-top: 40px;
 }
 
+.modal-instruction {
+  font-family: 'Raleway', sans-serif;
+  font-size:18px;
+}
+
+.modal-instruction-welcome {
+  font-size:23px;
+  font-weight:600;
+  border-bottom-style: solid;
+  color:black;
+  padding-bottom: 10px;
+  border-bottom-width:thin;
+}
+
 textarea, input, button { outline: none; }

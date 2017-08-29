@@ -123,7 +123,8 @@ class DashboardClassContainer extends Component {
               </div>
             </div>
             <div className="dashboardBody-container-card-body-container">
-              <div className="dashboardBody-container-card-body">
+              <div className={this.props.classes.length === 0 ? "dashboardBody-container-card-body-empty" : "dashboardBody-container-card-body"}>
+                {this.props.classes.length === 0 ? <div className="no-classes">You don't have any classes~</div> : null}
                 {this.props.classes.map((thisClass) => {
                   var date = new Date(thisClass.timestamp);
                   var dateString = String(date.getMonth() + 1) + '/' + String(date.getDate()) + '/' + String(date.getFullYear());

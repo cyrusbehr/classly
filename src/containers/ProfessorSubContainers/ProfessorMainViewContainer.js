@@ -53,6 +53,12 @@ class ProfessorMainViewContainer extends Component {
                 className="guide-modal"
                 overlayClassName="guide-modal-overlay"
                 >
+                <div className="modal-instruction">
+                  <div className="modal-instruction-welcome">
+                    Welcome to classly, professor!
+                </div>
+                <br>
+                </br>
                   Welcome to the live lecture room, Professor.
                   On the right hand side, you will find a list of all the questions aksed by the Students and TAs.
                   Each question will display the number of votes it has recieved, with the most upvoted questions being shown at the top.
@@ -67,8 +73,7 @@ class ProfessorMainViewContainer extends Component {
                    When asking questions, student identities will remain anonymous to their peers, but visible to the Professor and TAs.
 
                    To show this message again, click the question icon at the bottom right.
-
-
+                 </div>
                    <button className="dashboardBody-close-button hvr-grow"
                      onClick={() => this.props.close()}
                      >Dismiss</button>

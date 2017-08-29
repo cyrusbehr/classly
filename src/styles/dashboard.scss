@@ -218,6 +218,26 @@ $light-green: #8dcdc1;
   // margin-bottom: 120px;
 }
 
+.dashboardBody-container-body-empty {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  // margin-bottom: 120px;
+}
+
+.no-courses {
+  font-size:30px;
+  color:#c0c0c0;
+  margin-left:80px;
+}
+
+.no-classes {
+  font-size:30px;
+  color:#c0c0c0;
+  margin-left:30px;
+}
+
 .dashboardBody-container-card-body {
   display: flex;
   justify-content: flex-start;
@@ -226,6 +246,16 @@ $light-green: #8dcdc1;
   margin-bottom: 120px;
   width: 1000px;
 }
+
+.dashboardBody-container-card-body-empty {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 120px;
+  width: 1000px;
+}
+
 
 .dashboardBody-container-card-body-container {
   display: flex;
