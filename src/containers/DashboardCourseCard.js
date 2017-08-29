@@ -44,7 +44,12 @@ class DashboardCourseCard extends Component {
         </div>
           {isProfessor
           ?
-          <div className="dashboard-card-access-code">Sharable Code: {this.props.accessCode}</div>
+          <div
+            className="dashboard-card-access-code"
+            onClick={(e)=>{e.stopPropagation()}}
+          >
+            Sharable Code: {this.props.accessCode}
+          </div>
           :null}
 
       </div>
