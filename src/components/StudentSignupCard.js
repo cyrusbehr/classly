@@ -5,6 +5,7 @@ import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
+import {TextField} from 'material-ui';
 
 class StudentSignupCard extends Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class StudentSignupCard extends Component {
       wrongAccessCode: true,
       nameEmpty: true,
       codeEmpty: true,
+      emailFieldErrorText: "",
+      passwordFieldErrorText: ""
     }
   }
 
@@ -69,18 +72,25 @@ class StudentSignupCard extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+
     if(this.state.email.trim() === ''){
-      this.setState({nameEmpty: false});
+      // this.setState({nameEmpty: false});
+      this.setState({
+        emailFieldErrorText: "Email cannot be empty"
+      })
     }
 
     if(this.state.password.trim() === ''){
-      this.setState({codeEmpty: false});
+      // this.setState({codeEmpty: false});
+      this.setState({
+        passwordFieldErrorText: "Password cannot be empty"
+      })
     }
 
-    if(!this.state.password || !this.state.email) return;
-
-    if(this.state.email.trim() !== '' && this.state.password.trim() !== '') {
-      this.props.setLoadingAction()
+    if(this.state.password.trim() === '' || this.state.email.trim() === ''){
+      return;
+    } else {
+      // this.props.setLoadingAction() //note: commented out the loading cuz rerendering the form is messing with the display of error messages
       // this.props.socket.emit('join', this.state.password);
       axios.post(baseDomain + 'login', {
         email: this.state.email,
@@ -89,8 +99,11 @@ class StudentSignupCard extends Component {
       })
       .then((r) => {
         if(r.data.error) {
-          this.props.setNotLoadingAction();
-          // TODO: handle the errors here and give feedback to the user
+          // this.props.setNotLoadingAction();
+          this.setState({
+            emailFieldErrorText: r.data.error,
+            passwordFieldErrorText: r.data.error
+          })
         }else {
           this.props.setUserAction(r.data.response);
           this.props.setNotLoadingAction();
@@ -113,37 +126,27 @@ class StudentSignupCard extends Component {
       <div className="student-signup-card">
         <form>
           <label>
-            <input
-              type="text"
+            <TextField
+              errorText={this.state.emailFieldErrorText}
+              hintText="Email"
+              hintStyle={{'color':'#555555'}}
+              underlineFocusStyle={{borderColor:'#00C993'}}
+              inputStyle={{'color':'white'}}
               value={this.state.email}
-              placeholder="Email"
               onChange={(event) => this.handleEmailChange(event)}
-              className= {this.state.emailEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
             />
-            <div>
-              </div>
             </label>
             <br></br>
             <label>
-              <input
-                type="password"
-                value={this.state.title}
-                placeholder="Password"
+              <TextField
+                errorText={this.state.passwordFieldErrorText}
+                hintText="Password"
+                hintStyle={{'color':'#555555'}}
+                underlineFocusStyle={{borderColor:'#00C993'}}
+                inputStyle={{'color':'white'}}
+                value={this.state.password}
                 onChange={(event) => this.handlePasswordChange(event)}
-                className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
-                  "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
               />
-              <div>
-                {this.state.codeEmpty ? this.props.wrongAccessCode ?
-                  <div>
-                  </div> :
-                  <div className="wrong-access-alert">
-                    Wrong password!
-                  </div> :
-                  <div className="empty-access-alert">
-                    Password can't be empty!
-                  </div> }
-                </div>
               </label>
               <br></br>
               <button

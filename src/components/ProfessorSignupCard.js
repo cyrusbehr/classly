@@ -7,6 +7,7 @@ import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 import {baseDomain} from '../constants/const'
 import axios from 'axios'
+import {TextField} from 'material-ui';
 
 
 class ProfessorSignupCard extends Component {
@@ -16,7 +17,9 @@ class ProfessorSignupCard extends Component {
       email: "",
       password: "",
       nameEmpty: true,
-      lectureEmpty: true
+      lectureEmpty: true,
+      emailFieldErrorText: "",
+      passwordFieldErrorText: ""
     }
     if(this.props.userType === ""){
       this.props.history.push('/')
@@ -49,36 +52,48 @@ class ProfessorSignupCard extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    // if(this.state.name.trim() === ''){
-    //   this.setState({nameEmpty: false});
-    // }
-    //
-    // if(this.state.title.trim() === ''){
-    //   this.setState({lectureEmpty: false});
-    // }
-    //
-    // if(this.state.name.trim() !== '' && this.state.title.trim() !== '') {
-    //   this.props.socket.emit('createClass', this.state);
-    //   this.props.setLoadingAction();
-    // }
-    axios.post(baseDomain + 'login', {
-      email: this.state.email,
-      password: this.state.password,
-      userType: 'professor'
-    })
-    .then((r) => {
-      if(r.data.error) {
-        this.props.setNotLoadingAction();
-        console.log("there was an error: ", r.data.error);
+
+    if(this.state.email.trim() === ''){
+      // this.setState({nameEmpty: false});
+      this.setState({
+        emailFieldErrorText: "Email cannot be empty"
+      })
+    }
+
+    if(this.state.password.trim() === ''){
+      // this.setState({codeEmpty: false});
+      this.setState({
+        passwordFieldErrorText: "Password cannot be empty"
+      })
+    }
+
+    if(this.state.password.trim() === '' || this.state.email.trim() === ''){
+      return;
+    } else {
+      // this.props.setLoadingAction() //note: commented out the loading cuz rerendering the form is messing with the display of error messages
+      // this.props.socket.emit('join', this.state.password);
+      axios.post(baseDomain + 'login', {
+        email: this.state.email,
+        password: this.state.password,
+        userType: 'professor'
+      })
+      .then((r) => {
+        if(r.data.error) {
+          // this.props.setNotLoadingAction();
+          this.setState({
+            emailFieldErrorText: r.data.error,
+            passwordFieldErrorText: r.data.error
+          })
         }else {
-        this.props.setUserAction(r.data.response);
-        this.props.setNotLoadingAction();
-        this.redirect();
-      }
-    })
-    .catch((err) => {
-      console.log("there was an error with the request : ", err);
-    })
+          this.props.setUserAction(r.data.response);
+          this.props.setNotLoadingAction();
+          this.redirect();
+        }
+      })
+      .catch((err) => {
+        console.log("there was an error with the request : ", err);
+      })
+    }
   }
 
   register(e) {
@@ -91,35 +106,27 @@ class ProfessorSignupCard extends Component {
       <div className="professor-signup-card">
             <form>
               <label>
-                <input
-                  type="text"
+                <TextField
+                  errorText={this.state.emailFieldErrorText}
+                  hintText="Email"
+                  hintStyle={{'color':'#555555'}}
+                  underlineFocusStyle={{borderColor:'#00C993'}}
+                  inputStyle={{'color':'white'}}
                   value={this.state.email}
-                  placeholder="Email"
-                  className={this.state.nameEmpty ? "professor-signup-firstname-input" : "professor-signup-empty-firstname-input"}
                   onChange={(event) => this.handleEmailChange(event)}
                 />
-                {this.state.nameEmpty ?
-                  <div>
-                  </div> :
-                  <div className="empty-name-alert">
-                    Email can't be empty!
-                  </div>}
               </label>
               <br></br>
               <label>
-                <input
-                  type="password"
-                   value={this.state.password}
-                   placeholder="Password"
-                   className={this.state.nameEmpty ? "professor-signup-lecture-input" : "professor-signup-empty-firstname-input"}
-                   onChange={(event) => this.handlePasswordChange(event)}
+                <TextField
+                  errorText={this.state.passwordFieldErrorText}
+                  hintText="Password"
+                  hintStyle={{'color':'#555555'}}
+                  underlineFocusStyle={{borderColor:'#00C993'}}
+                  inputStyle={{'color':'white'}}
+                  value={this.state.password}
+                  onChange={(event) => this.handlePasswordChange(event)}
                 />
-                {this.state.lectureEmpty ?
-                  <div>
-                  </div> :
-                  <div className="empty-lecture-alert">
-                    Lecture title can't be empty!
-                  </div>}
               </label>
               <br></br>
               {/* <input type="submit"

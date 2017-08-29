@@ -5,8 +5,7 @@ import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
-
-
+import {TextField} from 'material-ui';
 
 class TASignupCard extends Component {
   constructor(props) {
@@ -15,7 +14,9 @@ class TASignupCard extends Component {
       email: "",
       password: "",
       nameEmpty: true,
-      codeEmpty: true
+      codeEmpty: true,
+      emailFieldErrorText: "",
+      passwordFieldErrorText: ""
     }
     if(this.props.userType === ""){
       this.props.history.push('/')
@@ -49,24 +50,48 @@ class TASignupCard extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    axios.post(baseDomain + 'login', {
-      email: this.state.email,
-      password: this.state.password,
-      userType: 'ta'
-    })
-    .then((r) => {
-      if(r.data.error) {
-        this.props.setNotLoadingAction();
-        // TODO: handle the errors here and give feedback to the user
-      }else {
-        this.props.setUserAction(r.data.response);
-        this.props.setNotLoadingAction();
-        this.redirect();
-      }
-    })
-    .catch((err) => {
-      console.log("there was an error with the request : ", err);
-    })
+
+    if(this.state.email.trim() === ''){
+      // this.setState({nameEmpty: false});
+      this.setState({
+        emailFieldErrorText: "Email cannot be empty"
+      })
+    }
+
+    if(this.state.password.trim() === ''){
+      // this.setState({codeEmpty: false});
+      this.setState({
+        passwordFieldErrorText: "Password cannot be empty"
+      })
+    }
+
+    if(this.state.password.trim() === '' || this.state.email.trim() === ''){
+      return;
+    } else {
+      // this.props.setLoadingAction() //note: commented out the loading cuz rerendering the form is messing with the display of error messages
+      // this.props.socket.emit('join', this.state.password);
+      axios.post(baseDomain + 'login', {
+        email: this.state.email,
+        password: this.state.password,
+        userType: 'ta'
+      })
+      .then((r) => {
+        if(r.data.error) {
+          // this.props.setNotLoadingAction();
+          this.setState({
+            emailFieldErrorText: r.data.error,
+            passwordFieldErrorText: r.data.error
+          })
+        }else {
+          this.props.setUserAction(r.data.response);
+          this.props.setNotLoadingAction();
+          this.redirect();
+        }
+      })
+      .catch((err) => {
+        console.log("there was an error with the request : ", err);
+      })
+    }
   }
 
   register(e) {
@@ -77,61 +102,47 @@ class TASignupCard extends Component {
 
   render() {
     return (
-          <div className="student-signup-card">
-            <form>
-              <label>
-                <input
-                  type="text"
-                  value={this.state.email}
-                  placeholder="Email"
-                  onChange={(event) => this.handleEmailChange(event)}
-                  className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
-                />
-                <div>
-                {this.state.nameEmpty ?
-                  <div>
-                  </div> :
-                  <div className="empty-name-alert">
-                    Email can't be empty!
-                  </div>}
-                </div>
-              </label>
-              <br></br>
-              <label>
-                <input
-                  type="password"
-                  value={this.state.password}
-                  placeholder="Password"
-                  onChange={(event) => this.handlePasswordChange(event)}
-                  className= {this.state.codeEmpty ? this.props.wrongAccessCode ? "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
-                />
-                <div>
-                {this.state.codeEmpty ? this.props.wrongAccessCode ?
-                  <div>
-                  </div> :
-                  <div className="wrong-access-alert">
-                    Wrong password!
-                  </div> :
-                  <div className="empty-access-alert">
-                    Access code can't be empty!
-                  </div> }
-                </div>
+      <div className="student-signup-card">
+        <form>
+          <label>
+            <TextField
+              errorText={this.state.emailFieldErrorText}
+              hintText="Email"
+              hintStyle={{'color':'#555555'}}
+              underlineFocusStyle={{borderColor:'#00C993'}}
+              inputStyle={{'color':'white'}}
+              value={this.state.email}
+              onChange={(event) => this.handleEmailChange(event)}
+            />
+            </label>
+            <br></br>
+            <label>
+              <TextField
+                errorText={this.state.passwordFieldErrorText}
+                hintText="Password"
+                hintStyle={{'color':'#555555'}}
+                underlineFocusStyle={{borderColor:'#00C993'}}
+                inputStyle={{'color':'white'}}
+                value={this.state.password}
+                onChange={(event) => this.handlePasswordChange(event)}
+              />
               </label>
               <br></br>
               <button
                 type="button"
                 onClick={(e) => this.onSubmit(e)}
                 className="student-signup-submit hvr-grow"
-              >Login</button>
-              <button
-                type="button"
-                onClick={(e) => this.register(e)}
-                className="student-signup-register hvr-grow"
-                >Register</button>
+                >Login</button>
+                <br></br>
+                <button
+                  type="button"
+                  onClick={(e) => this.register(e)}
+                  className="student-signup-register hvr-grow"
+                  >Register</button>
               </form>
             </div>
-      )
-    }
+          )
+        }
   }
 
   const mapStateToProps = state => {

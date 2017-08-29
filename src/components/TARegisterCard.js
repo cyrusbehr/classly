@@ -5,7 +5,7 @@ import {setUser, loading, notLoading} from '../actions/Actions'
 import $ from 'jquery'
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
-
+import {TextField} from 'material-ui';
 
 class TARegisterCard extends Component {
   constructor(props) {
@@ -16,6 +16,11 @@ class TARegisterCard extends Component {
       email: "",
       password: "",
       passwordRepeat: "",
+      firstnameErrorMessage: "",
+      lastnameErrorMessage: "",
+      emailErrorMessage: "",
+      passwordErrorMessage: "",
+      passwordRepeatErrorMessage: "",
       wrongAccessCode: true,
       nameEmpty: true,
       codeEmpty: true,
@@ -62,18 +67,7 @@ class TARegisterCard extends Component {
     // TODO: Do some propper validation here to make sure fields are not empty
     //or just use a form that has built in validation from codepen
 
-    // if(this.state.name.trim() === ''){
-    //   this.setState({nameEmpty: false});
-    // }
-    //
-    // if(this.state.accessCode.trim() === ''){
-    //   this.setState({codeEmpty: false});
-    // }
-
-    // if(!this.state.accessCode || !this.state.name) return;
-
-    // if(this.state.name.trim() !== '' && this.state.accessCode.trim() !== '') {
-      this.props.setLoadingAction()
+      // this.props.setLoadingAction() //note: commented out the loading cuz rerendering the form is messing with the display of error messages
       axios.post(baseDomain + 'register', {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
@@ -84,10 +78,39 @@ class TARegisterCard extends Component {
       })
       .then((r) => {
         if(r.data.error) {
-          this.props.setNotLoadingAction();
+          // this.props.setNotLoadingAction();
           // TODO: alert the user that there was an error, and do the corresponding action
-          // this.props.updateWrongAccessCode(false);
+          r.data.error.forEach((err) => {
+            switch(err.param){
+              case 'firstname':
+                this.setState({
+                  firstnameErrorMessage: err.msg
+                })
+                break;
+              case 'lastname':
+                this.setState({
+                  lastnameErrorMessage: err.msg
+                })
+                break;
+              case 'email':
+                this.setState({
+                  emailErrorMessage: err.msg
+                })
+                break;
+              case 'password':
+                this.setState({
+                  passwordErrorMessage: err.msg
+                })
+                break;
+              case 'passwordRepeat':
+                this.setState({
+                  passwordRepeatErrorMessage: err.msg
+                })
+                break;
+            }
+          })
           console.log("there was an error registering: ", r.data);
+          console.log("r.data.error", r.data.error);
         }else{
           this.props.setUserAction(r.data.response);
           this.props.setNotLoadingAction();
@@ -110,78 +133,58 @@ class TARegisterCard extends Component {
       <div className="student-signup-card">
         <form>
           <label>
-            <input
-              type="text"
-              value={this.state.firstname}
-              placeholder="First Name"
-              onChange={(event) => this.handleFirstNameChange(event)}
-              className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
-            />
-            <div>
-              {this.state.nameEmpty ?
-                <div>
-                </div> :
-                <div className="empty-name-alert">
-                  Name can't be empty!
-                </div>}
-              </div>
+              <TextField
+                errorText={this.state.firstnameErrorMessage}
+                hintText="Firstname"
+                hintStyle={{'color':'#555555'}}
+                underlineFocusStyle={{borderColor:'#00C993'}}
+                inputStyle={{'color':'white'}}
+                value={this.state.firstname}
+                onChange={(event) => this.handleFirstNameChange(event)}
+              />
             </label>
             <label>
-              <input
-                type="text"
-                value={this.state.lastname}
-                placeholder="Last Name"
-                onChange={(event) => this.handleLastNameChange(event)}
-                className= {this.state.nameEmpty ? "student-signup-firstname-input" : "student-signup-empty-firstname-input"}
-              />
-              <div>
-                {this.state.nameEmpty ?
-                  <div>
-                  </div> :
-                  <div className="empty-name-alert">
-                    Name can't be empty!
-                  </div>}
-                </div>
+                <TextField
+                  errorText={this.state.lastnameErrorMessage}
+                  hintText="Lastname"
+                  hintStyle={{'color':'#555555'}}
+                  underlineFocusStyle={{borderColor:'#00C993'}}
+                  inputStyle={{'color':'white'}}
+                  value={this.state.lastname}
+                  onChange={(event) => this.handleLastNameChange(event)}
+                />
               </label>
             <br></br>
             <label>
-              <input
-                type="text"
-                value={this.state.email}
-                placeholder="Email"
-                onChange={(event) => this.handleEmailChange(event)}
-                className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
-                  "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
-                />
-                <div>
-                  {this.state.codeEmpty ? this.props.wrongAccessCode ?
-                    <div>
-                    </div> :
-                    <div className="wrong-access-alert">
-                      Wrong access code!
-                    </div> :
-                    <div className="empty-access-alert">
-                      Access code can't be empty!
-                    </div> }
-                  </div>
+                  <TextField
+                    errorText={this.state.emailErrorMessage}
+                    hintText="Email"
+                    hintStyle={{'color':'#555555'}}
+                    underlineFocusStyle={{borderColor:'#00C993'}}
+                    inputStyle={{'color':'white'}}
+                    value={this.state.email}
+                    onChange={(event) => this.handleEmailChange(event)}
+                  />
                 </label>
                 <br></br>
-                <input
-                  type="password"
+                <TextField
+                  errorText={this.state.passwordErrorMessage}
+                  hintText="Password"
+                  hintStyle={{'color':'#555555'}}
+                  underlineFocusStyle={{borderColor:'#00C993'}}
+                  inputStyle={{'color':'white'}}
                   value={this.state.password}
-                  placeholder="Password"
-                  onChange={(e) => this.handlePasswordChange(e)}
-                  className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
-                    "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
+                  onChange={(event) => this.handlePasswordChange(event)}
                 />
                 <br></br>
-                <input
-                  type="password"
-                  value={this.state.repeatPassword}
-                  placeholder="Repeat Password"
-                  onChange={(e) => this.handlePasswordRepeatChange(e)}
-                  className= {this.state.codeEmpty ? this.props.wrongAccessCode ?
-                    "student-signup-acesscode-input" : "student-signup-wrongacesscode-input" : "student-signup-wrongacesscode-input"}
+                <TextField
+                  errorText={this.state.passwordRepeatErrorMessage}
+                  hintText="Password Repeat"
+                  hintStyle={{'color':'#555555'}}
+                  underlineFocusStyle={{borderColor:'#00C993'}}
+                  inputStyle={{'color':'white'}}
+                  value={this.state.passwordRepeat}
+                  onChange={(event) => this.handlePasswordRepeatChange(event)}
                 />
                 <br></br>
                 <button

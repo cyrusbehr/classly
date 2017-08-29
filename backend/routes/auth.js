@@ -12,14 +12,14 @@ module.exports = function(passport) {
     req.checkBody('userType', 'Invalid userType').isIn(['student', 'professor', 'ta']);
     req.checkBody('firstname', 'Firstname cannot be empty').notEmpty();
     req.checkBody('lastname', 'Lastname cannot be empty').notEmpty();
-    req.checkBody('email', 'Error with email').isEmail();
+    req.checkBody('email', 'Invalid email').isEmail();
     req.checkBody('passwordRepeat', 'Passwords must be the same').equals(req.body.password);
 
     req.getValidationResult()
     .then(function(result){
       if (!result.isEmpty()) { // Error in the validations above
         res.json({
-          error: util.inspect(result.array())
+          error: result.array()
         });
         return;
       }
