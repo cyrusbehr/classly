@@ -50,7 +50,6 @@ class StudentQuestion extends Component {
   deleteItem(e) {
     e.preventDefault()
     this.props.deleteQuestionAction(this.props.id);
-    console.log('The question id is: ', this.props.id)
     this.props.socket.emit('deleteQuestion', {questionId: this.props.id, reference: this.props.reference, userID: this.props.user._id});
   }
 
@@ -248,7 +247,7 @@ const mapStateToProps = state => {
     questionsArray: state.classReducer.questions,
     user: state.userReducer.user,
     userType: state.userReducer.user.userType,
-    likedQuestions: state.userReducer.likedQuestions,
+    likedQuestions: state.userReducer.user.likedQuestions,
     firstname: state.userReducer.user.firstname,
     lastname: state.userReducer.user.lastname,
   }

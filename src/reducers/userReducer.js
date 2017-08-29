@@ -3,7 +3,6 @@ import { SET_USER , LIKE_QUESTION, INITIALIZE, SET_LIKED_QUESTIONS } from '../co
 
 const initialState = {
   user: {},
-  likedQuestions: [],
   hasInitialized: false
 }
 
@@ -19,25 +18,19 @@ export default function (state = initialState, action) {
   return newState
 
   case LIKE_QUESTION:
-    var newState3;
     //if already liked
+    var newArr;
     if(action.direction === "DOWN"){
-      var newArr = state.likedQuestions;
+      newArr = state.user.likedQuestions;
       var index = newArr.indexOf(action.questionId);
       newArr.splice(index, 1);
-      newState3 = Object.assign({}, state, {likedQuestions: newArr})
     } else {
-      var newArr = state.likedQuestions;
+      newArr = state.user.likedQuestions;
       newArr.push(action.questionId);
-      // newArr[newArr.length] = action.questionId
-      // state.likedQuestions.push(action.questionId);
-      newState3 = Object.assign({}, state, {likedQuestions: newArr});
     }
-    return newState3;
-
-  case SET_LIKED_QUESTIONS:
-  var newState = Object.assign({}, state, {likedQuestions: action.likedQuestions})
-  return newState
+    var newState = Object.assign({}, state, {user: state.user});
+    newState.user.likedQuestions = newArr
+    return newState;
 
   default:
     return state;

@@ -82,8 +82,8 @@ class StudentSignupCard extends Component {
           })
         }else {
           this.props.setUserAction(r.data.response);
-          this.props.setLikedQuestionsAction(r.data.response.likedQuestions);
-          console.log("these are your liked questions: ", r.data.response.likedQuestions);
+          // this.props.setLikedQuestionsAction(r.data.response.likedQuestions);
+          // console.log("these are your liked questions: ", r.data.response.likedQuestions);
           this.props.setNotLoadingAction();
           this.redirect();
         }
@@ -155,9 +155,9 @@ class StudentSignupCard extends Component {
           setNotLoadingAction: () => {
             dispatch(notLoading())
           },
-          setLikedQuestionsAction: (likedQuestions) => {
-            dispatch(setLikedQuestions(likedQuestions))
-          }
+          // setLikedQuestionsAction: (likedQuestions) => {
+          //   dispatch(setLikedQuestions(likedQuestions))
+          // }
         }
       }
 
