@@ -38,14 +38,7 @@ const taSignupData = {
 }
 
 // const baseDomain = "https://class-ly.herokuapp.com/"
-var baseDomain;
-if(window.location.hostname === "localhost"){
-  baseDomain = "http://localhost:3000/"
-} else if (window.location.hostname === "livelecture.space") {
-  baseDomain = "http://livelecture.space/"
-} else {
-  baseDomain = "https://class-ly.herokuapp.com/"
-}
+var baseDomain = "https://" + window.location.hostname + "/";
 
 const colorArray = [
   '#FDA1FF',
