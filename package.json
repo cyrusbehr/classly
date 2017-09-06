@@ -15,6 +15,16 @@
     "lint": "eslint src",
     "postinstall": "npm run build:webpack"
   },
+  "babel": {
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-inline-elements"
+      ]
+    }
+  }
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tsaiDavid/simple-redux-boilerplate.git"

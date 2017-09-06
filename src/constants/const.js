@@ -37,8 +37,12 @@ const taSignupData = {
   redirectRoute: '/ta/main'
 }
 
-// const baseDomain = "https://class-ly.herokuapp.com/"
-var baseDomain = "https://" + window.location.hostname + "/";
+var baseDomain;
+if(window.location.hostname === "localhost") {
+  baseDomain = "http://localhost:3000/"
+} else {
+  baseDomain = "https://" + window.location.hostname + "/";
+}
 
 const colorArray = [
   '#FDA1FF',
