@@ -19,7 +19,7 @@ class ProfessorSignupContainer extends Component {
       <div className="middle-professor-cards-container">
         <div className="professor-signup-slogan-container">
           <div className="professor-signup-slogan">
-        Welcome to class.ly,<br></br><text className="professor-word">professor</text>! Let's help you<br></br>get started!
+        Welcome to Classly,<br></br><text className="professor-word">professor</text>! Let's help you<br></br>get started!
       </div>
       </div>
         <ProfessorSignupCard

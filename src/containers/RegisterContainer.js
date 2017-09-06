@@ -10,7 +10,7 @@ export default class LoginContainer extends Component {
           <div className="login-slogan-container">
             <div className="login-slogan">
               Let's get you set up with
-              <text className="classroom-word">Class.ly</text>
+              <text className="classroom-word">Classly</text>
             </div>
           </div>
           <div className="login-cards-container">

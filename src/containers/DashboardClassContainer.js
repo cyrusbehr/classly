@@ -90,7 +90,7 @@ class DashboardClassContainer extends Component {
     return(
       <div className="dashboard">
         <div className="dashboard-header">
-          <text className="dashboard-header-name">Class.ly</text>
+          <text className="dashboard-header-name">Classly</text>
           <div className="dashboard-navbar">
             <text className="dashboard-profile">Profile</text>
             <text onClick={(e) => this.handleLogout(e)} className="dashboard-logout">Log out</text>

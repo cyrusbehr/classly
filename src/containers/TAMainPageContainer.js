@@ -20,7 +20,7 @@ class TAMainPageContainer extends Component {
         </div>
         <div className="top-nav-bar">
           <div className="name-container">
-              <button className="name" onClick={(e) => this.clearUserTypeAndRedirect(e)}>Class.ly</button>
+              <button className="name" onClick={(e) => this.clearUserTypeAndRedirect(e)}>Classly</button>
           </div>
           <div className="right-nav-bar">
             <div className="home-nav-bar-container">
@@ -37,7 +37,7 @@ class TAMainPageContainer extends Component {
         <TASignupContainer {...this.props}/>
         <div className="footer">
           <div className="copyright-container">
-            © 2017 Class.ly
+            © 2017 Classly
           </div>
           <div className="social-media-container">
             Social Media
