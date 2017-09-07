@@ -45,7 +45,6 @@ const Class = models.Class;
 //double check mongoose.connect
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
-  console.log('connected to database')
 })
 
 function randomize(array) {
@@ -55,7 +54,6 @@ function randomize(array) {
 }
 
 io.on('connection', socket => {
-  console.log('Connected to socket');
   socket.on('join', (room) => {
     socket.join(room);
     socket.currentRoom = room;
@@ -78,7 +76,6 @@ io.on('connection', socket => {
           }
         }
         questionsArray.splice(index,1);
-        console.log("the question array after the splice is: ", questionsArray);
         classObj.questions = questionsArray;
         classObj.save();
         var deletedQuestionId = data.questionId;
@@ -190,25 +187,13 @@ io.on('connection', socket => {
             if(err){
               console.log("Error creating newClass:", err);
             } else {
-              // let newTopic = new Topic({
-              //   text: "All Topics",
-              //   votes: 0,
-              //   timestamp: Date.now(),
-              //   referenceClass: newClass._id,
-              //   username: 'default_topic',
-              //   isDefault: true
-              // });
               Class.findById(newClass._id, (err, classObj) => {
-                // classObj.topics.push(savedTopic._id);
                 classObj.save()
                 .then(() => {
-
                   socket.join(accessCode);
                   socket.currentRoom = accessCode;
                   socket.emit("Joined", accessCode);
                   socket.emit('classCreated', newClass);
-                  // socket.broadcast.to(socket.currentRoom).emit('newTopic', savedTopic);
-                  // socket.emit('newTopic', savedTopic);
                   return null;
                 })
               })
@@ -291,7 +276,6 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting topic:", err);
         } else {
-          // console.log('The updated topics is: ', updatedTopic)
           socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
           socket.emit('voteTopic', updatedTopic);
         }
@@ -302,7 +286,6 @@ io.on('connection', socket => {
         if(err){
           console.log("Error upVoting topic:", err);
         } else {
-          // console.log('The updated topics is: ', updatedTopic);
           socket.broadcast.to(socket.currentRoom).emit('voteTopic', updatedTopic);
           socket.emit('voteTopic', updatedTopic);
         }
@@ -312,12 +295,10 @@ io.on('connection', socket => {
 
   socket.on('toggleStar', (data) => {
     let tempStarred = !data.isStarred;
-    // console.log("toggleStar data:", data);
     Question.findOneAndUpdate({_id: data.questionId}, { $set: {isStarred: tempStarred}}, {new: true}, (err, updatedQuestion) => {
       if(err){
         console.log("Error starring question:", err);
       } else {
-        // console.log("emmiting backend toggleStar updatedQuestion:", updatedQuestion);
         socket.broadcast.to(socket.currentRoom).emit('toggleStar', updatedQuestion);
         socket.emit('updatedQuestion', updatedQuestion);
       }

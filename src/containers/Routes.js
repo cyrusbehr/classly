@@ -14,13 +14,9 @@ import ProfessorMainRegisterContainer from './ProfessorMainRegisterContainer'
 import TAMainRegisterContainer from './TAMainRegisterContainer'
 import DashboardClassContainer from './DashboardClassContainer'
 import AboutUs from '../components/AboutUs'
-import {baseDomain} from '../constants/const'
 
 export default class Routes extends Component {
    render() {
-     console.log("This is the domain from which it was visited! :", window.location.hostname
-   );
-   console.log("the base domain is : ", baseDomain);
       return(
        <div>
          <Switch>

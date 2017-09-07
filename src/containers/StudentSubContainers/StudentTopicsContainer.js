@@ -96,7 +96,6 @@ class StudentTopicsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("In the map state to props:", state.classReducer);
   return {
     socket: state.socketReducer.socket,
     classObj: state.classReducer,

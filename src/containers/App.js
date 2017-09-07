@@ -6,12 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import io from 'socket.io-client'
 import { setSocket } from '../actions/Actions'
 
-
-/**
- * It is common practice to have a 'Root' container/component require our main App (this one).
- * Again, this is because it serves to wrap the rest of our application with the Provider
- * component to make the Redux store available to the rest of the app.
- */
 class App extends Component {
   constructor(props) {
     super(props)
@@ -29,12 +23,7 @@ class App extends Component {
     );
   }
 }
-//
-// App.propTypes = {
-//   counter: PropTypes.number.isRequired,
-//   actions: PropTypes.object.isRequired
-// };
-//
+
 function mapStateToProps(state) {
   return {
   };
