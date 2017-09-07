@@ -15,7 +15,6 @@ class App extends Component {
 
   }
   render() {
-    console.log('render App component');
     return (
       <BrowserRouter>
         <Routes />

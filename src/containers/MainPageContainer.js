@@ -17,7 +17,6 @@ class MainPageContainer extends Component {
     var self = this;
     axios.get(baseDomain + 'checkLogin')
     .then((r) => {
-      console.log("Are we logged in?? :" , r.data.loggedIn);
       if(r.data.loggedIn) {
         self.props.setUserAction(r.data.user);
         self.props.history.push('/dashboard')

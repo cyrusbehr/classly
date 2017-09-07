@@ -6,7 +6,6 @@ import ProfessorSignupContainer from './ProfessorSubContainers/ProfessorSignupCo
 import {RaisedButton} from 'material-ui';
 export default class LoginContainer extends Component {
   render() {
-    console.log('render Login Container');
     return(
       <div className="main-login-cards-container">
         <div className="middle-login-cards-container">

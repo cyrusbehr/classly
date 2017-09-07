@@ -9,7 +9,6 @@ class StudentMainRegisterContainer extends Component {
   }
 
   render() {
-    console.log('render Login Container');
     return(
       <div className="login-container">
         <div className="background-picture">
