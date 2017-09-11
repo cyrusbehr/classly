@@ -234,6 +234,12 @@ $blue: #2979FF;
 
 }
 
+@media (max-width: 400px) {
+  .guide-modal-create-class {
+    width: 280px !important;
+  }
+}
+
 .main-login-cards-container {
   justify-content: center;
   display:flex;
