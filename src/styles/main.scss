@@ -95,10 +95,7 @@ $blue: #2979FF;
 }
 
 
-.name-container {
-  margin-left: 70px;
-  margin-top: 28px;
-}
+
 
 .name:hover{
   cursor: pointer;
@@ -162,6 +159,77 @@ $blue: #2979FF;
   margin-right: 50px;
 }
 
+@media (min-width: 700px) {
+  // apply these styles if the page width is greater than 700px
+  .login-cards-container {
+    display: flex;
+    justify-content: space-between;
+    // border-style: solid;
+    // border-color: white;
+    color:white;
+    width: 700px;
+    height: 330px;
+  }
+
+  .login-slogan-container {
+    // border-style: solid;
+    // border-color: white;
+    height: 120px;
+    width: 700px;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .name-container {
+    margin-left: 70px;
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 700px) {
+  //apply these styles if the page width is less than 700px
+  .login-cards-container {
+    display: flex;
+    // justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    color:white;
+    width: 700px;
+    height: 330px;
+    margin-right: 50px;
+  }
+
+  .login-slogan-container {
+    height: 120px;
+    width: 700px;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+  }
+
+  .name-container {
+    margin-left: 10px;
+    margin-top: 28px;
+  }
+
+  .home-nav-bar, .privacy-policy-container, .about-nav-bar,
+  .contact-nav-bar, .copyright-container, .social-media-container{
+    display: none;
+  }
+
+  .main-login-cards-container{
+    margin-top: 13vh !important;
+  }
+
+  .background-picture, .background-overlay {
+    height: 150% !important;
+  }
+
+}
+
 .main-login-cards-container {
   justify-content: center;
   display:flex;
@@ -183,17 +251,6 @@ $blue: #2979FF;
   align-items: flex-start;
 }
 
-.login-slogan-container {
-  // border-style: solid;
-  // border-color: white;
-  height: 120px;
-  width: 700px;
-  font-family: 'Raleway', sans-serif;
-  color: white;
-  display: flex;
-  justify-content: flex-start;
-}
-
 .classroom-word {
   color: $green;
 }
@@ -209,16 +266,6 @@ $blue: #2979FF;
   color: white;
 }
 
-.login-cards-container {
-  display: flex;
-  justify-content: space-between;
-  // border-style: solid;
-  // border-color: white;
-  color:white;
-  width: 700px;
-  height: 330px;
-}
-
 .login-card-picture {
   max-width: 100%;
   border-bottom: solid 4px;
@@ -230,6 +277,8 @@ $blue: #2979FF;
   width: 175px;
   background-color: $dark;
   transition: transform .4s;
+  margin-bottom: 30px;
+
 
   &::after {
     transition: opacity 2s cubic-bezier(.165, .84, .44, 1);
@@ -266,32 +315,6 @@ $blue: #2979FF;
 img{
   width: 100%;
 }
-
-// .signup-slogan-container {
-//   height: 120px;
-//   width: 700px;
-//   font-family: 'Raleway', sans-serif;
-//   color: white;
-//   display: flex;
-//   justify-content: flex-start;
-//   // border-style: solid;
-// }
-//
-// .signup-slogan {
-//   font-size: 27px;
-//   font-weight: 400;
-//   color: white;
-//   // border-style: solid;
-// }
-//
-// .middle-signup-card-container {
-//   width: 700px;
-//   // border-style: solid;
-//   // border-color: white;
-//   display:flex;
-//   flex-direction: column;
-//   align-items: flex-start;
-// }
 
 .student-signup-cards-container {
   justify-content: center;
