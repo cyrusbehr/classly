@@ -73,7 +73,7 @@ class ProfessorSignupCard extends Component {
       // this.props.setLoadingAction() //note: commented out the loading cuz rerendering the form is messing with the display of error messages
       // this.props.socket.emit('join', this.state.password);
       axios.post(baseDomain + 'login', {
-        email: this.state.email,
+        email: this.state.email.toLowerCase(),
         password: this.state.password,
         userType: 'professor'
       })

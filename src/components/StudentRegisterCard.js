@@ -71,7 +71,7 @@ class StudentRegisterCard extends Component {
       axios.post(baseDomain + 'register', {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
-        email: this.state.email,
+        email: this.state.email.toLowerCase(),
         password: this.state.password,
         passwordRepeat: this.state.passwordRepeat,
         userType: "student"
