@@ -1,18 +1,18 @@
 const LoginCardData = [
   {
-    URL: "http://res.cloudinary.com/dxih0rp6w/image/upload/v1503639178/student-card-picture_lkfv2q.png",
+    URL: "https://res.cloudinary.com/dxih0rp6w/image/upload/v1503639178/student-card-picture_lkfv2q.png",
     title: "Student",
     redirectRoute: "/student/signup",
     thisClass: "student-class",
   },
   {
-    URL: "http://res.cloudinary.com/dxih0rp6w/image/upload/v1503639177/teacher-card-picture_gmmujs.jpg",
+    URL: "https://res.cloudinary.com/dxih0rp6w/image/upload/v1503639177/teacher-card-picture_gmmujs.jpg",
     title: "Professor",
     redirectRoute: "/professor/signup",
     thisClass: "professor-class",
   },
   {
-    URL: "http://res.cloudinary.com/dxih0rp6w/image/upload/v1503639177/ta-card-picture_vkjlru.jpg",
+    URL: "https://res.cloudinary.com/dxih0rp6w/image/upload/v1503639177/ta-card-picture_vkjlru.jpg",
     title: "TA",
     redirectRoute: "/ta/signup",
     thisClass: "TA-class",
