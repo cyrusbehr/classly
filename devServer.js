@@ -415,10 +415,16 @@ app.use(passport.session());
 app.use('/', auth(passport));
 app.use('/api', dashboard, create_course_class);
 
+app.use('/wakemydyno.txt', (req, res) => {
+  res.sendFile(__dirname + '/wakemydyno.txt')
+})
+
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, process.env.NODE_ENV === 'production' ? '/dist/index.html' : '/public/devIndex.html'));
 });
+
+
 
 server.listen(port, (err) => {
   if (err) {
