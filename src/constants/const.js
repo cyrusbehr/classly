@@ -39,7 +39,7 @@ const taSignupData = {
 
 var baseDomain;
 if(window.location.hostname === "localhost") {
-  baseDomain = "http://localhost:3000/"
+  baseDomain = "http://localhost:8080/"
 } else {
   baseDomain = "https://" + window.location.hostname + "/";
 }
