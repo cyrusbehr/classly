@@ -58,8 +58,8 @@ class TAMainViewContainer extends Component {
                 </div>
                 <br>
                 </br>
-                  Welcome to the live lecture room, Professor.
-                  On the right hand side, you will find a list of all the questions aksed by the Students and TAs.
+                  Welcome to the live lecture room, TA.
+                  On the right hand side, you will find a list of all the questions asked by the Students and TAs.
                   Each question will display the number of votes it has recieved, with the most upvoted questions being shown at the top.
                   Professors and TAs have the ability to star questions, sending them straight to the top, as well as resolving questions,
                    indicating that they have already been adressed.
