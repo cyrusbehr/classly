@@ -69,7 +69,6 @@ function randomize(array) {
     req.getValidationResult()
     .then(function(result){
       if (!result.isEmpty()) { // Error in the validations above
-        console.log('1st error:', error);
         res.json({
           error: result.array()
         });
@@ -88,14 +87,12 @@ function randomize(array) {
           .then(function(foundCourse){
             foundCourse.classes.push(savedClass._id)
             foundCourse.save();
-            console.log('successful responded here');
             res.json({
               error: null,
               response: savedClass
             })
           })
           .catch(function(error){
-            console.log('2nd error:', error);
             res.json({
               error
             })
