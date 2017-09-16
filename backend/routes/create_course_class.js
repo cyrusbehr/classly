@@ -19,40 +19,34 @@ function randomize(array) {
         if(!courseObj){
           req.checkBody('courseTitle', 'Course title cannot be empty').notEmpty();
           req.checkBody('courseCode', 'Course code cannot be empty').notEmpty();
-        req.getValidationResult()
-        .then(function(result){
-          // if (!result.isEmpty()) { // Error in the validations above
-          //   res.json({
-          //     error: util.inspect(result.array())
-          //   });
-            // return;
-          // }
-          const newCourse = new Course({
-            professorName: "Prof: " + req.user.lastname,
-            courseTitle: req.body.courseTitle,
-            accessCode: newAccessCode,
-            courseCode: req.body.courseCode,
-            classes:[]
-          });
-          return newCourse.save()
-          .then(function(savedNewCourse){
-            return Promise.all([User.findById(req.user._id), savedNewCourse]);
-          })
-          .then(function(values){
-              values[0].courses.push(values[1]._id)
-              values[0].save()
-              res.json({
-                error: null,
-                response: values[1]
-              })
-              return null;
+          req.getValidationResult()
+          .then(function(result){
+            const newCourse = new Course({
+              professorName: "Prof: " + req.user.lastname,
+              courseTitle: req.body.courseTitle,
+              accessCode: newAccessCode,
+              courseCode: req.body.courseCode,
+              classes:[]
+            });
+            return newCourse.save()
+            .then(function(savedNewCourse){
+              return Promise.all([User.findById(req.user._id), savedNewCourse]);
             })
-            .catch(function(error){
-              res.json({
-                error
+            .then(function(values){
+                values[0].courses.push(values[1]._id)
+                values[0].save()
+                res.json({
+                  error: null,
+                  response: values[1]
+                })
+                return null;
+              })
+              .catch(function(error){
+                res.json({
+                  error
+                })
               })
             })
-        })
       } else {
         newAccessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
         return accessCodeRecursion(newAccessCode);
