@@ -10,29 +10,35 @@ function randomize(array) {
 }
 
   router.post('/create/course', function(req, res){
-    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-    let accessCode = '0n9u';
+    req.checkBody('courseTitle', 'Course title cannot be empty').notEmpty();
+    req.checkBody('courseCode', 'Course code cannot be empty').notEmpty();
+    req.getValidationResult()
+    .then(function(result){
+      if (!result.isEmpty()) { // Error in the validations above
+        res.json({
+          error: result.array()
+        });
+        return;
+      } else {
+        const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+        let accessCode = '0n9u';
 
-    function accessCodeRecursion(newAccessCode) {
-      Course.findOne({accessCode: newAccessCode}, (err, courseObj) => {
-        if(!courseObj){
-          req.checkBody('courseTitle', 'Course title cannot be empty').notEmpty();
-          req.checkBody('courseCode', 'Course code cannot be empty').notEmpty();
-          req.getValidationResult()
-          .then(function(result){
-            const newCourse = new Course({
-              professorName: "Prof: " + req.user.lastname,
-              courseTitle: req.body.courseTitle,
-              accessCode: newAccessCode,
-              courseCode: req.body.courseCode,
-              classes:[]
-            });
-            return newCourse.save()
-            .then(function(savedNewCourse){
-              return Promise.all([User.findById(req.user._id), savedNewCourse]);
-            })
-            .then(function(values){
+        function accessCodeRecursion(newAccessCode) {
+          Course.findOne({accessCode: newAccessCode}, (err, courseObj) => {
+            if(!courseObj){
+              const newCourse = new Course({
+                professorName: "Prof: " + req.user.lastname,
+                courseTitle: req.body.courseTitle,
+                accessCode: newAccessCode,
+                courseCode: req.body.courseCode,
+                classes:[]
+              });
+              return newCourse.save()
+              .then(function(savedNewCourse){
+                return Promise.all([User.findById(req.user._id), savedNewCourse]);
+              })
+              .then(function(values){
                 values[0].courses.push(values[1]._id)
                 values[0].save()
                 res.json({
@@ -46,14 +52,15 @@ function randomize(array) {
                   error
                 })
               })
-            })
-      } else {
-        newAccessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
-        return accessCodeRecursion(newAccessCode);
+            } else {
+              newAccessCode = randomize(numbers) + randomize(letters) + randomize(numbers) + randomize(letters);
+              return accessCodeRecursion(newAccessCode);
+            }
+          })
+        }
+        accessCodeRecursion(accessCode);
       }
-      })
-    }
-    accessCodeRecursion(accessCode);
+    })
   })
 
   router.post('/create/class', function(req, res){

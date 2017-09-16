@@ -15,6 +15,8 @@ class DashboardContainer extends Component {
       showCreateCourseModal: false,
       courseTitle: "",
       courseCode: "",
+      courseTitleError: "",
+      courseCodeError: "",
       showCreateClassModal: false,
       className: "",
       classTitle: "",
@@ -107,21 +109,31 @@ class DashboardContainer extends Component {
       courseCode: this.state.courseCode,
     })
     .then((r) => {
-      this.setState({
-        courseTitle: "",
-        courseCode: "",
-      })
       if(r.data.error) {
         console.log("Error encountered while creating new course: ", r.data);
+        this.setState({
+          courseTitleError: "",
+          courseCodeError: ""
+        })
+        r.data.error.forEach(err=>{
+          switch(err.param){
+            case "courseTitle": this.setState({courseTitleError: err.msg}); break;
+            case "courseCode": this.setState({courseCodeError: err.msg}); break;
+            default: break;
+          }
+        })
       } else {
+        this.setState({
+          courseTitle: "",
+          courseCode: "",
+        })
         this.props.addCourseAction(r.data.response);
+        this.setState({showCreateCourseModal: false});
       }
     })
     .catch((err) => {
       console.log("there was an error with the request : ", err);
     });
-    //close modal
-    this.setState({showCreateCourseModal: false});
   }
 
   onCloseModal(e){
@@ -222,6 +234,7 @@ class DashboardContainer extends Component {
                     </div>
                     <div className="modal-body-create-course">
                       <TextField
+                        errorText={this.state.courseTitleError}
                         hintText="Course Title"
                         underlineFocusStyle={{'borderColor': '#00c993'}}
                         value={this.state.courseTitle}
@@ -234,6 +247,7 @@ class DashboardContainer extends Component {
                         }}
                       />
                       <TextField
+                        errorText={this.state.courseCodeError}
                         onKeyPress={(ev) => {
                           if (ev.key === 'Enter') {
                             this.onSubmitModal()
