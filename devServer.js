@@ -20,7 +20,7 @@ const app = express();
 // const compiler = webpack(config);
 
 const host = 'http://localhost';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 
 // app.use('/dist/', express.static(path.join(__dirname, 'dist')));
@@ -43,7 +43,7 @@ const Question = models.Question;
 const Topic = models.Topic;
 const Class = models.Class;
 //double check mongoose.connect
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.createConnection(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
 })
 
@@ -368,7 +368,10 @@ app.use(expressValidator({
 }));
 
 app.use(cookieParser());
-app.use(session({ secret: 'keyboard cat' }));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true }));
 
 passport.serializeUser(function(user, done) {
   done(null, user._id);
@@ -412,10 +415,16 @@ app.use(passport.session());
 app.use('/', auth(passport));
 app.use('/api', dashboard, create_course_class);
 
+app.use('/wakemydyno.txt', (req, res) => {
+  res.sendFile(__dirname + '/wakemydyno.txt')
+})
+
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, process.env.NODE_ENV === 'production' ? '/dist/index.html' : '/public/devIndex.html'));
 });
+
+
 
 server.listen(port, (err) => {
   if (err) {
