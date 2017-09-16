@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { Course, Class, User } = require('../../src/Models/models');
-const util = require('util');
 
 function randomize(array) {
   const randomDigit = Math.floor((Math.random() * array.length));
@@ -64,43 +63,45 @@ function randomize(array) {
   })
 
   router.post('/create/class', function(req, res){
-    req.checkBody('className', 'Class name cannot be empty').notEmpty();
+    req.checkBody('classTitle', 'Class name cannot be empty').notEmpty();
     req.checkBody('courseReference', 'Course reference cannot be empty').notEmpty();
     var d = new Date();
     req.getValidationResult()
     .then(function(result){
-      // if (!result.isEmpty()) { // Error in the validations above
-      //   res.json({
-      //     error: util.inspect(result.array())
-      //   });
-      //   return;
-      // }
-
-      const newClass = new Class({
-        professorName: "Prof: " + req.user.lastname,
-        className: req.body.classTitle,
-        timestamp: d.getTime(),
-        questions: [],
-        topics:[],
-        courseReference: req.body.courseReference
-      });
-      return newClass.save();
-    })
-    .then(function(savedClass){
-      Course.findById(req.body.courseReference)
-      .then(function(foundCourse){
-        foundCourse.classes.push(savedClass._id)
-        foundCourse.save()
+      if (!result.isEmpty()) { // Error in the validations above
+        console.log('1st error:', error);
         res.json({
-          error: null,
-          response: savedClass
-        })
-      })
-      .catch(function(error){
-        res.json({
-          error
-        })
-      })
+          error: result.array()
+        });
+        return;
+      } else {
+        const newClass = new Class({
+          professorName: "Prof: " + req.user.lastname,
+          className: req.body.classTitle,
+          timestamp: d.getTime(),
+          questions: [],
+          topics:[],
+          courseReference: req.body.courseReference
+        });
+        newClass.save(function(err, savedClass){
+          Course.findById(req.body.courseReference)
+          .then(function(foundCourse){
+            foundCourse.classes.push(savedClass._id)
+            foundCourse.save();
+            console.log('successful responded here');
+            res.json({
+              error: null,
+              response: savedClass
+            })
+          })
+          .catch(function(error){
+            console.log('2nd error:', error);
+            res.json({
+              error
+            })
+          })
+        });
+      }
     })
   })
   module.exports = router;

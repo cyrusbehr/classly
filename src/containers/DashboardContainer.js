@@ -22,6 +22,7 @@ class DashboardContainer extends Component {
       classTitle: "",
       showAddClassModal: false,
       accessCode: "",
+      accessCodeError: ""
     }
   }
 
@@ -79,24 +80,21 @@ class DashboardContainer extends Component {
   }
 
   onSubmitAddCourseModal(e) {
-    console.log("we made it to this fucking point in time");
     e.preventDefault();
-    console.log("point 2");
     axios.post(baseDomain + 'api/addclass', {
       accessCode: this.state.accessCode
     })
     .then((r) => {
-      console.log("point 3");
-
       if(r.data.error) {
+        this.setState({accessCodeError: r.data.error})
         console.log("there was an error: ", r.data.error);
       } else {
         console.log("we actually made it to this point in time : ", r.data.response);
+        this.setState({showAddClassModal: false});
         this.props.addCourseAction(r.data.response);
       }
     })
     .catch((err) => console.log("There was an error : ", err))
-    this.setState({showAddClassModal: false});
   }
 
   onSubmitModal(e){
@@ -283,6 +281,7 @@ class DashboardContainer extends Component {
                           </div>
                           <TextField
                             hintText="Access Code"
+                            errorText={this.state.accessCodeError}
                             underlineFocusStyle={{'borderColor': '#00c993'}}
                             value={this.state.accessCode}
                             onChange={(e) => this.onAccessCodeChange(e)}

@@ -15,6 +15,7 @@ class DashboardClassContainer extends Component {
     this.state = {
       showCreateClassModal: false,
       classTitle: "",
+      classTitleError: ""
     }
   }
 
@@ -66,18 +67,25 @@ class DashboardClassContainer extends Component {
       if(r.data.error) {
         this.props.setNotLoadingAction();
         console.log("Error encountered while creating new class: ", r.data);
+        r.data.error.forEach(err=>{
+          switch(err.param){
+            case "classTitle": this.setState({classTitleError: err.msg}); break;
+            case "courseReference": alert("There's an error with the system. Please contact the developers."); break;
+            default: break;
+          }
+        })
       } else {
         this.props.setNotLoadingAction();
         //dispatch action to reducer to add coures to course reduver
         console.log("adding Class to array reducer");
         this.props.addClassToArrayAction(r.data.response);
+        //close modal
+        this.setState({showCreateClassModal: false});
       }
     })
     .catch((err) => {
       console.log("there was an error with the request : ", err);
     });
-    //close modal
-    this.setState({showCreateClassModal: false});
   }
 
   onCloseClassModal(){
@@ -154,6 +162,7 @@ class DashboardClassContainer extends Component {
             </div>
             <div className="modal-body">
                 <TextField
+                  errorText={this.state.classTitleError}
                   onKeyPress={(ev) => {
                     if (ev.key === 'Enter') {
                       this.onSubmitClassModal()
