@@ -17,7 +17,6 @@ class DashboardClassCard extends Component {
 
     axios.get(baseDomain + 'api/getclass/' + this.props.classID)
     .then((r) => {
-      console.log("this is the returned class : ", r.data.response);
       if(r.data.error) {
         this.props.setNotLoadingAction()
       } else {

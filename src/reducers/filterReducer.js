@@ -9,7 +9,6 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case TOGGLE_FILTER:
       let newState = action.newFilter;
-      console.log("this is new filter: ", newState);
         return newState;
 
   default:
