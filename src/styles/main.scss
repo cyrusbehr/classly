@@ -322,7 +322,7 @@ $sgreen: #6DE9D3;
   justify-content: center;
 }
 
-img{
+img:not(.demoImage){
   width: 100%;
 }
 
@@ -680,16 +680,15 @@ img{
   display: flex;
   width: 100%;
   justify-content: space-between;
-  box-shadow: 0px 2px 10px lightgrey;
 }
-.splash-header-name, .navbar-signup, .navbar-login{
+.splash-header-name, .navbar-signup, .navbar-login, .navbar-signup-2{
   font-family: Raleway, sans-serif;
   font-weight: bold;
 }
 
 .splash-header-name{
   font-size: 30px;
-  padding-left: 40px;
+  padding-left: 60px;
   color: $sgreen;
 }
 
@@ -708,25 +707,75 @@ img{
   background-color: $sgreen;
 }
 
+.navbar-signup:hover, .navbar-signup-2:hover{
+  background-color: #A4F5E6;
+  border-color: #A4F5E6;
+  cursor:pointer;
+}
+
+.navbar-login:hover{
+  color: #A4F5E6;
+  border-color: #A4F5E6;
+  cursor:pointer;
+}
+
 .navbar-login{
   color: $sgreen;
+  margin-right: 10px;
 }
 
 .splashImageContainer{
   display: flex;
+  padding-top: 5%;
+}
+
+.spashCont{
+  padding-top: 80px;
+  margin-left: 60px;
 }
 
 .splashText{
   flex: 1;
-  background-color: yellow;
+  font-family: Raleway, sans-serif;
+  // font-weight: bold;
+}
+
+.splashText-main{
+  font-size: 30px;
+  margin-bottom: 40px
+}
+
+.splashText-title{
+font-weight: bold;
+margin-bottom: 10px;
+font-size: 34px;
 }
 
 .splashImage{
   flex: 2;
-  background: red;
+  padding-left: 5%;
 }
 
+.splashText-sub{
+  font-size: 22px;
+  line-height: 27px;
+}
 
+.navbar-signup-2{
+  margin-top: 85px;
+  border-radius: 5px;
+  font-size: 22px;
+  // padding: 5px 20px;
+  padding: 5px 0px 5px 20px;
+  border: 2px solid $sgreen;
+  background-color: $sgreen;
+  color: white;
+  width:100px;
+}
+
+.demoImage{
+  width: 700px;
+}
 
 .dashboardBody-container {
   background-color: #fff;

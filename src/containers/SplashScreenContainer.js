@@ -20,11 +20,27 @@ class SplashScreenContainer extends Component {
             <span className="navbar-signup">Sign Up</span>
             <span className="navbar-login">Login</span>
           </div>
+        </div>
+        <div className="spashCont">
+          <div className="splashImageContainer">
+            <div className="splashText">
+              <div className="splashText-title">Classly </div>
+              <div className="splashText-main">
+                A live Q&A and <br/>discussion forum for <br/>the future classroom
+              </div>
+              <div className="splashText-sub">
+                Beta testing in progress now!
+                <br/>
+                Sign up for your class right now.
+              </div>
+              <div className="navbar-signup-2">Sign Up</div>
+            </div>
+            <span className="splashImage">
+                <img className="demoImage" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/c_scale,w_700/v1508040858/Macbook-PNG-Picture_sueqhy.png"}></img>
+            </span>
+          </div>
+        </div>
       </div>
-    <div className="splashImageContainer">
-      <span>Paragraph text will go in this segment</span>
-      <span>Background image will go here</span>
-    </div>
     )
   }
 }
