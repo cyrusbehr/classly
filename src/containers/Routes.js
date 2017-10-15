@@ -14,6 +14,7 @@ import ProfessorMainRegisterContainer from './ProfessorMainRegisterContainer'
 import TAMainRegisterContainer from './TAMainRegisterContainer'
 import DashboardClassContainer from './DashboardClassContainer'
 import AboutUs from '../components/AboutUs'
+import SplashScreenContainer from './SplashScreenContainer'
 
 export default class Routes extends Component {
    render() {
@@ -30,7 +31,8 @@ export default class Routes extends Component {
            <Route path="/ta/register" exact={true} component={TAMainRegisterContainer}/>
            <Route path="/professor/main" exact={true} component={ProfessorMainViewContainer}/>
            <Route path="/student/main" exact={true} component={StudentMainViewContainer}/>
-           <Route path="/" exact={true} component={MainPageContainer}/>
+           <Route path="/main" exact={true} component={MainPageContainer}/>
+           <Route path="/" exact={true} component={SplashScreenContainer}/>
            <Route path="/dashboard/class/:coursereference" component={DashboardClassContainer}/>
          </Switch>
        </div>
