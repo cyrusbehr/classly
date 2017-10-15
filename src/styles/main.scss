@@ -7,6 +7,7 @@ $lightGreen: #00e5a4;
 $dark: #343434;
 $lightBlue: #00AAE5;
 $blue: #2979FF;
+$sgreen: #6DE9D3;
 
 
 
@@ -674,17 +675,55 @@ img{
   right: 0;
   left: 0;
   background-color: rgba(255,255,255,0.5);
-  color: $green;
-  padding:30px 0 10px 35px;
-  height: 60px;
+  padding: 20px 0 10px 0;
+  height: 50px;
   display: flex;
   width: 100%;
   justify-content: space-between;
   box-shadow: 0px 2px 10px lightgrey;
 }
+.splash-header-name, .navbar-signup, .navbar-login{
+  font-family: Raleway, sans-serif;
+  font-weight: bold;
+}
 
 .splash-header-name{
-  font-size: 31px;
+  font-size: 30px;
+  padding-left: 40px;
+  color: $sgreen;
+}
+
+.navbar-signup, .navbar-login{
+  border-radius: 5px;
+  font-size: 22px;
+  padding: 5px 20px;
+  border: 2px solid $sgreen;
+  position: relative;
+  top: 5px;
+}
+
+.navbar-signup {
+  margin-right: 20px;
+  color: white;
+  background-color: $sgreen;
+}
+
+.navbar-login{
+  color: $sgreen;
+}
+
+.splashImageContainer{
+  display: flex;
+}
+
+.splashText{
+  flex: 1;
+  background-color: yellow;
+}
+
+.splashImage{
+  flex: 2;
+  background: red;
 }
 
 

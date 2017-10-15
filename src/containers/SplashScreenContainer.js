@@ -17,10 +17,13 @@ class SplashScreenContainer extends Component {
         <div className="splash-header">
           <text className="splash-header-name">Classly</text>
           <div className="dashboard-navbar">
-            <text className="dashboard-profile">Profile</text>
-            <text onClick={(e) => this.handleLogout(e)} className="dashboard-logout">Log out</text>
+            <span className="navbar-signup">Sign Up</span>
+            <span className="navbar-login">Login</span>
           </div>
       </div>
+    <div className="splashImageContainer">
+      <span>Paragraph text will go in this segment</span>
+      <span>Background image will go here</span>
     </div>
     )
   }
