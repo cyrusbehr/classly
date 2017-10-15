@@ -681,7 +681,7 @@ img:not(.demoImage){
   width: 100%;
   justify-content: space-between;
 }
-.splash-header-name, .navbar-signup, .navbar-login, .navbar-signup-2{
+.splash-header-name, .navbar-signup, .navbar-login, .navbar-signup-2, .splash-page2-header, .splash-page2-subheader{
   font-family: Raleway, sans-serif;
   font-weight: bold;
 }
@@ -815,6 +815,36 @@ font-size: 34px;
   width: 100%;
   background-color: rgba(109, 233, 211, 0.7);
   height: 100%;
+}
+
+.splash-page2-header{
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  padding-top: 180px;
+  line-height: 43px;
+}
+
+.splash-page2-subheader{
+  text-align: center;
+  color: white;
+  font-size: 35px;
+  font-weight: 900;
+  padding-top: 70px;
+}
+
+.splash-page2-row1{
+  display: flex;
+}
+
+.row1-col1{
+  flex: 1;
+  background-color: red;
+}
+.row1-col2{
+  flex: 1;
+  background-color: yellow;
 }
 
 textarea, input, button { outline: none; }

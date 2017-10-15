@@ -42,6 +42,19 @@ class SplashScreenContainer extends Component {
         </div>
         <div className="splash-page2-container">
           <div className="splash-page2-container-green-filter">
+            <div className="splash-page2-header">
+              In a large classroom setting, it is difficult to ask <br/>
+              questions, and asking questions is the main form of <br/>
+              communication between the teacher and students.
+            </div>
+            <div className="splash-page2-subheader">
+              How do we solve these problems?
+            </div>
+            <div className="row">
+              <div className="col-sm-6">use bootstrap to organize these columns</div>
+              <div className="col-sm-6">when it is large, have an offset</div>
+              <div className="col-sm-6">when medium, no offset, and when small, all in individual rows</div>
+            </div>
           </div>
         </div>
       </div>
