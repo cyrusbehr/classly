@@ -674,7 +674,7 @@ img:not(.demoImage){
   position: fixed;
   right: 0;
   left: 0;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.8);
   padding: 20px 0 10px 0;
   height: 50px;
   display: flex;
@@ -730,7 +730,7 @@ img:not(.demoImage){
 }
 
 .spashCont{
-  padding-top: 80px;
+  padding-top: 100px;
   margin-left: 60px;
 }
 
@@ -800,6 +800,21 @@ font-size: 34px;
   color:black;
   padding-bottom: 10px;
   border-bottom-width:thin;
+}
+
+.splash-page2-container{
+  margin-top: 300px;
+  height: 900px;
+  background-image: url("https://res.cloudinary.com/dxih0rp6w/image/upload/c_scale,h_800/v1508044321/Webp.net-compress-image_f668bi.jpg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.splash-page2-container-green-filter{
+  width: 100%;
+  background-color: rgba(109, 233, 211, 0.7);
+  height: 100%;
 }
 
 textarea, input, button { outline: none; }

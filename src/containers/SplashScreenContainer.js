@@ -40,6 +40,10 @@ class SplashScreenContainer extends Component {
             </span>
           </div>
         </div>
+        <div className="splash-page2-container">
+          <div className="splash-page2-container-green-filter">
+          </div>
+        </div>
       </div>
     )
   }
