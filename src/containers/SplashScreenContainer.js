@@ -65,11 +65,11 @@ class SplashScreenContainer extends Component {
             <div className="row">
               <div className="row1col1"></div>
               <div className="row1col2">
-                <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508121468/noun_977868_cc_s1nuxi.png"}></img>
+                <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508166186/noun_1206100_cc_pgrstp.png"}></img>
               </div>
               <div className="row1col3">An in-classroom<br/>LMS</div>
               <div className="row1col4">
-                <img className="customImage splash-page2-img2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508121603/noun_961730_cc_asc63b.png"}></img>
+                <img className="customImage splash-page2-img2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508166155/noun_1079413_cc_copy_bzbpau.png"}></img>
               </div>
               <div className="row1col5">Realtime<br/>feedback for<br/>the students</div>
               <div className="row1col6"></div>
