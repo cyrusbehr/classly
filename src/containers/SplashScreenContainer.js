@@ -36,7 +36,7 @@ class SplashScreenContainer extends Component {
               <div className="navbar-signup-2">Sign Up</div>
             </div>
             <span className="splashImage">
-                <img className="demoImage" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/c_scale,w_700/v1508040858/Macbook-PNG-Picture_sueqhy.png"}></img>
+                <img className="customImage demoImage" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508040858/Macbook-PNG-Picture_sueqhy.png"}></img>
             </span>
           </div>
         </div>
@@ -51,9 +51,28 @@ class SplashScreenContainer extends Component {
               How do we solve these problems?
             </div>
             <div className="row">
-              <div className="col-sm-6">use bootstrap to organize these columns</div>
-              <div className="col-sm-6">when it is large, have an offset</div>
-              <div className="col-sm-6">when medium, no offset, and when small, all in individual rows</div>
+              <div className="row1col1"></div>
+              <div className="row1col2">
+                <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508121468/noun_977868_cc_s1nuxi.png"}></img>
+              </div>
+              <div className="row1col3">Anonymity for<br/>students to ask<br/>questions</div>
+              <div className="row1col4">
+                <img className="customImage splash-page2-img2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508121603/noun_961730_cc_asc63b.png"}></img>
+              </div>
+              <div className="row1col5">Students and<br/>TAs can answer<br/>question</div>
+              <div className="row1col6"></div>
+            </div>
+            <div className="row">
+              <div className="row1col1"></div>
+              <div className="row1col2">
+                <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508121468/noun_977868_cc_s1nuxi.png"}></img>
+              </div>
+              <div className="row1col3">An in-classroom<br/>LMS</div>
+              <div className="row1col4">
+                <img className="customImage splash-page2-img2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508121603/noun_961730_cc_asc63b.png"}></img>
+              </div>
+              <div className="row1col5">Realtime<br/>feedback for<br/>the students</div>
+              <div className="row1col6"></div>
             </div>
           </div>
         </div>
