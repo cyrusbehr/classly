@@ -743,7 +743,8 @@ img:not(.customImage){
 
 .splashText-main{
   font-size: 30px;
-  margin-bottom: 40px
+  margin-bottom: 40px;
+  max-width: 300px;
 }
 
 .splashText-title{
@@ -864,6 +865,12 @@ img:not(.customImage){
   }
 
   .mobile_size{
+    display: none;
+  }
+}
+
+@media (max-width:460px) {
+  .navbar-signup{
     display: none;
   }
 }

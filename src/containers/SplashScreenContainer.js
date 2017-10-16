@@ -26,7 +26,7 @@ class SplashScreenContainer extends Component {
             <div className="splashText">
               <div className="splashText-title">Classly </div>
               <div className="splashText-main">
-                A live Q&A and <br/>discussion forum for <br/>the future classroom
+                A live Q&A and discussion forum for the future classroom
               </div>
               <div className="splashText-sub">
                 Beta testing in progress now!
