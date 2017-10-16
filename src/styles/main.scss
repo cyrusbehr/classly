@@ -575,20 +575,20 @@ img:not(.customImage){
 }
 
 .hvr-grow {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform;
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
 }
 
 .hvr-grow:hover,
 .hvr-grow:focus,
 .hvr-grow:active {
-    transform: scale(1.08);
+  transform: scale(1.08);
 }
 
 .professor-signup-submit {
@@ -747,9 +747,9 @@ img:not(.customImage){
 }
 
 .splashText-title{
-font-weight: bold;
-margin-bottom: 10px;
-font-size: 34px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 34px;
 }
 
 .splashImage{
@@ -836,32 +836,30 @@ font-size: 34px;
   margin-bottom: 40px;
 }
 
-.row{
-  display: flex;
-  margin-bottom: 50px;
-}
-
-.row1col1, .row1col4, .row1col2, .row1col3, .row1col5, .row1col6{
-  flex: 1;
-}
-
 .row1col5, .row1col3{
   color: white;
   font-family: 'Raleway', sans-serif;
-font-size: 22px;
-font-weight: bold;
-line-height: 35px;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 35px;
 }
 
-.splash-page2-img1{
-  width: 100px;
-}
-.splash-page2-img2{
-  width: 100px;
-}
+@media (min-width: 1100px) {
 
-.row1col4{
-  align-content: right;
+  .row{
+    display: flex;
+    margin-bottom: 50px;
+  }
+
+  .row1col1, .row1col4, .row1col2, .row1col3, .row1col5, .row1col6{
+    flex: 1;
+  }
+
+  .splash-page2-img1, .splash-page2-img2{
+    width: 100px;
+    float: right;
+    padding-right: 25px;
+  }
 }
 
 textarea, input, button { outline: none; }
