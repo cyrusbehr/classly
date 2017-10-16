@@ -825,6 +825,9 @@ img:not(.customImage){
   font-weight: 900;
   padding-top: 180px;
   line-height: 43px;
+  width: 80%;
+  max-width: 800px;
+  margin: auto;
 }
 
 .splash-page2-subheader{
@@ -836,7 +839,7 @@ img:not(.customImage){
   margin-bottom: 40px;
 }
 
-.row1col5, .row1col3{
+.row1col5, .row1col3, .row_inner1, .row_inner2{
   color: white;
   font-family: 'Raleway', sans-serif;
   font-size: 22px;
@@ -844,8 +847,13 @@ img:not(.customImage){
   line-height: 35px;
 }
 
-@media (min-width: 1100px) {
+.splash-page2-img1, .splash-page2-img2{
+  width: 100px;
+  float: right;
+  padding-right: 25px;
+}
 
+@media (min-width: 1100px) {
   .row{
     display: flex;
     margin-bottom: 50px;
@@ -855,11 +863,30 @@ img:not(.customImage){
     flex: 1;
   }
 
-  .splash-page2-img1, .splash-page2-img2{
-    width: 100px;
-    float: right;
-    padding-right: 25px;
+  .mobile_size{
+    display: none;
   }
 }
+
+@media (max-width:1100px){
+  .row{
+    display: none;
+  }
+
+  .splash-page2-container{
+    height: 1100px;
+}
+}
+
+.outer{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.row_inner1, .row_inner2{
+  width: 250px;
+}
+
 
 textarea, input, button { outline: none; }

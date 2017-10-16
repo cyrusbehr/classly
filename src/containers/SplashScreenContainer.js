@@ -36,15 +36,15 @@ class SplashScreenContainer extends Component {
               <div className="navbar-signup-2">Sign Up</div>
             </div>
             <span className="splashImage">
-                <img className="customImage demoImage" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508040858/Macbook-PNG-Picture_sueqhy.png"}></img>
+              <img className="customImage demoImage" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508040858/Macbook-PNG-Picture_sueqhy.png"}></img>
             </span>
           </div>
         </div>
         <div className="splash-page2-container">
           <div className="splash-page2-container-green-filter">
             <div className="splash-page2-header">
-              In a large classroom setting, it is difficult to ask <br/>
-              questions, and asking questions is the main form of <br/>
+              In a large classroom setting, it is difficult to ask
+              questions, and asking questions is the main form of
               communication between the teacher and students.
             </div>
             <div className="splash-page2-subheader">
@@ -67,12 +67,38 @@ class SplashScreenContainer extends Component {
               <div className="row1col2">
                 <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508166186/noun_1206100_cc_pgrstp.png"}></img>
               </div>
-              <div className="row1col3">An in-classroom<br/>LMS</div>
+              <div className="row1col3">An in-classroom<br/>learning managment<br/>system</div>
               <div className="row1col4">
                 <img className="customImage splash-page2-img2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508166155/noun_1079413_cc_copy_bzbpau.png"}></img>
               </div>
               <div className="row1col5">Realtime<br/>feedback for<br/>the students</div>
               <div className="row1col6"></div>
+            </div>
+            <div className="mobile_size">
+              <div className="outer">
+                <div className="row_inner1">
+                  <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508121468/noun_977868_cc_s1nuxi.png"}></img>
+                </div>
+                <div className="row_inner2">Anonymity for<br/>students to ask<br/>questions</div>
+              </div>
+              <div className="outer">
+                <div className="row_inner1">
+                  <img className="customImage splash-page2-img2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508121603/noun_961730_cc_asc63b.png"}></img>
+                </div>
+                <div className="row_inner2">Students and<br/>TAs can answer<br/>question</div>
+              </div>
+              <div className="outer">
+                <div className="row_inner1">
+                  <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508166186/noun_1206100_cc_pgrstp.png"}></img>
+                </div>
+                <div className="row_inner2">An in-classroom<br/>learning managment<br/>system</div>
+              </div>
+              <div className="outer">
+                <div className="row_inner1">
+                  <img className="customImage splash-page2-img2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508166155/noun_1079413_cc_copy_bzbpau.png"}></img>
+                </div>
+                <div className="row_inner2">Realtime<br/>feedback for<br/>the students</div>
+              </div>
             </div>
           </div>
         </div>
