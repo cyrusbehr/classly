@@ -102,6 +102,17 @@ class SplashScreenContainer extends Component {
             </div>
           </div>
         </div>
+      <div className="splash-page3-container">
+      <div className="splash-page3-main-pic-container">
+        <img className="customImage splash-page3-main-pic" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508185590/noun_898450_cc_a5ppwx.png"}></img>
+      </div>
+      <div className="text page3-header">
+        Additional Features
+      </div>
+      <div className="text page3-subHeader">
+        We also offer other features which help the professor manage the classroom
+      </div>
+      </div>
       </div>
     )
   }
