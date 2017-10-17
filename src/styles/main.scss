@@ -872,12 +872,24 @@ img:not(.customImage){
   border-radius: 50px;
 }
 
+.splash-image-border:hover{
+border-color: $lightBlue;
+}
+
+.member-name:hover{
+  color: $lightBlue;
+}
+
 .pad1{
   padding-top: 20px;
 }
 
 .pad2{
   padding-top: 10px;
+}
+
+a{
+  text-decoration: none;
 }
 
 .outer{

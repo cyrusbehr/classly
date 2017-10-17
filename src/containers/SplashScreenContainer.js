@@ -144,10 +144,10 @@ class SplashScreenContainer extends Component {
         <div className="screen4-title text">Meet the Team
         </div>
         <div className="outer">
-          <div className="row_inner1">
+          <a className="row_inner1" href="https://www.linkedin.com/in/cyrus-behroozi-b30905ab/">
             <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220275/cutmypic_bv7tg1.png"}></img>
-          </div>
-          <div className="text member-name">
+          </a>
+          <a className="text member-name" href="https://www.linkedin.com/in/cyrus-behroozi-b30905ab/">
             Cyrus Behroozi
             <div className="member-profession text">
               Mechatronics Engineering
@@ -155,13 +155,13 @@ class SplashScreenContainer extends Component {
             <div className="member-school text">
               University of British Columbia
             </div>
-          </div>
+          </a>
         </div>
         <div className="outer">
-          <div className="row_inner1">
+          <a className="row_inner1" href="https://www.linkedin.com/in/ryan-clyde-04b711111/">
             <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220357/4_fff7ii.png"}></img>
-          </div>
-          <div className="text member-name">
+          </a>
+          <a href="https://www.linkedin.com/in/ryan-clyde-04b711111/" className="text member-name">
             Ryan Clyde
             <div className="member-profession text">
               Finance and Statistics
@@ -170,13 +170,13 @@ class SplashScreenContainer extends Component {
               Wharton School of Buisness<br/>
               University of Pennsylvannia
             </div>
-          </div>
+          </a>
         </div>
         <div className="outer">
-          <div className="row_inner1">
+          <a className="row_inner1" href="https://www.linkedin.com/in/boon-hong-donovan-so-49759b126/">
             <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220317/2_hg6w87.png"}></img>
-          </div>
-          <div className="text member-name">
+          </a>
+          <a className="text member-name" href="https://www.linkedin.com/in/boon-hong-donovan-so-49759b126/">
             Donovan So
             <div className="member-profession text">
               Computer Engineering
@@ -184,13 +184,13 @@ class SplashScreenContainer extends Component {
             <div className="member-school text">
               Hong Kong University of<br/>Science and Technology
             </div>
-          </div>
+          </a>
         </div>
         <div className="outer">
-          <div className="row_inner1">
+          <a className="row_inner1" href="https://www.linkedin.com/in/spike-lu-38227b105/">
             <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220342/3_a667pm.png"}></img>
-          </div>
-          <div className="text member-name">
+          </a>
+          <a className="text member-name" href="https://www.linkedin.com/in/spike-lu-38227b105/">
             Spike Lu
             <div className="member-profession text">
               Computer Science and Physics
@@ -198,7 +198,7 @@ class SplashScreenContainer extends Component {
             <div className="member-school text">
               Emory University
             </div>
-          </div>
+          </a>
         </div>
       </div>
       </div>
