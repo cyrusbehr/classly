@@ -28,6 +28,7 @@ class SplashScreenContainer extends Component {
               <div className="splashText-main">
                 A live Q&A and discussion forum for the future classroom
               </div>
+              <img className="customImage demoImagehidden" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508040858/Macbook-PNG-Picture_sueqhy.png"}></img>
               <div className="splashText-sub">
                 Beta testing in progress now!
                 <br/>

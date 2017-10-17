@@ -761,7 +761,7 @@ img:not(.customImage){
 
 .splashText-sub{
   font-size: 22px;
-  line-height: 27px;
+  line-height: 30px;
 }
 
 .navbar-signup-2{
@@ -882,7 +882,7 @@ img:not(.customImage){
 
 .splash-page3-container{
   background-color: $splash_gray;
-  height: 1000px;
+  height: 800px;
 }
 
 .splash-page3-main-pic{
@@ -920,6 +920,12 @@ img:not(.customImage){
 
 }
 
+.demoImagehidden{
+  display: none;
+  width: 300px;
+  padding-bottom: 40px;
+}
+
 @media (min-width: 1100px) {
   .row{
     display: flex;
@@ -946,15 +952,41 @@ img:not(.customImage){
     display: none;
   }
 
+  .splash-page3-container{
+    height: 1000px;
+  }
+
   .splash-page2-container{
     height: 1100px;
+  }
+
 }
+
+@media (max-width: 1125px){
+  .demoImage{
+    width: 500px;
+  }
+  .splashImage{
+    flex: 1
+  }
+}
+
+@media (max-width: 928px){
+  .demoImage{
+    display: none !important;
+  }
+  .splashImage{
+    flex: 0;
+  }
+  .demoImagehidden{
+    display: inline-block;
+  }
 }
 
 @media (max-width: 587px){
   .splash-page2-container{
     height: 1300px;
-}
+  }
 }
 
 
