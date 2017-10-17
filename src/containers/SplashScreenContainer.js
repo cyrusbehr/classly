@@ -167,7 +167,7 @@ class SplashScreenContainer extends Component {
               Finance and Statistics
             </div>
             <div className="member-school text">
-              Wharton School of Buisness<br/>
+              The Wharton School<br/>
               University of Pennsylvannia
             </div>
           </a>
@@ -192,7 +192,7 @@ class SplashScreenContainer extends Component {
           </a>
           <a className="text member-name" href="https://www.linkedin.com/in/spike-lu-38227b105/" target="_blank">
             Spike Lu
-            <div className="member-profession text">
+            <div className="member-proffession text">
               Computer Science and Physics
             </div>
             <div className="member-school text">
