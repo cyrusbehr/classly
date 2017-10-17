@@ -9,7 +9,13 @@ class SplashScreenContainer extends Component {
     super(props)
   }
 
-  //here we can put our handleclick functions and so on...
+  redirectLogin() {
+    this.props.history.push("/main");
+  }
+
+  redirectSignup() {
+    this.props.history.push("/main");
+  }
 
   render() {
     return(
@@ -17,8 +23,8 @@ class SplashScreenContainer extends Component {
         <div className="splash-header">
           <text className="splash-header-name">Classly</text>
           <div className="dashboard-navbar">
-            <span className="navbar-signup">Sign Up</span>
-            <span className="navbar-login">Login</span>
+            <span onClick={() => this.redirectSignup()} className="navbar-signup">Sign Up</span>
+            <span onClick={() => this.redirectLogin()} className="navbar-login">Login</span>
           </div>
         </div>
         <div className="spashCont">
@@ -34,7 +40,7 @@ class SplashScreenContainer extends Component {
                 <br/>
                 Sign up for your class right now.
               </div>
-              <div className="navbar-signup-2">Sign Up</div>
+              <div onClick={() => this.redirectSignup()} className="navbar-signup-2">Sign Up</div>
             </div>
             <span className="splashImage">
               <img className="customImage demoImage" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508040858/Macbook-PNG-Picture_sueqhy.png"}></img>
