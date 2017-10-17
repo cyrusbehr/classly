@@ -144,10 +144,10 @@ class SplashScreenContainer extends Component {
         <div className="screen4-title text">Meet the Team
         </div>
         <div className="outer">
-          <a className="row_inner1" href="https://www.linkedin.com/in/cyrus-behroozi-b30905ab/">
+          <a className="row_inner1" href="https://www.linkedin.com/in/cyrus-behroozi-b30905ab/" target="_blank">
             <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220275/cutmypic_bv7tg1.png"}></img>
           </a>
-          <a className="text member-name" href="https://www.linkedin.com/in/cyrus-behroozi-b30905ab/">
+          <a className="text member-name" href="https://www.linkedin.com/in/cyrus-behroozi-b30905ab/" target="_blank">
             Cyrus Behroozi
             <div className="member-profession text">
               Mechatronics Engineering
@@ -158,10 +158,10 @@ class SplashScreenContainer extends Component {
           </a>
         </div>
         <div className="outer">
-          <a className="row_inner1" href="https://www.linkedin.com/in/ryan-clyde-04b711111/">
+          <a className="row_inner1" href="https://www.linkedin.com/in/ryan-clyde-04b711111/" target="_blank">
             <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220357/4_fff7ii.png"}></img>
           </a>
-          <a href="https://www.linkedin.com/in/ryan-clyde-04b711111/" className="text member-name">
+          <a href="https://www.linkedin.com/in/ryan-clyde-04b711111/" className="text member-name" target="_blank">
             Ryan Clyde
             <div className="member-profession text">
               Finance and Statistics
@@ -173,10 +173,10 @@ class SplashScreenContainer extends Component {
           </a>
         </div>
         <div className="outer">
-          <a className="row_inner1" href="https://www.linkedin.com/in/boon-hong-donovan-so-49759b126/">
+          <a className="row_inner1" href="https://www.linkedin.com/in/boon-hong-donovan-so-49759b126/" target="_blank">
             <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220317/2_hg6w87.png"}></img>
           </a>
-          <a className="text member-name" href="https://www.linkedin.com/in/boon-hong-donovan-so-49759b126/">
+          <a className="text member-name" href="https://www.linkedin.com/in/boon-hong-donovan-so-49759b126/" target="_blank">
             Donovan So
             <div className="member-profession text">
               Computer Engineering
@@ -187,10 +187,10 @@ class SplashScreenContainer extends Component {
           </a>
         </div>
         <div className="outer">
-          <a className="row_inner1" href="https://www.linkedin.com/in/spike-lu-38227b105/">
+          <a className="row_inner1" href="https://www.linkedin.com/in/spike-lu-38227b105/" target="_blank">
             <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220342/3_a667pm.png"}></img>
           </a>
-          <a className="text member-name" href="https://www.linkedin.com/in/spike-lu-38227b105/">
+          <a className="text member-name" href="https://www.linkedin.com/in/spike-lu-38227b105/" target="_blank">
             Spike Lu
             <div className="member-profession text">
               Computer Science and Physics
