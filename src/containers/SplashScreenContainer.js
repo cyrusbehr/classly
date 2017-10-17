@@ -193,7 +193,7 @@ class SplashScreenContainer extends Component {
           <div className="text member-name">
             Spike Lu
             <div className="member-profession text">
-              Physics
+              Computer Science and Physics
             </div>
             <div className="member-school text">
               Emory University
