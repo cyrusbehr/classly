@@ -198,7 +198,7 @@ class SplashScreenContainer extends Component {
           </a>
           <a className="text member-name" href="https://www.linkedin.com/in/spike-lu-38227b105/" target="_blank">
             Spike Lu
-            <div className="member-proffession text">
+            <div className="member-profession text">
               Computer Science and Physics
             </div>
             <div className="member-school text">
