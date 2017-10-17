@@ -112,6 +112,32 @@ class SplashScreenContainer extends Component {
       <div className="text page3-subHeader">
         We also offer other features which help the professor manage the classroom
       </div>
+      <div className="row">
+        <div className="row1col1"></div>
+        <div className="row1col2">
+          <img className="customImage splash-page2-img1 pad1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+        </div>
+        <div className="r1c3">Clicker<br/>functionality<br/>that doesn't<br/>cost money</div>
+        <div className="row1col4">
+          <img className="customImage splash-page2-img2 pad2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215949/noun_966235_cc_feqzd0.png"}></img>
+        </div>
+        <div className="r1c5">Attendance<br/>has never<br/>been easier<br/>with Classly</div>
+        <div className="row1col6"></div>
+      </div>
+      <div className="mobile_size">
+        <div className="outer">
+          <div className="row_inner1">
+            <img className="customImage splash-page2-img1 pad1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+          </div>
+          <div className="row_inner2">Clicker<br/>functionality<br/>that doesn't<br/>cost money</div>
+        </div>
+        <div className="outer">
+          <div className="row_inner1">
+            <img className="customImage splash-page2-img2 pad2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215949/noun_966235_cc_feqzd0.png"}></img>
+          </div>
+          <div className="row_inner2">Attendance<br/>has never<br/>been easier<br/>with Classly</div>
+        </div>
+      </div>
       </div>
       </div>
     )
