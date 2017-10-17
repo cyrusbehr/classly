@@ -140,6 +140,67 @@ class SplashScreenContainer extends Component {
         </div>
       </div>
       </div>
+      <div className="splash-screen4">
+        <div className="screen4-title text">Meet the Team
+        </div>
+        <div className="outer">
+          <div className="row_inner1">
+            <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+          </div>
+          <div className="text member-name">
+            Cyrus Behroozi
+            <div className="member-profession text">
+              Mechatronics Engineering
+            </div>
+            <div className="member-school text">
+              University of British Columbia
+            </div>
+          </div>
+        </div>
+        <div className="outer">
+          <div className="row_inner1">
+            <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+          </div>
+          <div className="text member-name">
+            Ryan Clyde
+            <div className="member-profession text">
+              Finance and Statistics
+            </div>
+            <div className="member-school text">
+              Wharton School of Buisness<br/>
+              University of Pennsylvannia
+            </div>
+          </div>
+        </div>
+        <div className="outer">
+          <div className="row_inner1">
+            <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+          </div>
+          <div className="text member-name">
+            Donovan So
+            <div className="member-profession text">
+              Computer Engineering
+            </div>
+            <div className="member-school text">
+              Hong Kong University of<br/>Science and Technology
+            </div>
+          </div>
+        </div>
+        <div className="outer">
+          <div className="row_inner1">
+            <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+          </div>
+          <div className="text member-name">
+            Spike Lu
+            <div className="member-profession text">
+              Physics
+            </div>
+            <div className="member-school text">
+              Emory University
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     )
   }

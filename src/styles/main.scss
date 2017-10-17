@@ -876,7 +876,7 @@ img:not(.customImage){
   margin-bottom: 30px;
 }
 
-.row_inner1, .row_inner2{
+.row_inner1, .row_inner2, .member-name{
   width: 250px;
 }
 
@@ -924,6 +924,38 @@ img:not(.customImage){
   display: none;
   width: 300px;
   padding-bottom: 40px;
+}
+
+.splash-screen4{
+  height: 800px;
+}
+
+.screen4-title{
+  color: $sgreen;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  padding-top: 90px;
+  padding-bottom: 40px;
+}
+
+.member-name{
+  color: $sgreen;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.member-school{
+  font-weight: normal;
+  color: black;
+  font-size: 13px;
+  padding-top: 3px;
+}
+.member-profession{
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+  padding-top: 3px;
 }
 
 @media (min-width: 1100px) {
