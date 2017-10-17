@@ -145,7 +145,7 @@ class SplashScreenContainer extends Component {
         </div>
         <div className="outer">
           <div className="row_inner1">
-            <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+            <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220275/cutmypic_bv7tg1.png"}></img>
           </div>
           <div className="text member-name">
             Cyrus Behroozi
@@ -159,7 +159,7 @@ class SplashScreenContainer extends Component {
         </div>
         <div className="outer">
           <div className="row_inner1">
-            <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+            <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220357/4_fff7ii.png"}></img>
           </div>
           <div className="text member-name">
             Ryan Clyde
@@ -174,7 +174,7 @@ class SplashScreenContainer extends Component {
         </div>
         <div className="outer">
           <div className="row_inner1">
-            <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+            <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220317/2_hg6w87.png"}></img>
           </div>
           <div className="text member-name">
             Donovan So
@@ -188,7 +188,7 @@ class SplashScreenContainer extends Component {
         </div>
         <div className="outer">
           <div className="row_inner1">
-            <img className="customImage splash-page2-img1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
+            <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220342/3_a667pm.png"}></img>
           </div>
           <div className="text member-name">
             Spike Lu

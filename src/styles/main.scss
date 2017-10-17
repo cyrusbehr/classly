@@ -862,6 +862,16 @@ img:not(.customImage){
   padding-right: 25px;
 }
 
+.splash-image-border{
+  width: 100px;
+  float: right;
+  margin-right: 25px;
+  border-width: 2px;
+  border-color: $sgreen;
+  border-style: solid;
+  border-radius: 50px;
+}
+
 .pad1{
   padding-top: 20px;
 }
