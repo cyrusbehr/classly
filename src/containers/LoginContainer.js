@@ -22,7 +22,7 @@ export default class LoginContainer extends Component {
             })}
           </div>
           <div className="sample-login-information text">
-            **To demo the product, please login as a<br/> student using the following credentials**
+            To demo the product, please login as a<br/> student using the following credentials
             <br/>
             Email: s@gmail.com <br/>
             Password: test
