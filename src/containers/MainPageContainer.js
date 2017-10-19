@@ -6,11 +6,29 @@ import { connect } from 'react-redux';
 import {setUser} from '../actions/Actions'
 import axios from 'axios'
 import {baseDomain} from '../constants/const'
+import Modal from 'react-modal';
+
 
 class MainPageContainer extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      showModalState: false
+    }
+  }
+
   clearUserTypeAndRedirect(e) {
     e.preventDefault();
     this.props.history.push('/');
+  }
+
+  showModal(){
+    this.setState({showModalState: true})
+    console.log("you pressed the modal button");
+  }
+
+  closeModal() {
+    this.setState({showModalState:false})
   }
 
   componentDidMount() {
@@ -40,13 +58,36 @@ class MainPageContainer extends Component {
                 <button className="home-nav-bar" onClick={(e) => this.clearUserTypeAndRedirect(e)}>HOME</button>
             </div>
             <div className="about-nav-bar-container">
-                <button className="about-nav-bar">ABOUT</button>
+                <button className="about-nav-bar" onClick={() => this.showModal()}>DEMO ACCOUNT</button>
             </div>
             <div className="contact-nav-bar-container">
                 <button className="contact-nav-bar">CONTACT</button>
             </div>
           </div>
         </div>
+        <Modal
+        className="guide-modal-create-class"
+        overlayClassName="guide-modal-overlay"
+        isOpen={this.state.showModalState}
+        contentLabel="Demo Account"
+        >
+          <div className="modal-header">
+            <text>Demo Account</text>
+          </div>
+          <div className="text sample-login-information">
+            To demo the product as a student, please login with the following credentials:
+            <br/>
+            <br/>
+            Username: s@gmail.com
+            <br/>
+            Password: test
+          </div>
+          <div className="modal-footer">
+            <button className="dashboardBody-close-button hvr-grow"
+              onClick={() => this.closeModal()}
+              >Close</button>
+          </div>
+        </Modal>
         <LoginContainer {...this.props}/>
         <div className="footer">
           <div className="copyright-container">

@@ -135,7 +135,7 @@ $splash_gray: #2A2A2A;
   font-size: 14px;
 }
 
-.home-nav-bar:hover {
+.home-nav-bar:hover, .about-nav-bar:hover {
   cursor: pointer;
 }
 
@@ -983,12 +983,9 @@ a:hover{
   padding-top: 3px;
 }
 
-// .sample-login-information{
-//   color: white;
-//   position: relative;
-//   top: 40px;
-//   line-height: 20px;
-// }
+.sample-login-information{
+  line-height: 22px;
+}
 
 @media (min-width: 1100px) {
   .row{
