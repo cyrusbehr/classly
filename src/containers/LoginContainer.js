@@ -21,6 +21,12 @@ export default class LoginContainer extends Component {
               title={element.title} redirectRoute={element.redirectRoute} {...this.props} />)
             })}
           </div>
+          <div className="sample-login-information text">
+            **To demo the product, please login as a<br/> student using the following credentials**
+            <br/>
+            Email: s@gmail.com <br/>
+            Password: test
+          </div>
         </div>
       </div>
     )
