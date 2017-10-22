@@ -353,7 +353,10 @@ img:not(.customImage){
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  border: 1px solid white;
+
 }
+
 
 .middle-professor-cards-container {
   width:320px;
@@ -365,6 +368,8 @@ img:not(.customImage){
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  border: 1px solid white;
+
 }
 
 .student-signup-slogan-container {
