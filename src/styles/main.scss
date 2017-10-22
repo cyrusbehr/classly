@@ -673,7 +673,7 @@ img:not(.customImage){
 
 .splash-header{
   z-index: 2;
-  position: fixed;
+  position: absolute;
   right: 0;
   left: 0;
   background-color: rgba(255,255,255,0.8);
