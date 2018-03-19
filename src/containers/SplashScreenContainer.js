@@ -124,7 +124,7 @@ class SplashScreenContainer extends Component {
         <div className="row1col2">
           <img className="customImage splash-page2-img1 pad1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
         </div>
-        <div className="r1c3">Clicker<br/>functionality<br/>that doesn't<br/>cost money</div>
+        <div className="r1c3">Clicker<br/>functionality<br/>without the<br/>costly hardware</div>
         <div className="row1col4">
           <img className="customImage splash-page2-img2 pad2" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215949/noun_966235_cc_feqzd0.png"}></img>
         </div>
@@ -136,7 +136,7 @@ class SplashScreenContainer extends Component {
           <div className="row_inner1">
             <img className="customImage splash-page2-img1 pad1" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508215970/noun_798715_cc_jqlfoy.png"}></img>
           </div>
-          <div className="row_inner2">Clicker<br/>functionality<br/>that doesn't<br/>cost money</div>
+          <div className="row_inner2">Clicker<br/>functionality<br/>without the<br/>costly hardware</div>
         </div>
         <div className="outer">
           <div className="row_inner1">
