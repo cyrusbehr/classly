@@ -151,7 +151,7 @@ class SplashScreenContainer extends Component {
         </div>
         <div className="outer">
           <a className="row_inner1" href="https://www.linkedin.com/in/cyrus-behroozi-b30905ab/" target="_blank">
-            <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/v1508220275/cutmypic_bv7tg1.png"}></img>
+            <img className="customImage splash-image-border" src={"https://res.cloudinary.com/dxih0rp6w/image/upload/c_scale,q_100,w_170/v1546993346/cyrushead_i0u8ax.png"}></img>
           </a>
           <a className="text member-name" href="https://www.linkedin.com/in/cyrus-behroozi-b30905ab/" target="_blank">
             Cyrus Behroozi
