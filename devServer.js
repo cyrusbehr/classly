@@ -13,7 +13,7 @@ const create_course_class = require('./backend/routes/create_course_class');
 const expressValidator = require('express-validator')
 const { User } = require('./src/Models/models.js');
 const dashboard = require('./backend/routes/dashboard');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 const app = express();
@@ -43,9 +43,14 @@ const Question = models.Question;
 const Topic = models.Topic;
 const Class = models.Class;
 //double check mongoose.connect
-mongoose.createConnection(process.env.MONGODB_URI);
-mongoose.connection.on('connected', () => {
-})
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true
+});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('Successfully connected to database');
+});
 
 function randomize(array) {
   const randomDigit = Math.floor((Math.random() * array.length));
