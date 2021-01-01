@@ -34,7 +34,7 @@ class TAMainRegisterContainer extends Component {
         <TARegisterContainer {...this.props}/>
         <div className="footer">
           <div className="copyright-container">
-            © 2017 Classly
+            © 2021 Classly
           </div>
           <div className="social-media-container">
             Social Media

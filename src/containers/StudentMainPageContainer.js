@@ -36,7 +36,7 @@ class StudentMainPageContainer extends Component {
         <StudentSignupContainer {...this.props}/>
         <div className="footer">
           <div className="copyright-container">
-            © 2017 Classly
+            © 2021 Classly
           </div>
           <div className="social-media-container">
             Social Media
